@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './workflowInstanceCompat';
+import './workflowSemanticCleanup';
 import App from './App';
 import './styles.css';
 
