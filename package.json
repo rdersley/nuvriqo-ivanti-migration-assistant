@@ -1,0 +1,20 @@
+{
+  "name": "ivanti-forge-migration-assistant",
+  "version": "6.2.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "npm --prefix static run build",
+    "lint": "forge lint",
+    "typecheck": "tsc --noEmit && npm --prefix static run typecheck",
+    "deploy": "npm run build && forge deploy"
+  },
+  "dependencies": {
+    "@forge/api": "latest",
+    "@forge/resolver": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}
