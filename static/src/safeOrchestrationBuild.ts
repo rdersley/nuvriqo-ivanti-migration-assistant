@@ -56,6 +56,64 @@ function resultBox(message: string, ok = true) {
   box.textContent = message;
 }
 
+function prepareConditionalSections(rawSections: any[], rawConditions: any[]) {
+  const sections = Array.isArray(rawSections) ? rawSections : [];
+  const conditions = Array.isArray(rawConditions) ? rawConditions : [];
+  if (!conditions.length) return sections;
+
+  const targetIds = new Set<string>();
+  conditions.forEach((condition: any) => {
+    (condition?.targetFieldIds || []).forEach((id: any) => targetIds.add(String(id)));
+  });
+
+  const prepared: any[] = [];
+  const placedConditional = new Set<string>();
+
+  sections.forEach((section: any, sectionIndex: number) => {
+    const ids = Array.isArray(section?.fieldIds) ? section.fieldIds.map((id: any) => String(id)) : [];
+    const baseIds = ids.filter((id: string) => !targetIds.has(id));
+
+    if (baseIds.length || sectionIndex === 0) {
+      prepared.push({
+        ...section,
+        id: String(section?.id || `section-${sectionIndex + 1}`),
+        fieldIds: baseIds
+      });
+    }
+
+    conditions.forEach((condition: any, conditionIndex: number) => {
+      const conditionTargets = new Set((condition?.targetFieldIds || []).map((id: any) => String(id)));
+      const matches = ids.filter((id: string) => conditionTargets.has(id));
+      if (!matches.length) return;
+      matches.forEach((id: string) => placedConditional.add(id));
+      prepared.push({
+        id: `conditional-${conditionIndex + 1}-${sectionIndex + 1}`,
+        name: `${section?.name || `Section ${sectionIndex + 1}`} — conditional`,
+        fieldIds: matches
+      });
+    });
+  });
+
+  conditions.forEach((condition: any, conditionIndex: number) => {
+    const missing = (condition?.targetFieldIds || [])
+      .map((id: any) => String(id))
+      .filter((id: string) => !placedConditional.has(id));
+    if (missing.length) {
+      prepared.push({
+        id: `conditional-${conditionIndex + 1}-unplaced`,
+        name: `Conditional fields ${conditionIndex + 1}`,
+        fieldIds: missing
+      });
+    }
+  });
+
+  return prepared;
+}
+
+function conditionStage(form: any): any | undefined {
+  return Array.isArray(form?.stages) ? form.stages.find((stage: any) => stage?.key === 'conditions') : undefined;
+}
+
 async function createIssueTypeOnly(button: HTMLButtonElement) {
   if (busy) return;
   const service = activeService();
@@ -112,22 +170,31 @@ async function buildJsm(button: HTMLButtonElement) {
       options: field.options
     }));
 
+    const conditions = service.proposedConditions || [];
+    const sections = prepareConditionalSections(service.formSections || [], conditions);
+
     const form: any = await invoke('createJsmForm', {
       projectId: p.targetProjectId,
       requestTypeId: request.requestTypeId,
       name: `${service.analysis.serviceName} - Ivanti Migration Form`,
       fields,
-      sections: service.formSections || [],
-      conditions: service.proposedConditions || []
+      sections,
+      conditions
     });
     if (!form?.published) throw new Error(form?.message || 'The JSM Form was not published.');
+
+    const condition = conditionStage(form);
+    if (conditions.length && (!condition || condition.status !== 'verified')) {
+      const reason = condition?.message || 'Jira did not verify the conditional logic stage.';
+      throw new Error(`Form published, but conditional logic is not verified: ${reason}`);
+    }
 
     const portal: any = await invoke('verifyJsmPortal', {
       projectId: p.targetProjectId,
       requestTypeId: request.requestTypeId,
       issueTypeId: issue.id
     });
-    resultBox(`JSM build complete. Request type ${request.requestTypeId}; Form ${form.formId || 'created'}; portal ${portal?.visibleInPortal ? 'verified' : 'requires portal-group review'}.`);
+    resultBox(`JSM build complete. Request type ${request.requestTypeId}; Form ${form.formId || 'created'}; ${conditions.length} conditional rule(s) verified; portal ${portal?.visibleInPortal ? 'verified' : 'requires portal-group review'}.`);
   } catch (error) {
     resultBox(`JSM build failed: ${error instanceof Error ? error.message : String(error)}`, false);
   } finally {
