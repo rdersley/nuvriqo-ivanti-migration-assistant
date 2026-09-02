@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Apply Forms condition compatibility hotfix
+      - name: Apply Forms conditional visibility fix
         shell: bash
         run: |
           python - <<'PY'
@@ -32,31 +32,124 @@ jobs:
           path = Path('src/index.ts')
           source = path.read_text()
 
+          # A Forms section must explicitly reference the condition IDs that
+          # govern it. Without this link Jira stores the condition but renders
+          # the section as always visible in the portal.
+          old_section = """      formSections[String(sectionIndex)] = {
+        name: section.name || `Section ${sectionIndex + 1}`,
+        sectionType: 'p'
+      };"""
+          new_section = """      formSections[String(sectionIndex)] = {
+        name: section.name || `Section ${sectionIndex + 1}`,
+        sectionType: 'p',
+        conditions: [] as string[]
+      };"""
+          if old_section not in source:
+              raise SystemExit('Expected form section block not found')
+          source = source.replace(old_section, new_section, 1)
+
           start = source.index('      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown')
-          end_marker = "          : 'EQUAL_TO';\n"
-          end = source.index(end_marker, start) + len(end_marker)
-          replacement = '''      // Model Ivanti visibility rules as HIDE-when-not-matched conditions.\n      // Forms section conditions only execute the configured output when the\n      // check is true; using SHOW for the positive case leaves the section\n      // visible when the condition is false. Inverting the check gives the\n      // expected portal behaviour: hidden initially / hidden on non-match,\n      // visible only when the Ivanti source condition is satisfied.\n      const controllerField = fields.find(\n        (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)\n      );\n      const controllerFormType = formQuestionType(controllerField?.jiraType);\n      let comparisonType = 'DOES_NOT_EQUAL';\n      let comparisonConstraint = [String(condition.value ?? '')];\n\n      if (controllerFormType === 'cd') {\n        const controllerResolved = resolved.find((item) =>\n          normaliseStatusName(item.name) === normaliseStatusName(controllerField?.name)\n        );\n        const jiraFieldId = String(controllerResolved?.jiraFieldId ?? '');\n        if (!jiraFieldId) {\n          unresolvedRules.push({\n            id: String((condition as any).id ?? conditionIndex + 1),\n            reason: 'Controller Jira choice field was not resolved.'\n          });\n          continue;\n        }\n\n        try {\n          const contextId = await getFirstContextId(jiraFieldId);\n          const optionResponse = await api.asUser().requestJira(\n            route`/rest/api/3/field/${jiraFieldId}/context/${contextId}/option?maxResults=100`,\n            { headers: { Accept: 'application/json' } }\n          );\n          const optionBody = await parseResponse<{ values?: Array<{ id?: string; value?: string }> }>(optionResponse);\n          const wanted = normaliseStatusName(condition.value);\n          const option = (optionBody.values ?? []).find((item) =>\n            normaliseStatusName(item.value) === wanted\n          );\n          if (!option?.id) {\n            unresolvedRules.push({\n              id: String((condition as any).id ?? conditionIndex + 1),\n              reason: `No Jira option ID matched condition value ${String(condition.value ?? '')}.`\n            });\n            continue;\n          }\n          comparisonType = 'NONE_OF';\n          comparisonConstraint = [String(option.id)];\n        } catch (error) {\n          unresolvedRules.push({\n            id: String((condition as any).id ?? conditionIndex + 1),\n            reason: `Could not resolve Jira option ID: ${String((error as Error)?.message ?? error)}`\n          });\n          continue;\n        }\n      }\n'''
+          end_marker = "      };\n    }\n\n    if (Object.keys(advancedConditions).length)"
+          end = source.index(end_marker, start)
+
+          replacement = r'''      const controllerField = fields.find(
+        (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)
+      );
+      const controllerFormType = formQuestionType(controllerField?.jiraType);
+      const conditionId = String(conditionIndex + 1);
+
+      if (controllerFormType === 'cd') {
+        // Jira Forms choice conditions use the linked Jira option ID, not the
+        // visible option label. The native simple-condition shape below is the
+        // same shape Jira itself emits for portal Forms and is the most reliable
+        // representation for a single Ivanti equals rule.
+        const controllerResolved = resolved.find((item) =>
+          normaliseStatusName(item.name) === normaliseStatusName(controllerField?.name)
+        );
+        const jiraFieldId = String(controllerResolved?.jiraFieldId ?? '');
+        if (!jiraFieldId) {
+          unresolvedRules.push({
+            id: String((condition as any).id ?? conditionIndex + 1),
+            reason: 'Controller Jira choice field was not resolved.'
+          });
+          continue;
+        }
+
+        try {
+          const contextId = await getFirstContextId(jiraFieldId);
+          const optionResponse = await api.asUser().requestJira(
+            route`/rest/api/3/field/${jiraFieldId}/context/${contextId}/option?maxResults=100`,
+            { headers: { Accept: 'application/json' } }
+          );
+          const optionBody = await parseResponse<{ values?: Array<{ id?: string; value?: string }> }>(optionResponse);
+          const wanted = normaliseStatusName(condition.value);
+          const option = (optionBody.values ?? []).find((item) =>
+            normaliseStatusName(item.value) === wanted
+          );
+          if (!option?.id) {
+            unresolvedRules.push({
+              id: String((condition as any).id ?? conditionIndex + 1),
+              reason: `No Jira option ID matched condition value ${String(condition.value ?? '')}.`
+            });
+            continue;
+          }
+
+          advancedConditions[conditionId] = {
+            i: {
+              co: {
+                cIds: {
+                  [controllerQuestionId]: [String(option.id)]
+                }
+              }
+            },
+            o: { sIds: targetSectionIds },
+            t: 'sh'
+          };
+        } catch (error) {
+          unresolvedRules.push({
+            id: String((condition as any).id ?? conditionIndex + 1),
+            reason: `Could not resolve Jira option ID: ${String((error as Error)?.message ?? error)}`
+          });
+          continue;
+        }
+      } else {
+        // Non-choice controllers use the advanced condition schema introduced
+        // by Atlassian in 2026.
+        advancedConditions[conditionId] = {
+          i: {
+            operator: 'OR',
+            groups: [{
+              operator: 'AND',
+              checks: [{
+                fieldId: controllerQuestionId,
+                type: 'EQUAL_TO',
+                constraint: [String(condition.value ?? '')]
+              }]
+            }]
+          },
+          o: {
+            sIds: targetSectionIds,
+            t: 'sh'
+          }
+        };
+      }
+
+      // Jira's stored section model carries the reverse link as well: each
+      // conditional section lists the condition IDs that control it. Populate
+      // that relationship so the portal renderer actually evaluates the rule.
+      for (const sectionId of targetSectionIds) {
+        const sectionDefinition = formSections[sectionId] as { conditions?: string[] } | undefined;
+        if (!sectionDefinition) continue;
+        if (!Array.isArray(sectionDefinition.conditions)) sectionDefinition.conditions = [];
+        if (!sectionDefinition.conditions.includes(conditionId)) {
+          sectionDefinition.conditions.push(conditionId);
+        }
+      }
+'''
           source = source[:start] + replacement + source[end:]
 
-          old_constraint = "constraint: [String(condition.value ?? '')]"
-          if old_constraint not in source:
-              raise SystemExit('Condition constraint expression not found')
-          source = source.replace(old_constraint, 'constraint: comparisonConstraint', 1)
-
-          # Preserve the compatibility object used by the current Forms save path.
-          # It is harmless alongside advanced groups/checks and avoids regressing
-          # tenants that still expect it.
-
-          # Change section output from positive SHOW to inverse HIDE. This is the
-          # behavioural correction: a failed positive show check does not itself
-          # hide an otherwise visible section.
-          output_marker = "t: 'sh'"
-          if output_marker not in source:
-              raise SystemExit('Forms condition output marker not found')
-          source = source.replace(output_marker, "t: 'hide'", 1)
-
-          # Retain explicit opt-in for compatibility with sites still gating
-          # advanced Forms condition saves.
+          # Advanced Forms endpoints are no longer experimental, but retaining
+          # the opt-in header is harmless on tenants that previously required it.
           needle = "body: JSON.stringify({ design: conditionedDesign })"
           put_at = source.index(needle)
           header_start = source.rfind("headers: { Accept: 'application/json', 'Content-Type': 'application/json' },", 0, put_at)
