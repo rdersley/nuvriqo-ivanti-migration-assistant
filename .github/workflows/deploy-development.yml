@@ -1,0 +1,53 @@
+name: Deploy Forge development
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-development
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      FORGE_SITE: ${{ secrets.FORGE_SITE }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: static/package-lock.json
+
+      - name: Install app dependencies
+        run: npm install
+
+      - name: Install frontend dependencies
+        run: npm --prefix static ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Install Forge CLI
+        run: npm install --global @forge/cli@latest
+
+      - name: Forge lint
+        run: forge lint
+
+      - name: Deploy to development
+        run: forge deploy --environment development --non-interactive --approve MAJOR_VERSION_RULE
+
+      - name: Upgrade Jira installation
+        run: forge install --upgrade --site "$FORGE_SITE" --product jira --environment development --confirm-scopes --non-interactive
