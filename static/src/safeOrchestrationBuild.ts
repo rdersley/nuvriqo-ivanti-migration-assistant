@@ -12,10 +12,26 @@ function project(): any | null {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch { return null; }
 }
 
+function serviceFromScreen(): any | null {
+  const selected = Array.from(document.querySelectorAll('h1,h2,h3')).find(el => {
+    const value = text(el);
+    return value && !['Create service configuration', 'Retail inMotion Ivanti migration'].includes(value);
+  });
+  const serviceName = text(selected);
+  if (!serviceName) return null;
+  const description = text(selected?.parentElement?.querySelector('p')) || `Migrated from Ivanti: ${serviceName}`;
+  return {
+    analysis: { serviceName, description, fields: [] },
+    build: { fieldResults: [] },
+    formSections: [],
+    proposedConditions: []
+  };
+}
+
 function activeService(): any | null {
   const p = project();
-  if (!p?.services?.length) return null;
-  return p.services[0];
+  if (p?.services?.length) return p.services[0];
+  return serviceFromScreen();
 }
 
 function savedIssueType(): { id: string; name?: string } | null {
@@ -43,7 +59,7 @@ function resultBox(message: string, ok = true) {
 async function createIssueTypeOnly(button: HTMLButtonElement) {
   if (busy) return;
   const service = activeService();
-  if (!service) return resultBox('No imported service is available.', false);
+  if (!service?.analysis?.serviceName) return resultBox('Could not determine the selected imported service. Refresh the page and try again.', false);
   busy = true;
   button.disabled = true;
   button.textContent = 'Creating issue type…';
@@ -72,9 +88,9 @@ async function createIssueTypeOnly(button: HTMLButtonElement) {
 async function buildJsm(button: HTMLButtonElement) {
   if (busy) return;
   const p = project();
-  const service = activeService();
+  const service = p?.services?.[0];
   const issue = savedIssueType();
-  if (!p?.targetProjectId || !service || !issue?.id) return resultBox('Create/reuse the Jira issue type first and make sure a target JSM project is selected.', false);
+  if (!p?.targetProjectId || !service || !issue?.id) return resultBox('Save the migration project first, then retry Build JSM experience.', false);
   busy = true;
   button.disabled = true;
   button.textContent = 'Building JSM…';
