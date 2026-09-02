@@ -38,10 +38,9 @@ jobs:
           replacement = '''      // Choice conditions must use the Jira option ID rather than the\n      // visible label. Resolve linked single-select options before building\n      // the Forms advanced condition payload.\n      const controllerField = fields.find(\n        (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)\n      );\n      const controllerFormType = formQuestionType(controllerField?.jiraType);\n      let comparisonType = 'EQUAL_TO';\n      let comparisonConstraint = [String(condition.value ?? '')];\n\n      if (controllerFormType === 'cd') {\n        const controllerResolved = resolved.find((item) =>\n          normaliseStatusName(item.name) === normaliseStatusName(controllerField?.name)\n        );\n        const jiraFieldId = String(controllerResolved?.jiraFieldId ?? '');\n        if (!jiraFieldId) {\n          unresolvedRules.push({\n            id: String((condition as any).id ?? conditionIndex + 1),\n            reason: 'Controller Jira choice field was not resolved.'\n          });\n          continue;\n        }\n\n        try {\n          const contextId = await getFirstContextId(jiraFieldId);\n          const optionResponse = await api.asUser().requestJira(\n            route`/rest/api/3/field/${jiraFieldId}/context/${contextId}/option?maxResults=100`,\n            { headers: { Accept: 'application/json' } }\n          );\n          const optionBody = await parseResponse<{ values?: Array<{ id?: string; value?: string }> }>(optionResponse);\n          const wanted = normaliseStatusName(condition.value);\n          const option = (optionBody.values ?? []).find((item) =>\n            normaliseStatusName(item.value) === wanted\n          );\n          if (!option?.id) {\n            unresolvedRules.push({\n              id: String((condition as any).id ?? conditionIndex + 1),\n              reason: `No Jira option ID matched condition value ${String(condition.value ?? '')}.`\n            });\n            continue;\n          }\n          comparisonType = 'SOME_OF';\n          comparisonConstraint = [String(option.id)];\n        } catch (error) {\n          unresolvedRules.push({\n            id: String((condition as any).id ?? conditionIndex + 1),\n            reason: `Could not resolve Jira option ID: ${String((error as Error)?.message ?? error)}`\n          });\n          continue;\n        }\n      }\n'''
           source = source[:start] + replacement + source[end:]
 
-          legacy_start = source.index('          // Atlassian Forms currently requires the legacy-compatible `co`')
-          legacy_end_marker = '          },\n          operator:'
-          legacy_end = source.index(legacy_end_marker, legacy_start)
-          source = source[:legacy_start] + '          operator:' + source[legacy_end + len(legacy_end_marker):]
+          # Keep the legacy compatibility object that exists in the current Forms
+          # condition input model. The 2026 advanced operator/groups/checks fields
+          # extend that input object; they do not require us to delete co/cIds.
 
           old_constraint = "constraint: [String(condition.value ?? '')]"
           if old_constraint not in source:
@@ -57,6 +56,13 @@ jobs:
               old_header = "headers: { Accept: 'application/json', 'Content-Type': 'application/json' },"
               new_header = "headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-ExperimentalApi': 'opt-in' },"
               source = source[:header_start] + source[header_start:].replace(old_header, new_header, 1)
+
+          # Surface the exact Atlassian response in the stage message if the
+          # conditioned design is rejected, so the next test cannot fail opaquely.
+          old_catch = "message: 'The populated Form is valid, but Atlassian rejected the inferred conditional-logic payload. The Form was kept without those conditions.',\n          detail: apiErrorDetail(error)"
+          new_catch = "message: `The populated Form is valid, but Atlassian rejected the inferred conditional-logic payload: ${JSON.stringify(apiErrorDetail(error))}. The Form was kept without those conditions.`,\n          detail: apiErrorDetail(error)"
+          if old_catch in source:
+              source = source.replace(old_catch, new_catch, 1)
 
           path.write_text(source)
           PY
