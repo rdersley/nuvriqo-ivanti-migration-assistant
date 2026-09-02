@@ -17,7 +17,7 @@ if old_section not in source:
 source = source.replace(old_section, new_section, 1)
 
 start = source.index('      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown')
-end_marker = "      };\n    }\n\n    if (Object.keys(advancedConditions).length)"
+end_marker = "\n    if (Object.keys(advancedConditions).length)"
 end = source.index(end_marker, start)
 
 replacement = r'''      const controllerField = fields.find(
@@ -66,8 +66,10 @@ replacement = r'''      const controllerField = fields.find(
                 }
               }
             },
-            o: { sIds: targetSectionIds },
-            t: 'sh'
+            o: {
+              sIds: targetSectionIds,
+              t: 'sh'
+            }
           };
         } catch (error) {
           unresolvedRules.push({
@@ -104,6 +106,7 @@ replacement = r'''      const controllerField = fields.find(
           sectionDefinition.conditions.push(conditionId);
         }
       }
+    }
 '''
 
 source = source[:start] + replacement + source[end:]
