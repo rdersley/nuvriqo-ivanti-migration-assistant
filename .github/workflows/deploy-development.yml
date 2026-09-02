@@ -31,44 +31,15 @@ jobs:
           from pathlib import Path
           path = Path('src/index.ts')
           source = path.read_text()
-
-          old_compare = """      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown
-      // questions. Choice-style questions use the set-membership checks
-      // (SOME_OF / NONE_OF / ALL_OF), while scalar questions can use
-      // EQUAL_TO. Resolve the controller's Forms question type before
-      // choosing the comparison.
-      const controllerField = fields.find(
-        (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)
-      );
-      const controllerFormType = formQuestionType(controllerField?.jiraType);
-      const comparisonType =
-        controllerFormType === 'cd'
-          ? 'SOME_OF'
-          : 'EQUAL_TO';
-"""
-          new_compare = """      // Since March 2026 the Forms API supports EQUAL_TO in advanced
-      // section conditions. Ivanti conditions carry the visible option value,
-      // so use EQUAL_TO directly rather than treating that label as a choice ID.
-      const comparisonType = 'EQUAL_TO';
-"""
-          if old_compare not in source:
-              raise SystemExit('Expected comparison block not found; refusing an unsafe deployment.')
-          source = source.replace(old_compare, new_compare, 1)
-
-          old_legacy = """          // Atlassian Forms currently requires the legacy-compatible `co`
-          // object even when the newer advanced operator/groups/checks
-          // condition structure is supplied.
-          co: {
-            cIds: {}
-          },
-"""
-          if old_legacy not in source:
-              raise SystemExit('Expected legacy co block not found; refusing an unsafe deployment.')
-          source = source.replace(old_legacy, '', 1)
-
-          old_message = "Applied ${Object.keys(advancedConditions).length}/${conditions.length} inferred Ivanti conditional rule(s) using question-type-aware Forms checks (choice fields use SOME_OF; scalar fields use EQUAL_TO)."
-          new_message = "Applied ${Object.keys(advancedConditions).length}/${conditions.length} inferred Ivanti conditional rule(s) using the current Forms advanced EQUAL_TO condition schema."
-          source = source.replace(old_message, new_message, 1)
+          start = source.index('      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown')
+          end_marker = "          : 'EQUAL_TO';\n"
+          end = source.index(end_marker, start) + len(end_marker)
+          replacement = "      // Current Forms API supports EQUAL_TO in advanced section conditions.\n      const comparisonType = 'EQUAL_TO';\n"
+          source = source[:start] + replacement + source[end:]
+          legacy_start = source.index('          // Atlassian Forms currently requires the legacy-compatible `co`')
+          legacy_end_marker = '          },\n          operator:'
+          legacy_end = source.index(legacy_end_marker, legacy_start)
+          source = source[:legacy_start] + '          operator:' + source[legacy_end + len(legacy_end_marker):]
           path.write_text(source)
           PY
 
