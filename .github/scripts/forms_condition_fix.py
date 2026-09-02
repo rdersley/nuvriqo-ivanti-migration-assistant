@@ -3,18 +3,9 @@ from pathlib import Path
 path = Path('src/index.ts')
 source = path.read_text()
 
-old_section = """      formSections[String(sectionIndex)] = {
-        name: section.name || `Section ${sectionIndex + 1}`,
-        sectionType: 'p'
-      };"""
-new_section = """      formSections[String(sectionIndex)] = {
-        name: section.name || `Section ${sectionIndex + 1}`,
-        sectionType: 'p',
-        conditions: [] as string[]
-      };"""
-if old_section not in source:
-    raise SystemExit('Expected form section block not found')
-source = source.replace(old_section, new_section, 1)
+# Keep the normal Forms section schema. Advanced conditions target sections
+# through design.conditions.*.o.sIds; section definitions themselves do not
+# need a custom conditions property.
 
 start = source.index('      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown')
 end_marker = "\n    if (Object.keys(advancedConditions).length)"
@@ -87,26 +78,71 @@ replacement = r'''      const controllerField = fields.find(
           t: 'sh'
         }
       };
-
-      for (const sectionId of targetSectionIds) {
-        const sectionDefinition = formSections[sectionId] as { conditions?: string[] } | undefined;
-        if (!sectionDefinition) continue;
-        if (!Array.isArray(sectionDefinition.conditions)) sectionDefinition.conditions = [];
-        if (!sectionDefinition.conditions.includes(conditionId)) {
-          sectionDefinition.conditions.push(conditionId);
-        }
-      }
     }
 '''
 
 source = source[:start] + replacement + source[end:]
 
-needle = "body: JSON.stringify({ design: conditionedDesign })"
-put_at = source.index(needle)
-header_start = source.rfind("headers: { Accept: 'application/json', 'Content-Type': 'application/json' },", 0, put_at)
-if header_start >= 0:
-    old_header = "headers: { Accept: 'application/json', 'Content-Type': 'application/json' },"
-    new_header = "headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-ExperimentalApi': 'opt-in' },"
-    source = source[:header_start] + source[header_start:].replace(old_header, new_header, 1)
+# Save each inferred condition independently. One unsupported Ivanti rule must
+# not cause Jira to reject every other valid rule. This also surfaces the exact
+# Atlassian validation response for the individual failing rule.
+save_start = source.index("    if (Object.keys(advancedConditions).length) {", start)
+save_end = source.index("  } else {\n    stages.push({ key: 'conditions'", save_start)
+
+save_replacement = r'''    if (Object.keys(advancedConditions).length) {
+      const acceptedConditions: Record<string, unknown> = {};
+
+      for (const [candidateId, candidateCondition] of Object.entries(advancedConditions)) {
+        const candidateConditions = {
+          ...acceptedConditions,
+          [candidateId]: candidateCondition
+        };
+        const candidateDesign = {
+          ...enrichedDesign,
+          conditions: candidateConditions
+        };
+
+        try {
+          const conditionResponse = await api.asUser().requestJira(route`/forms/project/${projectId}/form/${formId}`, {
+            method: 'PUT',
+            headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-ExperimentalApi': 'opt-in' },
+            body: JSON.stringify({ design: candidateDesign })
+          });
+          await parseResponse(conditionResponse);
+          acceptedConditions[candidateId] = candidateCondition;
+          activeDesign = candidateDesign;
+        } catch (error) {
+          const detail = apiErrorDetail(error);
+          let detailText = '';
+          try { detailText = JSON.stringify(detail); } catch { detailText = String(detail); }
+          unresolvedRules.push({
+            id: candidateId,
+            reason: `Atlassian rejected this rule: ${detailText}`
+          });
+        }
+      }
+
+      const acceptedCount = Object.keys(acceptedConditions).length;
+      conditionSaveSucceeded = acceptedCount === conditions.length && unresolvedRules.length === 0;
+      const firstFailure = unresolvedRules[0]?.reason;
+      stages.push({
+        key: 'conditions',
+        status: conditionSaveSucceeded ? 'verified' : 'partial',
+        message:
+          `Applied ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) independently using the documented Forms advanced-condition schema.` +
+          (firstFailure ? ` First unresolved rule: ${firstFailure}` : ''),
+        detail: unresolvedRules.length ? { unresolvedRules, acceptedConditionIds: Object.keys(acceptedConditions) } : undefined
+      });
+    } else {
+      stages.push({
+        key: 'conditions',
+        status: 'partial',
+        message: `None of the ${conditions.length} inferred Ivanti conditional rule(s) could be safely mapped to a Form section.`,
+        detail: { unresolvedRules }
+      });
+    }
+'''
+
+source = source[:save_start] + save_replacement + source[save_end:]
 
 path.write_text(source)
