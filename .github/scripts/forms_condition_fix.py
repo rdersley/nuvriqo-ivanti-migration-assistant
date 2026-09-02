@@ -25,6 +25,8 @@ replacement = r'''      const controllerField = fields.find(
       );
       const controllerFormType = formQuestionType(controllerField?.jiraType);
       const conditionId = String(conditionIndex + 1);
+      let comparisonType = 'EQUAL_TO';
+      let comparisonConstraint = [String(condition.value ?? '')];
 
       if (controllerFormType === 'cd') {
         const controllerResolved = resolved.find((item) =>
@@ -57,20 +59,8 @@ replacement = r'''      const controllerField = fields.find(
             });
             continue;
           }
-
-          advancedConditions[conditionId] = {
-            i: {
-              co: {
-                cIds: {
-                  [controllerQuestionId]: [String(option.id)]
-                }
-              }
-            },
-            o: {
-              sIds: targetSectionIds,
-              t: 'sh'
-            }
-          };
+          comparisonType = 'SOME_OF';
+          comparisonConstraint = [String(option.id)];
         } catch (error) {
           unresolvedRules.push({
             id: String((condition as any).id ?? conditionIndex + 1),
@@ -78,25 +68,25 @@ replacement = r'''      const controllerField = fields.find(
           });
           continue;
         }
-      } else {
-        advancedConditions[conditionId] = {
-          i: {
-            operator: 'OR',
-            groups: [{
-              operator: 'AND',
-              checks: [{
-                fieldId: controllerQuestionId,
-                type: 'EQUAL_TO',
-                constraint: [String(condition.value ?? '')]
-              }]
-            }]
-          },
-          o: {
-            sIds: targetSectionIds,
-            t: 'sh'
-          }
-        };
       }
+
+      advancedConditions[conditionId] = {
+        i: {
+          operator: 'OR',
+          groups: [{
+            operator: 'AND',
+            checks: [{
+              fieldId: controllerQuestionId,
+              type: comparisonType,
+              constraint: comparisonConstraint
+            }]
+          }]
+        },
+        o: {
+          sIds: targetSectionIds,
+          t: 'sh'
+        }
+      };
 
       for (const sectionId of targetSectionIds) {
         const sectionDefinition = formSections[sectionId] as { conditions?: string[] } | undefined;
