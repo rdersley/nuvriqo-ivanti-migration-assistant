@@ -43,6 +43,9 @@ jobs:
       - name: Install Forge CLI
         run: npm install --global @forge/cli@latest
 
+      - name: Configure Forge CLI for CI
+        run: forge settings set usage-analytics false
+
       - name: Forge lint
         run: forge lint
 
