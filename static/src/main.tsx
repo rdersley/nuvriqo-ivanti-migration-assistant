@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './orchestrationWorkflowView';
 import './workflowInstanceCompat';
 import './workflowSemanticCleanup';
 import App from './App';
