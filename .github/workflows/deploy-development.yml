@@ -47,7 +47,7 @@ jobs:
         run: forge settings set usage-analytics false
 
       - name: Forge lint
-        run: forge lint
+        run: forge lint --environment development
 
       - name: Deploy to development
         run: forge deploy --environment development --non-interactive --approve MAJOR_VERSION_RULE
