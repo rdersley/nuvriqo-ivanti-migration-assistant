@@ -40,6 +40,17 @@ jobs:
           legacy_end_marker = '          },\n          operator:'
           legacy_end = source.index(legacy_end_marker, legacy_start)
           source = source[:legacy_start] + '          operator:' + source[legacy_end + len(legacy_end_marker):]
+
+          # Advanced Forms condition saves are an experimental-capability request
+          # on the Forms REST surface. Opt in explicitly on the conditioned-design PUT.
+          needle = "body: JSON.stringify({ design: conditionedDesign })"
+          put_at = source.index(needle)
+          header_start = source.rfind("headers: { Accept: 'application/json', 'Content-Type': 'application/json' },", 0, put_at)
+          if header_start < 0:
+              raise SystemExit('Condition PUT headers not found')
+          old_header = "headers: { Accept: 'application/json', 'Content-Type': 'application/json' },"
+          new_header = "headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-ExperimentalApi': 'opt-in' },"
+          source = source[:header_start] + source[header_start:].replace(old_header, new_header, 1)
           path.write_text(source)
           PY
 
