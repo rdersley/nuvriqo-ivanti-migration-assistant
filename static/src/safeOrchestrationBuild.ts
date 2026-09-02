@@ -4,7 +4,7 @@ const STORAGE_KEY = 'ivanti-migration-assistant-project-v3';
 const ISSUE_TYPE_KEY = 'ivanti-orchestration-issue-type-v1';
 let busy = false;
 
-function text(el: Element | null): string {
+function text(el: Element | null | undefined): string {
   return (el?.textContent || '').replace(/\s+/g, ' ').trim();
 }
 
