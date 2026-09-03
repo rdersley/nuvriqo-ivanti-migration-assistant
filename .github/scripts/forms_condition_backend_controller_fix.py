@@ -11,7 +11,7 @@ old = r'''      const controllerField = fields.find(
         normaliseStatusName(item.name) === normaliseStatusName(controllerField?.name)
       );'''
 
-new = r'''      const targetSourceIds = new Set(
+new = r'''      const conditionTargetSourceIds = new Set(
         (condition.targetFieldIds ?? []).map((value: unknown) => String(value))
       );
 
@@ -24,7 +24,7 @@ new = r'''      const targetSourceIds = new Set(
       // controller from the matching non-conditional source section instead of
       // passing the corrupt relationship through to Jira Forms.
       const controllerIsTarget = controllerField
-        ? targetSourceIds.has(String(controllerField.sourceId ?? ''))
+        ? conditionTargetSourceIds.has(String(controllerField.sourceId ?? ''))
         : false;
 
       if (!controllerField || controllerIsTarget) {
@@ -32,7 +32,7 @@ new = r'''      const targetSourceIds = new Set(
           const ids = Array.isArray(section?.fieldIds)
             ? section.fieldIds.map((value: unknown) => String(value))
             : [];
-          return ids.some((id: string) => targetSourceIds.has(id));
+          return ids.some((id: string) => conditionTargetSourceIds.has(id));
         });
 
         const conditionalName = String(conditionalSection?.name ?? '');
@@ -56,7 +56,7 @@ new = r'''      const targetSourceIds = new Set(
         const candidates = baseIds
           .map((id: string) => fields.find((field) => String(field.sourceId ?? '') === id))
           .filter((field): field is JsmFieldInput => Boolean(field))
-          .filter((field) => !targetSourceIds.has(String(field.sourceId ?? '')))
+          .filter((field) => !conditionTargetSourceIds.has(String(field.sourceId ?? '')))
           .filter((field) => formQuestionType(field.jiraType) === 'cd');
 
         const preferred = candidates.find((field) =>
@@ -66,7 +66,7 @@ new = r'''      const targetSourceIds = new Set(
         if (preferred) controllerField = preferred;
       }
 
-      if (!controllerField || targetSourceIds.has(String(controllerField.sourceId ?? ''))) {
+      if (!controllerField || conditionTargetSourceIds.has(String(controllerField.sourceId ?? ''))) {
         unresolvedRules.push({
           id: String((condition as any).id ?? conditionIndex + 1),
           reason: `Conditional controller could not be safely resolved outside its target fields. Original controller: ${String(condition.controllerFieldId ?? 'unknown')}.`
