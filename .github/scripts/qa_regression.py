@@ -49,12 +49,12 @@ check('Gate 2 present', 'Gate 2' in app)
 check('Assets stage present', 'Create Assets work' in app)
 check('ServiceDesk branch present', 'Evaluate ServiceDesk' in app)
 
-# Prevent regression to dangerous workflow/status-centric build guidance for orchestration
-orch_start = app.find('Ivanti Workflow Orchestration Migration')
-orch_end = app.find('Raw workflow evidence', orch_start)
-orch = app[orch_start:orch_end if orch_end > orch_start else len(app)] if orch_start >= 0 else ''
-check('orchestration does not offer create v6 workflow', 'Create v6 workflow' not in orch)
-check('orchestration does not map every block to statuses', 'Do not create a parent status for every Ivanti block' in orch)
+# Orchestration sources must route through the protected implementation UI. The legacy
+# workflow builder may remain available for genuinely status-based sources elsewhere.
+check('orchestration safe boundary present', 'Safe orchestration boundary' in app)
+check('orchestration implementation pack present', 'Fulfilment implementation pack' in app)
+check('safe UI patch runs in deploy', 'orchestration_safe_ui_fix.py' in workflow)
+check('orchestration does not map every block to statuses', 'Do not create a parent status for every Ivanti block' in app)
 
 # Deployment pipeline must run QA before build/deploy.
 check('QA regression step wired', 'qa_regression.py' in workflow)
