@@ -7,23 +7,24 @@ start = source.index('      // Atlassian Forms does not allow EQUAL_TO for Choic
 end_marker = "\n    if (Object.keys(advancedConditions).length)"
 end = source.index(end_marker, start)
 
-replacement = r'''      // Build conditional visibility as an explicit HIDE rule when the
-      // controlling answer does not match the Ivanti source condition. In the
-      // portal this gives the required behaviour: dependent sections stay
-      // hidden for blank/non-matching answers and become visible only when the
-      // source condition is satisfied.
+replacement = r'''      // Jira Forms validates the advanced groups/checks structure, but the
+      // portal runtime also expects the legacy-compatible co.cIds map to carry
+      // the controller question/value relationship. Keep both structures in
+      // sync so accepted conditions actually execute in the customer portal.
       const controllerField = fields.find(
         (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)
       );
       const controllerFormType = formQuestionType(controllerField?.jiraType);
       const conditionId = String(conditionIndex + 1);
-      const comparisonType = controllerFormType === 'cd' ? 'NONE_OF' : 'DOES_NOT_EQUAL';
+      const comparisonType = controllerFormType === 'cd' ? 'SOME_OF' : 'EQUAL_TO';
       const comparisonConstraint = [String(condition.value ?? '')];
 
       advancedConditions[conditionId] = {
         i: {
           co: {
-            cIds: {}
+            cIds: {
+              [controllerQuestionId]: comparisonConstraint
+            }
           },
           operator: 'OR',
           groups: [{
@@ -37,7 +38,7 @@ replacement = r'''      // Build conditional visibility as an explicit HIDE rule
         },
         o: {
           sIds: targetSectionIds,
-          t: 'hide'
+          t: 'sh'
         }
       };
     }
@@ -91,7 +92,7 @@ save_replacement = r'''    if (Object.keys(advancedConditions).length) {
         key: 'conditions',
         status: conditionSaveSucceeded ? 'verified' : 'partial',
         message:
-          `Applied ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) as explicit hide-on-non-match rules.` +
+          `Applied ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) with portal-runtime controller mappings.` +
           (firstFailure ? ` First unresolved rule: ${firstFailure}` : ''),
         detail: unresolvedRules.length ? { unresolvedRules, acceptedConditionIds: Object.keys(acceptedConditions) } : undefined
       });
