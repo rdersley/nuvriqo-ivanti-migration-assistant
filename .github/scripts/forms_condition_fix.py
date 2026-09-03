@@ -43,21 +43,31 @@ replacement = r'''      const controllerField = fields.find(
           const option = (optionBody.values ?? []).find((item) =>
             normaliseStatusName(item.value) === wanted
           );
-          if (!option?.id) {
+          if (option?.id) {
+            comparisonType = 'SOME_OF';
+            comparisonConstraint = [String(option.id)];
+          } else {
+            // Some Forms-backed choice questions do not expose Jira context
+            // options. In that case use the visible value directly rather than
+            // discarding an otherwise valid Ivanti condition.
+            comparisonType = 'EQUAL_TO';
+            comparisonConstraint = [String(condition.value ?? '')];
+          }
+        } catch (error) {
+          // Jira returns 400 "custom field doesn't support options" for some
+          // linked Forms choice questions. Treat those as value-backed choices
+          // and let the Forms condition API validate the visible source value.
+          const message = String((error as Error)?.message ?? error);
+          if (message.includes("doesn't support options") || message.includes('does not support options') || message.includes('400')) {
+            comparisonType = 'EQUAL_TO';
+            comparisonConstraint = [String(condition.value ?? '')];
+          } else {
             unresolvedRules.push({
               id: String((condition as any).id ?? conditionIndex + 1),
-              reason: `No Jira option ID matched condition value ${String(condition.value ?? '')}.`
+              reason: `Could not resolve Jira option ID: ${message}`
             });
             continue;
           }
-          comparisonType = 'SOME_OF';
-          comparisonConstraint = [String(option.id)];
-        } catch (error) {
-          unresolvedRules.push({
-            id: String((condition as any).id ?? conditionIndex + 1),
-            reason: `Could not resolve Jira option ID: ${String((error as Error)?.message ?? error)}`
-          });
-          continue;
         }
       }
 
