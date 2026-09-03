@@ -110,6 +110,61 @@ function prepareConditionalSections(rawSections: any[], rawConditions: any[]) {
   return prepared;
 }
 
+// Ivanti ROX conditions can identify the first controlled field as the controller.
+// That is invalid in Jira Forms: the controller must be the separate Yes/No or
+// choice question which governs the controlled fields. Repair only that clearly
+// broken case (controller is itself one of the targets), using the source section
+// topology as the authoritative relationship.
+function repairConditionControllers(rawConditions: any[], rawSections: any[], rawFields: any[]) {
+  const conditions = Array.isArray(rawConditions) ? rawConditions : [];
+  const sections = Array.isArray(rawSections) ? rawSections : [];
+  const fields = Array.isArray(rawFields) ? rawFields : [];
+  const byId = new Map(fields.map((field: any) => [String(field?.id ?? ''), field]));
+
+  const controllerScore = (field: any) => {
+    const name = String(field?.name ?? '').toLowerCase();
+    const type = String(field?.jiraType ?? '').toLowerCase();
+    let score = ['select', 'checkbox'].includes(type) ? 50 : 0;
+    if (name.includes('required?') || name.includes('requested?')) score += 40;
+    if (name.startsWith('is ') || name.startsWith('does ') || name.startsWith('do ')) score += 25;
+    if (name.includes('required') || name.includes('requested')) score += 15;
+    return score;
+  };
+
+  return conditions.map((condition: any) => {
+    const targetIds = new Set((condition?.targetFieldIds || []).map((id: any) => String(id)));
+    const currentController = String(condition?.controllerFieldId ?? '');
+    if (!currentController || !targetIds.has(currentController)) return condition;
+
+    const sourceSection = sections.find((section: any) => {
+      const ids = (section?.fieldIds || []).map((id: any) => String(id));
+      return ids.some((id: string) => targetIds.has(id));
+    });
+    if (!sourceSection) return condition;
+
+    const candidates = (sourceSection.fieldIds || [])
+      .map((id: any) => String(id))
+      .filter((id: string) => !targetIds.has(id))
+      .map((id: string) => ({ id, field: byId.get(id) }))
+      .filter((item: any) => item.field)
+      .sort((a: any, b: any) => controllerScore(b.field) - controllerScore(a.field));
+
+    const best = candidates[0];
+    if (!best || controllerScore(best.field) < 50) return condition;
+
+    return {
+      ...condition,
+      controllerFieldId: best.id,
+      controllerFieldName: best.field?.name || condition?.controllerFieldName,
+      controllerRepair: {
+        from: currentController,
+        to: best.id,
+        reason: 'Original controller was one of the controlled target fields; repaired from source section topology.'
+      }
+    };
+  });
+}
+
 function conditionStage(form: any): any | undefined {
   return Array.isArray(form?.stages) ? form.stages.find((stage: any) => stage?.key === 'conditions') : undefined;
 }
@@ -170,7 +225,11 @@ async function buildJsm(button: HTMLButtonElement) {
       options: field.options
     }));
 
-    const conditions = service.proposedConditions || [];
+    const conditions = repairConditionControllers(
+      service.proposedConditions || [],
+      service.formSections || [],
+      service.analysis.fields || []
+    );
     const sections = prepareConditionalSections(service.formSections || [], conditions);
 
     const form: any = await invoke('createJsmForm', {
