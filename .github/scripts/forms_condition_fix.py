@@ -3,11 +3,8 @@ from pathlib import Path
 path = Path('src/index.ts')
 source = path.read_text()
 
-# 1) Make JSM field resolution type-safe. The old resolver trusted an exact-name
-# duplicate even when its Jira custom-field type was incompatible with the
-# Ivanti source field. That can produce a Forms ChoiceDropDown backed by a Jira
-# field that has no option semantics. Repair only choice controllers by creating
-# a dedicated single-select migration field when necessary.
+# 1) Make JSM field resolution type-safe. Existing same-name fields are only
+# reused for choice controllers when they are genuine Jira single-select fields.
 old_resolver = r'''async function resolveJsmFields(fields: JsmFieldInput[]) {
   const resolution = await resolveScreenFields(fields.map((field) => ({ id: field.id, name: field.name })));
   const byName = new Map(resolution.resolved.map((field) => [normaliseStatusName(field.name), field.id]));
@@ -74,78 +71,92 @@ new_resolver = r'''async function resolveJsmFields(fields: JsmFieldInput[]) {
   return output;
 }'''
 
-if old_resolver not in source:
-    raise SystemExit('Expected resolveJsmFields block not found')
-source = source.replace(old_resolver, new_resolver, 1)
+if old_resolver in source:
+    source = source.replace(old_resolver, new_resolver, 1)
 
-# 2) Keep the complete Jira read-back design. Conditions must be built from the
-# question/section representation Jira actually stored, not only from our input.
+# 2) Keep the complete Jira read-back design for native Forms condition wiring.
 old_readback_start = """  // Read the template back from Jira and verify the actual stored layout, instead\n  // of trusting a successful PUT response.\n  let designVerified = false;"""
-new_readback_start = """  // Read the template back from Jira and verify the actual stored layout, instead\n  // of trusting a successful PUT response. Keep the stored design because Forms\n  // may normalise linked choice questions and section identifiers.\n  let designVerified = false;\n  let storedDesignForConditions: { questions?: Record<string, unknown>; layout?: unknown[]; sections?: Record<string, unknown> } | undefined;"""
-if old_readback_start not in source:
-    raise SystemExit('Expected readback marker not found')
-source = source.replace(old_readback_start, new_readback_start, 1)
+new_readback_start = """  // Read the template back from Jira and verify the actual stored layout, instead\n  // of trusting a successful PUT response. Keep the stored design because native\n  // Forms conditions must reference the exact persisted question/section ids.\n  let designVerified = false;\n  let storedDesignForConditions: { questions?: Record<string, unknown>; layout?: unknown[]; sections?: Record<string, unknown> } | undefined;"""
+if old_readback_start in source:
+    source = source.replace(old_readback_start, new_readback_start, 1)
 
 old_stored = """    const stored = await parseResponse<{\n      design?: { questions?: Record<string, unknown>; layout?: unknown[]; sections?: Record<string, unknown> }\n    }>(getResponse);\n    const storedQuestions"""
 new_stored = """    const stored = await parseResponse<{\n      design?: { questions?: Record<string, unknown>; layout?: unknown[]; sections?: Record<string, unknown> }\n    }>(getResponse);\n    storedDesignForConditions = stored.design;\n    const storedQuestions"""
-if old_stored not in source:
-    raise SystemExit('Expected stored form readback block not found')
-source = source.replace(old_stored, new_stored, 1)
+if old_stored in source:
+    source = source.replace(old_stored, new_stored, 1)
 
-# 3) Replace the condition builder. Use the stored Forms question to resolve the
-# actual choice token when Jira exposes one. Also resolve target section IDs from
-# the stored section map by name/order rather than assuming our array index is
-# always the final Forms section ID.
-start = source.index('      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown')
+# 3) Replace every experimental/advanced condition builder with Jira Forms' own
+# native runtime representation. A real Jira-created form stores:
+#   conditions[id].i.co.cIds[questionId] = [choiceOptionId]
+#   conditions[id].o.sIds = [sectionId]
+#   conditions[id].t = 'sh'
+# and the target section itself references conditions:[id].
+start_marker = "      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown"
+if start_marker not in source:
+    # Previous patch revisions may have a different comment, anchor on controllerField.
+    start_marker = "      const controllerField = fields.find("
+start = source.index(start_marker)
 end_marker = "\n    if (Object.keys(advancedConditions).length)"
 end = source.index(end_marker, start)
 
 replacement = r'''      const controllerField = fields.find(
         (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)
       );
-      const controllerFormType = formQuestionType(controllerField?.jiraType);
+      const controllerResolved = resolved.find((item) =>
+        String(item.sourceId ?? '') === String(condition.controllerFieldId) ||
+        normaliseStatusName(item.name) === normaliseStatusName(controllerField?.name)
+      );
       const conditionId = String(conditionIndex + 1);
-      const desiredValue = String(condition.value ?? '');
+      const desiredValue = String(condition.value ?? '').trim();
+      const controllerFormType = formQuestionType(controllerField?.jiraType);
 
-      // Jira can normalise linked choice questions during form save. Search the
-      // stored question object recursively for a label/value that matches the
-      // Ivanti condition and use its associated id/key/value token when present.
-      const storedQuestion = storedDesignForConditions?.questions?.[controllerQuestionId] as unknown;
-      const wanted = normaliseStatusName(desiredValue);
-      const seen = new Set<unknown>();
-      const findChoiceToken = (node: unknown): string | undefined => {
-        if (!node || typeof node !== 'object' || seen.has(node)) return undefined;
-        seen.add(node);
-        if (Array.isArray(node)) {
-          for (const item of node) {
-            const found = findChoiceToken(item);
-            if (found) return found;
-          }
-          return undefined;
-        }
-        const record = node as Record<string, unknown>;
-        const labels = [record.label, record.name, record.text, record.displayName, record.value]
-          .map((value) => value == null ? '' : String(value));
-        if (labels.some((value) => normaliseStatusName(value) === wanted)) {
-          for (const key of ['id', 'key', 'choiceId', 'optionId', 'value']) {
-            const token = record[key];
-            if (token !== undefined && token !== null && String(token).trim()) return String(token);
-          }
-        }
-        for (const value of Object.values(record)) {
-          const found = findChoiceToken(value);
-          if (found) return found;
-        }
-        return undefined;
-      };
+      if (controllerFormType !== 'cd') {
+        unresolvedRules.push({
+          id: String((condition as any).id ?? conditionIndex + 1),
+          reason: `Controller ${controllerField?.name || condition.controllerFieldId} is not a choice question; native section logic currently requires a choice controller.`
+        });
+        continue;
+      }
 
-      const storedChoiceToken = controllerFormType === 'cd' ? findChoiceToken(storedQuestion) : undefined;
-      const comparisonType = controllerFormType === 'cd' ? 'SOME_OF' : 'EQUAL_TO';
-      const comparisonConstraint = [storedChoiceToken || desiredValue];
+      const jiraFieldId = String(controllerResolved?.jiraFieldId ?? '');
+      if (!jiraFieldId) {
+        unresolvedRules.push({
+          id: String((condition as any).id ?? conditionIndex + 1),
+          reason: 'Controller Jira choice field was not resolved.'
+        });
+        continue;
+      }
 
-      // Re-resolve target section IDs against Jira's stored section keys. The
-      // prepared sections array and Forms' section map are order-compatible, but
-      // using the stored keys avoids silently targeting a non-rendered section.
+      // Native Forms conditional logic for linked Jira dropdowns references the
+      // Jira option ID, not the display label. Resolve it from the repaired or
+      // existing single-select field.
+      let optionId = '';
+      try {
+        const contextId = await getFirstContextId(jiraFieldId);
+        const optionResponse = await api.asUser().requestJira(
+          route`/rest/api/3/field/${jiraFieldId}/context/${contextId}/option?maxResults=1000`,
+          { headers: { Accept: 'application/json' } }
+        );
+        const optionBody = await parseResponse<{ values?: Array<{ id?: string; value?: string }> }>(optionResponse);
+        const wanted = normaliseStatusName(desiredValue);
+        const option = (optionBody.values ?? []).find((item) => normaliseStatusName(item.value) === wanted);
+        optionId = String(option?.id ?? '');
+      } catch (error) {
+        unresolvedRules.push({
+          id: String((condition as any).id ?? conditionIndex + 1),
+          reason: `Could not resolve native Jira option id for ${controllerField?.name || jiraFieldId}: ${error instanceof Error ? error.message : String(error)}`
+        });
+        continue;
+      }
+
+      if (!optionId) {
+        unresolvedRules.push({
+          id: String((condition as any).id ?? conditionIndex + 1),
+          reason: `No Jira option matched Ivanti value '${desiredValue}' for ${controllerField?.name || jiraFieldId}.`
+        });
+        continue;
+      }
+
       const storedSectionKeys = Object.keys(storedDesignForConditions?.sections ?? {});
       const resolvedTargetSectionIds = targetSectionIds
         .map((candidate) => {
@@ -164,84 +175,117 @@ replacement = r'''      const controllerField = fields.find(
         continue;
       }
 
+      // This is the exact native legacy/runtime shape emitted by Jira Forms.
       advancedConditions[conditionId] = {
         i: {
-          // Keep the compatibility object because Jira currently validates its
-          // presence, but do not invent a second condition model inside it.
-          co: { cIds: {} },
-          operator: 'OR',
-          groups: [{
-            operator: 'AND',
-            checks: [{
-              fieldId: controllerQuestionId,
-              type: comparisonType,
-              constraint: comparisonConstraint
-            }]
-          }]
+          co: {
+            cIds: {
+              [controllerQuestionId]: [optionId]
+            }
+          }
         },
         o: {
-          sIds: resolvedTargetSectionIds,
-          t: 'sh'
-        }
+          sIds: resolvedTargetSectionIds
+        },
+        t: 'sh'
       };
     }
 '''
 source = source[:start] + replacement + source[end:]
 
-# 4) Keep independent saves, but verify the exact saved rule contents after each
-# PUT rather than treating a 2xx response as runtime-ready.
+# 4) Save all accepted conditions together and wire each target section back to
+# its condition id. Jira's own saved forms contain BOTH sides of this relation.
 save_start = source.index("    if (Object.keys(advancedConditions).length) {", start)
 save_end = source.index("  } else {\n    stages.push({ key: 'conditions'", save_start)
 
 save_replacement = r'''    if (Object.keys(advancedConditions).length) {
-      const acceptedConditions: Record<string, unknown> = {};
+      const conditionedSections: Record<string, unknown> = {};
+      const baseStoredSections = storedDesignForConditions?.sections ?? formSections;
 
-      for (const [candidateId, candidateCondition] of Object.entries(advancedConditions)) {
-        const candidateConditions = { ...acceptedConditions, [candidateId]: candidateCondition };
-        const candidateDesign = { ...enrichedDesign, conditions: candidateConditions };
-
-        try {
-          const conditionResponse = await api.asUser().requestJira(route`/forms/project/${projectId}/form/${formId}`, {
-            method: 'PUT',
-            headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-ExperimentalApi': 'opt-in' },
-            body: JSON.stringify({ design: candidateDesign })
-          });
-          await parseResponse(conditionResponse);
-
-          const verifyResponse = await api.asUser().requestJira(route`/forms/project/${projectId}/form/${formId}`, {
-            headers: { Accept: 'application/json' }
-          });
-          const verifyBody = await parseResponse<{ design?: { conditions?: Record<string, unknown> } }>(verifyResponse);
-          const persisted = verifyBody.design?.conditions?.[candidateId];
-          if (!persisted) throw new Error(`Jira did not persist condition ${candidateId} on read-back.`);
-
-          acceptedConditions[candidateId] = persisted;
-          activeDesign = { ...enrichedDesign, conditions: { ...acceptedConditions } };
-        } catch (error) {
-          const detail = apiErrorDetail(error);
-          let detailText = '';
-          try { detailText = JSON.stringify(detail); } catch { detailText = String(detail); }
-          unresolvedRules.push({ id: candidateId, reason: `Condition ${candidateId} failed save/read-back verification: ${detailText}` });
+      for (const [sectionId, sectionValue] of Object.entries(baseStoredSections)) {
+        const sectionRecord = { ...(sectionValue as Record<string, unknown>) };
+        const refs: string[] = [];
+        for (const [conditionId, rawCondition] of Object.entries(advancedConditions)) {
+          const output = (rawCondition as any)?.o;
+          const sIds = Array.isArray(output?.sIds) ? output.sIds.map(String) : [];
+          if (sIds.includes(String(sectionId))) refs.push(String(conditionId));
         }
+        sectionRecord.conditions = refs;
+        conditionedSections[String(sectionId)] = sectionRecord;
       }
 
-      const acceptedCount = Object.keys(acceptedConditions).length;
-      conditionSaveSucceeded = acceptedCount === conditions.length && unresolvedRules.length === 0;
-      const firstFailure = unresolvedRules[0]?.reason;
-      stages.push({
-        key: 'conditions',
-        status: conditionSaveSucceeded ? 'verified' : 'partial',
-        message:
-          `Saved and read back ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) using Jira-normalised question and section metadata.` +
-          (firstFailure ? ` First unresolved rule: ${firstFailure}` : '') +
-          (conditionSaveSucceeded ? ' Portal behaviour still requires the functional No/Yes test before migration sign-off.' : ''),
-        detail: unresolvedRules.length ? { unresolvedRules, acceptedConditionIds: Object.keys(acceptedConditions) } : undefined
-      });
+      const conditionedDesign = {
+        ...enrichedDesign,
+        sections: conditionedSections,
+        conditions: advancedConditions
+      };
+
+      try {
+        const conditionResponse = await api.asUser().requestJira(route`/forms/project/${projectId}/form/${formId}`, {
+          method: 'PUT',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-ExperimentalApi': 'opt-in' },
+          body: JSON.stringify({ design: conditionedDesign })
+        });
+        await parseResponse(conditionResponse);
+
+        const verifyResponse = await api.asUser().requestJira(route`/forms/project/${projectId}/form/${formId}`, {
+          headers: { Accept: 'application/json' }
+        });
+        const verifyBody = await parseResponse<{
+          design?: { conditions?: Record<string, any>; sections?: Record<string, any>; questions?: Record<string, any> }
+        }>(verifyResponse);
+
+        const persistedConditions = verifyBody.design?.conditions ?? {};
+        const persistedSections = verifyBody.design?.sections ?? {};
+        const expectedIds = Object.keys(advancedConditions);
+        const missingConditions = expectedIds.filter((id) => !persistedConditions[id]);
+        const brokenSectionRefs: string[] = [];
+
+        for (const conditionId of expectedIds) {
+          const raw = persistedConditions[conditionId];
+          const cIds = raw?.i?.co?.cIds ?? {};
+          const controllerIds = Object.keys(cIds);
+          const targetIds = Array.isArray(raw?.o?.sIds) ? raw.o.sIds.map(String) : [];
+          if (!controllerIds.length) brokenSectionRefs.push(`${conditionId}: controller missing`);
+          for (const sectionId of targetIds) {
+            const refs = Array.isArray(persistedSections?.[sectionId]?.conditions)
+              ? persistedSections[sectionId].conditions.map(String)
+              : [];
+            if (!refs.includes(conditionId)) brokenSectionRefs.push(`${conditionId}: section ${sectionId} not linked`);
+          }
+        }
+
+        conditionSaveSucceeded = missingConditions.length === 0 && brokenSectionRefs.length === 0 && unresolvedRules.length === 0;
+        activeDesign = conditionedDesign;
+        if (missingConditions.length || brokenSectionRefs.length) {
+          unresolvedRules.push({
+            reason: `Native Forms read-back verification failed. Missing conditions: ${missingConditions.join(', ') || 'none'}; broken links: ${brokenSectionRefs.join(', ') || 'none'}.`
+          });
+        }
+
+        stages.push({
+          key: 'conditions',
+          status: conditionSaveSucceeded ? 'verified' : 'partial',
+          message: conditionSaveSucceeded
+            ? `Saved and read back ${expectedIds.length}/${conditions.length} Ivanti rule(s) in Jira Forms native runtime format, including controller option IDs and section condition links. Portal No/Yes behaviour still requires functional confirmation.`
+            : `Native Forms condition wiring is incomplete: ${unresolvedRules[0]?.reason || 'read-back verification failed.'}`,
+          detail: unresolvedRules.length ? { unresolvedRules } : undefined
+        });
+      } catch (error) {
+        const detail = apiErrorDetail(error);
+        unresolvedRules.push({ reason: `Atlassian rejected native Forms condition wiring: ${JSON.stringify(detail)}` });
+        stages.push({
+          key: 'conditions',
+          status: 'partial',
+          message: `Native Forms condition wiring failed: ${unresolvedRules[0]?.reason}`,
+          detail: { unresolvedRules }
+        });
+      }
     } else {
       stages.push({
         key: 'conditions',
         status: 'partial',
-        message: `None of the ${conditions.length} inferred Ivanti conditional rule(s) could be safely mapped to a stored Form section.`,
+        message: `None of the ${conditions.length} inferred Ivanti conditional rule(s) could be mapped to Jira's native Forms condition model.`,
         detail: { unresolvedRules }
       });
     }
