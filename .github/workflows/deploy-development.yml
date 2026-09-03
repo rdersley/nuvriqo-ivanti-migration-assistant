@@ -37,6 +37,9 @@ jobs:
       - name: Apply backend Forms controller repair
         run: python .github/scripts/forms_condition_backend_controller_fix.py
 
+      - name: Apply deterministic frontend Forms controller repair
+        run: python .github/scripts/forms_frontend_controller_fix.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
