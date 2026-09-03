@@ -55,6 +55,9 @@ jobs:
       - name: Apply estate cutover readiness
         run: python .github/scripts/cutover_readiness_fix.py
 
+      - name: Apply live Jira validation readback
+        run: python .github/scripts/live_validation_readback_fix.py
+
       - name: Run migration regression QA
         run: python .github/scripts/qa_regression.py
 
