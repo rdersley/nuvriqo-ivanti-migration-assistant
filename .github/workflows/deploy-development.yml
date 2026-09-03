@@ -31,6 +31,9 @@ jobs:
       - name: Apply Forms runtime condition fix
         run: python .github/scripts/forms_condition_runtime_fix.py
 
+      - name: Apply Forms canonical question id fix
+        run: python .github/scripts/forms_condition_canonical_id_fix.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
