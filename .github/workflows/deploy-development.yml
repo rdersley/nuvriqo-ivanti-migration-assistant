@@ -52,6 +52,9 @@ jobs:
       - name: Apply orchestration-first safe UI
         run: python .github/scripts/orchestration_safe_ui_fix.py
 
+      - name: Apply estate cutover readiness
+        run: python .github/scripts/cutover_readiness_fix.py
+
       - name: Run migration regression QA
         run: python .github/scripts/qa_regression.py
 
