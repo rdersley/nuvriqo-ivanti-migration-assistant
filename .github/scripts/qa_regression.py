@@ -56,6 +56,18 @@ check('orchestration implementation pack present', 'Fulfilment implementation pa
 check('safe UI patch runs in deploy', 'orchestration_safe_ui_fix.py' in workflow)
 check('orchestration does not map every block to statuses', 'Do not create a parent status for every Ivanti block' in app)
 
+# Estate cutover assurance must remain available for every imported service.
+check('cutover readiness patch exists', (ROOT/'.github/scripts/cutover_readiness_fix.py').exists())
+check('cutover readiness patch runs in deploy', 'cutover_readiness_fix.py' in workflow)
+check('cutover readiness page present', 'Cutover readiness' in app)
+check('ready cutover state present', 'Ready to cut over' in app)
+check('needs review cutover state present', 'Needs review' in app)
+check('blocked cutover state present', "status = 'Blocked'" in app)
+check('not migrated cutover state present', "status = 'Not migrated'" in app)
+check('cutover CSV export present', 'exportCutoverReadinessCsv' in app and 'ivanti-jira-cutover-readiness.csv' in app)
+check('orchestration screens treated as not required', "source:orchestrationSource ? 'Not required' : 'Required'" in app)
+check('runtime signoff required before ready', "!['passed','approved'].includes(signoff)" in app)
+
 # Deployment pipeline must run QA before build/deploy.
 check('QA regression step wired', 'qa_regression.py' in workflow)
 
