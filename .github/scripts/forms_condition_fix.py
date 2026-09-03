@@ -47,16 +47,10 @@ replacement = r'''      const controllerField = fields.find(
             comparisonType = 'SOME_OF';
             comparisonConstraint = [String(option.id)];
           } else {
-            // Some Forms-backed choice questions do not expose Jira context
-            // options. In that case use the visible value directly rather than
-            // discarding an otherwise valid Ivanti condition.
             comparisonType = 'EQUAL_TO';
             comparisonConstraint = [String(condition.value ?? '')];
           }
         } catch (error) {
-          // Jira returns 400 "custom field doesn't support options" for some
-          // linked Forms choice questions. Treat those as value-backed choices
-          // and let the Forms condition API validate the visible source value.
           const message = String((error as Error)?.message ?? error);
           if (message.includes("doesn't support options") || message.includes('does not support options') || message.includes('400')) {
             comparisonType = 'EQUAL_TO';
@@ -73,6 +67,9 @@ replacement = r'''      const controllerField = fields.find(
 
       advancedConditions[conditionId] = {
         i: {
+          co: {
+            cIds: {}
+          },
           operator: 'OR',
           groups: [{
             operator: 'AND',
