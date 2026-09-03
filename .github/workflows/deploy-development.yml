@@ -58,6 +58,9 @@ jobs:
       - name: Apply live Jira validation readback
         run: python .github/scripts/live_validation_readback_fix.py
 
+      - name: Apply native Ivanti workflow XML import
+        run: python .github/scripts/native_workflow_export_import_fix.py
+
       - name: Run migration regression QA
         run: python .github/scripts/qa_regression.py
 
