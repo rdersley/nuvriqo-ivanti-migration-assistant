@@ -43,6 +43,9 @@ jobs:
       - name: Apply direct orchestration React view fix
         run: python .github/scripts/orchestration_react_view_fix.py
 
+      - name: Apply Jira orchestration execution plan
+        run: python .github/scripts/orchestration_execution_plan_fix.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
