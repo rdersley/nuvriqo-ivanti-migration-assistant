@@ -3,67 +3,21 @@ from pathlib import Path
 path = Path('src/index.ts')
 source = path.read_text()
 
-# Keep the normal Forms section schema. Advanced conditions target sections
-# through design.conditions.*.o.sIds; section definitions themselves do not
-# need a custom conditions property.
-
 start = source.index('      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown')
 end_marker = "\n    if (Object.keys(advancedConditions).length)"
 end = source.index(end_marker, start)
 
-replacement = r'''      const controllerField = fields.find(
+replacement = r'''      // Forms evaluates ChoiceDropDown conditions against the Form question's
+      // choice values. Do not call Jira's custom-field option endpoint here:
+      // linked Forms questions can be ChoiceDropDown even when the backing Jira
+      // field does not expose context options through that API.
+      const controllerField = fields.find(
         (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)
       );
       const controllerFormType = formQuestionType(controllerField?.jiraType);
       const conditionId = String(conditionIndex + 1);
-      let comparisonType = 'EQUAL_TO';
-      let comparisonConstraint = [String(condition.value ?? '')];
-
-      if (controllerFormType === 'cd') {
-        const controllerResolved = resolved.find((item) =>
-          normaliseStatusName(item.name) === normaliseStatusName(controllerField?.name)
-        );
-        const jiraFieldId = String(controllerResolved?.jiraFieldId ?? '');
-        if (!jiraFieldId) {
-          unresolvedRules.push({
-            id: String((condition as any).id ?? conditionIndex + 1),
-            reason: 'Controller Jira choice field was not resolved.'
-          });
-          continue;
-        }
-
-        try {
-          const contextId = await getFirstContextId(jiraFieldId);
-          const optionResponse = await api.asUser().requestJira(
-            route`/rest/api/3/field/${jiraFieldId}/context/${contextId}/option?maxResults=100`,
-            { headers: { Accept: 'application/json' } }
-          );
-          const optionBody = await parseResponse<{ values?: Array<{ id?: string; value?: string }> }>(optionResponse);
-          const wanted = normaliseStatusName(condition.value);
-          const option = (optionBody.values ?? []).find((item) =>
-            normaliseStatusName(item.value) === wanted
-          );
-          if (option?.id) {
-            comparisonType = 'SOME_OF';
-            comparisonConstraint = [String(option.id)];
-          } else {
-            comparisonType = 'EQUAL_TO';
-            comparisonConstraint = [String(condition.value ?? '')];
-          }
-        } catch (error) {
-          const message = String((error as Error)?.message ?? error);
-          if (message.includes("doesn't support options") || message.includes('does not support options') || message.includes('400')) {
-            comparisonType = 'EQUAL_TO';
-            comparisonConstraint = [String(condition.value ?? '')];
-          } else {
-            unresolvedRules.push({
-              id: String((condition as any).id ?? conditionIndex + 1),
-              reason: `Could not resolve Jira option ID: ${message}`
-            });
-            continue;
-          }
-        }
-      }
+      const comparisonType = controllerFormType === 'cd' ? 'SOME_OF' : 'EQUAL_TO';
+      const comparisonConstraint = [String(condition.value ?? '')];
 
       advancedConditions[conditionId] = {
         i: {
@@ -90,9 +44,9 @@ replacement = r'''      const controllerField = fields.find(
 
 source = source[:start] + replacement + source[end:]
 
-# Save each inferred condition independently. One unsupported Ivanti rule must
-# not cause Jira to reject every other valid rule. This also surfaces the exact
-# Atlassian validation response for the individual failing rule.
+# Save each inferred condition independently so one unsupported source rule
+# cannot remove the other valid conditions, and surface the exact Atlassian
+# validation response for the individual failing rule.
 save_start = source.index("    if (Object.keys(advancedConditions).length) {", start)
 save_end = source.index("  } else {\n    stages.push({ key: 'conditions'", save_start)
 
@@ -136,7 +90,7 @@ save_replacement = r'''    if (Object.keys(advancedConditions).length) {
         key: 'conditions',
         status: conditionSaveSucceeded ? 'verified' : 'partial',
         message:
-          `Applied ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) independently using the documented Forms advanced-condition schema.` +
+          `Applied ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) independently using Forms-native choice checks.` +
           (firstFailure ? ` First unresolved rule: ${firstFailure}` : ''),
         detail: unresolvedRules.length ? { unresolvedRules, acceptedConditionIds: Object.keys(acceptedConditions) } : undefined
       });
