@@ -85,15 +85,12 @@ new_stored = """    const stored = await parseResponse<{\n      design?: { quest
 if old_stored in source:
     source = source.replace(old_stored, new_stored, 1)
 
-# 3) Replace every experimental/advanced condition builder with Jira Forms' own
-# native runtime representation. A real Jira-created form stores:
-#   conditions[id].i.co.cIds[questionId] = [choiceOptionId]
-#   conditions[id].o.sIds = [sectionId]
-#   conditions[id].t = 'sh'
-# and the target section itself references conditions:[id].
+# 3) Build Jira Forms conditions with the controller option ids in co.cIds and
+# the output type under o.t. Jira's validation response explicitly requires
+# design.conditions.*.o.t, while the Forms editor/runtime also needs cIds populated
+# so the controller is not rendered as "Unnamed Field".
 start_marker = "      // Atlassian Forms does not allow EQUAL_TO for ChoiceDropDown"
 if start_marker not in source:
-    # Previous patch revisions may have a different comment, anchor on controllerField.
     start_marker = "      const controllerField = fields.find("
 start = source.index(start_marker)
 end_marker = "\n    if (Object.keys(advancedConditions).length)"
@@ -127,9 +124,6 @@ replacement = r'''      const controllerField = fields.find(
         continue;
       }
 
-      // Native Forms conditional logic for linked Jira dropdowns references the
-      // Jira option ID, not the display label. Resolve it from the repaired or
-      // existing single-select field.
       let optionId = '';
       try {
         const contextId = await getFirstContextId(jiraFieldId);
@@ -175,7 +169,6 @@ replacement = r'''      const controllerField = fields.find(
         continue;
       }
 
-      // This is the exact native legacy/runtime shape emitted by Jira Forms.
       advancedConditions[conditionId] = {
         i: {
           co: {
@@ -185,16 +178,16 @@ replacement = r'''      const controllerField = fields.find(
           }
         },
         o: {
-          sIds: resolvedTargetSectionIds
-        },
-        t: 'sh'
+          sIds: resolvedTargetSectionIds,
+          t: 'sh'
+        }
       };
     }
 '''
 source = source[:start] + replacement + source[end:]
 
 # 4) Save all accepted conditions together and wire each target section back to
-# its condition id. Jira's own saved forms contain BOTH sides of this relation.
+# its condition id. Verify the exact persisted controller, output and section links.
 save_start = source.index("    if (Object.keys(advancedConditions).length) {", start)
 save_end = source.index("  } else {\n    stages.push({ key: 'conditions'", save_start)
 
@@ -239,27 +232,28 @@ save_replacement = r'''    if (Object.keys(advancedConditions).length) {
         const persistedSections = verifyBody.design?.sections ?? {};
         const expectedIds = Object.keys(advancedConditions);
         const missingConditions = expectedIds.filter((id) => !persistedConditions[id]);
-        const brokenSectionRefs: string[] = [];
+        const brokenLinks: string[] = [];
 
         for (const conditionId of expectedIds) {
           const raw = persistedConditions[conditionId];
           const cIds = raw?.i?.co?.cIds ?? {};
           const controllerIds = Object.keys(cIds);
           const targetIds = Array.isArray(raw?.o?.sIds) ? raw.o.sIds.map(String) : [];
-          if (!controllerIds.length) brokenSectionRefs.push(`${conditionId}: controller missing`);
+          if (!controllerIds.length) brokenLinks.push(`${conditionId}: controller missing`);
+          if (raw?.o?.t !== 'sh' && raw?.o?.t !== 'hide') brokenLinks.push(`${conditionId}: output type missing`);
           for (const sectionId of targetIds) {
             const refs = Array.isArray(persistedSections?.[sectionId]?.conditions)
               ? persistedSections[sectionId].conditions.map(String)
               : [];
-            if (!refs.includes(conditionId)) brokenSectionRefs.push(`${conditionId}: section ${sectionId} not linked`);
+            if (!refs.includes(conditionId)) brokenLinks.push(`${conditionId}: section ${sectionId} not linked`);
           }
         }
 
-        conditionSaveSucceeded = missingConditions.length === 0 && brokenSectionRefs.length === 0 && unresolvedRules.length === 0;
+        conditionSaveSucceeded = missingConditions.length === 0 && brokenLinks.length === 0 && unresolvedRules.length === 0;
         activeDesign = conditionedDesign;
-        if (missingConditions.length || brokenSectionRefs.length) {
+        if (missingConditions.length || brokenLinks.length) {
           unresolvedRules.push({
-            reason: `Native Forms read-back verification failed. Missing conditions: ${missingConditions.join(', ') || 'none'}; broken links: ${brokenSectionRefs.join(', ') || 'none'}.`
+            reason: `Native Forms read-back verification failed. Missing conditions: ${missingConditions.join(', ') || 'none'}; broken links: ${brokenLinks.join(', ') || 'none'}.`
           });
         }
 
@@ -267,7 +261,7 @@ save_replacement = r'''    if (Object.keys(advancedConditions).length) {
           key: 'conditions',
           status: conditionSaveSucceeded ? 'verified' : 'partial',
           message: conditionSaveSucceeded
-            ? `Saved and read back ${expectedIds.length}/${conditions.length} Ivanti rule(s) in Jira Forms native runtime format, including controller option IDs and section condition links. Portal No/Yes behaviour still requires functional confirmation.`
+            ? `Saved and read back ${expectedIds.length}/${conditions.length} Ivanti rule(s) with native controller option IDs, output types and section condition links. Portal No/Yes behaviour still requires functional confirmation.`
             : `Native Forms condition wiring is incomplete: ${unresolvedRules[0]?.reason || 'read-back verification failed.'}`,
           detail: unresolvedRules.length ? { unresolvedRules } : undefined
         });
