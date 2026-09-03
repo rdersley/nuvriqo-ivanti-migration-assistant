@@ -7,16 +7,17 @@ start = source.index('      // Atlassian Forms does not allow EQUAL_TO for Choic
 end_marker = "\n    if (Object.keys(advancedConditions).length)"
 end = source.index(end_marker, start)
 
-replacement = r'''      // Forms evaluates ChoiceDropDown conditions against the Form question's
-      // choice values. Do not call Jira's custom-field option endpoint here:
-      // linked Forms questions can be ChoiceDropDown even when the backing Jira
-      // field does not expose context options through that API.
+replacement = r'''      // Build conditional visibility as an explicit HIDE rule when the
+      // controlling answer does not match the Ivanti source condition. In the
+      // portal this gives the required behaviour: dependent sections stay
+      // hidden for blank/non-matching answers and become visible only when the
+      // source condition is satisfied.
       const controllerField = fields.find(
         (field) => String(field.sourceId ?? '') === String(condition.controllerFieldId)
       );
       const controllerFormType = formQuestionType(controllerField?.jiraType);
       const conditionId = String(conditionIndex + 1);
-      const comparisonType = controllerFormType === 'cd' ? 'SOME_OF' : 'EQUAL_TO';
+      const comparisonType = controllerFormType === 'cd' ? 'NONE_OF' : 'DOES_NOT_EQUAL';
       const comparisonConstraint = [String(condition.value ?? '')];
 
       advancedConditions[conditionId] = {
@@ -36,7 +37,7 @@ replacement = r'''      // Forms evaluates ChoiceDropDown conditions against the
         },
         o: {
           sIds: targetSectionIds,
-          t: 'sh'
+          t: 'hide'
         }
       };
     }
@@ -90,7 +91,7 @@ save_replacement = r'''    if (Object.keys(advancedConditions).length) {
         key: 'conditions',
         status: conditionSaveSucceeded ? 'verified' : 'partial',
         message:
-          `Applied ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) independently using Forms-native choice checks.` +
+          `Applied ${acceptedCount}/${conditions.length} inferred Ivanti conditional rule(s) as explicit hide-on-non-match rules.` +
           (firstFailure ? ` First unresolved rule: ${firstFailure}` : ''),
         detail: unresolvedRules.length ? { unresolvedRules, acceptedConditionIds: Object.keys(acceptedConditions) } : undefined
       });
