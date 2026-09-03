@@ -46,6 +46,9 @@ jobs:
       - name: Apply Jira orchestration execution plan
         run: python .github/scripts/orchestration_execution_plan_fix.py
 
+      - name: Apply orchestration-aware automation blueprint
+        run: python .github/scripts/orchestration_automation_blueprint_fix.py
+
       - name: Run migration regression QA
         run: python .github/scripts/qa_regression.py
 
