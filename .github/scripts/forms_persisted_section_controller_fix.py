@@ -15,8 +15,11 @@ replacement = r'''      // Final controller repair from Jira's persisted Form to
       // conditional target section, find its matching non-conditional base
       // section, inspect the persisted questions actually placed there, and use
       // the strongest Required?/Requested? choice question as the controller.
-      // This deliberately overrides a stale imported controller reference such
-      // as Second Monitor Requested? when the governing question is Computer Required?.
+      //
+      // IMPORTANT: when the controller changes, the Jira option id must also be
+      // re-resolved against that repaired controller's Jira field. Reusing the
+      // old constraint is what produced a valid field with a blank Value selector
+      // (for example Computer Required? paired with Second Monitor's Yes option).
       const persistedDesignForControllerRepair = storedDesignForConditions ?? {};
       const persistedQuestionsForRepair = persistedDesignForControllerRepair.questions ?? {};
       const persistedLayoutForRepair = Array.isArray(persistedDesignForControllerRepair.layout)
@@ -84,19 +87,50 @@ replacement = r'''      // Final controller repair from Jira's persisted Form to
         }
 
         if (!repairedControllerId) continue;
-        const compatibilityValues = Object.values(condition?.i?.co?.cIds ?? {}) as any[];
-        const currentConstraint = compatibilityValues.find((value) => Array.isArray(value) && value.length)?.[0];
-        const advancedConstraint = condition?.i?.groups?.[0]?.checks?.[0]?.constraint?.[0];
-        const constraint = String(currentConstraint ?? advancedConstraint ?? '').trim();
-        if (!constraint) continue;
 
-        condition.i.co = { cIds: { [repairedControllerId]: [constraint] } };
+        const repairedQuestion: any = (persistedQuestionsForRepair as any)?.[repairedControllerId];
+        const repairedJiraFieldId = String(repairedQuestion?.jiraField ?? '').trim();
+        const sourceCondition: any = conditions[Number(conditionId) - 1];
+        const desiredValue = String(sourceCondition?.value ?? '').trim();
+
+        let repairedConstraint = '';
+        if (repairedJiraFieldId && desiredValue) {
+          try {
+            const repairedContextId = await getFirstContextId(repairedJiraFieldId);
+            const repairedOptionResponse = await api.asUser().requestJira(
+              route`/rest/api/3/field/${repairedJiraFieldId}/context/${repairedContextId}/option?maxResults=1000`,
+              { headers: { Accept: 'application/json' } }
+            );
+            const repairedOptionBody = await parseResponse<{ values?: Array<{ id?: string; value?: string }> }>(repairedOptionResponse);
+            const wanted = normaliseStatusName(desiredValue);
+            const repairedOption = (repairedOptionBody.values ?? []).find((item) =>
+              normaliseStatusName(item.value) === wanted
+            );
+            repairedConstraint = String(repairedOption?.id ?? '').trim();
+          } catch (error) {
+            unresolvedRules.push({
+              id: String(sourceCondition?.id ?? conditionId),
+              reason: `Could not re-resolve option '${desiredValue}' for repaired Forms controller ${String(repairedQuestion?.label ?? repairedControllerId)} (${repairedJiraFieldId}): ${error instanceof Error ? error.message : String(error)}`
+            });
+            continue;
+          }
+        }
+
+        if (!repairedConstraint) {
+          unresolvedRules.push({
+            id: String(sourceCondition?.id ?? conditionId),
+            reason: `No Jira option matched '${desiredValue}' for repaired Forms controller ${String(repairedQuestion?.label ?? repairedControllerId)} (${repairedJiraFieldId || 'no Jira field'}).`
+          });
+          continue;
+        }
+
+        condition.i.co = { cIds: { [repairedControllerId]: [repairedConstraint] } };
         if (Array.isArray(condition?.i?.groups)) {
           for (const group of condition.i.groups) {
             if (!Array.isArray(group?.checks)) continue;
             for (const check of group.checks) {
               check.fieldId = repairedControllerId;
-              check.constraint = [constraint];
+              check.constraint = [repairedConstraint];
             }
           }
         }
