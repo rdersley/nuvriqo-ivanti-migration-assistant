@@ -27,7 +27,7 @@ permissions:
   external:
     fetch:
       backend:
-        - '*'
+        - '*.ivanticloud.com'
 
 app:
   runtime:
