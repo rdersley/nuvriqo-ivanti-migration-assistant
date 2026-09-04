@@ -40,6 +40,9 @@ jobs:
       - name: Apply persisted Forms section controller repair
         run: python .github/scripts/forms_persisted_section_controller_fix.py
 
+      - name: Apply Ivanti lookup field fidelity fix
+        run: python .github/scripts/lookup_field_fidelity_fix.py
+
       - name: Apply direct orchestration React view fix
         run: python .github/scripts/orchestration_react_view_fix.py
 
