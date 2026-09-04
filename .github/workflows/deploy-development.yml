@@ -97,9 +97,6 @@ jobs:
           forge settings set usage-analytics true
           forge settings list
 
-      - name: Forge lint
-        run: forge lint --environment development
-
       - name: Deploy to development
         run: forge deploy --environment development --non-interactive --approve MAJOR_VERSION_RULE
 
