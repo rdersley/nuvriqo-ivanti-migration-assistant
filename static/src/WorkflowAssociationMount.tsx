@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { ParsedWorkflow } from './WorkflowXmlImportMount';
 
-type ServiceLite = { id: string; analysis?: { serviceName?: string } };
-type ProjectLite = { services?: ServiceLite[] };
+type ServiceLite = { id: string; analysis?: { serviceName?: string }; ivantiWorkflows?: ParsedWorkflow[]; updatedAt?: string };
+type ProjectLite = { services?: ServiceLite[]; updatedAt?: string };
 type Association = {
   workflowKey: string;
   serviceId: string;
@@ -73,6 +73,25 @@ function readAssociations(): Association[] {
   } catch { return []; }
 }
 
+function writeProjectWorkflow(workflow: ParsedWorkflow, serviceId: string): ProjectLite {
+  const project = readProject();
+  const now = new Date().toISOString();
+  const updated: ProjectLite = {
+    ...project,
+    updatedAt: now,
+    services: (project.services || []).map((service) => {
+      if (service.id !== serviceId) return service;
+      const current = service.ivantiWorkflows || [];
+      const map = new Map(current.map((item) => [keyOf(item), item]));
+      map.set(keyOf(workflow), workflow);
+      return { ...service, ivantiWorkflows: [...map.values()], updatedAt: now };
+    })
+  };
+  localStorage.setItem(PROJECT_KEY, JSON.stringify(updated));
+  window.dispatchEvent(new CustomEvent('ivanti-migration-project-changed', { detail: { project: updated } }));
+  return updated;
+}
+
 function semanticCounts(workflow: ParsedWorkflow) {
   const childQuickActions = workflow.workflow.quickActions.filter((action) => action.semantic?.kind === 'child-work-item').length;
   const emails = workflow.workflow.quickActions.filter((action) => action.semantic?.kind === 'email').length;
@@ -108,11 +127,13 @@ export default function WorkflowAssociationMount() {
     const observer = new MutationObserver(findSettings);
     observer.observe(document.body, { childList: true, subtree: true });
     window.addEventListener('ivanti-workflow-library-changed', refresh);
+    window.addEventListener('ivanti-migration-project-changed', refresh);
     window.addEventListener('storage', refresh);
     const interval = window.setInterval(() => setProject(readProject()), 1500);
     return () => {
       observer.disconnect();
       window.removeEventListener('ivanti-workflow-library-changed', refresh);
+      window.removeEventListener('ivanti-migration-project-changed', refresh);
       window.removeEventListener('storage', refresh);
       window.clearInterval(interval);
     };
@@ -141,7 +162,7 @@ export default function WorkflowAssociationMount() {
     return { workflow, association: best };
   }), [workflows, project.services, associations]);
 
-  function saveAssociation(workflow: ParsedWorkflow, serviceId: string) {
+  function saveAssociation(workflow: ParsedWorkflow, serviceId: string, scoreOverride?: number, reasonOverride?: string) {
     const service = (project.services || []).find((item) => item.id === serviceId);
     if (!service) return;
     const serviceName = service.analysis?.serviceName || 'Service';
@@ -151,8 +172,8 @@ export default function WorkflowAssociationMount() {
       serviceId,
       serviceName,
       workflowName: workflow.workflow.name,
-      score: scored.score,
-      reason: scored.reason,
+      score: scoreOverride ?? scored.score,
+      reason: reasonOverride ?? scored.reason,
       confirmed: true
     };
     setAssociations((current) => {
@@ -161,11 +182,23 @@ export default function WorkflowAssociationMount() {
       window.dispatchEvent(new CustomEvent('ivanti-workflow-associations-changed', { detail: { associations: updated } }));
       return updated;
     });
+    setProject(writeProjectWorkflow(workflow, serviceId));
   }
 
   function acceptSuggestion(workflow: ParsedWorkflow, association: Association) {
-    saveAssociation(workflow, association.serviceId);
+    saveAssociation(workflow, association.serviceId, association.score, association.reason);
   }
+
+  useEffect(() => {
+    // Exact name matches are safe enough to persist automatically. This is especially
+    // useful for runtime-only GetInstance workflows such as New Employee Setup v52.
+    const exact = suggestions.filter(({ association }) => association && !association.confirmed && association.score === 100);
+    if (!exact.length) return;
+    for (const { workflow, association } of exact) {
+      if (association) saveAssociation(workflow, association.serviceId, association.score, association.reason);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [suggestions]);
 
   if (!target || !workflows.length) return null;
 
@@ -176,7 +209,7 @@ export default function WorkflowAssociationMount() {
     <section style={{ marginTop: 24, border: '1px solid #dfe1e6', borderRadius: 8, padding: 20, background: '#fff' }} data-workflow-association-panel="true">
       <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.08em', color: '#44546f', textTransform: 'uppercase' }}>Migration design</div>
       <h2 style={{ margin: '5px 0 4px' }}>Workflow → Jira service mapping</h2>
-      <p style={{ margin: 0, color: '#626f86' }}>Match imported Ivanti workflows to the request/service they implement. Exact names and trigger values are used where available; uncertain matches stay for review rather than being guessed.</p>
+      <p style={{ margin: 0, color: '#626f86' }}>Match imported Ivanti workflows to the request/service they implement. Exact names are linked automatically; uncertain matches stay for review rather than being guessed. Confirmed workflows are stored on the migration service so the Jira build can use the actual Ivanti orchestration.</p>
       <div style={{ marginTop: 12, fontSize: 13, color: '#44546f' }}><strong>{workflows.length}</strong> workflows · <strong>{confident}</strong> strong automatic matches · <strong>{confirmed}</strong> confirmed mappings</div>
 
       <div style={{ marginTop: 14, display: 'grid', gap: 10 }}>
@@ -200,7 +233,7 @@ export default function WorkflowAssociationMount() {
                   {(project.services || []).map((service) => <option key={service.id} value={service.id}>{service.analysis?.serviceName || service.id}</option>)}
                 </select>
                 {!existing && association && association.score >= 50 && <button onClick={() => acceptSuggestion(workflow, association)}>Use suggested: {association.serviceName}</button>}
-                {association && <span style={{ fontSize: 12, color: '#626f86' }}>{existing ? 'Confirmed' : `Suggestion ${association.score}%`} · {association.reason}</span>}
+                {association && <span style={{ fontSize: 12, color: '#626f86' }}>{existing ? 'Confirmed and stored on service' : `Suggestion ${association.score}%`} · {association.reason}</span>}
               </div>
             </div>
           );
