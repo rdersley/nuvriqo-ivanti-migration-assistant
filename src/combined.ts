@@ -40,7 +40,7 @@ function normaliseTenantUrl(value: unknown): string {
 
   let parsed: URL;
   try {
-    parsed = new URL(raw);
+    parsed = new URL(raw.includes('://') ? raw : `https://${raw}`);
   } catch {
     throw new Error('Enter a valid Ivanti tenant URL, for example https://yourtenant.ivanticloud.com.');
   }
@@ -68,6 +68,19 @@ async function readStoredConnection(): Promise<{ metadata?: StoredIvantiConnecti
   const metadata = await kvs.get(CONNECTION_KEY) as StoredIvantiConnection | undefined;
   const apiKey = await kvs.getSecret(API_KEY_SECRET) as string | undefined;
   return { metadata, apiKey };
+}
+
+async function persistConnection(tenantUrlValue: unknown, apiKeyValue: unknown): Promise<IvantiConnection> {
+  const tenantUrl = normaliseTenantUrl(tenantUrlValue);
+  const suppliedKey = String(apiKeyValue ?? '').trim();
+  const existingKey = await kvs.getSecret(API_KEY_SECRET) as string | undefined;
+  const apiKey = suppliedKey ? normaliseApiKey(suppliedKey) : existingKey;
+  if (!apiKey) throw new Error('Ivanti REST API Key Reference ID is required.');
+
+  const updatedAt = new Date().toISOString();
+  await kvs.set(CONNECTION_KEY, { tenantUrl, updatedAt });
+  await kvs.setSecret(API_KEY_SECRET, apiKey);
+  return { tenantUrl, apiKey, updatedAt };
 }
 
 async function getSavedConnection(): Promise<IvantiConnection> {
@@ -111,6 +124,8 @@ async function testConnection(connection: IvantiConnection) {
       ok: true,
       status: metadata.status,
       tenantUrl: connection.tenantUrl,
+      tenantHost: new URL(connection.tenantUrl).hostname,
+      sampleCount: 0,
       message: 'Connected to the Ivanti OData API successfully.',
       metadataAvailable: true
     };
@@ -122,6 +137,8 @@ async function testConnection(connection: IvantiConnection) {
       ok: true,
       status: employeeProbe.status,
       tenantUrl: connection.tenantUrl,
+      tenantHost: new URL(connection.tenantUrl).hostname,
+      sampleCount: 0,
       message: 'Connected to the Ivanti REST API successfully.',
       metadataAvailable: false
     };
@@ -184,29 +201,34 @@ ivantiResolver.define('getIvantiConnection', async () => {
 });
 
 ivantiResolver.define('saveIvantiConnection', async ({ payload }) => {
-  const tenantUrl = normaliseTenantUrl(payload?.tenantUrl);
-  const suppliedKey = String(payload?.apiKey ?? '').trim();
-  const existingKey = await kvs.getSecret(API_KEY_SECRET) as string | undefined;
-  const apiKey = suppliedKey ? normaliseApiKey(suppliedKey) : existingKey;
-  if (!apiKey) throw new Error('Ivanti REST API Key Reference ID is required.');
-
-  const updatedAt = new Date().toISOString();
-  await kvs.set(CONNECTION_KEY, { tenantUrl, updatedAt });
-  await kvs.setSecret(API_KEY_SECRET, apiKey);
+  const connection = await persistConnection(payload?.tenantUrl ?? payload?.baseUrl, payload?.apiKey);
   return {
     configured: true,
-    tenantUrl,
-    apiKeyMasked: maskKey(apiKey),
-    updatedAt
+    tenantUrl: connection.tenantUrl,
+    apiKeyMasked: maskKey(connection.apiKey),
+    updatedAt: connection.updatedAt
   };
 });
 
-ivantiResolver.define('testIvantiConnection', async () => {
-  return testConnection(await getSavedConnection());
+ivantiResolver.define('testIvantiConnection', async ({ payload }) => {
+  const hasInlineConnection = Boolean(
+    String(payload?.tenantUrl ?? payload?.baseUrl ?? '').trim() ||
+    String(payload?.apiKey ?? '').trim()
+  );
+  const connection = hasInlineConnection
+    ? await persistConnection(payload?.tenantUrl ?? payload?.baseUrl, payload?.apiKey)
+    : await getSavedConnection();
+  return testConnection(connection);
 });
 
-ivantiResolver.define('discoverIvantiRequestOfferings', async () => {
-  const connection = await getSavedConnection();
+ivantiResolver.define('discoverIvantiRequestOfferings', async ({ payload }) => {
+  const hasInlineConnection = Boolean(
+    String(payload?.tenantUrl ?? payload?.baseUrl ?? '').trim() ||
+    String(payload?.apiKey ?? '').trim()
+  );
+  const connection = hasInlineConnection
+    ? await persistConnection(payload?.tenantUrl ?? payload?.baseUrl, payload?.apiKey)
+    : await getSavedConnection();
   await testConnection(connection);
 
   const metadataResponse = await ivantiFetch(connection, '/api/odata/$metadata');
