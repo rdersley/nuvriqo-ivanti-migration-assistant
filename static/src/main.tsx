@@ -9,6 +9,7 @@ import App from './App';
 import IvantiConnectionMount from './IvantiConnectionMount';
 import WorkflowXmlImportMount from './WorkflowXmlImportMount';
 import WorkflowAssociationMount from './WorkflowAssociationMount';
+import WorkflowImplementationMount from './WorkflowImplementationMount';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -17,5 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <IvantiConnectionMount />
     <WorkflowXmlImportMount />
     <WorkflowAssociationMount />
+    <WorkflowImplementationMount />
   </React.StrictMode>
 );
