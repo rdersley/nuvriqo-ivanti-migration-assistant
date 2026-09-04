@@ -5,12 +5,13 @@ import { handler as legacyHandler } from './index';
 import { getExecutablePlan, getExecutionState, saveExecutablePlan, type ExecutablePlan } from './orchestrationEngine';
 import { getExecutableGraph, getGraphState, saveExecutableGraph, type ExecutableGraphPlan } from './orchestrationGraphEngine';
 import { resolveGraphInstallTarget } from './graphInstallTarget';
+import { repairMigratedForms } from './formRepair';
 
 type InvocationEvent = { call?: { functionKey?: string; payload?: Record<string, unknown>; jobId?: string }; context?: Record<string, unknown> };
 type IvantiConnection = { tenantUrl: string; apiKey: string; updatedAt: string };
 type StoredIvantiConnection = { tenantUrl: string; updatedAt: string };
 const CONNECTION_KEY='ivanti-rest-connection-v1'; const API_KEY_SECRET='ivanti-rest-api-key-v1';
-const IVANTI_FUNCTIONS=new Set(['getIvantiConnection','saveIvantiConnection','testIvantiConnection','discoverIvantiRequestOfferings','saveExecutableOrchestration','getExecutableOrchestration','getOrchestrationExecutionState','saveExecutableGraph','getExecutableGraph','getGraphExecutionState','resolveGraphInstallTarget']);
+const IVANTI_FUNCTIONS=new Set(['getIvantiConnection','saveIvantiConnection','testIvantiConnection','discoverIvantiRequestOfferings','saveExecutableOrchestration','getExecutableOrchestration','getOrchestrationExecutionState','saveExecutableGraph','getExecutableGraph','getGraphExecutionState','resolveGraphInstallTarget','repairMigratedForms']);
 const ivantiResolver=new Resolver();
 function normaliseTenantUrl(value:unknown){const raw=String(value??'').trim();if(!raw)throw new Error('Ivanti tenant URL is required.');let parsed:URL;try{parsed=new URL(raw.includes('://')?raw:`https://${raw}`)}catch{throw new Error('Enter a valid Ivanti tenant URL.')}if(parsed.protocol!=='https:')throw new Error('Ivanti tenant URL must use HTTPS.');return `${parsed.protocol}//${parsed.host}`}
 function normaliseApiKey(value:unknown){const key=String(value??'').trim();if(!key)throw new Error('Ivanti REST API Key Reference ID is required.');if(key.length<16||key.length>256)throw new Error('The REST API Key Reference ID does not look valid.');return key}
@@ -36,5 +37,6 @@ ivantiResolver.define('saveExecutableGraph',async({payload})=>saveExecutableGrap
 ivantiResolver.define('getExecutableGraph',async({payload})=>getExecutableGraph(String(payload?.projectId||''),String(payload?.issueTypeId||'')));
 ivantiResolver.define('getGraphExecutionState',async({payload})=>getGraphState(String(payload?.issueId||'')));
 ivantiResolver.define('resolveGraphInstallTarget',async({payload})=>resolveGraphInstallTarget(String(payload?.projectId||''),String(payload?.serviceName||'')));
+ivantiResolver.define('repairMigratedForms',async({payload})=>repairMigratedForms(String(payload?.projectId||''),Array.isArray(payload?.serviceNames)?payload.serviceNames.map(String):[]));
 const ivantiHandler=ivantiResolver.getDefinitions();
 export const handler=async(event:InvocationEvent,runtimeContext:unknown)=>{const functionKey=event?.call?.functionKey||'';if(IVANTI_FUNCTIONS.has(functionKey))return ivantiHandler(event as never,runtimeContext as never);return legacyHandler(event as never,runtimeContext as never)};
