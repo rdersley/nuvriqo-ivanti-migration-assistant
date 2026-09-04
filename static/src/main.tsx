@@ -11,6 +11,7 @@ import WorkflowXmlImportMount from './WorkflowXmlImportMount';
 import WorkflowGetInstancePasteMount from './WorkflowGetInstancePasteMount';
 import WorkflowAssociationMount from './WorkflowAssociationMount';
 import WorkflowImplementationMount from './WorkflowImplementationMount';
+import WorkflowGraphCompilerMount from './WorkflowGraphCompilerMount';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -21,5 +22,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <WorkflowGetInstancePasteMount />
     <WorkflowAssociationMount />
     <WorkflowImplementationMount />
+    <WorkflowGraphCompilerMount />
   </React.StrictMode>
 );
