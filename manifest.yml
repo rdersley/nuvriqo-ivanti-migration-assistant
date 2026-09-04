@@ -17,7 +17,7 @@ modules:
     - key: resolver
       handler: combined.handler
     - key: orchestration-event
-      handler: orchestrationEngine.handleIssueEvent
+      handler: orchestrationGraphEngine.handleGraphIssueEvent
 
 resources:
   - key: main
