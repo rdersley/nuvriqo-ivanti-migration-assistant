@@ -8,7 +8,7 @@ modules:
 
   function:
     - key: resolver
-      handler: index.handler
+      handler: combined.handler
 
 resources:
   - key: main
