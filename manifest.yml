@@ -23,6 +23,7 @@ permissions:
     - read:servicedesk-request
     - read:requesttype:jira-service-management
     - write:requesttype:jira-service-management
+    - storage:app
   external:
     fetch:
       backend:
