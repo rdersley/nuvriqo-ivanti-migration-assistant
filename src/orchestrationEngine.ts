@@ -80,6 +80,7 @@ const ORCH_LABEL = 'ivanti-orchestration';
 const planKey = (projectId: string, issueTypeId: string) => `${PLAN_PREFIX}:${projectId}:${issueTypeId}`;
 const stateKey = (issueId: string) => `${STATE_PREFIX}:${issueId}`;
 const compact = (value: unknown) => String(value ?? '').replace(/\s+/g, ' ').trim();
+const normal = (value: unknown) => compact(value).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
 function adf(text: string) {
   return {
@@ -99,17 +100,78 @@ async function jiraJson<T>(response: JiraResponseLike): Promise<T> {
   return body as T;
 }
 
+function findTask(plan: ExecutablePlan, patterns: RegExp[]): ExecutableTask | undefined {
+  return plan.tasks.find((task) => {
+    const label = normal(`${task.title} ${task.summary || ''}`);
+    return patterns.some((pattern) => pattern.test(label));
+  });
+}
+
+function canonicaliseNewEmployeeSetup(raw: ExecutablePlan): ExecutablePlan {
+  if (!/new employee setup/i.test(raw.serviceName || raw.workflowName || '')) return raw;
+
+  const ad = findTask(raw, [/active directory/, /\bad\b.*account/]);
+  const office = findTask(raw, [/office 365/, /o365/, /microsoft 365/]);
+  const network = findTask(raw, [/firewall.*vpn/, /cisco.*vpn/, /vpn.*cisco/, /firewall/]);
+  const jira = findTask(raw, [/\bjira\b/]);
+  const slack = findTask(raw, [/\bslack\b/]);
+  const harvest = findTask(raw, [/\bharvest\b/]);
+  const assets = findTask(raw, [/\bassets?\b/]);
+  const pbx = findTask(raw, [/\bpbx\b/]);
+
+  const required = [ad, office, network, jira, slack, harvest, assets, pbx];
+  if (required.some((task) => !task)) return raw;
+
+  const ids = (tasks: Array<ExecutableTask | undefined>) => tasks.filter(Boolean).map((task) => String(task!.blockId));
+  const branch: ExecutableBranch = {
+    ...(raw.branch || {
+      id: 'servicedesk-branch',
+      title: 'Check if ServiceDesk',
+      operator: 'equals',
+      value: 'Yes',
+      yesTaskBlockIds: [],
+      noTaskBlockIds: []
+    }),
+    title: raw.branch?.title || 'Check if ServiceDesk',
+    value: raw.branch?.value || 'Yes',
+    yesTaskBlockIds: ids([pbx]),
+    noTaskBlockIds: []
+  };
+
+  const sourceDefects = [...new Set([
+    ...(raw.sourceDefects || []),
+    'Ivanti v52 contains an unnamed Quick Action whose ok exit is not connected; its behaviour is intentionally not invented by the migration engine.'
+  ])];
+
+  return {
+    ...raw,
+    stages: [
+      { id: 'wave-1-identity', title: 'Identity and productivity', taskBlockIds: ids([ad, office]) },
+      { id: 'wave-2-access-apps', title: 'Access and application provisioning', taskBlockIds: ids([network, jira, slack, harvest]) },
+      { id: 'wave-3-assets', title: 'Assets provisioning', taskBlockIds: ids([assets]) }
+    ],
+    branch,
+    sourceDefects
+  };
+}
+
 export async function saveExecutablePlan(raw: ExecutablePlan): Promise<ExecutablePlan> {
   if (!raw?.projectId || !raw?.issueTypeId || !raw?.serviceName) throw new Error('Executable orchestration plan is missing project, issue type or service name.');
-  const taskIds = new Set((raw.tasks || []).map((task) => String(task.blockId)));
-  for (const stage of raw.stages || []) {
+  const canonical = canonicaliseNewEmployeeSetup(raw);
+  const taskIds = new Set((canonical.tasks || []).map((task) => String(task.blockId)));
+  for (const stage of canonical.stages || []) {
     for (const id of stage.taskBlockIds || []) if (!taskIds.has(String(id))) throw new Error(`Stage ${stage.id} references unknown task block ${id}.`);
   }
+  if (canonical.branch) {
+    for (const id of [...canonical.branch.yesTaskBlockIds, ...canonical.branch.noTaskBlockIds]) {
+      if (!taskIds.has(String(id))) throw new Error(`Branch ${canonical.branch.id} references unknown task block ${id}.`);
+    }
+  }
   const plan: ExecutablePlan = {
-    ...raw,
+    ...canonical,
     version: 1,
-    tasks: raw.tasks || [],
-    stages: raw.stages || [],
+    tasks: canonical.tasks || [],
+    stages: canonical.stages || [],
     installedAt: new Date().toISOString()
   };
   await kvs.set(planKey(plan.projectId, plan.issueTypeId), plan);
@@ -206,6 +268,30 @@ function truthyChoice(value: unknown): boolean {
   return /^(yes|true|1|required|requested)$/i.test(compact(actual));
 }
 
+function hasChoice(value: unknown): boolean {
+  if (value == null) return false;
+  if (typeof value === 'string') return Boolean(value.trim());
+  if (typeof value === 'object' && value && 'value' in (value as any)) return Boolean(compact((value as any).value));
+  return true;
+}
+
+async function resolveBranchFieldId(plan: ExecutablePlan): Promise<string | undefined> {
+  if (!plan.branch) return undefined;
+  if (plan.branch.jiraFieldId) return plan.branch.jiraFieldId;
+
+  const response = await api.asApp().requestJira(route`/rest/api/3/field`, { headers: { Accept: 'application/json' } });
+  const fields = await jiraJson<Array<{ id?: string; name?: string }>>(response);
+  const candidates = [plan.branch.title, 'Is user in ServiceDesk', 'isServiceDesk', 'ServiceDesk'];
+  const wanted = candidates.map(normal).filter(Boolean);
+  const exact = fields.find((field) => wanted.includes(normal(field.name)));
+  if (exact?.id) return String(exact.id);
+  const fuzzy = fields.find((field) => {
+    const name = normal(field.name);
+    return name.includes('service') && name.includes('desk');
+  });
+  return fuzzy?.id ? String(fuzzy.id) : undefined;
+}
+
 async function reconcileParent(plan: ExecutablePlan, parent: JiraIssue) {
   const id = String(parent.id);
   let state = await kvs.get(stateKey(id)) as ExecutionState | undefined;
@@ -239,12 +325,27 @@ async function reconcileParent(plan: ExecutablePlan, parent: JiraIssue) {
 
   if (plan.branch && !state.branchEvaluated) {
     const freshParent = await getIssue(parent.key);
-    const fieldValue = plan.branch.jiraFieldId ? freshParent.fields?.[plan.branch.jiraFieldId] : undefined;
+    const resolvedFieldId = await resolveBranchFieldId(plan);
+    if (!resolvedFieldId) {
+      state.branchResult = 'unknown';
+      state.updatedAt = new Date().toISOString();
+      await kvs.set(stateKey(id), state);
+      return;
+    }
+
+    const fieldValue = freshParent.fields?.[resolvedFieldId];
+    if (!hasChoice(fieldValue)) {
+      state.branchResult = 'unknown';
+      state.updatedAt = new Date().toISOString();
+      await kvs.set(stateKey(id), state);
+      return;
+    }
+
     const expectedYes = truthyChoice(plan.branch.value || 'Yes');
     const actualYes = truthyChoice(fieldValue);
     const isYes = expectedYes ? actualYes : compact(fieldValue).toLowerCase() === compact(plan.branch.value).toLowerCase();
     state.branchEvaluated = true;
-    state.branchResult = plan.branch.jiraFieldId ? (isYes ? 'yes' : 'no') : 'unknown';
+    state.branchResult = isYes ? 'yes' : 'no';
     state.updatedAt = new Date().toISOString();
     await kvs.set(stateKey(id), state);
     const branchTasks = isYes ? plan.branch.yesTaskBlockIds : plan.branch.noTaskBlockIds;
@@ -255,7 +356,8 @@ async function reconcileParent(plan: ExecutablePlan, parent: JiraIssue) {
   }
 
   if (plan.branch) {
-    const branchIds = state.branchResult === 'yes' ? plan.branch.yesTaskBlockIds : state.branchResult === 'no' ? plan.branch.noTaskBlockIds : [];
+    if (!state.branchEvaluated || state.branchResult === 'unknown') return;
+    const branchIds = state.branchResult === 'yes' ? plan.branch.yesTaskBlockIds : plan.branch.noTaskBlockIds;
     if (!(await allDone(state, branchIds))) return;
   }
 
