@@ -19,6 +19,15 @@ type Project = { name?:string; targetProjectId?:string; services?:Service[]; upd
 type RunnerResult = { serviceId:string; serviceName:string; status:'complete'|'partial'|'failed'; steps:Array<{key:string;status:'ok'|'warning'|'failed';message:string}> };
 type JiraField = { id:string; name:string };
 
+type ExecutableTask = { blockId:string; title:string; summary?:string; details?:string; team?:string; dueDays?:number };
+type ExecutableStage = { id:string; title:string; taskBlockIds:string[] };
+type ExecutableBranch = { id:string; title:string; jiraFieldId?:string; operator?:string; value?:string; yesTaskBlockIds:string[]; noTaskBlockIds:string[] };
+type ExecutablePlan = {
+  version:1; serviceId:string; serviceName:string; projectId:string; issueTypeId:string;
+  workflowName:string; workflowVersion:string; tasks:ExecutableTask[]; stages:ExecutableStage[];
+  branch?:ExecutableBranch; sourceDefects?:string[]; installedAt:string;
+};
+
 const PROJECT_KEY='ivanti-migration-assistant-project-v3';
 const RESULT_KEY='ivanti-migration-assistant-full-run-v1';
 
@@ -62,12 +71,7 @@ function normaliseConditions(service:Service):Condition[]{
   const byId=new Map(fields.map(f=>[String(f.id),f]));
   return (service.proposedConditions||[]).map((condition,index)=>{
     const originalTargets=(condition.targetFieldIds||[]).map(String);
-    const candidates=[condition.controllerFieldId,...originalTargets]
-      .map(String)
-      .filter((id,pos,all)=>id&&all.indexOf(id)===pos)
-      .map(id=>({id,field:byId.get(id)}))
-      .filter(item=>item.field)
-      .sort((a,b)=>controllerScore(b.field)-controllerScore(a.field));
+    const candidates=[condition.controllerFieldId,...originalTargets].map(String).filter((id,pos,all)=>id&&all.indexOf(id)===pos).map(id=>({id,field:byId.get(id)})).filter(item=>item.field).sort((a,b)=>controllerScore(b.field)-controllerScore(a.field));
     const current=byId.get(String(condition.controllerFieldId||''));
     const currentScore=controllerScore(current);
     const best=currentScore>=50?{id:String(condition.controllerFieldId),field:current}:candidates[0];
@@ -80,13 +84,9 @@ function prepareConditionalSections(rawSections:Section[], conditions:Condition[
   if(!conditions.length) return rawSections||[];
   const allTargetIds=new Set(conditions.flatMap(c=>c.targetFieldIds.map(String)));
   const controllerIds=new Set(conditions.map(c=>String(c.controllerFieldId)));
-  const prepared:Section[]=[];
-  const placed=new Set<string>();
+  const prepared:Section[]=[];const placed=new Set<string>();
   (rawSections||[]).forEach((section,sectionIndex)=>{
     const ids=(section.fieldIds||[]).map(String);
-    // Controllers must remain top-level questions. Never place a conditional
-    // controller inside any section because Jira Forms can hide the whole
-    // section before the customer has a chance to answer that controller.
     const baseIds=ids.filter(id=>!allTargetIds.has(id)&&!controllerIds.has(id));
     if(baseIds.length||sectionIndex===0) prepared.push({...section,id:String(section.id||`section-${sectionIndex+1}`),fieldIds:baseIds});
     conditions.forEach((condition,conditionIndex)=>{
@@ -104,9 +104,7 @@ function prepareConditionalSections(rawSections:Section[], conditions:Condition[
   return prepared;
 }
 function validateTopology(service:Service,conditions:Condition[],sections:Section[]):string[]{
-  const errors:string[]=[];
-  const fieldIds=new Set((service.analysis?.fields||[]).map(f=>String(f.id)));
-  const sectionedIds=new Set(sections.flatMap(s=>s.fieldIds.map(String)));
+  const errors:string[]=[];const fieldIds=new Set((service.analysis?.fields||[]).map(f=>String(f.id)));const sectionedIds=new Set(sections.flatMap(s=>s.fieldIds.map(String)));
   for(const condition of conditions){
     const controller=String(condition.controllerFieldId);
     if(!fieldIds.has(controller)) errors.push(`Condition ${condition.id}: controller field ${controller} does not exist.`);
@@ -117,17 +115,58 @@ function validateTopology(service:Service,conditions:Condition[],sections:Sectio
   return errors;
 }
 function conditionStage(form:any):any|undefined{return Array.isArray(form?.stages)?form.stages.find((stage:any)=>stage?.key==='conditions'):undefined;}
+function wfParam(block:ParsedWorkflow['workflow']['blocks'][number],...names:string[]):string{
+  const wanted=names.map(name=>name.toLowerCase());
+  const found=block.params.find(param=>wanted.includes(clean(param.name).toLowerCase()));
+  return clean(found?.value);
+}
+function compileExecutablePlan(service:Service,projectId:string,issueTypeId:string,fieldResults:any[]):ExecutablePlan{
+  const workflow=(service.ivantiWorkflows||[])[0];
+  if(!workflow) throw new Error('No captured Ivanti runtime workflow is attached to this service.');
+  const blocks=workflow.workflow.blocks;
+  const taskBlocks=blocks.filter(block=>block.type==='task');
+  if(!taskBlocks.length) throw new Error('Captured workflow does not contain executable task blocks.');
+  const tasks:ExecutableTask[]=taskBlocks.map(block=>{
+    const dueRaw=wfParam(block,'duedatedays','due days','timeoutdays','timeout days');
+    const due=Number(dueRaw);
+    return {blockId:String(block.id),title:clean(block.title)||`Ivanti task ${block.id}`,summary:wfParam(block,'summary','subject')||undefined,details:wfParam(block,'details','detail','description')||undefined,team:wfParam(block,'team','assignment team','owner team')||undefined,dueDays:Number.isFinite(due)&&due>0?due:undefined};
+  });
+  const indexById=new Map(blocks.map((block,index)=>[String(block.id),index]));
+  const joinIndexes=blocks.map((block,index)=>block.type==='join'?index:-1).filter(index=>index>=0);
+  const decisionIndex=blocks.findIndex((block,index)=>index>(joinIndexes.at(-1)??-1)&&['if','switch','decision'].includes(block.type));
+  const mainEnd=decisionIndex>=0?decisionIndex:blocks.length;
+  const boundaries=[-1,...joinIndexes.filter(index=>index<mainEnd),mainEnd];
+  const stages:ExecutableStage[]=[];
+  for(let i=0;i<boundaries.length-1;i++){
+    const start=boundaries[i];const end=boundaries[i+1];
+    const ids=taskBlocks.filter(block=>{const idx=indexById.get(String(block.id))??-1;return idx>start&&idx<end;}).map(block=>String(block.id));
+    if(ids.length) stages.push({id:`stage-${stages.length+1}`,title:stages.length===0?'Initial fulfilment':`Gate ${stages.length} complete → next fulfilment wave`,taskBlockIds:ids});
+  }
+  if(!stages.length) stages.push({id:'stage-1',title:'Fulfilment',taskBlockIds:taskBlocks.filter(block=>(indexById.get(String(block.id))??-1)<mainEnd).map(block=>String(block.id))});
+
+  let branch:ExecutableBranch|undefined;
+  if(decisionIndex>=0){
+    const decision=blocks[decisionIndex];
+    const branchTaskIds=taskBlocks.filter(block=>(indexById.get(String(block.id))??-1)>decisionIndex).map(block=>String(block.id));
+    const sourceFieldHint=wfParam(decision,'field','fieldname','field name')||clean(decision.title);
+    const candidate=(service.analysis?.fields||[]).find(field=>{
+      const hay=`${field.name} ${field.ivantiName||''}`.toLowerCase();
+      const exact=clean(sourceFieldHint).toLowerCase();
+      return exact&&hay.includes(exact)||(/service\s*desk|servicedesk/i.test(sourceFieldHint)&&/service\s*desk|servicedesk/i.test(hay));
+    }) || (service.analysis?.fields||[]).find(field=>/service\s*desk|servicedesk/i.test(`${field.name} ${field.ivantiName||''}`));
+    const jiraResult=fieldResults.find(item=>item?.id&&candidate&&clean(item.name).toLowerCase()===clean(candidate.name).toLowerCase());
+    branch={id:String(decision.id),title:clean(decision.title)||'Ivanti decision',jiraFieldId:jiraResult?.id?String(jiraResult.id):undefined,operator:wfParam(decision,'operator')||'equals',value:wfParam(decision,'value')||'Yes',yesTaskBlockIds:branchTaskIds,noTaskBlockIds:[]};
+  }
+  return {version:1,serviceId:service.id,serviceName:clean(service.analysis?.serviceName)||'Service',projectId,issueTypeId:String(issueTypeId),workflowName:workflow.workflow.name,workflowVersion:workflow.workflow.version,tasks,stages,branch,sourceDefects:workflow.workflow.derived.defects||[],installedAt:new Date().toISOString()};
+}
 
 export default function FullMigrationRunnerMount(){
-  const [target,setTarget]=useState<HTMLElement|null>(null);
-  const [project,setProject]=useState<Project>(()=>readProject());
-  const [busy,setBusy]=useState(false);
-  const [results,setResults]=useState<RunnerResult[]>(()=>{try{return JSON.parse(localStorage.getItem(RESULT_KEY)||'[]');}catch{return[];}});
+  const [target,setTarget]=useState<HTMLElement|null>(null);const [project,setProject]=useState<Project>(()=>readProject());const [busy,setBusy]=useState(false);const [results,setResults]=useState<RunnerResult[]>(()=>{try{return JSON.parse(localStorage.getItem(RESULT_KEY)||'[]');}catch{return[];}});
   useEffect(()=>{const refresh=()=>setProject(readProject());const find=()=>{const panels=[...document.querySelectorAll<HTMLElement>('section.panel.fullPanel')];setTarget(panels.find(p=>p.querySelector('h1')?.textContent?.trim()==='Migration wizard')||null);};refresh();find();const obs=new MutationObserver(find);obs.observe(document.body,{childList:true,subtree:true});window.addEventListener('ivanti-migration-project-changed',refresh);window.addEventListener('storage',refresh);return()=>{obs.disconnect();window.removeEventListener('ivanti-migration-project-changed',refresh);window.removeEventListener('storage',refresh);};},[]);
   const ready=useMemo(()=>(project.services||[]).filter(s=>Boolean(s.analysis?.serviceName)&&Boolean((s.ivantiWorkflows||[]).length)),[project]);
   async function run(){
     if(busy||!project.targetProjectId||!ready.length)return;
-    if(!window.confirm(`Restore the Ivanti form with top-level conditional controllers and preserve the captured workflow for ${ready.length} mapped service${ready.length===1?'':'s'}?`))return;
+    if(!window.confirm(`Restore the Ivanti form and install executable workflow automation for ${ready.length} mapped service${ready.length===1?'':'s'}?`))return;
     setBusy(true);const runResults:RunnerResult[]=[];let working=readProject();
     for(const service of ready){
       const steps:RunnerResult['steps']=[];const name=clean(service.analysis?.serviceName)||service.id;
@@ -140,11 +179,19 @@ export default function FullMigrationRunnerMount(){
         const structure:any=await invoke('createJiraStructure',{serviceName:name,description:service.analysis?.description||'',statuses:lifecycle(service),createIssueType:true,createWorkflow:true,createWorkflowScheme:true});if(!structure?.issueTypeId) throw new Error(structure?.message||'Jira structure did not return an issue type.');steps.push({key:'structure',status:'ok',message:`Issue type ${structure.issueTypeId}; workflow ${structure.workflowName||structure.workflowId||'created/reused'}.`});
         const request:any=await invoke('createJsmRequestType',{projectId:working.targetProjectId,issueTypeId:structure.issueTypeId,name,description:service.analysis?.description||`Migrated from Ivanti: ${name}`});if(!request?.requestTypeId) throw new Error(request?.message||'JSM request type was not returned.');steps.push({key:'request-type',status:'ok',message:`Request type ${request.requestTypeId} reused/created.`});
         const form:any=await invoke('createJsmForm',{projectId:working.targetProjectId,requestTypeId:request.requestTypeId,name:`${name} - Ivanti Migration Form`,fields:formFields,sections,conditions});if(!form?.published) throw new Error(form?.message||'JSM Form was not published.');const condition=conditionStage(form);if(conditions.length&&(!condition||condition.status!=='verified')) throw new Error(`Form published but conditional logic was not verified: ${condition?.message||'Jira did not return a verified conditions stage.'}`);steps.push({key:'form',status:'ok',message:`Complete ${formFields.length}-field form ${form.formId||'created'} published; conditional logic verified.`});
-        const portal:any=await invoke('verifyJsmPortal',{projectId:working.targetProjectId,requestTypeId:request.requestTypeId,issueTypeId:structure.issueTypeId});steps.push({key:'portal',status:portal?.visibleInPortal?'ok':'warning',message:portal?.visibleInPortal?'Portal visibility verified.':'Portal visibility still needs review.'});steps.push({key:'workflow-activation',status:'warning',message:'Workflow scheme remains unassigned until all service workflow mappings are consolidated safely.'});runResults.push({serviceId:service.id,serviceName:name,status:steps.some(s=>s.status==='warning')?'partial':'complete',steps});
+
+        const plan=compileExecutablePlan(service,String(working.targetProjectId),String(structure.issueTypeId),completeFieldResults);
+        const installed:any=await invoke('saveExecutableOrchestration',{plan});
+        if(!installed?.issueTypeId) throw new Error('Executable workflow plan was not persisted by the Forge backend.');
+        steps.push({key:'automation-engine',status:'ok',message:`Installed live ${installed.workflowName} v${installed.workflowVersion} execution: ${installed.stages?.length||0} fulfilment wave(s), ${installed.tasks?.length||0} task block(s)${installed.branch?' and conditional branch':''}.`});
+
+        const portal:any=await invoke('verifyJsmPortal',{projectId:working.targetProjectId,requestTypeId:request.requestTypeId,issueTypeId:structure.issueTypeId});steps.push({key:'portal',status:portal?.visibleInPortal?'ok':'warning',message:portal?.visibleInPortal?'Portal visibility verified.':'Portal visibility still needs review.'});
+        steps.push({key:'workflow-activation',status:'warning',message:'Parent workflow scheme is still protected from automatic replacement; the captured business-rule orchestration now runs through the Forge issue-event automation engine.'});
+        runResults.push({serviceId:service.id,serviceName:name,status:steps.some(s=>s.status==='warning')?'partial':'complete',steps});
       }catch(error){steps.push({key:'run',status:'failed',message:error instanceof Error?error.message:String(error)});runResults.push({serviceId:service.id,serviceName:name,status:'failed',steps});}
     }
     localStorage.setItem(RESULT_KEY,JSON.stringify(runResults));setResults(runResults);setBusy(false);
   }
   if(!target)return null;
-  return createPortal(<section style={{marginTop:24,border:'2px solid #0c66e4',borderRadius:8,padding:20,background:'#fff'}} data-full-migration-runner="true"><div style={{fontSize:12,fontWeight:700,letterSpacing:'.08em',color:'#44546f',textTransform:'uppercase'}}>Protected live migration execution</div><h2 style={{margin:'5px 0 4px'}}>Restore Ivanti form + preserve captured workflow</h2><p style={{margin:0,color:'#626f86'}}>Conditional controller questions are kept top-level, outside every section, so Jira cannot hide the question needed to reveal its dependent fields. Workflow capture remains separate from the form topology.</p><div style={{marginTop:14,display:'flex',gap:10,alignItems:'center',flexWrap:'wrap'}}><button disabled={busy||!project.targetProjectId||!ready.length} onClick={()=>void run()}>{busy?'Restoring Ivanti form…':`Restore ${ready.length} captured service${ready.length===1?'':'s'} with top-level controllers`}</button><span style={{fontSize:13,color:'#626f86'}}>{project.targetProjectId?`Target project ${project.targetProjectId}`:'Choose a target project first.'}</span></div>{!ready.length&&<p style={{marginTop:10,color:'#974f0c'}}>No mapped runtime workflow is stored on a service yet. Existing GetInstance capture remains separate from form repair.</p>}{results.length>0&&<div style={{marginTop:14,display:'grid',gap:8}}>{results.map(r=><div key={r.serviceId} style={{padding:10,border:'1px solid #dfe1e6',borderRadius:6}}><strong>{r.serviceName} — {r.status}</strong>{r.steps.map((s,i)=><div key={`${s.key}-${i}`} style={{marginTop:4,fontSize:12,color:s.status==='failed'?'#ae2a19':s.status==='warning'?'#974f0c':'#164b35'}}>{s.key}: {s.message}</div>)}</div>)}</div>}</section>,target);
+  return createPortal(<section style={{marginTop:24,border:'2px solid #0c66e4',borderRadius:8,padding:20,background:'#fff'}} data-full-migration-runner="true"><div style={{fontSize:12,fontWeight:700,letterSpacing:'.08em',color:'#44546f',textTransform:'uppercase'}}>Protected live migration execution</div><h2 style={{margin:'5px 0 4px'}}>Restore form + install executable Ivanti workflow</h2><p style={{margin:0,color:'#626f86'}}>The Request Offering controls the Jira Form. The captured Ivanti workflow is separately compiled into live Jira issue-event automation: task blocks create fulfilment subtasks, joins create completion gates, and decisions create conditional branches.</p><div style={{marginTop:14,display:'flex',gap:10,alignItems:'center',flexWrap:'wrap'}}><button disabled={busy||!project.targetProjectId||!ready.length} onClick={()=>void run()}>{busy?'Restoring form and installing automation…':`Build ${ready.length} captured service${ready.length===1?'':'s'} end-to-end`}</button><span style={{fontSize:13,color:'#626f86'}}>{project.targetProjectId?`Target project ${project.targetProjectId}`:'Choose a target project first.'}</span></div>{!ready.length&&<p style={{marginTop:10,color:'#974f0c'}}>No mapped runtime workflow is stored on a service yet. Existing GetInstance capture remains separate from form repair.</p>}{results.length>0&&<div style={{marginTop:14,display:'grid',gap:8}}>{results.map(r=><div key={r.serviceId} style={{padding:10,border:'1px solid #dfe1e6',borderRadius:6}}><strong>{r.serviceName} — {r.status}</strong>{r.steps.map((s,i)=><div key={`${s.key}-${i}`} style={{marginTop:4,fontSize:12,color:s.status==='failed'?'#ae2a19':s.status==='warning'?'#974f0c':'#164b35'}}>{s.key}: {s.message}</div>)}</div>)}</div>}</section>,target);
 }
