@@ -46,9 +46,17 @@ function extractRecords(body:unknown):Array<Record<string,unknown>>{if(!body||ty
 function firstString(record:Record<string,unknown>,names:string[]):string{for(const name of names){const direct=record[name];if(direct!==undefined&&direct!==null&&String(direct).trim())return String(direct).trim();const key=Object.keys(record).find(item=>item.toLowerCase()===name.toLowerCase());if(key&&record[key]!==undefined&&record[key]!==null&&String(record[key]).trim())return String(record[key]).trim();}return'';}
 
 async function testConnection(connection:IvantiConnection){
-  const metadata=await ivantiFetch(connection,'/api/odata/$metadata'); const candidates=offeringCandidates(metadata.ok?metadata.text:''); const attempts:Array<{entitySet:string;status:number}>=[];
-  for(const entitySet of candidates){const response=await ivantiFetch(connection,`/api/odata/businessobject/${encodeURIComponent(entitySet)}?$top=1`);if(response.ok){const records=extractRecords(parseJson(response.text));return {ok:true,status:response.status,tenantUrl:connection.tenantUrl,tenantHost:new URL(connection.tenantUrl).hostname,sampleCount:records.length,message:`Connected to Ivanti. Service Request Template access confirmed via ${entitySet}.`,metadataAvailable:metadata.ok,entitySet};}attempts.push({entitySet,status:response.status});}
-  const summary=attempts.map(a=>`${a.entitySet} (${a.status})`).join(', '); throw new Error(`Ivanti is reachable, but Service Request Template access could not be confirmed. Tried: ${summary || 'no candidate objects'}. ${attempts.some(a=>a.status===403)?'At least one candidate returned 403 Forbidden.':'The API path or business-object name may differ on this tenant.'}`);
+  const metadata=await ivantiFetch(connection,'/api/odata/$metadata');
+  const controlObjects=['Incidents','Employees'];
+  const controlAttempts:Array<{entitySet:string;status:number}>=[];
+  for(const entitySet of controlObjects){const response=await ivantiFetch(connection,`/api/odata/businessobject/${entitySet}?$top=1`);controlAttempts.push({entitySet,status:response.status});}
+  const candidates=offeringCandidates(metadata.ok?metadata.text:''); const attempts:Array<{entitySet:string;status:number}>=[];
+  for(const entitySet of candidates){const response=await ivantiFetch(connection,`/api/odata/businessobject/${encodeURIComponent(entitySet)}?$top=1`);if(response.ok){const records=extractRecords(parseJson(response.text));return {ok:true,status:response.status,tenantUrl:connection.tenantUrl,tenantHost:new URL(connection.tenantUrl).hostname,sampleCount:records.length,message:`Connected to Ivanti. Service Request Template access confirmed via ${entitySet}.`,metadataAvailable:metadata.ok,metadataStatus:metadata.status,controlAttempts,entitySet};}attempts.push({entitySet,status:response.status});}
+  const summary=attempts.map(a=>`${a.entitySet} (${a.status})`).join(', ');
+  const controls=controlAttempts.map(a=>`${a.entitySet} (${a.status})`).join(', ');
+  const controlReadable=controlAttempts.some(a=>a.status>=200&&a.status<300);
+  const diagnostic=controlReadable?'General OData access works, but Service Request Template objects are blocked or not exposed through this endpoint.':'General OData access is also failing, so this is not specific to Service Request Templates.';
+  throw new Error(`Ivanti is reachable, but Service Request Template access could not be confirmed. Metadata: ${metadata.status}. Control objects: ${controls}. Tried: ${summary || 'no candidate objects'}. ${diagnostic}`);
 }
 
 ivantiResolver.define('getIvantiConnection',async()=>{const {metadata,apiKey}=await readStoredConnection();return metadata?.tenantUrl&&apiKey?{configured:true,tenantUrl:metadata.tenantUrl,apiKeyMasked:maskKey(apiKey),updatedAt:metadata.updatedAt}:{configured:false,tenantUrl:'',apiKeyMasked:''};});
