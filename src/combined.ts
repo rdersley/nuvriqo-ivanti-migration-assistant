@@ -2,6 +2,7 @@ import Resolver from '@forge/resolver';
 import api from '@forge/api';
 import { kvs } from '@forge/kvs';
 import { handler as legacyHandler } from './index';
+import { getExecutablePlan, getExecutionState, saveExecutablePlan, type ExecutablePlan } from './orchestrationEngine';
 
 type InvocationEvent = {
   call?: { functionKey?: string; payload?: Record<string, unknown>; jobId?: string };
@@ -11,7 +12,10 @@ type IvantiConnection = { tenantUrl: string; apiKey: string; updatedAt: string }
 type StoredIvantiConnection = { tenantUrl: string; updatedAt: string };
 const CONNECTION_KEY = 'ivanti-rest-connection-v1';
 const API_KEY_SECRET = 'ivanti-rest-api-key-v1';
-const IVANTI_FUNCTIONS = new Set(['getIvantiConnection','saveIvantiConnection','testIvantiConnection','discoverIvantiRequestOfferings']);
+const IVANTI_FUNCTIONS = new Set([
+  'getIvantiConnection','saveIvantiConnection','testIvantiConnection','discoverIvantiRequestOfferings',
+  'saveExecutableOrchestration','getExecutableOrchestration','getOrchestrationExecutionState'
+]);
 const ivantiResolver = new Resolver();
 
 function normaliseTenantUrl(value: unknown): string {
@@ -63,5 +67,8 @@ ivantiResolver.define('getIvantiConnection',async()=>{const {metadata,apiKey}=aw
 ivantiResolver.define('saveIvantiConnection',async({payload})=>{const c=await persistConnection(payload?.tenantUrl??payload?.baseUrl,payload?.apiKey);return{configured:true,tenantUrl:c.tenantUrl,apiKeyMasked:maskKey(c.apiKey),updatedAt:c.updatedAt};});
 ivantiResolver.define('testIvantiConnection',async({payload})=>{const inline=Boolean(String(payload?.tenantUrl??payload?.baseUrl??'').trim()||String(payload?.apiKey??'').trim());const c=inline?await persistConnection(payload?.tenantUrl??payload?.baseUrl,payload?.apiKey):await getSavedConnection();return testConnection(c);});
 ivantiResolver.define('discoverIvantiRequestOfferings',async({payload})=>{const inline=Boolean(String(payload?.tenantUrl??payload?.baseUrl??'').trim()||String(payload?.apiKey??'').trim());const c=inline?await persistConnection(payload?.tenantUrl??payload?.baseUrl,payload?.apiKey):await getSavedConnection();const test=await testConnection(c);const entitySet=String((test as {entitySet?:string}).entitySet||'');if(!entitySet)throw new Error('No readable Service Request Template business object was identified.');const response=await ivantiFetch(c,`/api/odata/businessobject/${encodeURIComponent(entitySet)}?$top=250`);if(!response.ok)throw new Error(explainHttp(response.status,response.text));const records=extractRecords(parseJson(response.text));const offerings=records.map((record,index)=>({id:firstString(record,['RecId','RecID','Id','ID'])||`${entitySet}-${index+1}`,name:firstString(record,['Name','DisplayName','Title','Subject'])||`Request offering ${index+1}`,description:firstString(record,['Description','Details']),status:firstString(record,['Status','State']),service:firstString(record,['Service','ServiceName','Category']),raw:record}));return{ok:true,entitySet,count:offerings.length,offerings,message:`Discovered ${offerings.length} Ivanti service request template${offerings.length===1?'':'s'} from ${entitySet}.`};});
+ivantiResolver.define('saveExecutableOrchestration',async({payload})=>saveExecutablePlan(payload?.plan as unknown as ExecutablePlan));
+ivantiResolver.define('getExecutableOrchestration',async({payload})=>getExecutablePlan(String(payload?.projectId||''),String(payload?.issueTypeId||'')));
+ivantiResolver.define('getOrchestrationExecutionState',async({payload})=>getExecutionState(String(payload?.issueId||'')));
 const ivantiHandler=ivantiResolver.getDefinitions();
 export const handler=async(event:InvocationEvent,runtimeContext:unknown)=>{const functionKey=event?.call?.functionKey||'';if(IVANTI_FUNCTIONS.has(functionKey))return ivantiHandler(event as never,runtimeContext as never);return legacyHandler(event as never,runtimeContext as never);};
