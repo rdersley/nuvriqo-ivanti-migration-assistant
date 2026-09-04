@@ -15,6 +15,7 @@ app = (ROOT / 'static/src/App.tsx').read_text()
 backend = (ROOT / 'src/index.ts').read_text()
 workflow = (ROOT / '.github/workflows/deploy-development.yml').read_text()
 main = (ROOT / 'static/src/main.tsx').read_text()
+runner = (ROOT / 'static/src/FullMigrationRunnerMount.tsx').read_text()
 
 # Core build safety
 check('frontend type/build scripts exist', '"build": "tsc -b && vite build"' in (ROOT/'static/package.json').read_text())
@@ -34,6 +35,15 @@ for script in [
 ]:
     check(f'{script} exists', (ROOT/'.github/scripts'/script).exists())
     check(f'{script} runs in deploy', script in workflow)
+
+# The full migration runner must never place a condition controller inside its own
+# hidden section again. This is the exact regression that hid Computer Required.
+check('full runner normalises conditional controllers', 'normaliseConditions(service)' in runner)
+check('full runner removes controller from targets', 'filter(id=>id!==controllerId)' in runner)
+check('full runner validates controller hidden-state', 'controller would be inside a hidden section' in runner)
+check('full runner validates form topology before publish', 'Form topology validation failed' in runner)
+check('full runner requires verified Jira conditions', "condition.status!=='verified'" in runner)
+check('full runner keeps workflow/form separation wording', 'Workflow capture remains separate from the form topology' in runner)
 
 # Orchestration regression guards (these are patched into App.tsx before this test runs)
 check('orchestration React view present', 'Ivanti Workflow Orchestration Migration' in app)
