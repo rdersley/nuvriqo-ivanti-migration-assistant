@@ -8,6 +8,7 @@ import './safeOrchestrationBuild';
 import App from './App';
 import IvantiConnectionMount from './IvantiConnectionMount';
 import WorkflowXmlImportMount from './WorkflowXmlImportMount';
+import WorkflowAssociationMount from './WorkflowAssociationMount';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -15,5 +16,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <App />
     <IvantiConnectionMount />
     <WorkflowXmlImportMount />
+    <WorkflowAssociationMount />
   </React.StrictMode>
 );
