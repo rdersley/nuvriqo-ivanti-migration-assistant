@@ -6,14 +6,15 @@ export type GraphNode = { id:string; sourceType:string; kind:GraphNodeKind; titl
 export type GraphTransition = { sourceId:string; sourceTitle:string; outcome:string; condition?:string; targetId:string; targetTitle:string };
 export type ExecutableGraphPlan = { version:2; serviceId:string; serviceName:string; projectId:string; issueTypeId:string; workflowName:string; workflowVersion:string; entryNodeIds:string[]; nodes:GraphNode[]; transitions:GraphTransition[]; defects?:string[]; installedAt?:string };
 type State={parentIssueId:string;parentIssueKey:string;createdTasks:Record<string,string>;active:string[];passed:string[];completed:boolean;updatedAt:string};
-type Issue={id:string;key:string;fields?:Record<string,any>&{project?:{id?:string};issuetype?:{id?:string;subtask?:boolean};parent?:{id?:string;key?:string};status?:{name?:string;statusCategory?:{key?:string}};created?:string}};
+type Issue={id:string;key:string;fields?:Record<string,any>&{project?:{id?:string};issuetype?:{id?:string;subtask?:boolean};parent?:{id?:string;key?:string};status?:{name?:string;statusCategory?:{key?:string}};created?:string;labels?:string[]}};
 const PLAN='ivanti-executable-graph-v2'; const STATE='ivanti-graph-state-v2'; const clean=(v:unknown)=>String(v??'').replace(/\s+/g,' ').trim(); const norm=(v:unknown)=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const planKey=(p:string,t:string)=>`${PLAN}:${p}:${t}`; const stateKey=(id:string)=>`${STATE}:${id}`;
 async function json<T>(r:any):Promise<T>{const text=await r.text();let body:any;try{body=text?JSON.parse(text):undefined}catch{body=text}if(!r.ok)throw new Error(`Jira ${r.status}: ${typeof body==='string'?body.slice(0,400):JSON.stringify(body).slice(0,400)}`);return body as T}
-async function issue(key:string):Promise<Issue>{return json(await api.asApp().requestJira(route`/rest/api/3/issue/${key}?fields=project,issuetype,parent,status,created,*all`,{headers:{Accept:'application/json'}}))}
+async function issue(key:string):Promise<Issue>{return json(await api.asApp().requestJira(route`/rest/api/3/issue/${key}?fields=project,issuetype,parent,status,created,labels,*all`,{headers:{Accept:'application/json'}}))}
 async function subtaskType(projectId:string){const p=await json<{issueTypes?:Array<{id?:string;subtask?:boolean;name?:string}>}>(await api.asApp().requestJira(route`/rest/api/3/project/${projectId}`,{headers:{Accept:'application/json'}}));const t=(p.issueTypes||[]).find(x=>x.subtask)||(p.issueTypes||[]).find(x=>/sub.?task/i.test(x.name||''));if(!t?.id)throw new Error(`No sub-task type in project ${projectId}`);return String(t.id)}
 function adf(text:string){return{type:'doc',version:1,content:text?[{type:'paragraph',content:[{type:'text',text}]}]:[]}}
-async function createTask(plan:ExecutableGraphPlan,state:State,node:GraphNode){if(state.createdTasks[node.id])return;const type=await subtaskType(plan.projectId);const desc=[node.details,node.team&&`Ivanti assignment team: ${node.team}`,node.dueDays&&`Ivanti due target: ${node.dueDays} day(s)`].filter(Boolean).join('\n\n');const made=await json<{key:string}>(await api.asApp().requestJira(route`/rest/api/3/issue`,{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({fields:{project:{id:plan.projectId},parent:{key:state.parentIssueKey},issuetype:{id:type},summary:node.summary||node.title,description:adf(desc||`Migrated Ivanti fulfilment task: ${node.title}`),labels:['ivanti-orchestration',`ivanti-node-${node.id.replace(/[^a-zA-Z0-9_-]/g,'-').slice(0,40)}`]}})}));state.createdTasks[node.id]=made.key;await saveState(state)}
+function nodeLabel(node:GraphNode){return `ivanti-node-${node.id.replace(/[^a-zA-Z0-9_-]/g,'-').slice(0,40)}`}
+async function createTask(plan:ExecutableGraphPlan,state:State,node:GraphNode){if(state.createdTasks[node.id])return;const type=await subtaskType(plan.projectId);const desc=[node.details,node.team&&`Ivanti assignment team: ${node.team}`,node.dueDays&&`Ivanti due target: ${node.dueDays} day(s)`].filter(Boolean).join('\n\n');const made=await json<{key:string}>(await api.asApp().requestJira(route`/rest/api/3/issue`,{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({fields:{project:{id:plan.projectId},parent:{key:state.parentIssueKey},issuetype:{id:type},summary:node.summary||node.title,description:adf(desc||`Migrated Ivanti fulfilment task: ${node.title}`),labels:['ivanti-orchestration',nodeLabel(node)]}})}));state.createdTasks[node.id]=made.key;await saveState(state)}
 async function saveState(s:State){s.updatedAt=new Date().toISOString();await kvs.set(stateKey(s.parentIssueId),s)}
 function outgoing(plan:ExecutableGraphPlan,id:string,outcome?:string){const edges=plan.transitions.filter(e=>e.sourceId===id);if(!outcome)return edges;const n=norm(outcome);return edges.filter(e=>{const o=norm(e.outcome);return o===n||(!o&&['ok','completed','true'].includes(n))})}
 function addActive(state:State,ids:string[]){for(const id of ids)if(!state.active.includes(id)&&!state.passed.includes(id))state.active.push(id)}
@@ -24,4 +25,37 @@ async function reconcile(plan:ExecutableGraphPlan,parent:Issue){let state=await 
 export async function saveExecutableGraph(raw:ExecutableGraphPlan){if(!raw?.projectId||!raw?.issueTypeId||!raw?.nodes?.length)throw new Error('Graph plan is missing project, issue type or nodes.');const ids=new Set(raw.nodes.map(n=>n.id));for(const e of raw.transitions)if(!ids.has(e.sourceId)||!ids.has(e.targetId))throw new Error(`Graph route references unknown node: ${e.sourceTitle} -> ${e.targetTitle}`);const plan={...raw,version:2 as const,installedAt:new Date().toISOString()};await kvs.set(planKey(plan.projectId,plan.issueTypeId),plan);return plan}
 export async function getExecutableGraph(projectId:string,issueTypeId:string){return await kvs.get(planKey(projectId,issueTypeId)) as ExecutableGraphPlan|undefined}
 export async function getGraphState(issueId:string){return await kvs.get(stateKey(issueId)) as State|undefined}
-export async function handleGraphIssueEvent(event:any){const raw=event?.issue;if(!raw?.id)return;const current=await issue(raw.key||raw.id);let parent=current;if(current.fields?.issuetype?.subtask&&current.fields?.parent?.key)parent=await issue(current.fields.parent.key);const projectId=String(parent.fields?.project?.id||'');const typeId=String(parent.fields?.issuetype?.id||'');if(!projectId||!typeId)return;const plan=await getExecutableGraph(projectId,typeId);if(!plan)return;const createdAt=Date.parse(String(parent.fields?.created||''));const installedAt=Date.parse(String(plan.installedAt||''));if(Number.isFinite(createdAt)&&Number.isFinite(installedAt)&&createdAt<installedAt)return;await reconcile(plan,parent)}
+
+/**
+ * Event policy is deliberately narrow. A new parent starts one run. App-created child CREATE
+ * events are ignored so they cannot recursively start a second reconciliation while the first
+ * invocation is still persisting its state. Child UPDATE events are only relevant once the child
+ * reaches a Done category, at which point the parent graph is reconciled to the next node(s).
+ */
+export async function handleGraphIssueEvent(event:any){
+  const raw=event?.issue;if(!raw?.id)return;
+  const eventType=norm(event?.eventType||event?.type||'');
+  const current=await issue(raw.key||raw.id);
+  const isSubtask=Boolean(current.fields?.issuetype?.subtask);
+  const isCreated=eventType.includes('created');
+  const isUpdated=eventType.includes('updated');
+
+  if(isSubtask){
+    const labels=current.fields?.labels||[];
+    if(!labels.includes('ivanti-orchestration'))return;
+    // Never let our own child creation recursively reconcile the parent.
+    if(isCreated)return;
+    const cat=norm(current.fields?.status?.statusCategory?.key);
+    if(!isUpdated||cat!=='done')return;
+  }else{
+    // Parent updates are noisy (Forms, SLA, assignment, our own actions). Only creation starts a run.
+    if(!isCreated)return;
+  }
+
+  let parent=current;
+  if(isSubtask&&current.fields?.parent?.key)parent=await issue(current.fields.parent.key);
+  const projectId=String(parent.fields?.project?.id||'');const typeId=String(parent.fields?.issuetype?.id||'');if(!projectId||!typeId)return;
+  const plan=await getExecutableGraph(projectId,typeId);if(!plan)return;
+  const createdAt=Date.parse(String(parent.fields?.created||''));const installedAt=Date.parse(String(plan.installedAt||''));if(Number.isFinite(createdAt)&&Number.isFinite(installedAt)&&createdAt<installedAt)return;
+  await reconcile(plan,parent)
+}
