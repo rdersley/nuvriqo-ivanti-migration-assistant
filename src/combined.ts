@@ -1,5 +1,6 @@
 import Resolver from '@forge/resolver';
-import api, { storage } from '@forge/api';
+import api from '@forge/api';
+import { kvs } from '@forge/kvs';
 import { handler as legacyHandler } from './index';
 
 type InvocationEvent = {
@@ -17,7 +18,13 @@ type IvantiConnection = {
   updatedAt: string;
 };
 
+type StoredIvantiConnection = {
+  tenantUrl: string;
+  updatedAt: string;
+};
+
 const CONNECTION_KEY = 'ivanti-rest-connection-v1';
+const API_KEY_SECRET = 'ivanti-rest-api-key-v1';
 const IVANTI_FUNCTIONS = new Set([
   'getIvantiConnection',
   'saveIvantiConnection',
@@ -57,12 +64,18 @@ function maskKey(key: string): string {
   return `${key.slice(0, 6)}••••••••${key.slice(-4)}`;
 }
 
+async function readStoredConnection(): Promise<{ metadata?: StoredIvantiConnection; apiKey?: string }> {
+  const metadata = await kvs.get(CONNECTION_KEY) as StoredIvantiConnection | undefined;
+  const apiKey = await kvs.getSecret(API_KEY_SECRET) as string | undefined;
+  return { metadata, apiKey };
+}
+
 async function getSavedConnection(): Promise<IvantiConnection> {
-  const saved = await storage.get(CONNECTION_KEY) as IvantiConnection | undefined;
-  if (!saved?.tenantUrl || !saved?.apiKey) {
+  const { metadata, apiKey } = await readStoredConnection();
+  if (!metadata?.tenantUrl || !apiKey) {
     throw new Error('No Ivanti connection has been saved yet.');
   }
-  return saved;
+  return { tenantUrl: metadata.tenantUrl, apiKey, updatedAt: metadata.updatedAt };
 }
 
 async function ivantiFetch(connection: IvantiConnection, path: string) {
@@ -92,7 +105,6 @@ function explainHttp(status: number, body: string): string {
 }
 
 async function testConnection(connection: IvantiConnection) {
-  // OData metadata is the safest discovery probe because it does not create or modify data.
   const metadata = await ivantiFetch(connection, '/api/odata/$metadata');
   if (metadata.ok) {
     return {
@@ -104,7 +116,6 @@ async function testConnection(connection: IvantiConnection) {
     };
   }
 
-  // Some tenants restrict $metadata while allowing business-object reads. Use a tiny read-only fallback.
   const employeeProbe = await ivantiFetch(connection, '/api/odata/businessobject/employees?$top=1');
   if (employeeProbe.ok) {
     return {
@@ -161,13 +172,13 @@ function firstString(record: Record<string, unknown>, names: string[]): string {
 }
 
 ivantiResolver.define('getIvantiConnection', async () => {
-  const saved = await storage.get(CONNECTION_KEY) as IvantiConnection | undefined;
-  return saved?.tenantUrl && saved?.apiKey
+  const { metadata, apiKey } = await readStoredConnection();
+  return metadata?.tenantUrl && apiKey
     ? {
         configured: true,
-        tenantUrl: saved.tenantUrl,
-        apiKeyMasked: maskKey(saved.apiKey),
-        updatedAt: saved.updatedAt
+        tenantUrl: metadata.tenantUrl,
+        apiKeyMasked: maskKey(apiKey),
+        updatedAt: metadata.updatedAt
       }
     : { configured: false, tenantUrl: '', apiKeyMasked: '' };
 });
@@ -175,17 +186,18 @@ ivantiResolver.define('getIvantiConnection', async () => {
 ivantiResolver.define('saveIvantiConnection', async ({ payload }) => {
   const tenantUrl = normaliseTenantUrl(payload?.tenantUrl);
   const suppliedKey = String(payload?.apiKey ?? '').trim();
-  const existing = await storage.get(CONNECTION_KEY) as IvantiConnection | undefined;
-  const apiKey = suppliedKey ? normaliseApiKey(suppliedKey) : existing?.apiKey;
+  const existingKey = await kvs.getSecret(API_KEY_SECRET) as string | undefined;
+  const apiKey = suppliedKey ? normaliseApiKey(suppliedKey) : existingKey;
   if (!apiKey) throw new Error('Ivanti REST API Key Reference ID is required.');
 
-  const saved: IvantiConnection = { tenantUrl, apiKey, updatedAt: new Date().toISOString() };
-  await storage.set(CONNECTION_KEY, saved);
+  const updatedAt = new Date().toISOString();
+  await kvs.set(CONNECTION_KEY, { tenantUrl, updatedAt });
+  await kvs.setSecret(API_KEY_SECRET, apiKey);
   return {
     configured: true,
     tenantUrl,
     apiKeyMasked: maskKey(apiKey),
-    updatedAt: saved.updatedAt
+    updatedAt
   };
 });
 
