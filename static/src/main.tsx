@@ -12,11 +12,13 @@ import WorkflowGetInstancePasteMount from './WorkflowGetInstancePasteMount';
 import WorkflowAssociationMount from './WorkflowAssociationMount';
 import WorkflowImplementationMount from './WorkflowImplementationMount';
 import WorkflowGraphCompilerMount from './WorkflowGraphCompilerMount';
+import FormRepairMount from './FormRepairMount';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
+    <FormRepairMount />
     <IvantiConnectionMount />
     <WorkflowXmlImportMount />
     <WorkflowGetInstancePasteMount />
