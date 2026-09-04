@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { invoke } from '@forge/bridge';
 
 const PROJECT_KEY = 'ivanti-migration-assistant-project-v3';
-const REPAIR_KEY = 'ivanti-migration-assistant-form-repair-v2';
+const REPAIR_KEY = 'ivanti-migration-assistant-form-repair-v3';
 
 type RepairResult = {
   matchedForms: number;
@@ -27,7 +27,7 @@ export default function FormRepairMount() {
       const serviceNames = (project.services ?? []).map((service) => String(service.analysis?.serviceName ?? '').trim()).filter(Boolean);
       if (!projectId || !serviceNames.length) return;
 
-      const fingerprint = `${projectId}|${serviceNames.sort().join('|')}|v2`;
+      const fingerprint = `${projectId}|${serviceNames.sort().join('|')}|v3`;
       if (localStorage.getItem(REPAIR_KEY) === fingerprint) return;
 
       setMessage('Repairing existing migrated Jira Forms…');
