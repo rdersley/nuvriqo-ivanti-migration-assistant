@@ -61,7 +61,10 @@ jobs:
       - name: Apply native Ivanti workflow XML import
         run: python .github/scripts/native_workflow_export_import_fix.py
 
-      - name: Apply Ivanti source acquisition foundation
+      - name: Apply Ivanti direct discovery backend
+        run: python .github/scripts/ivanti_direct_discovery_backend_fix.py
+
+      - name: Apply Ivanti source acquisition
         run: python .github/scripts/ivanti_source_acquisition_fix.py
 
       - name: Run migration regression QA
