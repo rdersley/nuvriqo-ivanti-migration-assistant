@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@forge/api": "latest",
+    "@forge/kvs": "latest",
     "@forge/resolver": "latest"
   },
   "devDependencies": {
