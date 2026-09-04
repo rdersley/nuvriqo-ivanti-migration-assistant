@@ -67,6 +67,12 @@ type JiraIssue = {
   };
 };
 
+type JiraResponseLike = {
+  ok: boolean;
+  status: number;
+  text(): Promise<string>;
+};
+
 const PLAN_PREFIX = 'ivanti-executable-plan-v1';
 const STATE_PREFIX = 'ivanti-execution-state-v1';
 const ORCH_LABEL = 'ivanti-orchestration';
@@ -83,7 +89,7 @@ function adf(text: string) {
   };
 }
 
-async function jiraJson<T>(response: Response): Promise<T> {
+async function jiraJson<T>(response: JiraResponseLike): Promise<T> {
   const text = await response.text();
   let body: any = undefined;
   if (text) {
