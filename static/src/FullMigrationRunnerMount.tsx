@@ -8,7 +8,7 @@ type Service = {
   id:string;
   analysis?: { serviceName?:string; description?:string; fields?:Field[]; suggestedWorkflow?:{statuses?:string[]} };
   formSections?: Array<{id:string;name:string;fieldIds:string[]}>;
-  proposedConditions?: Array<{id:string;controllerFieldId:string;operator:string;value:string;targetFieldIds:string[]>;
+  proposedConditions?: Array<{id:string;controllerFieldId:string;operator:string;value:string;targetFieldIds:string[]}>;
   ivantiWorkflows?: ParsedWorkflow[];
   build?: { fieldResults?: any[]; formCreated?:boolean; workflowCreated?:boolean; automationGenerated?:boolean };
   updatedAt?:string;
