@@ -43,7 +43,6 @@ export type SuggestedWorkflow = {
   notes: string[];
 };
 
-
 export type WorkflowStatusCandidate = {
   id: string;
   name: string;
@@ -85,8 +84,6 @@ export type WorkflowMigrationResult = {
   message: string;
   validation?: unknown;
 };
-
-
 
 export type AutomationCandidate = {
   id: string;
@@ -175,6 +172,26 @@ export type ProposedCondition = {
   source: 'inferred';
 };
 
+export type IvantiWorkflowSource = {
+  source: 'ivanti-workflow-export' | 'ivanti-getinstance';
+  sourceFile: string;
+  capturedAt: string;
+  workflow: {
+    name: string;
+    displayName?: string;
+    description?: string;
+    objectType?: string;
+    version?: string;
+    status?: string;
+    exception?: string;
+    blocks: Array<Record<string, unknown>>;
+    edges: Array<Record<string, unknown>>;
+    trigger?: Record<string, unknown>;
+    quickActions?: Array<Record<string, unknown>>;
+    derived?: Record<string, unknown>;
+  };
+};
+
 export type ServiceBuildState = {
   fieldResults: CreationResult[];
   formCreated: boolean;
@@ -190,6 +207,7 @@ export type MigrationService = {
   analysis: Analysis;
   formSections: FormSection[];
   proposedConditions: ProposedCondition[];
+  ivantiWorkflows?: IvantiWorkflowSource[];
   build: ServiceBuildState;
 };
 
@@ -201,7 +219,6 @@ export type MigrationProject = {
   updatedAt: string;
   services: MigrationService[];
 };
-
 
 export type PreflightConflict = {
   fieldName: string;
@@ -256,127 +273,4 @@ export type BuildCheckpoint = {
   completedStepKeys: string[];
   failedStepKey?: string;
   updatedAt: string;
-};
-
-export type ExistingFieldComparison = {
-  name: string;
-  proposedType: JiraFieldType;
-  status: 'new' | 'reuse' | 'review';
-  existingId?: string;
-  existingType?: string;
-  reason?: string;
-};
-
-
-export type MappingAction = 'create' | 'reuse' | 'merge' | 'skip';
-
-export type IntelligentFieldMapping = {
-  key: string;
-  serviceId: string;
-  sourceFieldId: string;
-  ivantiName: string;
-  proposedName: string;
-  proposedType: JiraFieldType;
-  options: string[];
-  action: MappingAction;
-  existingFieldId?: string;
-  existingFieldName?: string;
-  existingType?: string;
-  confidence: number;
-  reason: string;
-};
-
-
-export type JiraStructureStep = {
-  element: 'issueType' | 'workflow' | 'workflowScheme';
-  status: 'created' | 'reused' | 'failed' | 'skipped';
-  id?: string;
-  name?: string;
-  message: string;
-};
-
-export type JiraStructureResult = {
-  serviceName: string;
-  status: 'created' | 'partial' | 'failed';
-  issueTypeId?: string;
-  workflowId?: string;
-  workflowName?: string;
-  workflowSchemeId?: string;
-  steps: JiraStructureStep[];
-};
-
-export type ProjectActivationResult = {
-  projectId: string;
-  workflowSchemeId: string;
-  status: 'assigned' | 'failed';
-  message: string;
-};
-
-
-export type HealthCheckItem = {
-  key: string;
-  label: string;
-  status: 'pass' | 'warning' | 'fail';
-  message: string;
-};
-
-export type EnvironmentHealthResult = {
-  checkedAt: string;
-  ready: boolean;
-  project?: { id: string; key: string; name: string; projectTypeKey?: string; simplified?: boolean };
-  issueCount?: number;
-  checks: HealthCheckItem[];
-};
-
-
-export type ScreenStructureStep = {
-  element: 'createScreen' | 'editScreen' | 'viewScreen' | 'screenScheme' | 'issueTypeScreenScheme' | 'fields';
-  status: 'created' | 'reused' | 'partial' | 'failed' | 'skipped';
-  id?: string;
-  name?: string;
-  message: string;
-};
-
-export type ScreenStructureResult = {
-  serviceName: string;
-  status: 'created' | 'partial' | 'failed';
-  createScreenId?: string;
-  editScreenId?: string;
-  viewScreenId?: string;
-  screenSchemeId?: string;
-  issueTypeScreenSchemeId?: string;
-  steps: ScreenStructureStep[];
-};
-
-export type ScreenActivationResult = {
-  projectId: string;
-  issueTypeScreenSchemeId: string;
-  status: 'assigned';
-  message: string;
-};
-
-export type JsmRequestTypeResult = { status: 'created' | 'reused'; serviceDeskId: string; requestTypeId: string; name: string; message: string; issueTypeId?: string; issueTypeSchemeId?: string; duplicates?: Array<{ id: string; issueTypeId?: string }> };
-export type JsmFormStage = { key: 'fieldResolution' | 'baseForm' | 'questions' | 'readback' | 'conditions' | 'publish'; status: 'created' | 'reused' | 'verified' | 'partial' | 'failed' | 'skipped'; message: string; detail?: unknown };
-export type JsmFormResult = { status: 'created' | 'reused' | 'partial' | 'failed'; formId: string; serviceDeskId: string; requestTypeId: string; resolvedFields: number; totalFields: number; sections: number; conditions: number; published: boolean; stages: JsmFormStage[]; message: string };
-export type JsmPortalResult = {
-  status: 'verified' | 'partial';
-  serviceDeskId: string;
-  requestTypeId: string;
-  requestTypeName: string;
-  issueTypeId?: string;
-  issueTypeMatches?: boolean;
-  formAttached: boolean;
-  formId?: string;
-  visibleInPortal: boolean;
-  groupIds?: string[];
-  portalGroups?: Array<{ id: string; name: string }>;
-  message: string;
-};
-
-export type JsmDuplicateCleanupResult = {
-  status: 'deleted' | 'partial';
-  deleted: number;
-  failed: number;
-  results: Array<{ id: string; status: 'deleted' | 'failed'; message: string }>;
-  message: string;
 };
