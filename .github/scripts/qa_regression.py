@@ -36,11 +36,13 @@ for script in [
     check(f'{script} exists', (ROOT/'.github/scripts'/script).exists())
     check(f'{script} runs in deploy', script in workflow)
 
-# The full migration runner must never place a condition controller inside its own
-# hidden section again. This is the exact regression that hid Computer Required.
+# The full migration runner must never place a condition controller inside any
+# section. Jira may hide an entire section before the customer can answer its
+# controller, which is the regression that hid Computer Required.
 check('full runner normalises conditional controllers', 'normaliseConditions(service)' in runner)
 check('full runner removes controller from targets', 'filter(id=>id!==controllerId)' in runner)
-check('full runner validates controller hidden-state', 'controller would be inside a hidden section' in runner)
+check('full runner removes controllers from every section', '!controllerIds.has(id)' in runner)
+check('full runner validates top-level controllers', 'controller would be inside a section instead of remaining top-level' in runner)
 check('full runner validates form topology before publish', 'Form topology validation failed' in runner)
 check('full runner requires verified Jira conditions', "condition.status!=='verified'" in runner)
 check('full runner keeps workflow/form separation wording', 'Workflow capture remains separate from the form topology' in runner)
