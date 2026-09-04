@@ -6,10 +6,12 @@ import './workflowInstanceCompat';
 import './workflowSemanticCleanup';
 import './safeOrchestrationBuild';
 import App from './App';
+import IvantiConnectionMount from './IvantiConnectionMount';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
+    <IvantiConnectionMount />
   </React.StrictMode>
 );
