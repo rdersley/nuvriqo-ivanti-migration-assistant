@@ -19,6 +19,8 @@ jobs:
       FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
       FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
       FORGE_SITE: ${{ secrets.FORGE_SITE }}
+      QA_JIRA_URL: ${{ secrets.QA_JIRA_URL }}
+      QA_JIRA_STORAGE_STATE_B64: ${{ secrets.QA_JIRA_STORAGE_STATE_B64 }}
       CI: true
 
     steps:
@@ -108,3 +110,34 @@ jobs:
 
       - name: Upgrade Jira installation
         run: forge install --upgrade --site "$FORGE_SITE" --product jira --environment development --confirm-scopes --non-interactive
+
+      - name: Prepare authenticated Jira browser session
+        if: ${{ env.QA_JIRA_STORAGE_STATE_B64 != '' && env.QA_JIRA_URL != '' }}
+        run: |
+          mkdir -p qa/browser
+          printf '%s' "$QA_JIRA_STORAGE_STATE_B64" | base64 --decode > qa/browser/storage-state.json
+
+      - name: Install Playwright browser QA runner
+        if: ${{ env.QA_JIRA_STORAGE_STATE_B64 != '' && env.QA_JIRA_URL != '' }}
+        run: |
+          npm install --no-save @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run authenticated Jira browser QA
+        if: ${{ env.QA_JIRA_STORAGE_STATE_B64 != '' && env.QA_JIRA_URL != '' }}
+        env:
+          QA_STORAGE_STATE_FILE: qa/browser/storage-state.json
+          QA_PROJECT_KEY: DEMO
+          QA_REQUEST_TYPE_ID: '60'
+        run: npx playwright test --config qa/browser/playwright.config.mjs
+
+      - name: Upload browser QA evidence
+        if: ${{ always() && env.QA_JIRA_STORAGE_STATE_B64 != '' && env.QA_JIRA_URL != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: jira-browser-qa-${{ github.run_number }}
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 14
