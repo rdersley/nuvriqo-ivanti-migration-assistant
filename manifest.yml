@@ -6,9 +6,18 @@ modules:
         function: resolver
       title: Ivanti Migration Assistant
 
+  trigger:
+    - key: ivanti-orchestration-issue-events
+      function: orchestration-event
+      events:
+        - avi:jira:created:issue
+        - avi:jira:updated:issue
+
   function:
     - key: resolver
       handler: combined.handler
+    - key: orchestration-event
+      handler: orchestrationEngine.handleIssueEvent
 
 resources:
   - key: main
