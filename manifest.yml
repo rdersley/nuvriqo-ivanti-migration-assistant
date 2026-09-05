@@ -36,7 +36,8 @@ permissions:
   external:
     fetch:
       backend:
-        - '*.ivanticloud.com'
+        - address: '*.ivanticloud.com'
+          inScopeEUD: true
 
 app:
   runtime:
