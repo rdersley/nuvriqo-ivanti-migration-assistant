@@ -78,6 +78,9 @@ jobs:
       - name: Run orchestration runtime simulation QA
         run: python .github/scripts/qa_orchestration_runtime.py
 
+      - name: Run cross-file source integrity QA
+        run: python .github/scripts/qa_source_integrity.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
