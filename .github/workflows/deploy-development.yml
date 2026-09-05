@@ -72,6 +72,9 @@ jobs:
       - name: Apply Ivanti source acquisition
         run: python .github/scripts/ivanti_source_acquisition_fix.py
 
+      - name: Hold unsupported action/wait/approval nodes for review
+        run: python .github/scripts/action_review_hold_fix.py
+
       - name: Run migration regression QA
         run: python .github/scripts/qa_regression.py
 
