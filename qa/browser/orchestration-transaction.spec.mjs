@@ -68,13 +68,20 @@ async function waitForSummaries(request, parentKey, expected) {
   });
 }
 
+async function waitForParentDone(request, parentKey) {
+  return waitFor(request, `${parentKey} to reach Done`, async () => {
+    const parent = await issue(request, parentKey);
+    return norm(parent?.fields?.status?.statusCategory?.key) === 'done' ? parent : null;
+  });
+}
+
 test.describe('Ivanti orchestration - live transactional Jira QA', () => {
   // A release-critical transaction must pass on its first attempt. Global browser retries are
   // useful for page-navigation smoke tests, but they must not turn an orchestration race into green CI.
   test.describe.configure({ retries: 0 });
 
-  test('runs New Employee Setup through both gates to Assets without duplicate subtasks', async ({ request }) => {
-    test.setTimeout(12 * 60 * 1000);
+  test('runs New Employee Setup through both gates, Assets and parent completion without duplicates', async ({ request }) => {
+    test.setTimeout(15 * 60 * 1000);
     let parentKey;
     try {
       const project = await apiJson(request, 'GET', `/rest/api/3/project/${projectKey}`, undefined);
@@ -123,10 +130,16 @@ test.describe('Ivanti orchestration - live transactional Jira QA', () => {
       await doneTransition(request, secondChildren.at(-1).key);
 
       const withAssets = await waitForSummaries(request, parentKey, ['Assets']);
-      expect([...withAssets.values()].filter((item) => norm(item.fields.summary).includes('assets'))).toHaveLength(1);
+      const assetsChildren = [...withAssets.values()].filter((item) => norm(item.fields.summary).includes('assets'));
+      expect(assetsChildren).toHaveLength(1);
 
-      const all = [...withAssets.values()];
-      const orchestration = all.filter((item) => (item.fields.labels || []).includes('ivanti-orchestration'));
+      await doneTransition(request, assetsChildren[0].key);
+      await waitForParentDone(request, parentKey);
+
+      const completedChildren = await children(request, parentKey);
+      expect(completedChildren.some((item) => norm(item.fields.summary).includes('pbx')), 'PBX must not be created on the default/no-ServiceDesk branch').toBeFalsy();
+
+      const orchestration = completedChildren.filter((item) => (item.fields.labels || []).includes('ivanti-orchestration'));
       const duplicateSummaries = orchestration.reduce((acc, item) => {
         const key = norm(item.fields.summary);
         acc.set(key, (acc.get(key) || 0) + 1);
