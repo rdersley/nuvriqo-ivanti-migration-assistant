@@ -92,10 +92,12 @@ jobs:
         run: npm install
 
       - name: Install frontend dependencies
-        run: npm --prefix static ci
+        run: npm --prefix static install
 
-      - name: Report frontend dependency audit
-        continue-on-error: true
+      - name: Apply non-breaking frontend security fixes
+        run: npm --prefix static audit fix
+
+      - name: Enforce frontend dependency audit
         run: npm --prefix static audit --audit-level=high
 
       - name: Typecheck backend and frontend
@@ -110,10 +112,10 @@ jobs:
       - name: Configure Forge CLI for CI
         run: |
           forge settings set usage-analytics true
+          forge settings set default-environment development
           forge settings list
 
-      - name: Report Forge lint diagnostics
-        continue-on-error: true
+      - name: Enforce Forge lint
         run: forge lint
 
       - name: Deploy to development
