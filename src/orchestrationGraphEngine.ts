@@ -19,7 +19,25 @@ async function saveState(s:State){s.updatedAt=new Date().toISOString();await kvs
 function outgoing(plan:ExecutableGraphPlan,id:string,outcome?:string){const edges=plan.transitions.filter(e=>e.sourceId===id);if(!outcome)return edges;const n=norm(outcome);return edges.filter(e=>{const o=norm(e.outcome);return o===n||(!o&&['ok','completed','true'].includes(n))})}
 function addActive(state:State,ids:string[]){for(const id of ids)if(!state.active.includes(id)&&!state.passed.includes(id))state.active.push(id)}
 async function fieldValue(parent:Issue,condition:string|undefined){if(!condition)return undefined;const m=condition.match(/^(.+?)\s+(equals|=|==|is|not equals|!=)\s+(.+)$/i);if(!m)return undefined;const fieldName=norm(m[1]);const expected=clean(m[3]).replace(/^['"]|['"]$/g,'');const fields=await json<Array<{id?:string;name?:string}>>(await api.asApp().requestJira(route`/rest/api/3/field`,{headers:{Accept:'application/json'}}));const f=fields.find(x=>norm(x.name)===fieldName)||fields.find(x=>norm(x.name).includes(fieldName)||fieldName.includes(norm(x.name)));if(!f?.id)return undefined;const actual=(await issue(parent.key)).fields?.[String(f.id)];const value=typeof actual==='object'&&actual&&'value'in actual?actual.value:actual;const eq=norm(value)===norm(expected);return /not|!=/i.test(m[2])?!eq:eq}
-async function taskOutcome(state:State,node:GraphNode){const key=state.createdTasks[node.id];if(!key)return undefined;const child=await issue(key);const cat=norm(child.fields?.status?.statusCategory?.key);const status=norm(child.fields?.status?.name);if(cat!=='done')return undefined;const available=node.outcomes.map(norm);for(const candidate of ['completed','accepted','cancelled','canceled','timed out','timeout','ok','success'])if(available.includes(candidate)&&status.includes(candidate.replace('timed out','timed')))return candidate;if(available.includes('completed'))return'completed';if(available.includes('ok'))return'ok';return available[0]||'completed'}
+function taskOutcomeFromStatus(node:GraphNode,statusName:unknown,statusCategory:unknown){
+  const status=norm(statusName); const cat=norm(statusCategory); const available=node.outcomes.map(norm);
+  const aliases:Array<[string,string[]]>=[
+    ['accepted',['accepted','accept']],['completed',['completed','complete','done','resolved','closed']],
+    ['cancelled',['cancelled','canceled','cancel']],['canceled',['cancelled','canceled','cancel']],
+    ['timed out',['timed out','timeout','timedout']],['timeout',['timed out','timeout','timedout']],
+    ['failed',['failed','failure','rejected']],['ok',['ok','success']]
+  ];
+  // Prefer an explicit Jira status whose meaning matches one of the actual Ivanti exit ports.
+  for(const [outcome,names] of aliases)if(available.includes(outcome)&&names.some(name=>status===norm(name)||status.includes(norm(name))))return outcome;
+  // A generic Jira Done status is safe to map to COMPLETED/OK only when no more precise status matched.
+  if(cat==='done'){
+    if(available.includes('completed'))return'completed';
+    if(available.includes('ok'))return'ok';
+    if(available.length===1)return available[0];
+  }
+  return undefined;
+}
+async function taskOutcome(state:State,node:GraphNode){const key=state.createdTasks[node.id];if(!key)return undefined;const child=await issue(key);return taskOutcomeFromStatus(node,child.fields?.status?.name,child.fields?.status?.statusCategory?.key)}
 async function transitionDone(key:string){const body=await json<{transitions?:Array<{id?:string;name?:string;to?:{name?:string;statusCategory?:{key?:string}}}>}>(await api.asApp().requestJira(route`/rest/api/3/issue/${key}/transitions`,{headers:{Accept:'application/json'}}));const t=(body.transitions||[]).find(x=>norm(x.to?.statusCategory?.key)==='done')||(body.transitions||[]).find(x=>/done|complete|resolve|close/i.test(x.to?.name||x.name||''));if(t?.id)await json(await api.asApp().requestJira(route`/rest/api/3/issue/${key}/transitions`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({transition:{id:String(t.id)}})}))}
 async function reconcile(plan:ExecutableGraphPlan,parent:Issue){let state=await kvs.get(stateKey(parent.id)) as State|undefined;if(!state){state={parentIssueId:String(parent.id),parentIssueKey:parent.key,createdTasks:{},active:[...plan.entryNodeIds],passed:[],completed:false,updatedAt:new Date().toISOString()};await saveState(state)}if(state.completed)return;let changed=true;let guard=0;while(changed&&guard++<100){changed=false;for(const id of [...state.active]){const node=plan.nodes.find(n=>n.id===id);if(!node){state.active=state.active.filter(x=>x!==id);changed=true;continue}if(node.kind==='unsupported'||node.kind==='approval'||node.kind==='wait')continue;if(node.kind==='task'){await createTask(plan,state,node);const outcome=await taskOutcome(state,node);if(!outcome)continue;state.active=state.active.filter(x=>x!==id);state.passed.push(id);addActive(state,outgoing(plan,id,outcome).map(e=>e.targetId));changed=true;continue}if(node.kind==='gate'){const incoming=plan.transitions.filter(e=>e.targetId===id).map(e=>e.sourceId);if(incoming.some(src=>!state.passed.includes(src)))continue;state.active=state.active.filter(x=>x!==id);state.passed.push(id);addActive(state,outgoing(plan,id).map(e=>e.targetId));changed=true;continue}if(node.kind==='decision'){let selected:GraphTransition[]=[];for(const e of outgoing(plan,id)){const test=await fieldValue(parent,e.condition||node.condition);if(test===true){selected=[e];break}}if(!selected.length){const edges=outgoing(plan,id);const yes=edges.find(e=>['true','yes'].includes(norm(e.outcome)));const no=edges.find(e=>['false','no'].includes(norm(e.outcome)));const test=await fieldValue(parent,node.condition);if(test!==undefined)selected=[test?yes:no].filter(Boolean) as GraphTransition[]}if(!selected.length)continue;state.active=state.active.filter(x=>x!==id);state.passed.push(id);addActive(state,selected.map(e=>e.targetId));changed=true;continue}if(node.kind==='stop'){state.active=state.active.filter(x=>x!==id);state.passed.push(id);state.completed=true;await transitionDone(parent.key);changed=true;continue}if(node.kind==='start'||node.kind==='action'){state.active=state.active.filter(x=>x!==id);state.passed.push(id);addActive(state,outgoing(plan,id).map(e=>e.targetId));changed=true;continue}}if(changed)await saveState(state)}await saveState(state)}
 export async function saveExecutableGraph(raw:ExecutableGraphPlan){if(!raw?.projectId||!raw?.issueTypeId||!raw?.nodes?.length)throw new Error('Graph plan is missing project, issue type or nodes.');const ids=new Set(raw.nodes.map(n=>n.id));for(const e of raw.transitions)if(!ids.has(e.sourceId)||!ids.has(e.targetId))throw new Error(`Graph route references unknown node: ${e.sourceTitle} -> ${e.targetTitle}`);const plan={...raw,version:2 as const,installedAt:new Date().toISOString()};await kvs.set(planKey(plan.projectId,plan.issueTypeId),plan);return plan}
@@ -29,8 +47,9 @@ export async function getGraphState(issueId:string){return await kvs.get(stateKe
 /**
  * Event policy is deliberately narrow. A new parent starts one run. App-created child CREATE
  * events are ignored so they cannot recursively start a second reconciliation while the first
- * invocation is still persisting its state. Child UPDATE events are only relevant once the child
- * reaches a Done category, at which point the parent graph is reconciled to the next node(s).
+ * invocation is still persisting its state. Child UPDATE events reconcile whenever the Jira
+ * status can be mapped to an explicit Ivanti exit outcome (Accepted, Completed, Cancelled,
+ * Timed Out, etc.). Unrelated/noisy updates remain harmless because reconcile will keep waiting.
  */
 export async function handleGraphIssueEvent(event:any){
   const raw=event?.issue;if(!raw?.id)return;
@@ -45,8 +64,8 @@ export async function handleGraphIssueEvent(event:any){
     if(!labels.includes('ivanti-orchestration'))return;
     // Never let our own child creation recursively reconcile the parent.
     if(isCreated)return;
-    const cat=norm(current.fields?.status?.statusCategory?.key);
-    if(!isUpdated||cat!=='done')return;
+    // Active outcomes such as ACCEPTED can be meaningful Ivanti exits, so do not require Done here.
+    if(!isUpdated)return;
   }else{
     // Parent updates are noisy (Forms, SLA, assignment, our own actions). Only creation starts a run.
     if(!isCreated)return;
