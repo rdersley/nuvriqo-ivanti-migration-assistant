@@ -69,6 +69,10 @@ async function waitForSummaries(request, parentKey, expected) {
 }
 
 test.describe('Ivanti orchestration - live transactional Jira QA', () => {
+  // A release-critical transaction must pass on its first attempt. Global browser retries are
+  // useful for page-navigation smoke tests, but they must not turn an orchestration race into green CI.
+  test.describe.configure({ retries: 0 });
+
   test('runs New Employee Setup through both gates to Assets without duplicate subtasks', async ({ request }) => {
     test.setTimeout(12 * 60 * 1000);
     let parentKey;
@@ -97,7 +101,6 @@ test.describe('Ivanti orchestration - live transactional Jira QA', () => {
       const o365 = initialChildren.find((item) => /office 365/i.test(item.fields.summary));
       await doneTransition(request, ad.key);
 
-      // One completed first-wave task must not open the second gate.
       await new Promise((resolve) => setTimeout(resolve, Math.min(30000, pollMs * 2)));
       const beforeGate = await children(request, parentKey);
       for (const name of ['Firewall', 'Jira', 'Slack', 'Harvest']) {
