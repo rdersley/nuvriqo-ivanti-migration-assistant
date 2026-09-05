@@ -34,6 +34,25 @@ function norm(value) {
   return String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
+async function setServiceDeskDecision(request, key, choice) {
+  const fields = await apiJson(request, 'GET', '/rest/api/3/field', undefined);
+  const field = (fields || []).find((item) => norm(item?.name) === 'isservicedesk')
+    || (fields || []).find((item) => norm(item?.name) === 'is service desk')
+    || (fields || []).find((item) => norm(item?.name).includes('service desk'));
+  expect(field?.id, 'Expected a Jira field for the migrated ServiceDesk decision').toBeTruthy();
+
+  const editMeta = await apiJson(request, 'GET', `/rest/api/3/issue/${key}/editmeta`, undefined);
+  const meta = editMeta?.fields?.[field.id];
+  const allowed = meta?.allowedValues || [];
+  const option = allowed.find((value) => norm(value?.value ?? value?.name) === norm(choice));
+  let value;
+  if (option?.id) value = { id: String(option.id) };
+  else if (allowed.length) throw new Error(`ServiceDesk field does not offer ${choice}. Allowed: ${allowed.map((v) => v?.value ?? v?.name ?? v?.id).join(', ')}`);
+  else value = { value: choice };
+
+  await apiJson(request, 'PUT', `/rest/api/3/issue/${key}`, { fields: { [field.id]: value } });
+}
+
 async function waitFor(request, description, predicate, timeout = waitMs) {
   const started = Date.now();
   let last;
@@ -76,11 +95,9 @@ async function waitForParentDone(request, parentKey) {
 }
 
 test.describe('Ivanti orchestration - live transactional Jira QA', () => {
-  // A release-critical transaction must pass on its first attempt. Global browser retries are
-  // useful for page-navigation smoke tests, but they must not turn an orchestration race into green CI.
   test.describe.configure({ retries: 0 });
 
-  test('runs New Employee Setup through both gates, Assets and parent completion without duplicates', async ({ request }) => {
+  test('runs New Employee Setup through both gates, Assets and explicit no-ServiceDesk completion without duplicates', async ({ request }) => {
     test.setTimeout(15 * 60 * 1000);
     let parentKey;
     try {
@@ -98,6 +115,7 @@ test.describe('Ivanti orchestration - live transactional Jira QA', () => {
       });
       parentKey = created.key;
       expect(parentKey).toBeTruthy();
+      await setServiceDeskDecision(request, parentKey, 'No');
 
       const initial = await waitForSummaries(request, parentKey, ['Active Directory', 'Office 365']);
       const initialChildren = [...initial.values()];
@@ -137,7 +155,7 @@ test.describe('Ivanti orchestration - live transactional Jira QA', () => {
       await waitForParentDone(request, parentKey);
 
       const completedChildren = await children(request, parentKey);
-      expect(completedChildren.some((item) => norm(item.fields.summary).includes('pbx')), 'PBX must not be created on the default/no-ServiceDesk branch').toBeFalsy();
+      expect(completedChildren.some((item) => norm(item.fields.summary).includes('pbx')), 'PBX must not be created on the explicit no-ServiceDesk branch').toBeFalsy();
 
       const orchestration = completedChildren.filter((item) => (item.fields.labels || []).includes('ivanti-orchestration'));
       const duplicateSummaries = orchestration.reduce((acc, item) => {
