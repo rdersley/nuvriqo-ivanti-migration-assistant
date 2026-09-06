@@ -39,4 +39,8 @@ elif new_check not in qa:
     raise SystemExit('Expected source-integrity review-hold assertion not found')
 qa_path.write_text(qa, encoding='utf-8')
 
+# Jira can emit sibling subtask updates concurrently. Apply the monotonic state merge patch
+# in the same pre-QA runtime patch stage so one invocation cannot erase another's progress.
+exec(Path('.github/scripts/orchestration_state_merge_fix.py').read_text(encoding='utf-8'))
+
 print('Applied review-flagged action routing while preserving hard holds for unsupported/wait/approval nodes')
