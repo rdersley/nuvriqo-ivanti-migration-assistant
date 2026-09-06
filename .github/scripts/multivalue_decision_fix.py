@@ -71,9 +71,10 @@ qa.write_text(text)
 integrity = Path('.github/scripts/qa_source_integrity.py')
 text = integrity.read_text()
 if "multi-value decision fields supported" not in text:
-    # Locate the runtime review-hold check by its stable check name rather than its exact implementation text.
     lines = text.splitlines()
-    insert_at = next((i for i, line in enumerate(lines) if "nodes hold'" in line and line.lstrip().startswith("check(")), None)
+    insert_at = next((i for i, line in enumerate(lines) if line.lstrip().startswith("check(") and "unsupported/" in line and "nodes hold" in line), None)
+    if insert_at is None:
+        insert_at = next((i for i, line in enumerate(lines) if line.lstrip().startswith("check(") and "stop node completes parent" in line), None)
     if insert_at is None:
         raise SystemExit('Expected source-integrity runtime safety insertion point not found')
     lines.insert(insert_at + 1, "check('multi-value decision fields supported', 'Array.isArray(actual)' in engine and 'values.some' in engine)")
