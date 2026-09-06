@@ -75,6 +75,9 @@ jobs:
       - name: Hold unsupported action/wait/approval nodes for review
         run: python .github/scripts/action_review_hold_fix.py
 
+      - name: Support multi-value Ivanti decision fields
+        run: python .github/scripts/multivalue_decision_fix.py
+
       - name: Run migration regression QA
         run: python .github/scripts/qa_regression.py
 
