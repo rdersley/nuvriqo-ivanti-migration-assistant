@@ -50,7 +50,8 @@ async function setServiceDeskDecision(request, key, choice) {
   else if (allowed.length) throw new Error(`ServiceDesk field does not offer ${choice}. Allowed: ${allowed.map((v) => v?.value ?? v?.name ?? v?.id).join(', ')}`);
   else value = { value: choice };
 
-  await apiJson(request, 'PUT', `/rest/api/3/issue/${key}`, { fields: { [field.id]: value } });
+  const payloadValue = meta?.schema?.type === 'array' ? [value] : value;
+  await apiJson(request, 'PUT', `/rest/api/3/issue/${key}`, { fields: { [field.id]: payloadValue } });
 }
 
 async function waitFor(request, description, predicate, timeout = waitMs) {
