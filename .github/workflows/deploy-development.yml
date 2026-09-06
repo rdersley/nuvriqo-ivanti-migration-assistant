@@ -2,8 +2,6 @@ name: Deploy Forge development
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   contents: read
