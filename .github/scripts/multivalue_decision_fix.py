@@ -71,13 +71,13 @@ qa.write_text(text)
 integrity = Path('.github/scripts/qa_source_integrity.py')
 text = integrity.read_text()
 if "multi-value decision fields supported" not in text:
-    candidates = [
-        "check('unsupported/wait/approval nodes hold', \"node.kind==='unsupported'||node.kind==='approval'||node.kind==='wait'\" in engine)",
-        "check('unsupported/action/wait/approval nodes hold', \"node.kind==='unsupported'||node.kind==='action'||node.kind==='approval'||node.kind==='wait'\" in engine)",
-    ]
-    needle = next((candidate for candidate in candidates if candidate in text), None)
-    if not needle: raise SystemExit('Expected source-integrity runtime safety insertion point not found')
-    text = text.replace(needle, needle + "\ncheck('multi-value decision fields supported', 'Array.isArray(actual)' in engine and 'values.some' in engine)", 1)
+    # Locate the runtime review-hold check by its stable check name rather than its exact implementation text.
+    lines = text.splitlines()
+    insert_at = next((i for i, line in enumerate(lines) if "nodes hold'" in line and line.lstrip().startswith("check(")), None)
+    if insert_at is None:
+        raise SystemExit('Expected source-integrity runtime safety insertion point not found')
+    lines.insert(insert_at + 1, "check('multi-value decision fields supported', 'Array.isArray(actual)' in engine and 'values.some' in engine)")
+    text = '\n'.join(lines) + ('\n' if text.endswith('\n') else '')
 if "PBX branch live QA retained" not in text:
     browser_tx = "browser_transaction = read('qa/browser/orchestration-transaction.spec.mjs')\n"
     anchor = "browser_qa = read('qa/browser/ivanti-live.spec.mjs')\n"
