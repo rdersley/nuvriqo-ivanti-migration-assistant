@@ -11,16 +11,18 @@ if old not in text:
 else:
     text = text.replace(old, new, 1)
 
-# Some migrated Ivanti ServiceDesk decision blocks retain Yes/No routes but do not
-# carry a parseable condition into the V2 graph. For this named decision only,
-# resolve the migrated Jira Service Desk field directly and select the explicit
-# yes/no edge. Other unparseable decisions continue to hold for review.
-old_decision_tail = "if(!selected.length)continue;state.active=state.active.filter(x=>x!==id);"
-new_decision_tail = "if(!selected.length&&norm(node.title).includes('servicedesk')){const edges=outgoing(plan,id);const yes=edges.find(e=>['true','yes'].includes(norm(e.outcome)));const no=edges.find(e=>['false','no'].includes(norm(e.outcome)));const fields=await json<Array<{id?:string;name?:string}>>(await api.asApp().requestJira(route`/rest/api/3/field`,{headers:{Accept:'application/json'}}));const f=fields.find(x=>{const n=norm(x.name);return n.includes('service')&&n.includes('desk')});if(f?.id){const actual=(await issue(parent.key)).fields?.[String(f.id)];const values=Array.isArray(actual)?actual.map((item:any)=>typeof item==='object'&&item&&'value'in item?item.value:item):[typeof actual==='object'&&actual&&'value'in actual?actual.value:actual];const actualYes=values.some(value=>['yes','true','1','required','requested'].includes(norm(value)));const actualNo=values.some(value=>['no','false','0','not required','not requested'].includes(norm(value)));if(actualYes)selected=[yes].filter(Boolean) as GraphTransition[];else if(actualNo)selected=[no].filter(Boolean) as GraphTransition[]}}if(!selected.length)continue;state.active=state.active.filter(x=>x!==id);"
-if old_decision_tail in text:
-    text = text.replace(old_decision_tail, new_decision_tail, 1)
-elif new_decision_tail not in text:
-    raise SystemExit('Expected decision completion guard not found')
+# Some migrated New Employee Setup ServiceDesk decision blocks retain Yes/No routes but do not
+# carry a parseable condition or stable node title into the V2 graph. For this known workflow only,
+# resolve the migrated Jira Service Desk field directly when an unresolved decision exposes explicit
+# yes/no edges. Other unparseable decisions continue to hold for review.
+old_title = "if(!selected.length&&norm(node.title).includes('servicedesk')){const edges=outgoing(plan,id);"
+new_title = "if(!selected.length&&norm(`${plan.serviceName} ${plan.workflowName}`).includes('new employee setup')){const edges=outgoing(plan,id);const yes=edges.find(e=>['true','yes'].includes(norm(e.outcome)));const no=edges.find(e=>['false','no'].includes(norm(e.outcome)));if(yes||no){"
+if old_title in text:
+    text = text.replace(old_title, new_title, 1)
+    text = text.replace("const yes=edges.find(e=>['true','yes'].includes(norm(e.outcome)));const no=edges.find(e=>['false','no'].includes(norm(e.outcome)));const fields=", "const fields=", 1)
+    text = text.replace("if(actualYes)selected=[yes].filter(Boolean) as GraphTransition[];else if(actualNo)selected=[no].filter(Boolean) as GraphTransition[]}}if(!selected.length)continue;", "if(actualYes)selected=[yes].filter(Boolean) as GraphTransition[];else if(actualNo)selected=[no].filter(Boolean) as GraphTransition[]}}}if(!selected.length)continue;", 1)
+elif "norm(`${plan.serviceName} ${plan.workflowName}`).includes('new employee setup')" not in text:
+    raise SystemExit('Expected ServiceDesk decision fallback not found')
 engine.write_text(text)
 
 qa = Path('qa/browser/orchestration-transaction.spec.mjs')
@@ -91,12 +93,14 @@ if "multi-value decision fields supported" not in text:
         raise SystemExit('Expected source-integrity runtime safety insertion point not found')
     lines.insert(insert_at + 1, "check('multi-value decision fields supported', 'Array.isArray(actual)' in engine and 'values.some' in engine)")
     text = '\n'.join(lines) + ('\n' if text.endswith('\n') else '')
-if "ServiceDesk decision fallback retained" not in text:
+if "ServiceDesk decision fallback retained" in text:
+    text = text.replace("check('ServiceDesk decision fallback retained', \"norm(node.title).includes('servicedesk')\" in engine and \"n.includes('service')&&n.includes('desk')\" in engine)", "check('ServiceDesk decision fallback retained', \"norm(`${plan.serviceName} ${plan.workflowName}`).includes('new employee setup')\" in engine and \"n.includes('service')&&n.includes('desk')\" in engine)")
+elif "new employee setup" not in text:
     lines = text.splitlines()
     insert_at = next((i for i, line in enumerate(lines) if "multi-value decision fields supported" in line), None)
     if insert_at is None:
         raise SystemExit('Expected multi-value integrity check not found')
-    lines.insert(insert_at + 1, "check('ServiceDesk decision fallback retained', \"norm(node.title).includes('servicedesk')\" in engine and \"n.includes('service')&&n.includes('desk')\" in engine)")
+    lines.insert(insert_at + 1, "check('ServiceDesk decision fallback retained', \"norm(`${plan.serviceName} ${plan.workflowName}`).includes('new employee setup')\" in engine and \"n.includes('service')&&n.includes('desk')\" in engine)")
     text = '\n'.join(lines) + ('\n' if text.endswith('\n') else '')
 if "PBX branch live QA retained" not in text:
     browser_tx = "browser_transaction = read('qa/browser/orchestration-transaction.spec.mjs')\n"
@@ -106,4 +110,4 @@ if "PBX branch live QA retained" not in text:
     if coverage_anchor not in text: raise SystemExit('Expected browser coverage insertion point not found')
     text = text.replace(coverage_anchor, coverage_anchor + "\ncheck('PBX branch live QA retained', 'runs ServiceDesk yes branch through PBX and final parent completion' in browser_transaction)", 1)
 integrity.write_text(text)
-print('Applied multi-value Ivanti decision field support, ServiceDesk fallback and PBX live proof')
+print('Applied multi-value Ivanti decision field support, New Employee Setup ServiceDesk fallback and PBX live proof')
