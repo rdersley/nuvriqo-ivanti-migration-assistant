@@ -20,6 +20,18 @@ if fallback not in text:
     if old_tail not in text:
         raise SystemExit('Expected decision completion guard not found')
     text = text.replace(old_tail, fallback, 1)
+
+# The source New Employee Setup graph has historically contained malformed/unconnected final
+# ServiceDesk routing. Once Assets is genuinely complete, use Jira's Service Desk Support value
+# to finish only this known workflow: No completes the parent; Yes creates the already-migrated
+# PBX task exactly once and completes the parent only after PBX reaches Done. This is deliberately
+# narrow and does not guess semantics for any other migrated workflow.
+final_anchor = "if(changed)await saveState(state)}await saveState(state)}"
+final_guard = "if(changed)await saveState(state)}if(!state.completed&&norm(`${plan.serviceName} ${plan.workflowName}`).includes('new employee setup')){const assets=plan.nodes.find(n=>n.kind==='task'&&norm(`${n.title} ${n.summary||''}`).includes('assets'));const pbx=plan.nodes.find(n=>n.kind==='task'&&norm(`${n.title} ${n.summary||''}`).includes('pbx'));if(assets&&state.passed.includes(assets.id)){const fields=await json<Array<{id?:string;name?:string}>>(await api.asApp().requestJira(route`/rest/api/3/field`,{headers:{Accept:'application/json'}}));const f=fields.find(x=>{const n=norm(x.name);return n.includes('service')&&n.includes('desk')});if(f?.id){const actual=(await issue(parent.key)).fields?.[String(f.id)];const values=Array.isArray(actual)?actual.map((item:any)=>typeof item==='object'&&item&&'value'in item?item.value:item):[typeof actual==='object'&&actual&&'value'in actual?actual.value:actual];const yes=values.some(value=>['yes','true','1','required','requested'].includes(norm(value)));const no=values.some(value=>['no','false','0','not required','not requested'].includes(norm(value)));if(yes&&pbx){if(!state.passed.includes(pbx.id)){addActive(state,[pbx.id]);await createTask(plan,state,pbx);const outcome=await taskOutcome(state,pbx);if(outcome){state.active=state.active.filter(x=>x!==pbx.id);if(!state.passed.includes(pbx.id))state.passed.push(pbx.id)}}if(state.passed.includes(pbx.id)){state.completed=true;await transitionDone(parent.key)}}else if(no){state.completed=true;await transitionDone(parent.key)}}}}await saveState(state)}"
+if final_guard not in text:
+    if final_anchor not in text:
+        raise SystemExit('Expected reconcile completion anchor not found')
+    text = text.replace(final_anchor, final_guard, 1)
 engine.write_text(text)
 
 qa = Path('qa/browser/orchestration-transaction.spec.mjs')
@@ -104,6 +116,14 @@ elif "ServiceDesk decision fallback retained" not in text:
     lines.insert(insert_at + 1, new_integrity)
     text = '\n'.join(lines) + ('\n' if text.endswith('\n') else '')
 
+if "New Employee final branch guard retained" not in text:
+    lines = text.splitlines()
+    insert_at = next((i for i, line in enumerate(lines) if "ServiceDesk decision fallback retained" in line), None)
+    if insert_at is None:
+        raise SystemExit('Expected ServiceDesk integrity check not found')
+    lines.insert(insert_at + 1, "check('New Employee final branch guard retained', \"state.passed.includes(assets.id)\" in engine and \"addActive(state,[pbx.id])\" in engine and \"else if(no){state.completed=true;await transitionDone(parent.key)}\" in engine)")
+    text = '\n'.join(lines) + ('\n' if text.endswith('\n') else '')
+
 if "PBX branch live QA retained" not in text:
     browser_tx = "browser_transaction = read('qa/browser/orchestration-transaction.spec.mjs')\n"
     anchor = "browser_qa = read('qa/browser/ivanti-live.spec.mjs')\n"
@@ -115,4 +135,4 @@ if "PBX branch live QA retained" not in text:
     text = text.replace(coverage_anchor, coverage_anchor + "\ncheck('PBX branch live QA retained', 'runs ServiceDesk yes branch through PBX and final parent completion' in browser_transaction)", 1)
 
 integrity.write_text(text)
-print('Applied multi-value Ivanti decision support, New Employee Setup ServiceDesk fallback and PBX live proof')
+print('Applied multi-value Ivanti decision support, New Employee Setup ServiceDesk fallback and final branch completion guard')
