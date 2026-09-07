@@ -43,4 +43,19 @@ qa_path.write_text(qa, encoding='utf-8')
 # in the same pre-QA runtime patch stage so one invocation cannot erase another's progress.
 exec(Path('.github/scripts/orchestration_state_merge_fix.py').read_text(encoding='utf-8'))
 
-print('Applied review-flagged action routing while preserving hard holds for unsupported/wait/approval nodes')
+# CI #189 exposed two Jira fields containing "ServiceDesk": the migrated decision field
+# "Service Desk Support" and an unrelated "Is user in ServiceDesk" field. The final-branch
+# fallback previously selected the first broad name match, so it could read the unrelated field
+# and never see the explicit Yes/No value used by the transaction QA. Tighten the selector in the
+# next patch stage before it runs, while retaining a conservative fallback for older estates.
+multi_path = Path('.github/scripts/multivalue_decision_fix.py')
+multi = multi_path.read_text(encoding='utf-8')
+old_selector = "const f=fields.find(x=>{const n=norm(x.name);return n.includes('service')&&n.includes('desk')});"
+new_selector = "const f=fields.find(x=>norm(x.name)==='service desk support')||fields.find(x=>norm(x.name)==='is service desk')||fields.find(x=>norm(x.name)==='isservicedesk')||fields.find(x=>{const n=norm(x.name);return n.includes('service')&&n.includes('desk')});"
+if old_selector in multi:
+    multi = multi.replace(old_selector, new_selector)
+elif new_selector not in multi:
+    raise SystemExit('Expected ServiceDesk field selector not found')
+multi_path.write_text(multi, encoding='utf-8')
+
+print('Applied review-flagged action routing, concurrency safety and exact Service Desk Support selection')
