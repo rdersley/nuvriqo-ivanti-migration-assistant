@@ -69,11 +69,14 @@ if old_final_probe in multi:
 elif new_final_probe not in multi:
     raise SystemExit('Expected New Employee final ServiceDesk value probe not found')
 
-old_integrity = "check('New Employee final branch guard retained', \"state.passed.includes(assets.id)\" in engine and \"addActive(state,[pbx.id])\" in engine and \"else if(no){state.completed=true;await transitionDone(parent.key)}\" in engine)"
-new_integrity = "check('New Employee final branch guard retained', \"state.passed.includes(assets.id)\" in engine and \"fieldValue(parent,'Service Desk Support equals Yes')\" in engine and \"fieldValue(parent,'Service Desk Support equals No')\" in engine and \"addActive(state,[pbx.id])\" in engine and \"else if(no){state.completed=true;await transitionDone(parent.key)}\" in engine)"
-if old_integrity in multi:
-    multi = multi.replace(old_integrity, new_integrity, 1)
-elif new_integrity not in multi:
+# multivalue_decision_fix.py stores this QA assertion inside a Python string literal, so the
+# embedded double quotes are escaped in the source file. Match that representation explicitly
+# instead of looking only for the rendered qa_source_integrity.py line.
+old_integrity_source = "    lines.insert(insert_at + 1, \"check('New Employee final branch guard retained', \\\"state.passed.includes(assets.id)\\\" in engine and \\\"addActive(state,[pbx.id])\\\" in engine and \\\"else if(no){state.completed=true;await transitionDone(parent.key)}\\\" in engine)\")"
+new_integrity_source = "    lines.insert(insert_at + 1, \"check('New Employee final branch guard retained', \\\"state.passed.includes(assets.id)\\\" in engine and \\\"fieldValue(parent,'Service Desk Support equals Yes')\\\" in engine and \\\"fieldValue(parent,'Service Desk Support equals No')\\\" in engine and \\\"addActive(state,[pbx.id])\\\" in engine and \\\"else if(no){state.completed=true;await transitionDone(parent.key)}\\\" in engine)\")"
+if old_integrity_source in multi:
+    multi = multi.replace(old_integrity_source, new_integrity_source, 1)
+elif new_integrity_source not in multi:
     raise SystemExit('Expected New Employee final branch integrity assertion not found')
 
 multi_path.write_text(multi, encoding='utf-8')
