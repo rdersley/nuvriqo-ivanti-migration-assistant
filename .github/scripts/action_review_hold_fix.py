@@ -56,6 +56,26 @@ if old_selector in multi:
     multi = multi.replace(old_selector, new_selector)
 elif new_selector not in multi:
     raise SystemExit('Expected ServiceDesk field selector not found')
+
+# CI #190 proved the No branch end-to-end but the Yes branch still stalled before PBX even after
+# selecting the exact field by name. Do not maintain a second, subtly different Yes/No reader in
+# the final completion guard. Reuse fieldValue(), whose exact-name lookup and multi-value handling
+# are already exercised by the decision engine. This keeps the final safety path consistent with
+# the normal graph semantics and removes the last duplicated field-decoding path.
+old_final_probe = "const fields=await json<Array<{id?:string;name?:string}>>(await api.asApp().requestJira(route`/rest/api/3/field`,{headers:{Accept:'application/json'}}));const f=fields.find(x=>norm(x.name)==='service desk support')||fields.find(x=>norm(x.name)==='is service desk')||fields.find(x=>norm(x.name)==='isservicedesk')||fields.find(x=>{const n=norm(x.name);return n.includes('service')&&n.includes('desk')});if(f?.id){const actual=(await issue(parent.key)).fields?.[String(f.id)];const values=Array.isArray(actual)?actual.map((item:any)=>typeof item==='object'&&item&&'value'in item?item.value:item):[typeof actual==='object'&&actual&&'value'in actual?actual.value:actual];const yes=values.some(value=>['yes','true','1','required','requested'].includes(norm(value)));const no=values.some(value=>['no','false','0','not required','not requested'].includes(norm(value)));"
+new_final_probe = "const yes=await fieldValue(parent,'Service Desk Support equals Yes');const no=await fieldValue(parent,'Service Desk Support equals No');if(yes!==undefined||no!==undefined){"
+if old_final_probe in multi:
+    multi = multi.replace(old_final_probe, new_final_probe, 1)
+elif new_final_probe not in multi:
+    raise SystemExit('Expected New Employee final ServiceDesk value probe not found')
+
+old_integrity = "check('New Employee final branch guard retained', \"state.passed.includes(assets.id)\" in engine and \"addActive(state,[pbx.id])\" in engine and \"else if(no){state.completed=true;await transitionDone(parent.key)}\" in engine)"
+new_integrity = "check('New Employee final branch guard retained', \"state.passed.includes(assets.id)\" in engine and \"fieldValue(parent,'Service Desk Support equals Yes')\" in engine and \"fieldValue(parent,'Service Desk Support equals No')\" in engine and \"addActive(state,[pbx.id])\" in engine and \"else if(no){state.completed=true;await transitionDone(parent.key)}\" in engine)"
+if old_integrity in multi:
+    multi = multi.replace(old_integrity, new_integrity, 1)
+elif new_integrity not in multi:
+    raise SystemExit('Expected New Employee final branch integrity assertion not found')
+
 multi_path.write_text(multi, encoding='utf-8')
 
-print('Applied review-flagged action routing, concurrency safety and exact Service Desk Support selection')
+print('Applied review-flagged action routing, concurrency safety and unified Service Desk Support decision reading')
