@@ -1,0 +1,37 @@
+name: Production Migration Dry Run
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - 'migration-input/**'
+      - '.github/scripts/production_migration_dry_run.py'
+      - '.github/workflows/production-migration-dry-run.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyse-rox:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run non-destructive ROX analysis
+        run: python .github/scripts/production_migration_dry_run.py
+
+      - name: Upload migration plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-migration-dry-run
+          path: migration-output/
+          if-no-files-found: error
+          retention-days: 14
