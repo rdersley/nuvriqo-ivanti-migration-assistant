@@ -83,4 +83,18 @@ jobs:
         run: forge deploy --environment production --non-interactive --approve MAJOR_VERSION_RULE
 
       - name: Install or upgrade production on Retail in Motion
-        run: forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive
+        run: |
+          set +e
+          output=$(forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive 2>&1)
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -eq 0 ]; then
+            exit 0
+          fi
+          if printf '%s\n' "$output" | grep -qi "Could not find an installation for the provided Atlassian app"; then
+            echo "No production installation exists yet; performing first production install."
+            forge install --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive
+          else
+            exit "$status"
+          fi
