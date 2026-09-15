@@ -1,0 +1,1686 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Offerings TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Offering.OfferingDefinitionZipData">
+ <RequestOffering TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Offering.OfferingDefinitionZipData" FRS_ID="2FE21EBA9AA7426CB2DA101B9FA58778">
+  <ServiceRequestTemplate TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplate.ServiceReqTemplateData" FRS_ID="2FE21EBA9AA7426CB2DA101B9FA58778">
+   <RecId>2FE21EBA9AA7426CB2DA101B9FA58778</RecId>
+   <CreatedBy>alexandru.mateescu</CreatedBy>
+   <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+   <LastModBy>leandro.crixi</LastModBy>
+   <LastModDateTime TypeCode="DateTime">2021-11-08T15:09:25.0000000Z</LastModDateTime>
+   <Name>UAT Vector System Decommissioning</Name>
+   <Item>Access</Item>
+   <Description>Decommission unused or retired Vector Systems</Description>
+   <IconName>9C09A144E6564EE9A60D057F48618136</IconName>
+   <Service_RecId>E4A4028448D149939B3A23FD9C7EBC56</Service_RecId>
+   <Service_Category>CI.Service</Service_Category>
+   <Price TypeCode="Decimal">0.0000</Price>
+   <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+   <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+   <DeliveryCommitment TypeCode="Int32">20160</DeliveryCommitment>
+   <ColumnsCount TypeCode="Int32">1</ColumnsCount>
+   <Status>Published (Automatic)</Status>
+   <VersionInformation></VersionInformation>
+   <IsClean TypeCode="Boolean">False</IsClean>
+   <ConfigOptions>{"configData":{"hidePrice":true,"enableCancel":false,"enableEditing":false,"hideDeliveryTime":false,"usePriceList":false,"financialTransaction":false,"hasPriceData":false,"alignRowsInColumns":false,"showColumnNumber":false}}</ConfigOptions>
+   <LayoutDefinition>null</LayoutDefinition>
+   <LayoutName></LayoutName>
+   <IsFormOffering TypeCode="Boolean">False</IsFormOffering>
+   <IsAllowAnonymousSubmit TypeCode="Boolean">False</IsAllowAnonymousSubmit>
+   <IsExternal TypeCode="Boolean">False</IsExternal>
+   <Categories TypeCode="Object" IsList="True" ElementType="String">
+    <Element>F97D40643D974FBCB174FF99774C362D</Element>
+   </Categories>
+   <Parameters TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam">
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="74748D3163954482A4D9A3681866C368">
+     <RecId>74748D3163954482A4D9A3681866C368</RecId>
+     <CreatedBy>alexandru.mateescu</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+     <LastModBy>alexandru.mateescu</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:47.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(false)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>ICAO Code</DisplayName>
+     <Name>IcaoCode</Name>
+     <SequenceNumber TypeCode="Int32">5</SequenceNumber>
+     <DisplayType>text</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>ICAO Code</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>ICAO Code</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="35F3852F2B0B48C186704B00A96C535D">
+     <RecId>35F3852F2B0B48C186704B00A96C535D</RecId>
+     <CreatedBy>alexandru.mateescu</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+     <LastModBy>alexandru.mateescu</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:47.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>UAT Vector System</DisplayName>
+     <Name>UATVectorSystem</Name>
+     <SequenceNumber TypeCode="Int32">6</SequenceNumber>
+     <DisplayType>text</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>UAT Vector System</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>UAT Vector System</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="EA76A48C813F41C287D9844B89590CD1">
+     <RecId>EA76A48C813F41C287D9844B89590CD1</RecId>
+     <CreatedBy>alexandru.mateescu</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+     <LastModBy>alexandru.mateescu</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:47.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(false)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>UAT Vector System Decommissioning  request</DisplayName>
+     <Name>VectorDNSReq</Name>
+     <SequenceNumber TypeCode="Int32">1</SequenceNumber>
+     <DisplayType>category</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"generateAutoText":false,"categoryClasses":{"x-formitem-category-underline":"x-formitem-category-underline"},"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value>Systemzugriff</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>System Access</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value>Acceso al sistema</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value>Accès système</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value>Accesso di sistema</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value>システムアクセス</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value>Systeemtoegang</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value>Dostęp do systemu</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value>Acesso ao Sistema</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value>Доступ к системе</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value>系统访问</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value>系統存取</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>UAT Vector System Decommissioning  request</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="674ABE5DD109459596BAFC279B371609">
+     <RecId>674ABE5DD109459596BAFC279B371609</RecId>
+     <CreatedBy>alexandru.mateescu</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+     <LastModBy>alexandru.mateescu</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:47.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description>When do you need access (minimum 2 day notice)</Description>
+     <DisplayName>Date required</DisplayName>
+     <Name>DateRequired</Name>
+     <SequenceNumber TypeCode="Int32">3</SequenceNumber>
+     <DisplayType>date</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"dateValidation":{"lowerBoundFld":"__CURRENT_DATE__","lowerBoundAdjustUnit":"DAY","lowerBoundAdjustOperator":"+","lowerBoundAdjustNum":2,"expr":"$(DateRequired&gt;=CurrentDate()+2)"},"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value>Wann benötigen Sie Zugriff (Benachrichtigung mindestens drei Tage im Voraus)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>When do you need access (minimum 2 day notice)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value>¿Cuándo necesita acceso (antelación mínima de 2 días)?</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value>Date à laquelle l'accès doit vous être accordé (notification 2 jours à l'avance au minimum)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value>Quando è richiesto l'accesso (avviso minimo di 2 giorni)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value>アクセスが必要な期日(最低2日前通知)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value>Wanneer hebt u toegang nodig (minimaal 2 dagen vooraf)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value>Kiedy potrzebujesz uzyskać dostęp (z wyprzedzeniem co najmniej dwóch dni)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value>Quando você precisa de acesso? (notificação com um mínimo de dois dias de antecedência)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value>Когда вам нужен доступ (сообщить не позже, чем за 2 дня)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value>您什么时候需要访问(至少 2 天通知)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value>何時需要存取 (最少需 2 天前通知)</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>When do you need access (minimum 2 day notice)</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value>Benötigt am</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Date Required</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value>Fecha requerida</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value>Date requise</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value>Data richiesta</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value>日付</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value>Datum Verplicht</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value>Data jest wymagana</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value>Data Necessária</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value>Не указана дата</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value>需要日期</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value>必須有日期</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Date required</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="96A758718673431F871E0F6F313CFF09">
+     <RecId>96A758718673431F871E0F6F313CFF09</RecId>
+     <CreatedBy>alexandru.mateescu</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+     <LastModBy>alexandru.mateescu</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:47.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(false)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>Vector System Name</DisplayName>
+     <Name>NewVectorSystem</Name>
+     <SequenceNumber TypeCode="Int32">4</SequenceNumber>
+     <DisplayType>text</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Vector System Name</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Vector System Name</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="AD714C99BF6740E8AEECE63D97F17F6D">
+     <RecId>AD714C99BF6740E8AEECE63D97F17F6D</RecId>
+     <CreatedBy>alexandru.mateescu</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+     <LastModBy>alexandru.mateescu</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:47.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>Requested by</DisplayName>
+     <Name>requested_name</Name>
+     <SequenceNumber TypeCode="Int32">2</SequenceNumber>
+     <DisplayType>text</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression>$(CurrentUserField("DisplayName"))</ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"expr","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Requested by</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>$(CurrentUserField("DisplayName"))</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+   </Parameters>
+   <AccessItems TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessItem">
+    <AccessItem TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessItem" FRS_ID="C477F1A13D1B4DB4A45A547F18BCACA2">
+     <RecId>C477F1A13D1B4DB4A45A547F18BCACA2</RecId>
+     <CreatedBy>alexandru.mateescu</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.0000000Z</CreatedDateTime>
+     <LastModBy>alexandru.mateescu</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:47.0000000Z</LastModDateTime>
+     <CanSubmit TypeCode="Boolean">True</CanSubmit>
+     <CanEditRequest TypeCode="Boolean">True</CanEditRequest>
+     <CanDeleteRequest TypeCode="Boolean">True</CanDeleteRequest>
+     <CanEdit TypeCode="Boolean">True</CanEdit>
+     <CanDelete TypeCode="Boolean">True</CanDelete>
+     <CanCopy TypeCode="Boolean">True</CanCopy>
+     <RelatedObjects TypeCode="Object" IsMap="True" MapKeyType="String">
+      <Name TypeCode="Object" Key="Frs_CompositeContract_Entity#.EntityAccess">
+       <RelatedObject TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessToRelatedObject">
+        <IsIncludeSubtree TypeCode="Boolean">True</IsIncludeSubtree>
+        <Relationship>Frs_CompositeContract_Entity#.EntityAccess</Relationship>
+        <Items TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessValue">
+         <AccessValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessValue">
+          <RecId>86C05FC909B64C459EF50D294516E442</RecId>
+          <DisplayName>RIM</DisplayName>
+         </AccessValue>
+        </Items>
+       </RelatedObject>
+      </Name>
+      <Name TypeCode="Object" Key="Location#.Location">
+       <RelatedObject TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessToRelatedObject">
+        <IsIncludeSubtree TypeCode="Boolean">True</IsIncludeSubtree>
+        <Relationship>Location#.Location</Relationship>
+        <Items TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessValue">
+         <AccessValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessValue">
+          <RecId>7160555EEB234EEEB774827F541D700C</RecId>
+          <DisplayName>Default</DisplayName>
+         </AccessValue>
+        </Items>
+       </RelatedObject>
+      </Name>
+     </RelatedObjects>
+    </AccessItem>
+   </AccessItems>
+   <RelatedItems TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplate.RelatedItem" />
+   <DeliveryItems TypeCode="Object" IsList="True" ElementType="DataLayer.Financial.PriceListItem" />
+   <FulfillmentAction TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Fulfillment.FulfillmentWorkflowPlan" FRS_ID="B8011C4B75A2485CB64621D1C717E236">
+    <RecId>B8011C4B75A2485CB64621D1C717E236</RecId>
+    <CreatedBy>alexandru.mateescu</CreatedBy>
+    <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:10.0000000Z</CreatedDateTime>
+    <LastModBy>alexandru.mateescu</LastModBy>
+    <LastModDateTime TypeCode="DateTime">2021-10-13T08:05:13.0000000Z</LastModDateTime>
+    <FulfillmentPlanType>Workflow</FulfillmentPlanType>
+    <WorkflowId>3f2bdbba518d43eb99442b5d3e16f7c9</WorkflowId>
+   </FulfillmentAction>
+   <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Description</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value>Zugriff auf Serveranwendungen beantragen</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value>Request access to server applications</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value>Solicitar acceso a aplicaciones de servidor</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value>Demander l'accès à des applications de serveur</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value>Richiedere l'accesso alle applicazioni server</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value>サーバ アプリケーションへのアクセスを申請</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value>Vraag toegang tot server applicaties aan</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value>Wnioskuj o dostęp do aplikacji serwera</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value>Solicitar acesso a aplicativos do servidor</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value>Запросить доступ к приложениям сервера</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value>请求访问服务器应用程序</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value>要求存取伺服器應用程式</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value>Decommission unused or retired Vector Systems</Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Name</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value>UAT Vector System Decommissioning</Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Item</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value>Access</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value>Access</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value>Acceso</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value>Accès</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value>Accesso</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value>アクセス</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value>Toegang</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value>Dostęp</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value>Access</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value>Доступ</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value>访问</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value>存取</Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value>Access</Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+   </FieldTranslations>
+  </ServiceRequestTemplate>
+  <Attachments TypeCode="Object" IsList="True" ElementType="HEAT.Attachments.Models.AttachmentRecordBinary">
+   <Attachment TypeCode="Object" CLR_Type="HEAT.Attachments.Models.AttachmentRecordBinary" FRS_ID="9C09A144E6564EE9A60D057F48618136">
+    <RecId>9C09A144E6564EE9A60D057F48618136</RecId>
+    <CreatedBy>alexandru.mateescu</CreatedBy>
+    <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:10.0000000Z</CreatedDateTime>
+    <LastModBy>alexandru.mateescu</LastModBy>
+    <LastModDateTime TypeCode="DateTime">2021-10-13T08:03:10.0000000Z</LastModDateTime>
+    <Host>10.12.10.20</Host>
+    <Path></Path>
+    <Description></Description>
+    <Name>vector_logos_.PNG</Name>
+    <Uploaded>True</Uploaded>
+    <Content CLR_Type="byte[]" Encode="base64">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</Content>
+   </Attachment>
+   <Attachment TypeCode="Object" CLR_Type="HEAT.Attachments.Models.AttachmentRecordBinary" FRS_ID="6C7A9572B1094C3195560B8F2ABE2528">
+    <RecId>6C7A9572B1094C3195560B8F2ABE2528</RecId>
+    <CreatedBy>alexandru.mateescu</CreatedBy>
+    <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:10.0000000Z</CreatedDateTime>
+    <LastModBy>alexandru.mateescu</LastModBy>
+    <LastModDateTime TypeCode="DateTime">2021-10-13T08:03:10.0000000Z</LastModDateTime>
+    <Host>127.0.0.1</Host>
+    <Path></Path>
+    <Description>Image for offering</Description>
+    <Name>SECURITY_1.png</Name>
+    <Uploaded>True</Uploaded>
+    <Content CLR_Type="byte[]" Encode="base64">/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAwADADASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+s3W
+9Yi0TT/tMkbyyO4ihhQcySHOFz26Hn27nin61qa6PpE98YWmMe0LGpALMzBVGe3JHP8AOuH1Kx1Z
+sa3quroj2ysyjyx5cQPUKuDn0yeTge1KrSqyoylSaT6X2/JlQlTUl7TYztQl+2XU02rw3mqzw/PP
+HbbvIswR0GDxwvPPbnnNdB4a1F7LVrSwjuZrjTL+EvaeYdzQsgyVyTwu0dOcHHTknzRdU8QCD7FH
+qlxZWvmGbZBiOUk93dcMTz0JPb0FdBJdajomn6FLpqxS3tnBJMEuASHVwQAcEHOCe/UV8cubC4yn
+JVXJt+9vZ6dDojmlDEUqlk+WHX1vbTpqex0VT0rU7bWdKtdRtG3QXEYkXkEjPVTgkZByCM8EEVcr
+7JO+pyJ3V0YXjFJW8K3rQpueLZMRkD5UdXY8+gUmuZ8TXkdxZWAY5tpLqAy88bdwIz7bttegyRxz
+RPFKivG6lWRhkMD1BHcV5dqGjXFjazaRc3sF1bwhIgfIYMwYZwfmwCPbPUc54Dq1KUcPKNSXL9/V
+eXoDoTrXjBa2ORjDvd+dLGZMSFpI/wC9146jjOM89K32vGmkn1G7XyxjIjXnaoGAo9T/ADJpP+EV
+1pJgtrNBeDyjKfMVllwCoI44Y/MPQn3NXtO01YdRT7fKtxtAeDYu2P2YDJJP1PHoDXx9TDpTU38m
+efh8uxzg8O1aF7vY6/4e2clj4E0qGVoy5RpCEOQu92fafcbsEdiCK6aue0S9kglj01rX92TKyzI2
+QPmLcjHA+bGcnnHrXQ19RhqkalJOJ6k6PsXyLbp6BXB6463GqNsBG+5YHPfaFT+amu8rkNR094tS
+SadCq+c/lsoLCQMxYDA5Dc4x3/CuTM1J00ltc6sFJRm31Lmhxv8A2zdSKgaIRLG0hH3GGMKD7g5I
+HoKztc0hraUiBTsyZbcgABTyWj4/MfiOa39FsZ7Q3Us+UE7grCWztxxk44yfb0HNXL6zW+tTEWKM
+CGSQDJRh0I/z0zUxwjnhVFrXVj+scla6emhxkE5ubIypPJBLEjfNG5Ugdxx7gfpXcW5la2iadQsx
+QF1HQNjkfnWamgwjb5k0j8guoRFVyDnkBenHTNa1aYHDzo3c+pniasZ2UT//2Q==</Content>
+   </Attachment>
+  </Attachments>
+  <WorkflowDefinition>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;WorkflowVersionInformation&gt;&lt;WorkflowDefinition&gt;&lt;Name&gt;UAT Vector System Decommissioning Request form&lt;/Name&gt;&lt;Details&gt;&amp;lt;?xml version='1.0' encoding='utf-16le' ?&amp;gt;&amp;lt;scenario xmlns='http://frontrange.com/saas/workflow/Bpe_workflow.xsd'&amp;gt;&amp;lt;id&amp;gt;81278F1D9E344C818AACF2989DE4D065&amp;lt;/id&amp;gt;&amp;lt;title&amp;gt;new scenario&amp;lt;/title&amp;gt;&amp;lt;context&amp;gt;&amp;lt;category&amp;gt;businessObjectType&amp;lt;/category&amp;gt;&amp;lt;value&amp;gt;ServiceReq&amp;lt;/value&amp;gt;&amp;lt;/context&amp;gt;&amp;lt;scenarioProperties/&amp;gt;&amp;lt;blocks&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;9E23E652FCDE41008BD2D875B0C6E82E&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;stop&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Vector System DNS record&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;1620&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;540&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;description&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;descriptionText&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits/&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;613EBA961DD4493F8D2517E9B6E1B520&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;start&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Vector System DNS record&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;68&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;12&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;description&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Vector System DNS record&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;descriptionText&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;ok&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5931-ff2c-4bf0-a940-4398f1a81da2&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;85&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;-53&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;7F039376A4FD43729793FAFB3E24032C&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;6E79C5CD33114C04BC71E308E37808B5&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;7D217F1ADBE14F1A8E812276DBD08923&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;invokeworkflow&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Standard Service Request Workflow Completion&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;1412&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;380&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;object_prop&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Current Context BO&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;contextobject&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;contextobject&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlanAssociatedServiceReq&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;relationship&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;workflow_prop&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;389aece94456489db4e14ddfa6606fd8&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;workflow&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;yes&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;waitforcompletion&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;started&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5931-ff2c-4bf0-a940-4398f1a81da2&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;FF32450E65EA4E33A570F1F589051EFC&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9E23E652FCDE41008BD2D875B0C6E82E&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5931-ff2c-4bf0-a940-4398f1a81db6&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;BD9F07CE9C6B4235AB82B332F61BF319&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9E23E652FCDE41008BD2D875B0C6E82E&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;failed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5931-ff2c-4bf0-a940-4398f1a81db8&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;4EE6B1CBB3734D079990BF75DDF89324&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9E23E652FCDE41008BD2D875B0C6E82E&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;6E79C5CD33114C04BC71E308E37808B5&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;UAT - Nagios AWS - Remove from monitoring&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;296&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;28&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Nagios AWS - Remove $(UATVectorSystem) system from monitoring&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Remove Vector Web endpoint monitoring  for $(UATVectorSystem)
+Remove monitoring of AppPools, web site and services on the webservers for $(UATVectorSystem)
+&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;First Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;_unchecked&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;498020B8A03C45D988F0AB26F0D7FF9F&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;1E33315CE91F4DC3AD89F37BF880D98F&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;048A04174A80437281293B1B25A6FA83&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Remove from UAT webservers&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;540&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;348&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Remove $(UATVectorSystem) from UAT webservers&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;delete websites/app/pools for $(UATVectorSystem) 
+delete all site folders for $(UATVectorSystem) 
+delete any $(UATVectorSystem)  folders in Octopus folder
+uninstall any $(UATVectorSystem)  Windows services
+delete any $(UATVectorSystem)  service folders
+delete all $(UATVectorSystem)  user profile folders
+delete all $(UATVectorSystem)  user accounts
+remove $(UATVectorSystem)  from nxlog config&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;First Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;_unchecked&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;B504CD1C92F74FDC875406A7B4C0C4D7&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;B9314B101E9F4D8E95966409252F96FD&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;AE6B3B3C3C9C4CDD8D2D80BD81B98D8E&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Remove database from UAT servers&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;648&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;528&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Remove database for $(UATVectorSystem)&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;delete $(UATVectorSystem) database
+delete any $(UATVectorSystem) database backups that may exist on H drive
+delete $(UATVectorSystem) SQL Logins
+delete any $(UATVectorSystem) Windows account
+&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;First Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Value&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;387496F5DD0D4DEAB1F5B2C07FA4C0EF&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;B9314B101E9F4D8E95966409252F96FD&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;B0AD4CEF416042A185968AA227C33B00&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;UAT FIle Server - Remove data&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;976&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;348&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;UAT FIle Server - Remove $(UATVectorSystem) data&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;delete all $(UATVectorSystem) user accounts
+delete all $(UATVectorSystem) user profile folders
+delete $(UATVectorSystem) data folder&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;First Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;_unchecked&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;537079734DE041B6B65324B068611E77&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;B9314B101E9F4D8E95966409252F96FD&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;85A85F858FAD48229DFD7E2E92BB71AD&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;UAT Reports Server - Remove Reports&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;760&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;348&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Reports Server - Remove Reports for $(UATVectorSystem)&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;delete all $(UATVectorSystem) user accounts
+delete all $(UATVectorSystem) user profile folders
+Delete $(UATVectorSystem) reports folder from within SSRS&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;First Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Value&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;932FC770AF764F8DAFA2F71EF395EED4&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;B9314B101E9F4D8E95966409252F96FD&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;C8CD4F906D104E5F959DD8ECE5302BEC&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Remove server config from UAT proxy servers&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;868&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;528&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Remove $(UATVectorSystem) server config from UAT proxy servers&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Remove $(UATVectorSystem) server config from UAT proxy servers&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Change Management&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;_unchecked&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;217D21F196994878BD9F17F929C11F26&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;B9314B101E9F4D8E95966409252F96FD&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;1E33315CE91F4DC3AD89F37BF880D98F&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Remove UAT DNS records&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;608&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;80&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Remove any UAT DNS records for $(UATVectorSystem) &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Remove any UAT DNS records for $(UATVectorSystem) from Route 53&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;First Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Value&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;85A523B58DF343048A9FD03B92A43E2E&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;048A04174A80437281293B1B25A6FA83&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;C1DBF55B56C2433691E7CA07878B3B3B&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;85A85F858FAD48229DFD7E2E92BB71AD&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;916FA73CF60B49DCA3C432ED416BCD57&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;B0AD4CEF416042A185968AA227C33B00&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;E4C6F94CCE424C6AA7D436D6CDB5C1EF&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;AE6B3B3C3C9C4CDD8D2D80BD81B98D8E&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;934EC7073AA240309BCA822AA6A0F886&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;C8CD4F906D104E5F959DD8ECE5302BEC&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;7F59284BF6D54A0BA89EDCA43A82F66B&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;SLS review&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;1396&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;180&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Please review the decommissioning of $(NewVectorSystem)&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Please review the decommissioning of $(NewVectorSystem)&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Second Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;_unchecked&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;DateRequired&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;							&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;18A26577E83C4C56B31979B590710450&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;7D217F1ADBE14F1A8E812276DBD08923&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;40&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;26CFC69CD9BB454EA1745F53AB6A01C1&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9E23E652FCDE41008BD2D875B0C6E82E&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;60&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;B9314B101E9F4D8E95966409252F96FD&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;join&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;UAT Tasks Completed&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;1248&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;72&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties/&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;ok&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5931-ff2c-4bf0-a940-4598f1a81da2&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;EE20FF7E6A7447A9A54D432C6DD1A516&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;7F59284BF6D54A0BA89EDCA43A82F66B&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;/blocks&amp;gt;&amp;lt;/scenario&amp;gt;&lt;/Details&gt;&lt;TriggerDetails&gt;&amp;lt;?xml version='1.0' encoding='utf-16le' ?&amp;gt;&amp;lt;BPETrigger xmlns='http://frontrange.com/saas/workflow/Bpe_workflow.xsd'&amp;gt;&amp;lt;id&amp;gt;1805C41BF5424F1CA7BDF13A561EF9F5&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;trigger&amp;lt;/type&amp;gt;&amp;lt;title/&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;0&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;starttype_block&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Condition&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;starttype&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;contextblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;yes&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;created&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;yes&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;updated&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;deleted&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logical&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;trigger&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlan.Workflow&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;childObjectName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlanAssociatedServiceReq&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;relationshipName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlanType&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Workflow&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;RequestOfferingWFTrigger&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Ready&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlan.Workflow&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;childObjectName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlanAssociatedServiceReq&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;relationshipName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;WorkflowId&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;3f2bdbba518d43eb99442b5d3e16f7c9&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;executiontime_start_block&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_start&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;executiontime_end_block&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;No end date&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_end&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;       &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_end&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;10&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;endnumber_count&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;End by&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_end&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;enddate&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;recurrence_block_daily&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Daily&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;recurrence&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;recurrence_block_weekly&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;       &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;recurrence&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;weekly&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_sunday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_monday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_tuesday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_wednesday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_thursday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_friday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_saturday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;recurrence_block_monthly&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;       &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;recurrence&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;day_of_month&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;day_of_month_number&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits/&amp;gt;&amp;lt;/BPETrigger&amp;gt;&lt;/TriggerDetails&gt;&lt;ExceptionHandling /&gt;&lt;/WorkflowDefinition&gt;&lt;WorkflowType&gt;&lt;Name&gt;UAT Vector System Decommissioning Request form&lt;/Name&gt;&lt;DisplayName&gt;UAT Vector System Decommissioning Request form&lt;/DisplayName&gt;&lt;ObjectType&gt;ServiceReq&lt;/ObjectType&gt;&lt;Description /&gt;&lt;/WorkflowType&gt;&lt;QuickActions /&gt;&lt;/WorkflowVersionInformation&gt;</WorkflowDefinition>
+  <WorkflowType TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Workflow.WorkflowTypeDef" FRS_ID="7032a92fcb31426aa96d84c32dfede9d">
+   <RecId>7032a92fcb31426aa96d84c32dfede9d</RecId>
+   <CreatedBy>alexandru.mateescu</CreatedBy>
+   <CreatedDateTime TypeCode="DateTime">2021-10-13T08:03:09.1230000Z</CreatedDateTime>
+   <LastModBy>alexandru.mateescu</LastModBy>
+   <LastModDateTime TypeCode="DateTime">2021-10-13T08:03:09.1230000Z</LastModDateTime>
+   <TypeRecId>7032a92fcb31426aa96d84c32dfede9d</TypeRecId>
+   <Name>UAT Vector System Decommissioning Request form</Name>
+   <ObjectType>ServiceReq</ObjectType>
+   <Description></Description>
+   <DisplayName>UAT Vector System Decommissioning Request form</DisplayName>
+   <Category>User</Category>
+   <IsInternal TypeCode="Boolean">True</IsInternal>
+  </WorkflowType>
+ </RequestOffering>
+</Offerings>

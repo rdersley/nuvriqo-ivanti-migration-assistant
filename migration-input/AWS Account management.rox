@@ -1,0 +1,2699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Offerings TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Offering.OfferingDefinitionZipData">
+ <RequestOffering TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Offering.OfferingDefinitionZipData" FRS_ID="6EC5EB67038F45B2B555F60FA0F9A4AD">
+  <ServiceRequestTemplate TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplate.ServiceReqTemplateData" FRS_ID="6EC5EB67038F45B2B555F60FA0F9A4AD">
+   <RecId>6EC5EB67038F45B2B555F60FA0F9A4AD</RecId>
+   <CreatedBy>christian.magalhaes</CreatedBy>
+   <CreatedDateTime TypeCode="DateTime">2023-11-27T15:10:38.0000000Z</CreatedDateTime>
+   <LastModBy>milan.repic</LastModBy>
+   <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+   <Name>AWS Account management</Name>
+   <Item></Item>
+   <Description>Please use this request offering to manage your AWS account</Description>
+   <IconName>CCF615B269FC4786B4CECDC98BB10685</IconName>
+   <Service_RecId>CD0446D89F4B4BE5A6CD52C8B93B1018</Service_RecId>
+   <Service_Category>CI.Service</Service_Category>
+   <Price TypeCode="Decimal">0.0000</Price>
+   <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+   <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+   <DeliveryCommitment TypeCode="Int32">1440</DeliveryCommitment>
+   <ColumnsCount TypeCode="Int32">1</ColumnsCount>
+   <Status>Published (Automatic)</Status>
+   <VersionInformation></VersionInformation>
+   <IsClean TypeCode="Boolean">False</IsClean>
+   <ConfigOptions>{"configData":{"hidePrice":false,"enableCancel":false,"enableEditing":false,"hideDeliveryTime":false,"usePriceList":false,"financialTransaction":false,"hasPriceData":false,"alignRowsInColumns":true,"showColumnNumber":true}}</ConfigOptions>
+   <LayoutDefinition>null</LayoutDefinition>
+   <LayoutName></LayoutName>
+   <IsFormOffering TypeCode="Boolean">False</IsFormOffering>
+   <IsAllowAnonymousSubmit TypeCode="Boolean">False</IsAllowAnonymousSubmit>
+   <IsExternal TypeCode="Boolean">False</IsExternal>
+   <Categories TypeCode="Object" IsList="True" ElementType="String">
+    <Element>533DED9E716343FE91C724E2036A40F5</Element>
+   </Categories>
+   <Parameters TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam">
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="3F848E260BEA4C048FA184414320282B">
+     <RecId>3F848E260BEA4C048FA184414320282B</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+     <LastModBy>milan.repic</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description>&lt;font color="#262626" face="Open Sans, sans-serif"&gt;&lt;span style="font-size: 13px;"&gt;&amp;nbsp;Please find the full list of AWS accounts below:&lt;/span&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color="#262626" face="Open Sans, sans-serif"&gt;&lt;span style="font-size: 13px;"&gt;&lt;a href="https://retailinmotion.atlassian.net/wiki/spaces/PS/pages/25363866/AWS+Amazon+Web+Services"&gt;https://retailinmotion.atlassian.net/wiki/spaces/PS/pages/25363866/AWS+Amazon+Web+Services&lt;/a&gt;&lt;/span&gt;&lt;/font&gt;</Description>
+     <DisplayName>AWS Account</DisplayName>
+     <Name>list_1</Name>
+     <SequenceNumber TypeCode="Int32">5</SequenceNumber>
+     <DisplayType>list</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":300,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","validationListAdditionalConfig":[],"priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <AdHocValues TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue">
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="32279EC1100748E6A10A7D2904E9D464">
+       <RecId>32279EC1100748E6A10A7D2904E9D464</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Vector 2</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">10</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Vector 2</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="F7A0CE962F624B4BBA1AE99A1B67393D">
+       <RecId>F7A0CE962F624B4BBA1AE99A1B67393D</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Vector US UAT</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">11</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Vector US UAT</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="8E3F621E30854A48984115260B7760DA">
+       <RecId>8E3F621E30854A48984115260B7760DA</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Vector EKS</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">12</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Vector EKS</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="5F1D6120287548FE8417EEE57C7CA724">
+       <RecId>5F1D6120287548FE8417EEE57C7CA724</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>vPay US UAT</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">13</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>vPay US UAT</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="CD4FABF7A7DE4CD38DBCED4421A314BA">
+       <RecId>CD4FABF7A7DE4CD38DBCED4421A314BA</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>vPay US</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">14</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>vPay US</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="CE046F0FD2EC4F7F9443483F6FCFB955">
+       <RecId>CE046F0FD2EC4F7F9443483F6FCFB955</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>CBase-Test</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">15</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>CBase-Test</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="FC3CE5BE5967494B99DDB47E1C8F1731">
+       <RecId>FC3CE5BE5967494B99DDB47E1C8F1731</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>IT Dept (Billing Account)</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">1</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>IT Dept (Billing Account)</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="EC15C0F9BB7D48D8951C5196E6E3E7BF">
+       <RecId>EC15C0F9BB7D48D8951C5196E6E3E7BF</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>IT Operations</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">2</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>IT Operations</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="5B0BFD60A5C14FEB95573E8DD9E4DB10">
+       <RecId>5B0BFD60A5C14FEB95573E8DD9E4DB10</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>RiM LSG</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">3</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>RiM LSG</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="D1B2B9E2B579401C90462A3BA036BB91">
+       <RecId>D1B2B9E2B579401C90462A3BA036BB91</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>RiM LSG-Backbone</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">4</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>RiM LSG-Backbone</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="48F17B93470545D2B9362F360C6877E0">
+       <RecId>48F17B93470545D2B9362F360C6877E0</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>RiM LSG Development</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">5</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>RiM LSG Development</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="3C6FCD1FEEC14C1D93D898A8C5E19AAC">
+       <RecId>3C6FCD1FEEC14C1D93D898A8C5E19AAC</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>LSG SAP</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">6</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>LSG SAP</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="FAF46B77B07D4EB48AB895B269F6F029">
+       <RecId>FAF46B77B07D4EB48AB895B269F6F029</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>MiM</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">7</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>MiM</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="1A48ED940BBD4714876F910C2B154C32">
+       <RecId>1A48ED940BBD4714876F910C2B154C32</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>RiM Development</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">8</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>RiM Development</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="FC463AF8668E447E838A933C07ABB6E5">
+       <RecId>FC463AF8668E447E838A933C07ABB6E5</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>RiM Test</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">9</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>RiM Test</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="828D65B04D0A41FEAE33FC35FB4ECBAA">
+       <RecId>828D65B04D0A41FEAE33FC35FB4ECBAA</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>LSG-Test</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">16</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>LSG-Test</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+     </AdHocValues>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>&lt;font color="#262626" face="Open Sans, sans-serif"&gt;&lt;span style="font-size: 13px;"&gt;&amp;nbsp;Please if you are not sure which AWS account to select, reach out to ITOps team.&lt;/span&gt;&lt;/font&gt;</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>&lt;font color="#262626" face="Open Sans, sans-serif"&gt;&lt;span style="font-size: 13px;"&gt;&amp;nbsp;Please find the full list of AWS accounts below:&lt;/span&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color="#262626" face="Open Sans, sans-serif"&gt;&lt;span style="font-size: 13px;"&gt;&lt;a href="https://retailinmotion.atlassian.net/wiki/spaces/PS/pages/25363866/AWS+Amazon+Web+Services"&gt;https://retailinmotion.atlassian.net/wiki/spaces/PS/pages/25363866/AWS+Amazon+Web+Services&lt;/a&gt;&lt;/span&gt;&lt;/font&gt;</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>AWS Account</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>AWS Account</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="5FF82A0E1311444D89915E7CCDE99E92">
+     <RecId>5FF82A0E1311444D89915E7CCDE99E92</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+     <LastModBy>milan.repic</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>New AWS account</DisplayName>
+     <Name>new_aws_account</Name>
+     <SequenceNumber TypeCode="Int32">1</SequenceNumber>
+     <DisplayType>combo</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","validationListAdditionalConfig":[],"priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <AdHocValues TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue">
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="A1F1DED356094CCBA5E8C0C2F2C054C3">
+       <RecId>A1F1DED356094CCBA5E8C0C2F2C054C3</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Yes</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">1</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Yes</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="EA1E8D0FDF884C3682E6D2F589A9DFF2">
+       <RecId>EA1E8D0FDF884C3682E6D2F589A9DFF2</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>No</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">2</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>No</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+     </AdHocValues>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>New AWS User Account</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>New AWS account</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="A679852E668D445BA723C33EF90CCEFE">
+     <RecId>A679852E668D445BA723C33EF90CCEFE</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+     <LastModBy>milan.repic</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(if new_aws_account == "No" || password_reset == "Account Modifications"
+  then true
+  else false)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>Password reset or Modify</DisplayName>
+     <Name>password_reset</Name>
+     <SequenceNumber TypeCode="Int32">2</SequenceNumber>
+     <DisplayType>combo</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression>$(if new_aws_account == "No" then true else false)</VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","validationListAdditionalConfig":[],"priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <AdHocValues TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue">
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="093DE32C65464478B53F91D94F68AC5B">
+       <RecId>093DE32C65464478B53F91D94F68AC5B</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Password Reset</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">1</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Password Reset</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="6FC1A1443A6C4C5B9F3D38A9281874D0">
+       <RecId>6FC1A1443A6C4C5B9F3D38A9281874D0</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+       <LastModBy>milan.repic</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Account Modifications</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">2</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Account Modifications</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+     </AdHocValues>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Password reset or Modify</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Password reset or Modify</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="E819432637E846899117C8BF956DC626">
+     <RecId>E819432637E846899117C8BF956DC626</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+     <LastModBy>milan.repic</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(if new_aws_account == "Yes" || password_reset == "Account Modifications"
+  then true
+  else false)</RequiredExpression>
+     <Description>Why is this needed? Please give details</Description>
+     <DisplayName>Business Case</DisplayName>
+     <Name>textarea_1</Name>
+     <SequenceNumber TypeCode="Int32">3</SequenceNumber>
+     <DisplayType>textarea</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression>$(if new_aws_account == "Yes" || password_reset == "Account Modifications"
+  then true
+  else false)</VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":300,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Why is this needed? Please give details</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Why is this needed? Please give details</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Business Case</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Business Case</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="42C0219C87124097A71A1A6622CBD361">
+     <RecId>42C0219C87124097A71A1A6622CBD361</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+     <LastModBy>milan.repic</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2026-06-11T11:22:30.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>User Name</DisplayName>
+     <Name>combo_1</Name>
+     <SequenceNumber TypeCode="Int32">4</SequenceNumber>
+     <DisplayType>combo</DisplayType>
+     <ValidationListRecId>c67a22b626694ff0bfdd430b7081f689</ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints>[]</ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","validationListAdditionalConfig":[{"boName":"Employee#","fieldName":"DisplayName","fieldDisplayName":"Display Name","relationTag":"","additionalCBObjectValue":"","fieldType":2,"isMandatory":true},{"boName":"Employee#","fieldName":"LoginID","fieldDisplayName":"LoginID","relationTag":"","additionalCBObjectValue":"","fieldType":0,"isMandatory":true}],"priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>User Name</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>User Name</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+   </Parameters>
+   <AccessItems TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessItem">
+    <AccessItem TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessItem" FRS_ID="20FEF6304EEA436EBE11BCFA1BF3C7B8">
+     <RecId>20FEF6304EEA436EBE11BCFA1BF3C7B8</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-06T12:23:19.0000000Z</LastModDateTime>
+     <CanSubmit TypeCode="Boolean">True</CanSubmit>
+     <CanEditRequest TypeCode="Boolean">True</CanEditRequest>
+     <CanDeleteRequest TypeCode="Boolean">True</CanDeleteRequest>
+     <CanEdit TypeCode="Boolean">True</CanEdit>
+     <CanDelete TypeCode="Boolean">True</CanDelete>
+     <CanCopy TypeCode="Boolean">True</CanCopy>
+     <RelatedObjects TypeCode="Object" IsMap="True" MapKeyType="String">
+      <Name TypeCode="Object" Key="Frs_CompositeContract_Entity#.EntityAccess">
+       <RelatedObject TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessToRelatedObject">
+        <IsIncludeSubtree TypeCode="Boolean">True</IsIncludeSubtree>
+        <Relationship>Frs_CompositeContract_Entity#.EntityAccess</Relationship>
+        <Items TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessValue" />
+       </RelatedObject>
+      </Name>
+      <Name TypeCode="Object" Key="Location#.Location">
+       <RelatedObject TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessToRelatedObject">
+        <IsIncludeSubtree TypeCode="Boolean">True</IsIncludeSubtree>
+        <Relationship>Location#.Location</Relationship>
+        <Items TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessValue" />
+       </RelatedObject>
+      </Name>
+     </RelatedObjects>
+    </AccessItem>
+   </AccessItems>
+   <RelatedItems TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplate.RelatedItem" />
+   <DeliveryItems TypeCode="Object" IsList="True" ElementType="DataLayer.Financial.PriceListItem" />
+   <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Description</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value>Please use this request offering to manage your AWS account</Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Name</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value>AWS Account management</Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Item</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value></Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+   </FieldTranslations>
+  </ServiceRequestTemplate>
+  <Attachments TypeCode="Object" IsList="True" ElementType="HEAT.Attachments.Models.AttachmentRecordBinary">
+   <Attachment TypeCode="Object" CLR_Type="HEAT.Attachments.Models.AttachmentRecordBinary" FRS_ID="CCF615B269FC4786B4CECDC98BB10685">
+    <RecId>CCF615B269FC4786B4CECDC98BB10685</RecId>
+    <CreatedBy>christian.magalhaes</CreatedBy>
+    <CreatedDateTime TypeCode="DateTime">2023-12-06T12:43:11.8530000Z</CreatedDateTime>
+    <LastModBy>christian.magalhaes</LastModBy>
+    <LastModDateTime TypeCode="DateTime">2023-12-06T12:43:11.0000000Z</LastModDateTime>
+    <Host>10.12.10.8</Host>
+    <Path></Path>
+    <Description></Description>
+    <Name>AWS.png</Name>
+    <Uploaded>True</Uploaded>
+    <Content CLR_Type="byte[]" Encode="base64">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
+eKhhZfV/CUNBK5FJz/oAAAAASUVORK5CYII=</Content>
+   </Attachment>
+  </Attachments>
+ </RequestOffering>
+</Offerings>

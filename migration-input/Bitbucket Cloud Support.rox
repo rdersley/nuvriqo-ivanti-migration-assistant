@@ -1,0 +1,2087 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Offerings TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Offering.OfferingDefinitionZipData">
+ <RequestOffering TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Offering.OfferingDefinitionZipData" FRS_ID="8460EFF1ACA04FF28764E084C85EA2DF">
+  <ServiceRequestTemplate TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplate.ServiceReqTemplateData" FRS_ID="8460EFF1ACA04FF28764E084C85EA2DF">
+   <RecId>8460EFF1ACA04FF28764E084C85EA2DF</RecId>
+   <CreatedBy>christian.magalhaes</CreatedBy>
+   <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+   <LastModBy>daniel.torrejon</LastModBy>
+   <LastModDateTime TypeCode="DateTime">2024-01-04T10:15:08.0000000Z</LastModDateTime>
+   <Name>Bitbucket Cloud Support</Name>
+   <Item></Item>
+   <Description>Bitbucket Cloud - a formal request from a user for something to be provided</Description>
+   <IconName>2F9BA12E1C86464F9EB84B03E6984184</IconName>
+   <Service_RecId>FAB3BE34F7274DF19BFA5586C75950E9</Service_RecId>
+   <Service_Category>CI.Service</Service_Category>
+   <Price TypeCode="Decimal">0.0000</Price>
+   <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+   <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+   <DeliveryCommitment TypeCode="Int32">10080</DeliveryCommitment>
+   <ColumnsCount TypeCode="Int32">1</ColumnsCount>
+   <Status>Published (Automatic)</Status>
+   <VersionInformation></VersionInformation>
+   <IsClean TypeCode="Boolean">False</IsClean>
+   <ConfigOptions>{"configData":{"hidePrice":false,"enableCancel":true,"enableEditing":true,"hideDeliveryTime":false,"usePriceList":false,"financialTransaction":false,"hasPriceData":false,"alignRowsInColumns":false,"showColumnNumber":false}}</ConfigOptions>
+   <LayoutDefinition>null</LayoutDefinition>
+   <LayoutName></LayoutName>
+   <IsFormOffering TypeCode="Boolean">False</IsFormOffering>
+   <IsAllowAnonymousSubmit TypeCode="Boolean">False</IsAllowAnonymousSubmit>
+   <IsExternal TypeCode="Boolean">False</IsExternal>
+   <Categories TypeCode="Object" IsList="True" ElementType="String">
+    <Element>81EDE4E37C9940BA9E1CE2F8DB9851D4</Element>
+   </Categories>
+   <Parameters TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam">
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="17C6E360CE644C2C8C27A9AFA2FCA24C">
+     <RecId>17C6E360CE644C2C8C27A9AFA2FCA24C</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description>Please give detailed description of the request and/or business case</Description>
+     <DisplayName>Description</DisplayName>
+     <Name>sreq_desc</Name>
+     <SequenceNumber TypeCode="Int32">6</SequenceNumber>
+     <DisplayType>textarea</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":300,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Please give detailed description of the request and/or business case</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Please give detailed description of the request and/or business case</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Description</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Description</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="E374B7561ACD4BC7ADF2A632BC7020F4">
+     <RecId>E374B7561ACD4BC7ADF2A632BC7020F4</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description>If the request is for someone else please chose the person from the dropdown list</Description>
+     <DisplayName>This request is for</DisplayName>
+     <Name>RequestFor</Name>
+     <SequenceNumber TypeCode="Int32">2</SequenceNumber>
+     <DisplayType>combo</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression>$("myself")</ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"value","validationListAdditionalConfig":[],"priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <AdHocValues TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue">
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="4D3F4A1EC3554A1D8C54AE8697836465">
+       <RecId>4D3F4A1EC3554A1D8C54AE8697836465</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+       <LastModBy>christian.magalhaes</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>myself</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">1</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>myself</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="399F22D81C194AE1BDFBDE7F4C503A3A">
+       <RecId>399F22D81C194AE1BDFBDE7F4C503A3A</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+       <LastModBy>christian.magalhaes</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>someone else</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">2</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>someone else</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="5FF03DEDDF7F4CB3A738430FF17C917F">
+       <RecId>5FF03DEDDF7F4CB3A738430FF17C917F</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+       <LastModBy>christian.magalhaes</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>a new starter</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">3</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>a new starter</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+     </AdHocValues>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>If the request is for someone else please chose the person from the dropdown list</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>If the request is for someone else please chose the person from the dropdown list</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>This request is for</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>This request is for</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>$("myself")</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="25C1AE570561446EAC5D5830FCB4AB60">
+     <RecId>25C1AE570561446EAC5D5830FCB4AB60</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(true)</RequiredExpression>
+     <Description>What is this request about</Description>
+     <DisplayName>Summary</DisplayName>
+     <Name>sreq_summary</Name>
+     <SequenceNumber TypeCode="Int32">1</SequenceNumber>
+     <DisplayType>text</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>What is this request about</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>What is this request about</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Summary</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Summary</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="E5E2B1B2E66C4BBB9E44C211C125516B">
+     <RecId>E5E2B1B2E66C4BBB9E44C211C125516B</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(false)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>Please choose a person</DisplayName>
+     <Name>Username</Name>
+     <SequenceNumber TypeCode="Int32">5</SequenceNumber>
+     <DisplayType>combo</DisplayType>
+     <ValidationListRecId>c67a22b626694ff0bfdd430b7081f689</ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints>[]</ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression>$(RequestFor == "someone else")</VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","validationListAdditionalConfig":[{"boName":"Employee#","fieldName":"DisplayName","fieldDisplayName":"Display Name","relationTag":"","additionalCBObjectValue":"","fieldType":2,"isMandatory":true},{"boName":"Employee#","fieldName":"LoginID","fieldDisplayName":"LoginID","relationTag":"","additionalCBObjectValue":"","fieldType":0,"isMandatory":true}],"priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Please choose a person</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Please choose a person</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="156485853E364FF7854EDBE8E0314AB1">
+     <RecId>156485853E364FF7854EDBE8E0314AB1</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(false)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>Urgency</DisplayName>
+     <Name>combo_1</Name>
+     <SequenceNumber TypeCode="Int32">7</SequenceNumber>
+     <DisplayType>combo</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression></VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","validationListAdditionalConfig":[],"priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <AdHocValues TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue">
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="18147A0A09F84BA5AA1D406F3E96A077">
+       <RecId>18147A0A09F84BA5AA1D406F3E96A077</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+       <LastModBy>christian.magalhaes</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>High</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">1</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>High</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="96824A0F038E48DAB268ADF69BA50CFE">
+       <RecId>96824A0F038E48DAB268ADF69BA50CFE</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+       <LastModBy>christian.magalhaes</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Medium</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">2</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Medium</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+      <ServiceRequestTemplateParameterValue TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParamValue" FRS_ID="9626731CF1404F398B9B0F2052BD0B04">
+       <RecId>9626731CF1404F398B9B0F2052BD0B04</RecId>
+       <CreatedBy>christian.magalhaes</CreatedBy>
+       <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+       <LastModBy>christian.magalhaes</LastModBy>
+       <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+       <Price TypeCode="Decimal">0.0000</Price>
+       <ParameterValue>Low</ParameterValue>
+       <AttachmentRecId></AttachmentRecId>
+       <SortOrder TypeCode="Int32">3</SortOrder>
+       <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+        <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+         <FieldName>ParameterValue</FieldName>
+         <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>de</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>en-GB</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>es</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>fr</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>it</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ja</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>nl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pl</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>pt-BR</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>ru</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-CN</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture>zh-TW</Culture>
+           <Value></Value>
+          </Translation>
+          <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+           <Culture></Culture>
+           <Value>Low</Value>
+          </Translation>
+         </Translations>
+        </FieldTranslation>
+       </FieldTranslations>
+      </ServiceRequestTemplateParameterValue>
+     </AdHocValues>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Urgency</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Urgency</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="AB3F7A7B67EB407A88CB08572668376D">
+     <RecId>AB3F7A7B67EB407A88CB08572668376D</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(false)</RequiredExpression>
+     <Description>Please input the new starter's name</Description>
+     <DisplayName>New Starter</DisplayName>
+     <Name>newstarter</Name>
+     <SequenceNumber TypeCode="Int32">4</SequenceNumber>
+     <DisplayType>text</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression></ValueExpression>
+     <VisibilityExpression>$(RequestFor == "a new starter")</VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"none","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>Please input the new starter's name</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>Please input the new starter's name</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>New Starter</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>New Starter</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+    <ServiceRequestTemplateParameter TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.ServiceReqTemplateParam.ServiceReqTemplateParam" FRS_ID="4F25416D29DD4A379B2B6D12D421FBD2">
+     <RecId>4F25416D29DD4A379B2B6D12D421FBD2</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:36:04.0000000Z</LastModDateTime>
+     <PriceExpression></PriceExpression>
+     <ReadOnlyExpression>$(false)</ReadOnlyExpression>
+     <AutoFillExpression></AutoFillExpression>
+     <AutoFillOnlyWhenEmpty TypeCode="Boolean">False</AutoFillOnlyWhenEmpty>
+     <LineBreak TypeCode="Boolean">False</LineBreak>
+     <RequiresSubscription TypeCode="Boolean">False</RequiresSubscription>
+     <Price TypeCode="Decimal">0.0000</Price>
+     <RecurringPrice TypeCode="Decimal">0.0000</RecurringPrice>
+     <RecurringPeriod TypeCode="Int32">30</RecurringPeriod>
+     <IsCalculated TypeCode="Boolean">False</IsCalculated>
+     <RequiredExpression>$(false)</RequiredExpression>
+     <Description></Description>
+     <DisplayName>User</DisplayName>
+     <Name>user</Name>
+     <SequenceNumber TypeCode="Int32">3</SequenceNumber>
+     <DisplayType>text</DisplayType>
+     <ValidationListRecId></ValidationListRecId>
+     <TriggerFields></TriggerFields>
+     <ValidationConstraints></ValidationConstraints>
+     <ValueExpression>$(if RequestFor == "myself" then CurrentUserField("DisplayName") else "")</ValueExpression>
+     <VisibilityExpression>$(RequestFor == "myself")</VisibilityExpression>
+     <ConfigOptions>{"configData":{"width":250,"height":0,"topMargin":0,"bottomMargin":0,"maxLength":2000,"preserveSpace":false,"generateAutoText":false,"singleSelect":false,"imageWidth":48,"showPricesForAllItems":false,"imageHeight":48,"withAdvancedSearch":false,"typeAheadChars":3,"enableHint":false,"usePriceList":false,"noPriceExclude":false,"defaultValueRadioVal":"expr","priceQuantityField":""}}</ConfigOptions>
+     <HelpText></HelpText>
+     <HelpLink></HelpLink>
+     <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>Description</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value></Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>DisplayName</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+         <Value>User</Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+         <Value></Value>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>User</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+      <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+       <FieldName>ValueExpression</FieldName>
+       <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>de</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>en-GB</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>es</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>fr</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>it</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ja</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>nl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pl</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>pt-BR</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>ru</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-CN</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture>zh-TW</Culture>
+        </Translation>
+        <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+         <Culture></Culture>
+         <Value>$(if RequestFor == "myself" then CurrentUserField("DisplayName") else "")</Value>
+        </Translation>
+       </Translations>
+      </FieldTranslation>
+     </FieldTranslations>
+    </ServiceRequestTemplateParameter>
+   </Parameters>
+   <AccessItems TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessItem">
+    <AccessItem TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessItem" FRS_ID="38503FA8341D45D69B244F0B2D912E13">
+     <RecId>38503FA8341D45D69B244F0B2D912E13</RecId>
+     <CreatedBy>christian.magalhaes</CreatedBy>
+     <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.0000000Z</CreatedDateTime>
+     <LastModBy>christian.magalhaes</LastModBy>
+     <LastModDateTime TypeCode="DateTime">2023-12-15T10:22:54.0000000Z</LastModDateTime>
+     <CanSubmit TypeCode="Boolean">True</CanSubmit>
+     <CanEditRequest TypeCode="Boolean">True</CanEditRequest>
+     <CanDeleteRequest TypeCode="Boolean">True</CanDeleteRequest>
+     <CanEdit TypeCode="Boolean">True</CanEdit>
+     <CanDelete TypeCode="Boolean">True</CanDelete>
+     <CanCopy TypeCode="Boolean">True</CanCopy>
+     <RelatedObjects TypeCode="Object" IsMap="True" MapKeyType="String">
+      <Name TypeCode="Object" Key="Frs_CompositeContract_Entity#.EntityAccess">
+       <RelatedObject TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessToRelatedObject">
+        <IsIncludeSubtree TypeCode="Boolean">True</IsIncludeSubtree>
+        <Relationship>Frs_CompositeContract_Entity#.EntityAccess</Relationship>
+        <Items TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessValue" />
+       </RelatedObject>
+      </Name>
+      <Name TypeCode="Object" Key="Location#.Location">
+       <RelatedObject TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Access.AccessToRelatedObject">
+        <IsIncludeSubtree TypeCode="Boolean">True</IsIncludeSubtree>
+        <Relationship>Location#.Location</Relationship>
+        <Items TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.Access.AccessValue" />
+       </RelatedObject>
+      </Name>
+     </RelatedObjects>
+    </AccessItem>
+   </AccessItems>
+   <RelatedItems TypeCode="Object" IsList="True" ElementType="HEAT.ServiceCatalog.Models.ServiceReqTemplate.RelatedItem" />
+   <DeliveryItems TypeCode="Object" IsList="True" ElementType="DataLayer.Financial.PriceListItem" />
+   <FulfillmentAction TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Fulfillment.FulfillmentWorkflowPlan" FRS_ID="E6667243C5A24C6BA40D4EE1E5D8CC9D">
+    <RecId>E6667243C5A24C6BA40D4EE1E5D8CC9D</RecId>
+    <CreatedBy>christian.magalhaes</CreatedBy>
+    <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:53.0000000Z</CreatedDateTime>
+    <LastModBy>christian.magalhaes</LastModBy>
+    <LastModDateTime TypeCode="DateTime">2023-12-15T10:22:54.0000000Z</LastModDateTime>
+    <FulfillmentPlanType>Workflow</FulfillmentPlanType>
+    <WorkflowId>ab5084215dc14308958e7f5a8469947c</WorkflowId>
+   </FulfillmentAction>
+   <FieldTranslations TypeCode="Object" IsList="True" ElementType="DataLayer.FieldTranslation">
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Description</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value>Bitbucket Cloud - a formal request from a user for something to be provided</Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Name</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value>Bitbucket Cloud Support</Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+    <FieldTranslation TypeCode="Object" CLR_Type="DataLayer.FieldTranslation">
+     <FieldName>Item</FieldName>
+     <Translations TypeCode="Object" IsList="True" ElementType="DataLayer.Translation">
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>de</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>en-GB</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>es</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>fr</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>it</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ja</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>nl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pl</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>pt-BR</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>ru</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-CN</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture>zh-TW</Culture>
+       <Value></Value>
+      </Translation>
+      <Translation TypeCode="Object" CLR_Type="DataLayer.Translation">
+       <Culture></Culture>
+       <Value></Value>
+      </Translation>
+     </Translations>
+    </FieldTranslation>
+   </FieldTranslations>
+  </ServiceRequestTemplate>
+  <Attachments TypeCode="Object" IsList="True" ElementType="HEAT.Attachments.Models.AttachmentRecordBinary">
+   <Attachment TypeCode="Object" CLR_Type="HEAT.Attachments.Models.AttachmentRecordBinary" FRS_ID="2F9BA12E1C86464F9EB84B03E6984184">
+    <RecId>2F9BA12E1C86464F9EB84B03E6984184</RecId>
+    <CreatedBy>christian.magalhaes</CreatedBy>
+    <CreatedDateTime TypeCode="DateTime">2023-12-15T10:35:12.4070000Z</CreatedDateTime>
+    <LastModBy>christian.magalhaes</LastModBy>
+    <LastModDateTime TypeCode="DateTime">2023-12-15T10:35:12.0000000Z</LastModDateTime>
+    <Host>10.12.10.54</Host>
+    <Path></Path>
+    <Description></Description>
+    <Name>Bitbucket Cloud.jpg</Name>
+    <Uploaded>True</Uploaded>
+    <Content CLR_Type="byte[]" Encode="base64">/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABuAG4DASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iis
+W/8AFmi6Zdta3d6qTKAWQKzbfrgVcKc6j5YJt+RM5xgrydjaorm/+E88Of8AP/8A+Qn/AMKP+E88
+Of8AP/8A+Qn/AMK2+p4j/n2/uZl9Zo/zr70dJRXN/wDCeeHP+f8A/wDIT/4Uf8J54c/5/wD/AMhP
+/hR9TxH/AD7f3MPrNH+dfejpKK5v/hPPDn/P/wD+Qn/wpf8AhO/Dn/QQ/wDIT/4UfU8R/wA+39zD
+6zR/nX3o6Oiuc/4Tvw5/0EP/ACE/+FH/AAnfhz/oIf8AkJ/8KX1PEf8APt/cw+s0f5196OjornP+
+E78Of9BD/wAhP/hR/wAJ34c/6CH/AJCf/Cj6niP+fb+5h9Zo/wA6+9HR0lZ+l67p2tK50+5Wbyzh
+xggr6cGtGsZQlB8slZmsZRkrxd0HavFvG1v9n8X33pIVkH4qP65r2mvLPiZbeXrdpcAf66Dafcqf
+/r16uSz5cTy90/8AM4M0jehfsziaKKK+tPnQooooAKKKKACiiigAooooA9C+F1v+81K6PYJEP1J/
+pXo9cb8NrfyvDbzEcz3DN+AwP6Guyr4nM58+Lm/l92h9RgY8uHigrgvihb7tNsLnH+rmKE/7w/8A
+sa72uZ8fW/n+Ebpu8TJIPwYZ/Qmpy+fJioPz/PQrGR5qEl5flqeOUUUV9wfKhRQehr17Q/Dfh/UN
+CsbttLty0sKsxweWxz+tceMxscLFSmm0+x04bDSxDcYu1jyGivbf+EO8Pf8AQKt/yNH/AAh3h7/o
+FW/5GuD+3aH8r/D/ADOv+yav8yPEqK7H4pafpuhaNZDTbOK2uJ7jBkQc7QpyPzIryk392P8Al4ev
+Tw2JjiKaqRVkzjrYeVKfI2dLRXM/2hef8/D0fb7wjHnuc8YrouZcjPpTwjbfZfCmmxkYJhDn6t83
+9a26q6ZC1vpVnA5JeOBEYnqSFAq1X5/Wnz1JS7tn1tOPLBR7IKoa3bfbNEvrfGfMt3UfXHFX6CMj
+BqYycZKS6FSXMmmfOqnKgn0pasX1ubTUbq2P/LKZ0/Imq9foKakro+Oas7BXrvw7uvP8KRxE828r
+x/hnI/nXkVehfC+6+bUbMnn5JVH5g/0rzM4p82Fb7NP9P1O7LZ8uIS7no9FFIelfHn0h478ZLrzN
+Z06zB4igaQj0LNj/ANlrzB1rtfiPc/bPG99g5WEJCPwXJ/UmuPda+4wEOTDQXl+ep8xip81aT8yq
+etaGgWf9oeItNtMZE11GpHtuGf0qk611fwys/tfj7T8jKwh5j+CkD9SK1xE+SjKXZMmjHmqRj5n0
+TRQOlFfBH1IUUUUAeJ+M7f7N4u1Be0jCUf8AAlB/nmsKu0+Jdv5WvW04HE1vgn3Un/EVxdfdYGfP
+hoS8vy0PlMVHlryXmFbPhjXv+Ee1VrxoWmRojGyK2CeQR/Ksait6tONWDhPZmUJyhJSjuj0c/FW2
+H/MJn/7+rTG+LFqP+YRcf9/VrzlhkVC61wf2RhP5fxZ1/wBo4j+b8ER6tdnUdVvL5l2m4maTB7ZP
+Ss11q861Xda9FJRVkct23dlJ1r0X4M2e/wAQajdleIbYID7s2f8A2WuAda9e+Dln5Wiajdkf665C
+D6Kv+LGvOzWfJhJedl+J24CPNXR6VRRRXxp9EFFFFAHA/FC33WOn3IH3JWjJ9mGf/Za80r2Xx1YS
+6h4XnSCNpJYmWVVUZJwecfgTXjWD6H8q+uyWopYbl7N/5nzuZwca9+4UUYPofyowfQ/lXrHnBTGW
+n4Pofyox7H8qAKrrVd1q86n0P5VA6+x/Kgooute6/Da0+y+B7E4wZi8x/Fjj9AK8RMUkh2Rxu7tw
+qqpJJ9K+jNEs/wCz9CsLMrtMNuiEehAGf1rw89nalGHd/l/w56uVRvUlLsi/RRRXy57gUUlLQAUw
+xRk5KKT9KfRQAzyo/wDnmv5UeVH/AM81/Kn0UXFZDPKj/wCea/lR5Uf/ADzX8qfRRdhZDPKj/wCe
+af8AfNHkxf8APNP++afRRdhZDBHGDkIoI7gU/pRRQMKKKSgD/9k=</Content>
+   </Attachment>
+  </Attachments>
+  <WorkflowDefinition>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;WorkflowVersionInformation&gt;&lt;WorkflowDefinition&gt;&lt;Name&gt;Bitbucket Cloud Support Request form&lt;/Name&gt;&lt;Details&gt;&amp;lt;?xml version='1.0' encoding='utf-16le' ?&amp;gt;&amp;lt;scenario xmlns='http://frontrange.com/saas/workflow/Bpe_workflow.xsd'&amp;gt;&amp;lt;id&amp;gt;3E2C5D616DD0421C9464FE648D2DEBE0&amp;lt;/id&amp;gt;&amp;lt;title&amp;gt;new scenario&amp;lt;/title&amp;gt;&amp;lt;context&amp;gt;&amp;lt;category&amp;gt;businessObjectType&amp;lt;/category&amp;gt;&amp;lt;value&amp;gt;ServiceReq&amp;lt;/value&amp;gt;&amp;lt;/context&amp;gt;&amp;lt;scenarioProperties/&amp;gt;&amp;lt;blocks&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;2C17DF609DCB4F07BD720D76DAF11B09&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;start&amp;lt;/type&amp;gt;&amp;lt;title/&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;57&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;52&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties/&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;ok&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5931-ff2c-4bf0-a940-4398f1a81da2&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;10&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;20&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;85685E9065D64C8BBCD3B379404CA63F&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;B5EF62068F314C30B21939CB63403124&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;9443C5DEA355472A9DD161465455EAF5&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;stop&amp;lt;/type&amp;gt;&amp;lt;title/&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;1300&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;466&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties/&amp;gt;&amp;lt;exits/&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;53AF0DA6884E439AA0C8C098A90026D9&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;task&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;Service request taks&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;527&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;83&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;summaryblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;$(sreq_summary)&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;summary&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;detailsblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;$(sreq_desc)&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;details&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;teamblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;First Line Support&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;team&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;assigneeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;assignee&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;typeblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Internal Task&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;type&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;priorityblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;_unchecked&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priority&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Field&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;ispriorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;combo_1&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;priorityfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;duedate&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;_unchecked&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt; &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatefield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Duration&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;isfield&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;30&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;duedatedays&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedatehours&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value/&amp;gt;&amp;lt;name&amp;gt;duedateminutes&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;accepted&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;0EE60A4879FB4D0C8FE74B0FE2C66CCF&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9443C5DEA355472A9DD161465455EAF5&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Accepted&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;completed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;19&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;C7145B22548A401690A18006E6399951&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9443C5DEA355472A9DD161465455EAF5&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b32-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Completed&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;cancelled&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/id&amp;gt;&amp;lt;editable&amp;gt;true&amp;lt;/editable&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;39&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links/&amp;gt;&amp;lt;condition&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logicaloperator&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff0c-4bf0-a940-8091f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond_3fca6b31-ff2c-4bf0-a940-4598f1a84da2&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;conditions&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Status&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Cancelled&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/condition&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;timedout&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;85141fd4-664e-4ae4-93dc-1498f561b6bf&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;59&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;46A5EF1971BC43B7A42C4C6CCE45E888&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9443C5DEA355472A9DD161465455EAF5&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;block&amp;gt;&amp;lt;id&amp;gt;B5EF62068F314C30B21939CB63403124&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;update&amp;lt;/type&amp;gt;&amp;lt;title&amp;gt;update name and description&amp;lt;/title&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;211&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;187&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;QuickAction&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;d4538b5a-36a8-43ec-8ee1-124f5d063f28&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;QAID&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;ok&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5931-ff2c-4bf0-a940-4398f1a81da2&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;2B85DE973B4D4C3C829FB07644EE5221&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;53AF0DA6884E439AA0C8C098A90026D9&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;exit&amp;gt;&amp;lt;title&amp;gt;failed&amp;lt;/title&amp;gt;&amp;lt;id&amp;gt;3fbd5666-ff2c-4bf0-a940-4398f1a81da2&amp;lt;/id&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;30&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;19&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;links&amp;gt;&amp;lt;link&amp;gt;&amp;lt;id&amp;gt;A19092FF98F549F1ABDF5BC811B4791F&amp;lt;/id&amp;gt;&amp;lt;blockId&amp;gt;9443C5DEA355472A9DD161465455EAF5&amp;lt;/blockId&amp;gt;&amp;lt;/link&amp;gt;&amp;lt;/links&amp;gt;&amp;lt;condition/&amp;gt;&amp;lt;/exit&amp;gt;&amp;lt;/exits&amp;gt;&amp;lt;/block&amp;gt;&amp;lt;/blocks&amp;gt;&amp;lt;/scenario&amp;gt;&lt;/Details&gt;&lt;TriggerDetails&gt;&amp;lt;?xml version='1.0' encoding='utf-16le' ?&amp;gt;&amp;lt;BPETrigger xmlns='http://frontrange.com/saas/workflow/Bpe_workflow.xsd'&amp;gt;&amp;lt;id&amp;gt;1805C41BF5424F1CA7BDF13A561EF9F5&amp;lt;/id&amp;gt;&amp;lt;type&amp;gt;trigger&amp;lt;/type&amp;gt;&amp;lt;title/&amp;gt;&amp;lt;layout&amp;gt;&amp;lt;x&amp;gt;0&amp;lt;/x&amp;gt;&amp;lt;y&amp;gt;0&amp;lt;/y&amp;gt;&amp;lt;/layout&amp;gt;&amp;lt;blockProperties&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;starttype_block&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Condition&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;starttype&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;contextblock&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;yes&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;created&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;yes&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;updated&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;deleted&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;logical&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;AND&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;cond&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;trigger&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlan.Workflow&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;childObjectName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlanAssociatedServiceReq&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;relationshipName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlanType&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Workflow&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;RequestOfferingWFTrigger&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Ready&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlan.Workflow&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;childObjectName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ServiceReqFulfillmentPlanAssociatedServiceReq&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;relationshipName&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;WorkflowId&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;field&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Equal to&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;operator&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;ab5084215dc14308958e7f5a8469947c&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;value&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;executiontime_start_block&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_start&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;executiontime_end_block&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;No end date&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_end&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;       &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_end&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;10&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;endnumber_count&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;End by&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;executiontime_end&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;enddate&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;recurrence_block_daily&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;Daily&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;recurrence&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;recurrence_block_weekly&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;       &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;recurrence&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;weekly&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_sunday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_monday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_tuesday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_wednesday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_thursday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_friday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;weekly_saturday&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;recurrence_block_monthly&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;       &amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;recurrence&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;day_of_month&amp;lt;/name&amp;gt;&amp;lt;groups&amp;gt;&amp;lt;group&amp;gt;&amp;lt;param&amp;gt;&amp;lt;value&amp;gt;&amp;lt;/value&amp;gt;&amp;lt;name&amp;gt;day_of_month_number&amp;lt;/name&amp;gt;&amp;lt;/param&amp;gt;&amp;lt;/group&amp;gt;&amp;lt;/groups&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;/blockProperties&amp;gt;&amp;lt;exits/&amp;gt;&amp;lt;/BPETrigger&amp;gt;&lt;/TriggerDetails&gt;&lt;ExceptionHandling /&gt;&lt;/WorkflowDefinition&gt;&lt;WorkflowType&gt;&lt;Name&gt;Bitbucket Cloud Support Request form&lt;/Name&gt;&lt;DisplayName&gt;Bitbucket Cloud Support Request form&lt;/DisplayName&gt;&lt;ObjectType&gt;ServiceReq&lt;/ObjectType&gt;&lt;Description /&gt;&lt;/WorkflowType&gt;&lt;QuickActions&gt;&lt;QuickAction&gt;&lt;Id&gt;d4538b5a-36a8-43ec-8ee1-124f5d063f28&lt;/Id&gt;&lt;ObjectId /&gt;&lt;Name&gt;Workflow update object&lt;/Name&gt;&lt;Definition&gt;{"FieldValues":[{"FieldName":"ReorderContinue","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"AdHocApprover","ExpressionText":"","FieldType":"list","FieldLength":50,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"AdHocApprover_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"AlternateContactLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"AlternateContactLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ApprovalNeeded","ExpressionText":"","FieldType":"list","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ApprovalNeeded_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"BlockRequest","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Cancelable","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ChargingAccount","ExpressionText":"","FieldType":"list","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ChargingAccount_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_CILink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ClosedDateTime","ExpressionText":"","FieldType":"datetime","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ClosedBy","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ClosingEscLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ClosingEscLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ProfileLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ProfileLoginId","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ProfileFullName","ExpressionText":"","FieldType":"string","FieldLength":200,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Cost","ExpressionText":"","FieldType":"currency","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"CostPerMinute","ExpressionText":"","FieldType":"currency","FieldLength":6,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"CreatedBy","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"CreatedDateTime","ExpressionText":"","FieldType":"datetime","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"CustomerLocation","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"DefaultApprover","ExpressionText":"","FieldType":"list","FieldLength":255,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"DefaultApprover_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Symptom","ExpressionText":"$(GetSRPValue(RecId,  \"sreq_desc\"))","FieldType":"text","FieldLength":1000,"Overwrite":true,"Expression":{"Description":null,"FieldRefs":["RecId"],"IsFullExpression":true,"Name":null,"Tree":{"Arguments":[{"FieldIndex":0,"Details":{"Container":null,"Selector":"RecId","SubSelector":null,"IsObjectSelector":false,"Qualifiers":null,"Kind":"Selection"},"Kind":"Field"},{"Value":"sreq_desc","LongImage":null,"IsHex":false,"IsVerbatimText":false,"Kind":"Literal"}],"FunctionName":"GetSRPValue","IsMethod":false,"Kind":"Function"},"ValidationStatus":"Ok"},"IsHtml":false},{"FieldName":"DraftPrice","ExpressionText":"","FieldType":"currency","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsEditable","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Email","ExpressionText":"","FieldType":"string","FieldLength":255,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"EntityLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"EntityLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ExternalViewUrl","ExpressionText":"","FieldType":"string","FieldLength":500,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ForceNotCancelable","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ForceNotEditable","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"FulfillmentPlanLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"FulfillmentPlanLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"HasScriptRun","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"HRCaseLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"HRCaseLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"InShoppingCart","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IncidentLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IncidentLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsDraft","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsInFinalState","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsDSMTaskExisted","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsExternal","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsNewRequestNotificationSent","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsReportedByAlternateContact","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsUnRead","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsVIP","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_CILink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_LinkHRCases_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_ProductCatalogLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_SecurityIncidentLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_WorkOrderLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"LastModBy","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"LastModDateTime","ExpressionText":"","FieldType":"datetime","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_LinkHRCases_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"LoginId","ExpressionText":"","FieldType":"string","FieldLength":200,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Subject","ExpressionText":"$(GetSRPValue(RecId,  \"sreq_summary\"))","FieldType":"string","FieldLength":100,"Overwrite":true,"Expression":{"Description":null,"FieldRefs":["RecId"],"IsFullExpression":true,"Name":null,"Tree":{"Arguments":[{"FieldIndex":0,"Details":{"Container":null,"Selector":"RecId","SubSelector":null,"IsObjectSelector":false,"Qualifiers":null,"Kind":"Selection"},"Kind":"Field"},{"Value":"sreq_summary","LongImage":null,"IsHex":false,"IsVerbatimText":false,"Kind":"Literal"}],"FunctionName":"GetSRPValue","IsMethod":false,"Kind":"Function"},"ValidationStatus":"Ok"},"IsHtml":false},{"FieldName":"IsNewRecord","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OfferStatus","ExpressionText":"","FieldType":"list","FieldLength":250,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OfferStatus_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OrganizationUnitID","ExpressionText":"","FieldType":"string","FieldLength":60,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OrgUnitLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OrgUnitLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Owner","ExpressionText":"","FieldType":"list","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OwnerEmail","ExpressionText":"","FieldType":"string","FieldLength":255,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Owner_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OwnershipAssignmentEmail","ExpressionText":"","FieldType":"string","FieldLength":255,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OwnerTeam_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OwnerType","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ParentSvcReqLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ParentSvcReqLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Phone","ExpressionText":"","FieldType":"string","FieldLength":50,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Price","ExpressionText":"","FieldType":"currency","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_ProductCatalogLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ProfileLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ProgressBarPosition","ExpressionText":"","FieldType":"string","FieldLength":25,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_PurchaseRequestCount","ExpressionText":"","FieldType":"number","FieldLength":8,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ReadOnly","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"RecId","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"RecurrentPeriod","ExpressionText":"","FieldType":"number","FieldLength":4,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"RecurrentPrice","ExpressionText":"","FieldType":"currency","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Reminder","ExpressionText":"","FieldType":"datetime","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Reorder_global_constant","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_RequestedCatalogItemCount","ExpressionText":"","FieldType":"number","FieldLength":8,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"RequestOfferingWFTrigger","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Resolution","ExpressionText":"","FieldType":"text","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ResolutionEscLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ResolutionEscLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ResolvedBy","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ResolvedDateTime","ExpressionText":"","FieldType":"datetime","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ResponseEscLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ResponseEscLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_SecurityIncidentLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SendSurveyNotification","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Service","ExpressionText":"","FieldType":"list","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ServiceReqNumber","ExpressionText":"","FieldType":"float","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Service_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ServiceReqApprovalParams","ExpressionText":"$(ForEachChild(\"ServiceReq#\", \r\n  RecId, \r\n  \"ServiceReqParam#\", \r\n  \"ParameterName + ': ' + ParameterValue + '\\r\\n'\", \r\n  \"CreatedDateTime ASC\"))","FieldType":"text","FieldLength":0,"Overwrite":true,"Expression":{"Description":null,"FieldRefs":["RecId"],"IsFullExpression":true,"Name":null,"Tree":{"Arguments":[{"Value":"ServiceReq#","LongImage":null,"IsHex":false,"IsVerbatimText":false,"Kind":"Literal"},{"FieldIndex":0,"Details":{"Container":null,"Selector":"RecId","SubSelector":null,"IsObjectSelector":false,"Qualifiers":null,"Kind":"Selection"},"Kind":"Field"},{"Value":"ServiceReqParam#","LongImage":null,"IsHex":false,"IsVerbatimText":false,"Kind":"Literal"},{"Value":"ParameterName + ': ' + ParameterValue + '\r\n'","LongImage":null,"IsHex":false,"IsVerbatimText":false,"Kind":"Literal"},{"Value":"CreatedDateTime ASC","LongImage":null,"IsHex":false,"IsVerbatimText":false,"Kind":"Literal"}],"FunctionName":"ForEachChild","IsMethod":false,"Kind":"Function"},"ValidationStatus":"Ok"},"IsHtml":false},{"FieldName":"ServiceReqLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ServiceReqLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ServiceReqTemplateDefinitionLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ServiceReqTemplateDefinitionLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SLA","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SLADisplayText","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SLALink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SLALink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Source","ExpressionText":"","FieldType":"list","FieldLength":50,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Source_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Status","ExpressionText":"","FieldType":"list","FieldLength":50,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Status_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SvcReqSubscLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SvcReqSubscLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SvcReqTmplLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"SvcReqTmplLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"TaskCostUSD","ExpressionText":"","FieldType":"currency","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"TaskPriceUSD","ExpressionText":"","FieldType":"currency","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OwnerTeam","ExpressionText":"","FieldType":"list","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"OwnerTeamEmail","ExpressionText":"","FieldType":"string","FieldLength":255,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"TemplateCancelable","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"IsTemplateEditable","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_TimeSheetDuplicate","ExpressionText":"","FieldType":"boolean","FieldLength":0,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"TotalTimeSpent","ExpressionText":"","FieldType":"float","FieldLength":10,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Urgency","ExpressionText":"","FieldType":"list","FieldLength":50,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"Urgency_Valid","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"WaitRequest","ExpressionText":"","FieldType":"string","FieldLength":32,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"WaitingEscLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"WaitingEscLink_Category","ExpressionText":"","FieldType":"string","FieldLength":100,"Overwrite":false,"Expression":null,"IsHtml":false},{"FieldName":"ivnt_WorkOrderLink_RecID","ExpressionText":"","FieldType":"string","FieldLength":30,"Overwrite":false,"Expression":null,"IsHtml":false}],"RelationshipPath":null,"ChildTableRef":null,"ActionType":"UpdateObject","CreatedBy":"alexandru.mateescu","CreatedDateTime":new Date(1667993300120),"Description":null,"Keywords":null,"DisabledExpression":null,"ExecConfirm":false,"ExecConfirmMsg":null,"GroupName":"Workflow engine","HiddenExpression":null,"HideFromUI":false,"Id":"d4538b5a-36a8-43ec-8ee1-124f5d063f28","IsDisabled":false,"IsInternal":true,"Name":"Workflow update object","OwnerId":"alexandru.mateescu","Permissions":"Delete, Update","RoleScopes":null,"ShouldSave":false,"TableRef":"ServiceReq#"}&lt;/Definition&gt;&lt;ActionType&gt;UpdateObject&lt;/ActionType&gt;&lt;GroupName&gt;Workflow engine&lt;/GroupName&gt;&lt;/QuickAction&gt;&lt;/QuickActions&gt;&lt;/WorkflowVersionInformation&gt;</WorkflowDefinition>
+  <WorkflowType TypeCode="Object" CLR_Type="HEAT.ServiceCatalog.Models.Workflow.WorkflowTypeDef" FRS_ID="d54b23e693ec4b9da823146a490e8e5b">
+   <RecId>d54b23e693ec4b9da823146a490e8e5b</RecId>
+   <CreatedBy>christian.magalhaes</CreatedBy>
+   <CreatedDateTime TypeCode="DateTime">2023-12-15T10:22:46.8230000Z</CreatedDateTime>
+   <LastModBy>christian.magalhaes</LastModBy>
+   <LastModDateTime TypeCode="DateTime">2023-12-15T10:22:46.8230000Z</LastModDateTime>
+   <TypeRecId>d54b23e693ec4b9da823146a490e8e5b</TypeRecId>
+   <Name>Bitbucket Cloud Support Request form</Name>
+   <ObjectType>ServiceReq</ObjectType>
+   <Description></Description>
+   <DisplayName>Bitbucket Cloud Support Request form</DisplayName>
+   <Category>User</Category>
+   <IsInternal TypeCode="Boolean">True</IsInternal>
+  </WorkflowType>
+ </RequestOffering>
+</Offerings>
