@@ -1,0 +1,38 @@
+name: Retail in Motion IT Help - Create Forms
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_it_create_forms.py'
+      - '.github/workflows/rim-it-create-forms.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  create-forms:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild deterministic ROX creation plan
+        run: python .github/scripts/build_creation_plan.py
+      - name: Create, populate, publish and verify IT Help Forms
+        run: python .github/scripts/rim_it_create_forms.py
+      - name: Upload Forms migration report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-forms
+          path: migration-output/it-forms/
+          if-no-files-found: warn
+          retention-days: 14
