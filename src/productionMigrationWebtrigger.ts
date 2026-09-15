@@ -509,7 +509,8 @@ export async function handler(request: WebtriggerRequest) {
       if (sections.length) {
         sections.forEach((section) => buckets.push({ name: section.name || 'Section', sequence: Number(section.sequence ?? 0), qids: [] }));
         const pre: string[] = [];
-        for (const item: MappedField of mapped.filter((entry) => !entry.visibilityExpression)) {
+        const unconditionalMapped: MappedField[] = mapped.filter((entry) => !entry.visibilityExpression);
+        for (const item of unconditionalMapped) {
           const eligible = buckets.filter((bucket) => bucket.sequence <= item.sequence);
           if (eligible.length) eligible.sort((a, b) => b.sequence - a.sequence)[0].qids.push(item.qid);
           else pre.push(item.qid);
@@ -521,7 +522,8 @@ export async function handler(request: WebtriggerRequest) {
 
       // Jira Forms conditions show/hide sections, so each conditional source
       // question is isolated in its own section instead of hiding unrelated fields.
-      for (const item: MappedField of mapped.filter((entry) => item.visibilityExpression)) {
+      const conditionallyMapped: MappedField[] = mapped.filter((entry) => Boolean(entry.visibilityExpression));
+      for (const item of conditionallyMapped) {
         buckets.push({ name: `${item.name} — conditional`, sequence: item.sequence, qids: [item.qid] });
       }
 
