@@ -6,6 +6,7 @@ on:
       - production-migration-runner
     paths:
       - '.github/scripts/rim_it_source_request_descriptions.py'
+      - '.github/scripts/rim_it_source_condition_inventory.py'
       - '.github/workflows/rim-it-source-fidelity.yml'
   workflow_dispatch:
 
@@ -31,6 +32,8 @@ jobs:
           test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
       - name: Sync source-faithful request descriptions
         run: python .github/scripts/rim_it_source_request_descriptions.py
+      - name: Inventory Ivanti conditional visibility rules
+        run: python .github/scripts/rim_it_source_condition_inventory.py
       - name: Upload source fidelity report
         if: always()
         uses: actions/upload-artifact@v4
