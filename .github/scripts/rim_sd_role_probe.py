@@ -23,6 +23,21 @@ if rs==200 and isinstance(roles,dict):
   path=url.split('.atlassian.net',1)[-1] if '.atlassian.net' in url else url
   st,body=get(path)
   role_data[name]={'status':st,'body':body}
-result={'mode':'READ_ONLY_SD_ROLE_PROBE','myselfStatus':s,'myself':me,'rolesStatus':rs,'roles':role_data}
+account_id=me.get('accountId') if isinstance(me,dict) else None
+extra={}
+probes={
+ 'applicationRoles':'/rest/api/3/applicationrole',
+ 'myPermissionsSD':'/rest/api/3/mypermissions?projectKey=SD',
+ 'userGroups':f'/rest/api/3/user/groups?accountId={account_id}' if account_id else None,
+ 'serviceDesks':'/rest/servicedeskapi/servicedesk?start=0&limit=100',
+ 'requestTypesAll':'/rest/servicedeskapi/requesttype?start=0&limit=1'
+}
+for name,path in probes.items():
+ if path:
+  st,body=get(path);extra[name]={'status':st,'body':body}
+result={'mode':'READ_ONLY_SD_ROLE_AND_ENTITLEMENT_PROBE','myselfStatus':s,'myself':me,'rolesStatus':rs,'roles':role_data,'probes':extra}
 (OUT/'result.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
-print(json.dumps({'myselfStatus':s,'accountId':me.get('accountId') if isinstance(me,dict) else None,'displayName':me.get('displayName') if isinstance(me,dict) else None,'roles':{k:{'status':v['status'],'id':(v['body'].get('id') if isinstance(v['body'],dict) else None),'actors':[{'displayName':a.get('displayName'),'type':a.get('type'),'accountId':((a.get('actorUser') or {}).get('accountId'))} for a in ((v['body'].get('actors') or []) if isinstance(v['body'],dict) else [])]} for k,v in role_data.items()}},indent=2))
+summary={'myselfStatus':s,'accountId':account_id,'displayName':me.get('displayName') if isinstance(me,dict) else None,
+ 'roleMemberships':[{'name':k,'id':(v['body'].get('id') if isinstance(v['body'],dict) else None)} for k,v in role_data.items() if isinstance(v['body'],dict) and any(((a.get('actorUser') or {}).get('accountId')==account_id) for a in (v['body'].get('actors') or []))],
+ 'probeStatuses':{k:v['status'] for k,v in extra.items()}}
+print(json.dumps(summary,indent=2))
