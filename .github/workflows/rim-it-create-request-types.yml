@@ -1,0 +1,36 @@
+name: Retail in Motion IT Help - Create Request Types
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_it_create_request_types.py'
+      - '.github/workflows/rim-it-create-request-types.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  create-request-types:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create or reuse IT Help request types and verify
+        run: python .github/scripts/rim_it_create_request_types.py
+      - name: Upload IT request type report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-request-types
+          path: migration-output/it-request-types/
+          if-no-files-found: warn
+          retention-days: 14
