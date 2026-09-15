@@ -1,0 +1,37 @@
+name: Retail in Motion Jira Write Preflight
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_write_preflight.py'
+      - '.github/workflows/rim-write-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run read-only write-permission preflight
+        run: python .github/scripts/rim_write_preflight.py
+      - name: Upload preflight artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-write-preflight
+          path: migration-output/write-preflight/
+          if-no-files-found: error
+          retention-days: 7
