@@ -34,10 +34,17 @@ def clean_html(value: str) -> str:
     return re.sub(r'\s+', ' ', value).strip()
 
 
-def infer_type(display_type: str, values):
-    d = (display_type or '').lower()
+def infer_type(display_type: str, values, lookup_id: str, name: str):
+    d = (display_type or '').lower().strip()
+    n = (name or '').lower().strip()
+    if d == 'category':
+        return 'section'
     if d in {'list', 'dropdown', 'radio', 'combobox', 'select'}:
         return 'select'
+    if d == 'combo':
+        if re.search(r'\b(requester|person|employee name|user name|choose a person|name)\b', n) and lookup_id:
+            return 'user-or-lookup'
+        return 'lookup-select' if lookup_id else ('select' if values else 'text')
     if d in {'checkbox', 'boolean', 'yesno', 'yes/no'}:
         return 'checkbox'
     if 'date' in d:
@@ -72,6 +79,7 @@ def parse_offering(path: Path):
         'description': clean_html(child_text(t, 'Description')),
         'status': child_text(t, 'Status'),
         'fields': [],
+        'sections': [],
     }
     for p in descendants(t, 'ServiceRequestTemplateParameter'):
         display = child_text(p, 'DisplayName') or child_text(p, 'Name')
@@ -80,13 +88,17 @@ def parse_offering(path: Path):
         options = option_values(p)
         required_expr = child_text(p, 'RequiredExpression')
         visibility_expr = child_text(p, 'VisibilityExpression')
-        field = {
+        lookup_id = child_text(p, 'ValidationListRecId')
+        display_type = child_text(p, 'DisplayType')
+        jira_type = infer_type(display_type, options, lookup_id, display)
+        entry = {
             'sourceId': child_text(p, 'RecId'),
             'name': display.strip(),
             'sourceName': child_text(p, 'Name'),
             'description': clean_html(child_text(p, 'Description')),
-            'displayType': child_text(p, 'DisplayType'),
-            'jiraType': infer_type(child_text(p, 'DisplayType'), options),
+            'displayType': display_type,
+            'jiraType': jira_type,
+            'validationListRecId': lookup_id,
             'required': 'true' in required_expr.lower(),
             'requiredExpression': required_expr,
             'visibilityExpression': visibility_expr,
@@ -94,8 +106,12 @@ def parse_offering(path: Path):
             'options': options,
             'sequence': int(child_text(p, 'SequenceNumber') or 0),
         }
-        service['fields'].append(field)
+        if jira_type == 'section':
+            service['sections'].append(entry)
+        else:
+            service['fields'].append(entry)
     service['fields'].sort(key=lambda x: (x['sequence'], x['name'].lower()))
+    service['sections'].sort(key=lambda x: (x['sequence'], x['name'].lower()))
     return service
 
 
@@ -107,7 +123,7 @@ def main():
             if s:
                 services.append(s)
         except Exception as exc:
-            services.append({'sourceFile': path.name, 'name': path.stem, 'error': str(exc), 'fields': []})
+            services.append({'sourceFile': path.name, 'name': path.stem, 'error': str(exc), 'fields': [], 'sections': []})
 
     shared = defaultdict(list)
     for service in services:
@@ -135,32 +151,39 @@ def main():
         elif len(entries) > 1:
             reusable.append(item)
 
-    unsupported = []
-    supported_display = {'text', 'textbox', 'list', 'dropdown', 'radio', 'combobox', 'select', 'checkbox', 'boolean', 'yesno', 'yes/no', 'date', 'datepicker', 'textarea', 'text area', 'multiline', ''}
+    lookup_backed = []
+    unresolved_user_or_lookup = []
     for service in services:
         for f in service.get('fields', []):
-            d = f['displayType'].strip().lower()
-            if d not in supported_display and not any(x in d for x in ['text', 'date', 'number', 'list', 'select', 'check']):
-                unsupported.append({'service': service['name'], 'field': f['name'], 'displayType': f['displayType']})
+            if f['jiraType'] == 'lookup-select':
+                lookup_backed.append({'service': service['name'], 'field': f['name'], 'validationListRecId': f['validationListRecId']})
+            elif f['jiraType'] == 'user-or-lookup':
+                unresolved_user_or_lookup.append({'service': service['name'], 'field': f['name'], 'validationListRecId': f['validationListRecId']})
 
     plan = {
         'mode': 'PLAN_ONLY_NO_JIRA_WRITES',
         'serviceCount': len(services),
         'fieldOccurrences': sum(len(s.get('fields', [])) for s in services),
+        'sectionHeadings': sum(len(s.get('sections', [])) for s in services),
         'uniqueFieldNames': len(shared),
         'sharedReusableFieldNames': len(reusable),
         'typeConflictCount': len(conflicts),
-        'unsupportedDisplayTypeCount': len(unsupported),
+        'lookupBackedFieldCount': len(lookup_backed),
+        'userOrLookupReviewCount': len(unresolved_user_or_lookup),
         'services': services,
         'sharedReusableFields': reusable,
         'typeConflicts': conflicts,
-        'unsupportedDisplayTypes': unsupported,
+        'lookupBackedFields': lookup_backed,
+        'userOrLookupReview': unresolved_user_or_lookup,
         'proposedBuildOrder': [
             'read-only Jira inventory / target project validation',
+            'resolve Ivanti validation-list backed combo fields before creating Jira fields',
+            'confirm user-picker candidates against live Jira users and source lookup semantics',
             'reuse compatible existing Jira fields',
             'create missing shared fields and options',
             'create/reuse one issue type per offering',
             'create request types in the target JSM project',
+            'recreate category headings as form sections, not Jira fields',
             'create forms and conditional visibility rules',
             'create screens/workflows only where source data supports them',
             'validate created objects by read-back before continuing',
@@ -172,31 +195,37 @@ def main():
         '# Jira creation plan from Ivanti ROX offerings', '',
         '**PLAN ONLY — this file does not change Jira.**', '',
         f"- Services: {plan['serviceCount']}",
-        f"- Field occurrences: {plan['fieldOccurrences']}",
+        f"- Jira field occurrences: {plan['fieldOccurrences']}",
+        f"- Ivanti category headings to recreate as form sections: {plan['sectionHeadings']}",
         f"- Unique field names: {plan['uniqueFieldNames']}",
         f"- Reusable shared field names: {plan['sharedReusableFieldNames']}",
         f"- Type conflicts: {plan['typeConflictCount']}",
-        f"- Unsupported display types: {plan['unsupportedDisplayTypeCount']}", '',
+        f"- Validation-list backed lookup fields: {plan['lookupBackedFieldCount']}",
+        f"- User/lookup candidates needing live resolution: {plan['userOrLookupReviewCount']}", '',
         '## Services', '',
-        '| Service | Fields | Required | Conditional | Select options |',
-        '|---|---:|---:|---:|---:|',
+        '| Service | Fields | Sections | Required | Conditional | Select options |',
+        '|---|---:|---:|---:|---:|---:|',
     ]
     for s in services:
         fields = s.get('fields', [])
-        lines.append(f"| {s['name']} | {len(fields)} | {sum(1 for f in fields if f['required'])} | {sum(1 for f in fields if f['conditional'])} | {sum(len(f['options']) for f in fields)} |")
+        lines.append(f"| {s['name']} | {len(fields)} | {len(s.get('sections', []))} | {sum(1 for f in fields if f['required'])} | {sum(1 for f in fields if f['conditional'])} | {sum(len(f['options']) for f in fields)} |")
     if conflicts:
         lines += ['', '## Field type conflicts', '']
         for c in conflicts:
             lines.append(f"- {c['name']}: {', '.join(c['types'])} across {', '.join(c['services'])}")
-    if unsupported:
-        lines += ['', '## Unsupported/unknown display types', '']
-        for u in unsupported:
-            lines.append(f"- {u['service']} / {u['field']}: {u['displayType']}")
+    if lookup_backed:
+        lines += ['', '## Lookup-backed combo fields', '']
+        for u in lookup_backed:
+            lines.append(f"- {u['service']} / {u['field']} — validation list {u['validationListRecId']}")
+    if unresolved_user_or_lookup:
+        lines += ['', '## User-or-lookup candidates', '']
+        for u in unresolved_user_or_lookup:
+            lines.append(f"- {u['service']} / {u['field']} — validation list {u['validationListRecId']}")
     (OUT / 'jira-creation-plan.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
 
-    print(json.dumps({k: v for k, v in plan.items() if k not in {'services','sharedReusableFields','typeConflicts','unsupportedDisplayTypes','proposedBuildOrder'}}, indent=2))
+    print(json.dumps({k: v for k, v in plan.items() if k not in {'services','sharedReusableFields','typeConflicts','lookupBackedFields','userOrLookupReview','proposedBuildOrder'}}, indent=2))
     for s in services:
-        print(f"{s['name']}: fields={len(s.get('fields', []))}")
+        print(f"{s['name']}: fields={len(s.get('fields', []))} sections={len(s.get('sections', []))}")
     return 1 if any('error' in s for s in services) else 0
 
 
