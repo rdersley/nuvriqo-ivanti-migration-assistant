@@ -1,0 +1,53 @@
+name: Retail in Motion Migration Reconciliation
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - 'migration-input/**'
+      - '.github/scripts/production_migration_dry_run.py'
+      - '.github/scripts/build_creation_plan.py'
+      - '.github/scripts/rim_jira_readonly_inventory.py'
+      - '.github/scripts/reconcile_jira_creation_plan.py'
+      - '.github/workflows/rim-migration-reconciliation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse ROX sources
+        run: python .github/scripts/production_migration_dry_run.py
+
+      - name: Build Jira creation plan
+        run: python .github/scripts/build_creation_plan.py
+
+      - name: Inventory Retail in Motion Jira read-only
+        run: python .github/scripts/rim_jira_readonly_inventory.py
+
+      - name: Reconcile source plan to existing Jira
+        run: python .github/scripts/reconcile_jira_creation_plan.py
+
+      - name: Upload complete reconciliation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-migration-reconciliation
+          path: migration-output/
+          if-no-files-found: error
+          retention-days: 14
