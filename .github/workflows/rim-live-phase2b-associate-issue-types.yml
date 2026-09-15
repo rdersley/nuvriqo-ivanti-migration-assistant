@@ -1,0 +1,42 @@
+name: Retail in Motion Live Migration - Phase 2B Associate Issue Types
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_phase2b_associate_issue_types.py'
+      - '.github/workflows/rim-live-phase2b-associate-issue-types.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rim-live-migration-phase2b-associate-issue-types
+  cancel-in-progress: false
+
+jobs:
+  associate:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Associate migrated issue types with SD and verify cleanup
+        run: python .github/scripts/rim_phase2b_associate_issue_types.py
+      - name: Upload phase-two-B result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-live-phase2b
+          path: migration-output/live-create-phase2b/
+          if-no-files-found: warn
+          retention-days: 14
