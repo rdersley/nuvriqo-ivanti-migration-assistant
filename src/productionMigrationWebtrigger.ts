@@ -1,5 +1,6 @@
 import api, { route } from '@forge/api';
 import { kvs } from '@forge/kvs';
+import { saveExecutableGraph, type ExecutableGraphPlan } from './orchestrationGraphEngine';
 
 const PROJECT_ID = '12789';
 const PROJECT_KEY = 'IT';
@@ -36,7 +37,20 @@ type SourceField = {
 };
 type SourceSection = { name: string; sequence?: number };
 type SourceService = { name: string; fields?: SourceField[]; sections?: SourceSection[] };
-type Payload = { runId?: string; projectKey?: string; projectId?: string; services?: SourceService[] };
+type MappedField = {
+  qid: string; sequence: number; sourceName: string; name: string;
+  jiraFieldId: string; jiraType: string; visibilityExpression: string;
+};
+type CompletionService = {
+  name: string; requestTypeId: string; issueTypeId: string; approval: boolean;
+  tasks?: string[]; orchestrationHold?: string;
+};
+type CompletionPlan = {
+  target: { projectKey: string; projectId: string; serviceDeskId: string; workflowSchemeId: string };
+  workflows: { standard: string; approval: string };
+  services: CompletionService[];
+};
+type Payload = { runId?: string; projectKey?: string; projectId?: string; services?: SourceService[]; completionPlan?: CompletionPlan };
 type JiraField = { id: string; name: string; schema?: { custom?: string } };
 
 type WebtriggerRequest = {
@@ -263,6 +277,129 @@ function headerValue(headers: Record<string, string | string[] | undefined> | un
   return Array.isArray(value) ? String(value[0] ?? '') : String(value ?? '');
 }
 
+function validateCompletionPlan(plan: CompletionPlan | undefined): CompletionPlan {
+  if (!plan || plan.target.projectKey !== PROJECT_KEY || plan.target.projectId !== PROJECT_ID || plan.target.serviceDeskId !== SERVICE_DESK_ID) {
+    throw new Error('Completion plan target guard failed.');
+  }
+  if (plan.services.length !== 14) throw new Error(`Completion plan must contain exactly 14 services; received ${plan.services.length}.`);
+  const approved = Object.entries(REQUEST_TYPES);
+  for (const [name, requestTypeId] of approved) {
+    const service = plan.services.find((item) => item.name === name && item.requestTypeId === requestTypeId);
+    if (!service?.issueTypeId || !/^125(?:2[5-9]|3[0-8])$/.test(service.issueTypeId)) {
+      throw new Error(`Completion plan identity guard failed for ${name}.`);
+    }
+  }
+  if (plan.services.filter((item) => item.approval).length !== 7) throw new Error('Exactly seven v11-backed approval services are required.');
+  return plan;
+}
+
+function buildExecutablePlan(service: CompletionService): ExecutableGraphPlan | undefined {
+  if (!service.tasks?.length) return undefined;
+  const taskNodes = service.tasks.map((title, index) => ({
+    id: `task-${index + 1}`,
+    sourceType: 'v11-recurring-task',
+    kind: 'task' as const,
+    title,
+    summary: title,
+    details: `Source-backed recurring Ivanti fulfilment task for ${service.name}.`,
+    outcomes: ['completed']
+  }));
+  const nodes = [
+    { id: 'start', sourceType: 'v11-history', kind: 'start' as const, title: 'Start fulfilment', outcomes: ['ok'] },
+    ...taskNodes,
+    { id: 'join', sourceType: 'v11-history', kind: 'gate' as const, title: 'All source-backed tasks complete', outcomes: ['ok'] },
+    { id: 'stop', sourceType: 'v11-history', kind: 'stop' as const, title: 'Complete request', outcomes: [] }
+  ];
+  const transitions = [
+    ...taskNodes.map((node) => ({ sourceId: 'start', sourceTitle: 'Start fulfilment', outcome: 'ok', targetId: node.id, targetTitle: node.title })),
+    ...taskNodes.map((node) => ({ sourceId: node.id, sourceTitle: node.title, outcome: 'completed', targetId: 'join', targetTitle: 'All source-backed tasks complete' })),
+    { sourceId: 'join', sourceTitle: 'All source-backed tasks complete', outcome: 'ok', targetId: 'stop', targetTitle: 'Complete request' }
+  ];
+  return {
+    version: 2,
+    serviceId: service.requestTypeId,
+    serviceName: service.name,
+    projectId: PROJECT_ID,
+    issueTypeId: service.issueTypeId,
+    workflowName: `${service.name} — v11 recurring fulfilment`,
+    workflowVersion: 'v11-20260915',
+    entryNodeIds: ['start'], nodes, transitions
+  };
+}
+
+async function installSourceBackedOrchestration(plan: CompletionPlan) {
+  const results: Array<{ service: string; status: string; tasks: number; hold?: string }> = [];
+  for (const service of plan.services) {
+    const graph = buildExecutablePlan(service);
+    if (!graph) {
+      results.push({ service: service.name, status: service.orchestrationHold ? 'source-hold' : 'not-evidenced', tasks: 0, hold: service.orchestrationHold });
+      continue;
+    }
+    await saveExecutableGraph(graph);
+    results.push({ service: service.name, status: 'installed', tasks: service.tasks?.length ?? 0, hold: service.orchestrationHold });
+  }
+  return results;
+}
+
+async function applyItWorkflowMappings(plan: CompletionPlan) {
+  const targetSchemeId = String(plan.target.workflowSchemeId);
+  const projectSchemes = await parseJira<{ values?: Array<{ projectIds?: string[]; workflowScheme?: any }> }>(
+    await api.asApp().requestJira(route`/rest/api/3/workflowscheme/project?projectId=${PROJECT_ID}`, { headers: { Accept: 'application/json' } })
+  );
+  const association = (projectSchemes.values ?? []).find((item) => (item.projectIds ?? []).map(String).includes(PROJECT_ID));
+  const scheme = association?.workflowScheme;
+  if (!scheme || String(scheme.id) !== targetSchemeId || (association?.projectIds ?? []).map(String).some((id) => id !== PROJECT_ID)) {
+    throw new Error('IT workflow scheme is missing, changed, or shared with another project; refusing to update it.');
+  }
+  const desired = { ...(scheme.issueTypeMappings ?? {}) } as Record<string, string>;
+  for (const service of plan.services) desired[service.issueTypeId] = service.approval ? plan.workflows.approval : plan.workflows.standard;
+  if (plan.services.every((service) => scheme.issueTypeMappings?.[service.issueTypeId] === desired[service.issueTypeId])) {
+    return { status: 'already-mapped', schemeId: targetSchemeId, mapped: 14 };
+  }
+
+  let draftResponse = await api.asApp().requestJira(route`/rest/api/3/workflowscheme/${targetSchemeId}/draft`, { headers: { Accept: 'application/json' } });
+  if (draftResponse.status === 404) {
+    const createDraft = await api.asApp().requestJira(route`/rest/api/3/workflowscheme/${targetSchemeId}/createdraft`, {
+      method: 'POST', headers: { Accept: 'application/json' }
+    });
+    await parseJira(createDraft);
+    draftResponse = await api.asApp().requestJira(route`/rest/api/3/workflowscheme/${targetSchemeId}/draft`, { headers: { Accept: 'application/json' } });
+  }
+  const draft = await parseJira<any>(draftResponse);
+  const updateDraft = await api.asApp().requestJira(route`/rest/api/3/workflowscheme/${targetSchemeId}/draft`, {
+    method: 'PUT',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: draft.name ?? scheme.name,
+      description: draft.description ?? scheme.description ?? '',
+      defaultWorkflow: draft.defaultWorkflow ?? scheme.defaultWorkflow,
+      issueTypeMappings: desired,
+      updateDraftIfNeeded: true
+    })
+  });
+  await parseJira(updateDraft);
+  const draftReadback = await parseJira<any>(await api.asApp().requestJira(
+    route`/rest/api/3/workflowscheme/${targetSchemeId}/draft`, { headers: { Accept: 'application/json' } }
+  ));
+  for (const service of plan.services) {
+    if (draftReadback.issueTypeMappings?.[service.issueTypeId] !== desired[service.issueTypeId]) throw new Error(`Draft workflow readback failed for ${service.name}.`);
+  }
+  const publish = await api.asApp().requestJira(route`/rest/api/3/workflowscheme/${targetSchemeId}/draft/publish`, {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ statusMappings: [] })
+  });
+  await parseJira(publish);
+  const finalSchemes = await parseJira<{ values?: Array<{ projectIds?: string[]; workflowScheme?: any }> }>(
+    await api.asApp().requestJira(route`/rest/api/3/workflowscheme/project?projectId=${PROJECT_ID}`, { headers: { Accept: 'application/json' } })
+  );
+  const finalScheme = (finalSchemes.values ?? []).find((item) => (item.projectIds ?? []).map(String).includes(PROJECT_ID))?.workflowScheme;
+  for (const service of plan.services) {
+    if (finalScheme?.issueTypeMappings?.[service.issueTypeId] !== desired[service.issueTypeId]) throw new Error(`Published workflow readback failed for ${service.name}.`);
+  }
+  return { status: 'published', schemeId: targetSchemeId, mapped: 14 };
+}
+
 export async function handler(request: WebtriggerRequest) {
   try {
     if (String(request.method ?? '').toUpperCase() !== 'POST') return jsonResponse(405, { ok: false, error: 'POST required.' });
@@ -338,10 +475,7 @@ export async function handler(request: WebtriggerRequest) {
       const fields = [...(service.fields ?? [])].sort((a, b) => Number(a.sequence ?? 0) - Number(b.sequence ?? 0));
       const sections = [...(service.sections ?? [])].sort((a, b) => Number(a.sequence ?? 0) - Number(b.sequence ?? 0));
       const questions: Record<string, unknown> = {};
-      const mapped: Array<{
-        qid: string; sequence: number; sourceName: string; name: string;
-        jiraFieldId: string; jiraType: string; visibilityExpression: string;
-      }> = [];
+      const mapped: MappedField[] = [];
       const unresolved: Array<{ name: string; jiraType?: string; reason: string }> = [];
       let qNumber = 1;
 
@@ -375,7 +509,7 @@ export async function handler(request: WebtriggerRequest) {
       if (sections.length) {
         sections.forEach((section) => buckets.push({ name: section.name || 'Section', sequence: Number(section.sequence ?? 0), qids: [] }));
         const pre: string[] = [];
-        for (const item of mapped.filter((entry) => !entry.visibilityExpression)) {
+        for (const item: MappedField of mapped.filter((entry) => !entry.visibilityExpression)) {
           const eligible = buckets.filter((bucket) => bucket.sequence <= item.sequence);
           if (eligible.length) eligible.sort((a, b) => b.sequence - a.sequence)[0].qids.push(item.qid);
           else pre.push(item.qid);
@@ -387,7 +521,7 @@ export async function handler(request: WebtriggerRequest) {
 
       // Jira Forms conditions show/hide sections, so each conditional source
       // question is isolated in its own section instead of hiding unrelated fields.
-      for (const item of mapped.filter((entry) => item.visibilityExpression)) {
+      for (const item: MappedField of mapped.filter((entry) => item.visibilityExpression)) {
         buckets.push({ name: `${item.name} — conditional`, sequence: item.sequence, qids: [item.qid] });
       }
 
@@ -574,6 +708,13 @@ export async function handler(request: WebtriggerRequest) {
     }
 
     const failed = (results as any[]).filter((item) => item.status === 'failed');
+    let workflowResult: unknown;
+    let orchestrationResults: unknown[] = [];
+    if (!failed.length) {
+      const completionPlan = validateCompletionPlan(payload.completionPlan);
+      workflowResult = await applyItWorkflowMappings(completionPlan);
+      orchestrationResults = await installSourceBackedOrchestration(completionPlan);
+    }
     const output = {
       ok: failed.length === 0,
       runId: payload.runId,
@@ -583,6 +724,8 @@ export async function handler(request: WebtriggerRequest) {
       failed: failed.length,
       conditions: (results as any[]).reduce((sum, item) => sum + Number(item.conditions ?? 0), 0),
       unresolvedFieldOccurrences: (results as any[]).reduce((sum, item) => sum + (item.unresolved?.length ?? 0), 0),
+      workflowResult,
+      orchestrationResults,
       results
     };
     if (!failed.length) {

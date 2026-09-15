@@ -14,6 +14,7 @@ def check(name, value):
 
 plan = json.loads((ROOT / 'migration-output/jira-creation-plan.json').read_text())
 payload = json.loads((ROOT / 'migration-output/it-webtrigger/payload.json').read_text())
+completion = payload.get('completionPlan') or {}
 conditions = [
     (service['name'], field)
     for service in payload['services']
@@ -24,6 +25,11 @@ check('exactly 14 source services', len(payload.get('services', [])) == 14 == pl
 check('exactly 12 source visibility rules', len(conditions) == 12)
 check('all conditional fields retain sourceName', all(field.get('sourceName') for _, field in conditions))
 check('all conditional fields retain sourceId', all(field.get('sourceId') for _, field in conditions))
+check('completion plan targets IT only', completion.get('target') == {'projectKey':'IT','projectId':'12789','serviceDeskId':'2183','workflowSchemeId':'12635'})
+check('completion plan has 14 services', len(completion.get('services') or []) == 14)
+check('completion plan has seven approval services', sum(bool(item.get('approval')) for item in completion.get('services') or []) == 7)
+check('completion plan has four exact orchestration services', sum(bool(item.get('tasks')) for item in completion.get('services') or []) == 4)
+check('exact orchestration task count is source-backed', sum(len(item.get('tasks') or []) for item in completion.get('services') or []) == 23)
 
 supported = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*\s*==\s*(?:"[^"]*"|\'[^\']*\'|true|false)$', re.I)
 for service, field in conditions:
@@ -41,11 +47,14 @@ for anchor in [
     "const PROJECT_ID = '12789'", "const PROJECT_KEY = 'IT'", "const SERVICE_DESK_ID = '2183'",
     'parseVisibilityExpression', 'findPersistedQuestion', 'findChoiceToken', 'jiraOptionId',
     'conditions-readback', 'publish-readback', 'ensureLookupFallbackFields'
+    , 'applyItWorkflowMappings', 'installSourceBackedOrchestration'
 ]:
     check(f'runner anchor {anchor}', anchor in source)
 check('workflow requires 12 persisted conditions', "parsed.get('conditions') != 12" in workflow)
 check('workflow requires all 14 forms', "parsed.get('published') != 14" in workflow)
 check('workflow requires zero unresolved lookups', "parsed.get('unresolvedFieldOccurrences') != 0" in workflow)
+check('workflow requires all workflow mappings', 'mapped != 14' in workflow)
+check('workflow requires four exact orchestration plans', 'installed != 4' in workflow)
 check('completion runner has no SD project target', not re.search(r"project(?:Key)?\s*[:=]\s*['\"]SD['\"]", source))
 
 print(f'IT completion QA: {31 + len(conditions)} guarded checks')
