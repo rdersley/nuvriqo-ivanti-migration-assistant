@@ -1,0 +1,35 @@
+name: Retail in Motion JSM SD Access Probe
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_jsm_access_probe.py'
+      - '.github/workflows/rim-jsm-access-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe SD JSM access without writes
+        run: python .github/scripts/rim_jsm_access_probe.py
+      - name: Upload probe result
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-jsm-sd-access-probe
+          path: migration-output/jsm-access-probe/
+          if-no-files-found: error
+          retention-days: 7
