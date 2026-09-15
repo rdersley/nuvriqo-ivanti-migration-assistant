@@ -1,0 +1,41 @@
+name: Retail in Motion IT Help - Completion Inventory
+
+on:
+  push:
+    branches:
+      - migration-completion-20260915
+    paths:
+      - '.github/scripts/rim_it_completion_inventory.py'
+      - '.github/workflows/rim-it-completion-inventory.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Hard target guard
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "migration-completion-20260915"
+          test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
+      - name: Inventory only IT Help migration configuration
+        run: python .github/scripts/rim_it_completion_inventory.py
+      - name: Upload completion inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-completion-inventory
+          path: migration-output/it-completion-inventory/
+          if-no-files-found: error
+          retention-days: 14
