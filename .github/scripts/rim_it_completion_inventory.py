@@ -13,7 +13,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-SITE = os.environ['RIM_FORGE_SITE'].strip().rstrip('/')
+SITE_HOST = os.environ['RIM_FORGE_SITE'].strip().rstrip('/')
+SITE = SITE_HOST if SITE_HOST.startswith(('http://', 'https://')) else f'https://{SITE_HOST}'
 EMAIL = os.environ['FORGE_EMAIL']
 TOKEN = os.environ['FORGE_API_TOKEN']
 PROJECT_ID = '12789'
@@ -48,13 +49,13 @@ def assert_safe(path: str) -> None:
     if any(value in decoded for value in forbidden):
         raise SystemExit(f'Forbidden SD target in read-only inventory path: {path}')
     allowed = (
-        '/rest/api/3/project/it', f'/rest/api/3/project/{PROJECT_ID}',
-        f'/rest/servicedeskapi/servicedesk/{SERVICE_DESK_ID}',
-        f'/forms/project/{PROJECT_ID}', '/rest/api/3/field',
+        '/rest/api/3/project/it', f'/rest/api/3/project/{PROJECT_ID}'.lower(),
+        f'/rest/servicedeskapi/servicedesk/{SERVICE_DESK_ID}'.lower(),
+        f'/forms/project/{PROJECT_ID}'.lower(), '/rest/api/3/field',
         '/rest/api/3/workflow', '/rest/api/3/workflowscheme',
         '/rest/api/3/status', '/rest/api/3/search', '/rest/api/3/group',
     )
-    if not path.startswith(allowed):
+    if not decoded.startswith(allowed):
         raise SystemExit(f'Path is outside the IT completion inventory allow-list: {path}')
 
 def get(path: str):
