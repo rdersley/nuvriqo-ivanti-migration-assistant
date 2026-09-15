@@ -9,6 +9,7 @@ on:
       - '.github/scripts/rim_it_request_group_internal_probe.py'
       - '.github/scripts/rim_it_group_put_noop_probe.py'
       - '.github/scripts/rim_it_group_single_assignment.py'
+      - '.github/scripts/rim_it_group_all_migrated_request_types.py'
       - '.github/workflows/rim-it-request-type-groups-inventory.yml'
   workflow_dispatch:
 
@@ -35,7 +36,9 @@ jobs:
         run: python .github/scripts/rim_it_group_put_noop_probe.py
       - name: Assign AWS Account management to Logins and Accounts with hard guards
         run: python .github/scripts/rim_it_group_single_assignment.py
-      - name: Re-inventory after assignment
+      - name: Assign all migrated request types to appropriate portal groups
+        run: python .github/scripts/rim_it_group_all_migrated_request_types.py
+      - name: Re-inventory after assignments
         run: python .github/scripts/rim_it_request_type_groups_inventory.py
       - name: Upload request type group inventory
         if: always()
