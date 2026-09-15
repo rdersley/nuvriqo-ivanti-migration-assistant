@@ -41,6 +41,26 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Apply release patches
+        run: |
+          python .github/scripts/forms_condition_fix.py
+          python .github/scripts/forms_condition_runtime_fix.py
+          python .github/scripts/forms_condition_canonical_id_fix.py
+          python .github/scripts/forms_condition_backend_controller_fix.py
+          python .github/scripts/forms_persisted_section_controller_fix.py
+          python .github/scripts/lookup_field_fidelity_fix.py
+          python .github/scripts/orchestration_react_view_fix.py
+          python .github/scripts/orchestration_execution_plan_fix.py
+          python .github/scripts/orchestration_automation_blueprint_fix.py
+          python .github/scripts/orchestration_safe_ui_fix.py
+          python .github/scripts/cutover_readiness_fix.py
+          python .github/scripts/live_validation_readback_fix.py
+          python .github/scripts/native_workflow_export_import_fix.py
+          python .github/scripts/ivanti_direct_discovery_backend_fix.py
+          python .github/scripts/ivanti_source_acquisition_fix.py
+          python .github/scripts/action_review_hold_fix.py
+          python .github/scripts/multivalue_decision_fix.py
+
       - name: Rebuild and validate ROX plan
         run: |
           python .github/scripts/build_creation_plan.py
