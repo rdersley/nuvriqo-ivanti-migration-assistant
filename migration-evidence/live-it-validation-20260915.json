@@ -1,0 +1,55 @@
+{
+  "validatedAt": "2026-09-15T20:44:34Z",
+  "githubRunId": 35020305468,
+  "commit": "949c47caec1ad8f1c7a49e568e7c332f38a51ec5",
+  "mode": "LIVE_IT_END_TO_END",
+  "target": {
+    "projectKey": "IT",
+    "projectId": "12789",
+    "serviceDeskId": "2183",
+    "workflowSchemeId": "12635"
+  },
+  "forms": {
+    "published": 14,
+    "failed": 0,
+    "conditions": 12,
+    "unresolvedFieldOccurrences": 0
+  },
+  "workflows": {
+    "mappedIssueTypes": 14,
+    "approvalWorkflowIssueTypes": 7,
+    "standardWorkflowIssueTypes": 7
+  },
+  "orchestration": {
+    "installedServices": 4,
+    "verifiedTasks": 22,
+    "verifiedRoutingMetadata": "First Line Support",
+    "verifiedParentCompletion": true
+  },
+  "requestTypes": [
+    {"name":"AWS Account management","requestTypeId":"2424","issueTypeId":"12525","result":"passed"},
+    {"name":"Bitbucket Cloud Support","requestTypeId":"2425","issueTypeId":"12526","result":"passed"},
+    {"name":"Domain Password Reset","requestTypeId":"2426","issueTypeId":"12527","result":"passed"},
+    {"name":"Employee Move","requestTypeId":"2427","issueTypeId":"12528","result":"passed"},
+    {"name":"Leaver","requestTypeId":"2428","issueTypeId":"12529","result":"passed"},
+    {"name":"New Application Access Request","requestTypeId":"2429","issueTypeId":"12530","result":"passed"},
+    {"name":"New IT Software Request","requestTypeId":"2430","issueTypeId":"12531","result":"passed"},
+    {"name":"New Service Request","requestTypeId":"2431","issueTypeId":"12532","result":"passed"},
+    {"name":"New Vector System Provisioning","requestTypeId":"2432","issueTypeId":"12533","result":"passed"},
+    {"name":"Production Vector System Decommissioning","requestTypeId":"2433","issueTypeId":"12534","result":"passed"},
+    {"name":"Suspend Temporary Access","requestTypeId":"2434","issueTypeId":"12535","result":"passed"},
+    {"name":"Test Vector System Decommissioning","requestTypeId":"2435","issueTypeId":"12536","result":"passed"},
+    {"name":"UAT Vector System Decommissioning","requestTypeId":"2436","issueTypeId":"12537","result":"passed"},
+    {"name":"cBase Leaver","requestTypeId":"2437","issueTypeId":"12538","result":"passed"}
+  ],
+  "cleanup": {
+    "temporaryParentIssuesDeleted": 14,
+    "failures": 0
+  },
+  "evidenceLimits": [
+    "The seven approval-backed request types were verified against the existing native IT approval workflow mapping and its Waiting for approval status. No approver identity was invented or pre-populated.",
+    "Operational assignment was not invented for the absent First Line Support Jira group. The exact v11 team is preserved and verified as task metadata.",
+    "Parameterised Vector task families remain on explicit source hold because v11 and ROX do not expose exact per-offering branching and value-substitution rules."
+  ]
+}
+
