@@ -13,11 +13,17 @@ modules:
         - avi:jira:created:issue
         - avi:jira:updated:issue
 
+  webtrigger:
+    - key: ivanti-production-migration-webtrigger
+      function: production-migration-webtrigger
+
   function:
     - key: resolver
       handler: combined.handler
     - key: orchestration-event
       handler: orchestrationGraphEngine.handleGraphIssueEvent
+    - key: production-migration-webtrigger
+      handler: productionMigrationWebtrigger.handler
 
 resources:
   - key: main
