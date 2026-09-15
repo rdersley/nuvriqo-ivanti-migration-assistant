@@ -131,7 +131,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          output=$(forge webtrigger create --functionKey ivanti-production-migration-webtrigger --site "$RIM_FORGE_SITE" --product Jira --environment production 2>&1)
+          output=$(forge webtrigger create --functionKey ivanti-prod-migration-trigger --site "$RIM_FORGE_SITE" --product Jira --environment production 2>&1)
           status=$?
           set -e
           printf '%s\n' "$output" | sed -E 's#https://[^ ]+#<webtrigger-url>#g'
