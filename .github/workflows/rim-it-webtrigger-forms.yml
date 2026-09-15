@@ -8,6 +8,7 @@ on:
       - 'src/productionMigrationWebtrigger.ts'
       - 'manifest.yml'
       - '.github/scripts/prepare_it_webtrigger_payload.py'
+      - '.github/scripts/lookup_fallback_forms_fix.py'
       - '.github/workflows/rim-it-webtrigger-forms.yml'
   workflow_dispatch:
 
@@ -49,6 +50,7 @@ jobs:
           python .github/scripts/forms_condition_backend_controller_fix.py
           python .github/scripts/forms_persisted_section_controller_fix.py
           python .github/scripts/lookup_field_fidelity_fix.py
+          python .github/scripts/lookup_fallback_forms_fix.py
           python .github/scripts/orchestration_react_view_fix.py
           python .github/scripts/orchestration_execution_plan_fix.py
           python .github/scripts/orchestration_automation_blueprint_fix.py
@@ -175,7 +177,7 @@ jobs:
           try: parsed=json.loads(body)
           except Exception: parsed={'raw':body}
           print(json.dumps({'http':status,'ok':parsed.get('ok') if isinstance(parsed,dict) else None,'published':parsed.get('published') if isinstance(parsed,dict) else None,'failed':parsed.get('failed') if isinstance(parsed,dict) else None,'unresolvedFieldOccurrences':parsed.get('unresolvedFieldOccurrences') if isinstance(parsed,dict) else None},indent=2))
-          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14:
+          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14 or parsed.get('unresolvedFieldOccurrences') != 0:
               raise SystemExit(2)
           PY
 
