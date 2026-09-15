@@ -1,0 +1,35 @@
+name: Retail in Motion SD Role Probe
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_sd_role_probe.py'
+      - '.github/workflows/rim-sd-role-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe SD roles without writes
+        run: python .github/scripts/rim_sd_role_probe.py
+      - name: Upload role probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-sd-role-probe
+          path: migration-output/sd-role-probe/
+          if-no-files-found: error
+          retention-days: 7
