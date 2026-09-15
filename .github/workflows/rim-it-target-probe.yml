@@ -1,0 +1,31 @@
+name: Retail in Motion IT Help Target Probe
+
+on:
+  push:
+    branches: [production-migration-runner]
+    paths:
+      - '.github/scripts/rim_it_target_probe.py'
+      - '.github/workflows/rim-it-target-probe.yml'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe IT Help target without writes
+        run: python .github/scripts/rim_it_target_probe.py
+      - name: Upload probe result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-target-probe
+          path: migration-output/it-target-probe/
+          retention-days: 7
