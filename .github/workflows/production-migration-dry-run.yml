@@ -7,6 +7,7 @@ on:
     paths:
       - 'migration-input/**'
       - '.github/scripts/production_migration_dry_run.py'
+      - '.github/scripts/build_creation_plan.py'
       - '.github/workflows/production-migration-dry-run.yml'
   workflow_dispatch:
 
@@ -27,6 +28,9 @@ jobs:
 
       - name: Run non-destructive ROX analysis
         run: python .github/scripts/production_migration_dry_run.py
+
+      - name: Build Jira creation plan
+        run: python .github/scripts/build_creation_plan.py
 
       - name: Upload migration plan
         uses: actions/upload-artifact@v4
