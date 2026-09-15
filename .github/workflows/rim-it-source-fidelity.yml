@@ -1,0 +1,41 @@
+name: Retail in Motion IT Help - Ivanti Source Fidelity
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_it_source_request_descriptions.py'
+      - '.github/workflows/rim-it-source-fidelity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-fidelity:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Hard target guard
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "production-migration-runner"
+          test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
+      - name: Sync source-faithful request descriptions
+        run: python .github/scripts/rim_it_source_request_descriptions.py
+      - name: Upload source fidelity report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-source-fidelity
+          path: migration-output/it-source-fidelity/
+          if-no-files-found: error
+          retention-days: 14
