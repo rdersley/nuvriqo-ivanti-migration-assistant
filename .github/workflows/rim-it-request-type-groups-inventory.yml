@@ -1,0 +1,35 @@
+name: Retail in Motion IT Help - Request Type Group Inventory
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_it_request_type_groups_inventory.py'
+      - '.github/workflows/rim-it-request-type-groups-inventory.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inventory IT Help request type groups
+        run: python .github/scripts/rim_it_request_type_groups_inventory.py
+      - name: Upload request type group inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-request-type-groups
+          path: migration-output/it-request-type-groups/
+          if-no-files-found: error
+          retention-days: 7
