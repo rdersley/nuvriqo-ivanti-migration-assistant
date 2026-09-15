@@ -25,11 +25,14 @@ const REQUEST_TYPES: Record<string, string> = {
 
 type SourceField = {
   sourceId?: string;
+  sourceName?: string;
   name: string;
   description?: string;
   jiraType?: string;
   required?: boolean;
   sequence?: number;
+  visibilityExpression?: string;
+  options?: string[];
 };
 type SourceSection = { name: string; sequence?: number };
 type SourceService = { name: string; fields?: SourceField[]; sections?: SourceSection[] };
@@ -50,6 +53,28 @@ const jsonResponse = (statusCode: number, value: unknown) => ({
 
 function normalise(value: unknown): string {
   return String(value ?? '').trim().toLocaleLowerCase().replace(/\s+/g, ' ');
+}
+
+type ParsedVisibilityCheck = { sourceName: string; value: string };
+
+function parseVisibilityExpression(expression: unknown): ParsedVisibilityCheck[][] {
+  let text = String(expression ?? '').replace(/\r?\n/g, ' ').trim();
+  if (!text) return [];
+  text = text.replace(/^\$\(\s*/, '').replace(/\)\s*$/, '').trim();
+  const wrapped = text.match(/^if\s+(.+?)\s+then\s+true\s+else\s+false$/i);
+  if (wrapped) text = wrapped[1].trim();
+  const groups: ParsedVisibilityCheck[][] = [];
+  for (const orPart of text.split(/\s*\|\|\s*/)) {
+    const checks: ParsedVisibilityCheck[] = [];
+    for (const andPart of orPart.split(/\s*&&\s*/)) {
+      const match = andPart.trim().match(/^([A-Za-z_][A-Za-z0-9_]*)\s*==\s*(?:"([^"]*)"|'([^']*)'|(true|false))$/i);
+      if (!match) return [];
+      const raw = String(match[2] ?? match[3] ?? match[4] ?? '').trim();
+      checks.push({ sourceName: String(match[1]), value: /^(true|false)$/i.test(raw) ? (raw.toLowerCase() === 'true' ? 'Yes' : 'No') : raw });
+    }
+    if (checks.length) groups.push(checks);
+  }
+  return groups;
 }
 
 async function parseJira<T>(response: any): Promise<T> {
@@ -80,10 +105,39 @@ function jiraKind(field: JiraField): string | undefined {
   return undefined;
 }
 
+async function ensureLookupFallbackFields(existing: JiraField[], services: SourceService[]): Promise<JiraField[]> {
+  const merged = [...existing];
+  const lookupNames = [...new Set(services.flatMap((service) =>
+    (service.fields ?? [])
+      .filter((field) => String(field.jiraType ?? '').toLowerCase() === 'lookup-select')
+      .map((field) => String(field.name ?? '').trim())
+      .filter(Boolean)
+  ))];
+  for (const sourceName of lookupNames) {
+    const candidates = [sourceName, `${sourceName} - Ivanti`];
+    if (merged.some((field) => candidates.some((candidate) => normalise(field.name) === normalise(candidate)) && jiraKind(field) === 'text')) continue;
+    const response = await api.asApp().requestJira(route`/rest/api/3/field`, {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: `${sourceName} - Ivanti`,
+        description: `Migrated from an Ivanti dynamic lookup. The source API does not expose its values, so this field preserves the question as free text without inventing options.`,
+        type: 'com.atlassian.jira.plugin.system.customfieldtypes:textfield',
+        searcherKey: 'com.atlassian.jira.plugin.system.customfieldtypes:textsearcher'
+      })
+    });
+    const created = await parseJira<JiraField>(response);
+    if (!created?.id) throw new Error(`Jira did not return an ID for lookup fallback field ${sourceName}.`);
+    merged.push(created);
+  }
+  return merged;
+}
+
 function compatible(field: JiraField, requestedType: string): boolean {
   const actual = jiraKind(field);
   if ((field.id === 'summary' || field.id === 'description') && ['text', 'paragraph'].includes(requestedType)) return true;
   if (requestedType === 'checkbox') return actual === 'select';
+  if (requestedType === 'lookup-select') return actual === 'text';
   return actual === requestedType;
 }
 
@@ -153,6 +207,55 @@ function collectQuestionIds(layout: unknown[]): string[] {
   return ids;
 }
 
+function findPersistedQuestion(questions: Record<string, any>, jiraFieldId: string) {
+  const entry = Object.entries(questions).find(([, question]) => String(question?.jiraField ?? '') === jiraFieldId);
+  if (!entry) return undefined;
+  const [mapKey, question] = entry;
+  return { id: String(question?.id ?? mapKey), mapKey: String(mapKey), question };
+}
+
+function findChoiceToken(node: unknown, wantedValue: string, seen = new Set<unknown>()): string | undefined {
+  if (!node || typeof node !== 'object' || seen.has(node)) return undefined;
+  seen.add(node);
+  if (Array.isArray(node)) {
+    for (const value of node) {
+      const token = findChoiceToken(value, wantedValue, seen);
+      if (token) return token;
+    }
+    return undefined;
+  }
+  const record = node as Record<string, unknown>;
+  const labels = [record.label, record.name, record.text, record.displayName, record.value]
+    .filter((value) => value != null).map(String);
+  if (labels.some((value) => normalise(value) === normalise(wantedValue))) {
+    for (const key of ['id', 'choiceId', 'key', 'optionId', 'value']) {
+      const token = record[key];
+      if (token != null && String(token).trim()) return String(token);
+    }
+  }
+  for (const value of Object.values(record)) {
+    const token = findChoiceToken(value, wantedValue, seen);
+    if (token) return token;
+  }
+  return undefined;
+}
+
+async function jiraOptionId(jiraFieldId: string, wantedValue: string): Promise<string | undefined> {
+  const contexts = await parseJira<{ values?: Array<{ id?: string }> }>(await api.asApp().requestJira(
+    route`/rest/api/3/field/${jiraFieldId}/context?startAt=0&maxResults=100`, { headers: { Accept: 'application/json' } }
+  ));
+  for (const context of contexts.values ?? []) {
+    if (!context.id) continue;
+    const options = await parseJira<{ values?: Array<{ id?: string; value?: string }> }>(await api.asApp().requestJira(
+      route`/rest/api/3/field/${jiraFieldId}/context/${String(context.id)}/option?startAt=0&maxResults=1000`,
+      { headers: { Accept: 'application/json' } }
+    ));
+    const match = (options.values ?? []).find((item) => normalise(item.value) === normalise(wantedValue));
+    if (match?.id) return String(match.id);
+  }
+  return undefined;
+}
+
 function headerValue(headers: Record<string, string | string[] | undefined> | undefined, name: string): string {
   if (!headers) return '';
   const key = Object.keys(headers).find((item) => item.toLowerCase() === name.toLowerCase());
@@ -196,7 +299,8 @@ export async function handler(request: WebtriggerRequest) {
     const prior = await kvs.get(RUN_STATE_KEY) as { completedRunId?: string; completedAt?: string } | undefined;
     if (prior?.completedRunId === payload.runId) return jsonResponse(200, { ok: true, status: 'already-completed', ...prior });
 
-    const jiraFields = await getAllFields();
+    let jiraFields = await getAllFields();
+    jiraFields = await ensureLookupFallbackFields(jiraFields, payload.services);
     const byName = new Map<string, JiraField[]>();
     for (const field of jiraFields) {
       const key = normalise(field.name);
@@ -206,7 +310,6 @@ export async function handler(request: WebtriggerRequest) {
 
     const resolveField = (serviceName: string, source: SourceField): JiraField | undefined => {
       const requestedType = String(source.jiraType ?? 'text');
-      if (requestedType === 'lookup-select') return undefined;
       let candidates: string[];
       if (source.name === 'Name') {
         candidates = serviceName === 'cBase Leaver' ? ['Name - cBase Leaver'] : ['Name - Ivanti Person', 'Name'];
@@ -235,7 +338,10 @@ export async function handler(request: WebtriggerRequest) {
       const fields = [...(service.fields ?? [])].sort((a, b) => Number(a.sequence ?? 0) - Number(b.sequence ?? 0));
       const sections = [...(service.sections ?? [])].sort((a, b) => Number(a.sequence ?? 0) - Number(b.sequence ?? 0));
       const questions: Record<string, unknown> = {};
-      const mapped: Array<{ qid: string; sequence: number }> = [];
+      const mapped: Array<{
+        qid: string; sequence: number; sourceName: string; name: string;
+        jiraFieldId: string; jiraType: string; visibilityExpression: string;
+      }> = [];
       const unresolved: Array<{ name: string; jiraType?: string; reason: string }> = [];
       let qNumber = 1;
 
@@ -254,21 +360,35 @@ export async function handler(request: WebtriggerRequest) {
           questionKey: `ivanti-${qid}`,
           validation: { rq: Boolean(field.required) }
         };
-        mapped.push({ qid, sequence: Number(field.sequence ?? 0) });
+        mapped.push({
+          qid,
+          sequence: Number(field.sequence ?? 0),
+          sourceName: String(field.sourceName ?? ''),
+          name: field.name,
+          jiraFieldId: String(jiraField.id),
+          jiraType: String(field.jiraType ?? 'text'),
+          visibilityExpression: String(field.visibilityExpression ?? '').trim()
+        });
       }
 
       const buckets: Array<{ name: string; sequence: number; qids: string[] }> = [];
       if (sections.length) {
         sections.forEach((section) => buckets.push({ name: section.name || 'Section', sequence: Number(section.sequence ?? 0), qids: [] }));
         const pre: string[] = [];
-        for (const item of mapped) {
+        for (const item of mapped.filter((entry) => !entry.visibilityExpression)) {
           const eligible = buckets.filter((bucket) => bucket.sequence <= item.sequence);
           if (eligible.length) eligible.sort((a, b) => b.sequence - a.sequence)[0].qids.push(item.qid);
           else pre.push(item.qid);
         }
         if (pre.length) buckets.unshift({ name: 'Request details', sequence: -1, qids: pre });
       } else {
-        buckets.push({ name: 'Request details', sequence: 0, qids: mapped.map((item) => item.qid) });
+        buckets.push({ name: 'Request details', sequence: 0, qids: mapped.filter((entry) => !entry.visibilityExpression).map((item) => item.qid) });
+      }
+
+      // Jira Forms conditions show/hide sections, so each conditional source
+      // question is isolated in its own section instead of hiding unrelated fields.
+      for (const item of mapped.filter((entry) => item.visibilityExpression)) {
+        buckets.push({ name: `${item.name} — conditional`, sequence: item.sequence, qids: [item.qid] });
       }
 
       const layout: unknown[] = [];
@@ -306,7 +426,9 @@ export async function handler(request: WebtriggerRequest) {
       await parseJira(populateResponse);
 
       const readResponse = await api.asApp().requestJira(route`/forms/project/${PROJECT_ID}/form/${formId}`, { headers: { Accept: 'application/json' } });
-      const stored = await parseJira<{ design?: { questions?: Record<string, unknown>; layout?: unknown[] } }>(readResponse);
+      const stored = await parseJira<{ design?: {
+        questions?: Record<string, any>; layout?: unknown[]; sections?: Record<string, any>; conditions?: Record<string, any>
+      } }>(readResponse);
       const expectedIds = Object.keys(questions);
       const storedIds = Object.keys(stored.design?.questions ?? {});
       const layoutIds = collectQuestionIds(stored.design?.layout ?? []);
@@ -317,11 +439,120 @@ export async function handler(request: WebtriggerRequest) {
         continue;
       }
 
+      let activeDesign: Record<string, unknown> = stored.design ?? design;
+      const conditionalItems = mapped.filter((item) => item.visibilityExpression);
+      const advancedConditions: Record<string, any> = {};
+      const conditionErrors: string[] = [];
+      const storedQuestions = stored.design?.questions ?? {};
+      const storedSections = stored.design?.sections ?? {};
+
+      for (const [conditionIndex, target] of conditionalItems.entries()) {
+        const parsedGroups = parseVisibilityExpression(target.visibilityExpression);
+        if (!parsedGroups.length) {
+          conditionErrors.push(`${target.name}: unsupported source expression ${target.visibilityExpression}`);
+          continue;
+        }
+        const targetSectionName = `${target.name} — conditional`;
+        const targetSection = Object.entries(storedSections).find(([, section]) => normalise(section?.name) === normalise(targetSectionName));
+        if (!targetSection) {
+          conditionErrors.push(`${target.name}: persisted conditional section was not found`);
+          continue;
+        }
+
+        const compatibilityMap: Record<string, string[]> = {};
+        const groups: Array<{ operator: 'AND'; checks: Array<{ fieldId: string; type: 'SOME_OF'; constraint: string[] }> }> = [];
+        let groupFailed = false;
+        for (const sourceGroup of parsedGroups) {
+          const checks: Array<{ fieldId: string; type: 'SOME_OF'; constraint: string[] }> = [];
+          for (const sourceCheck of sourceGroup) {
+            const controller = mapped.find((item) => normalise(item.sourceName) === normalise(sourceCheck.sourceName));
+            if (!controller) {
+              conditionErrors.push(`${target.name}: controller ${sourceCheck.sourceName} is absent from the ROX form`);
+              groupFailed = true;
+              break;
+            }
+            if (!['select', 'checkbox'].includes(controller.jiraType.toLowerCase())) {
+              conditionErrors.push(`${target.name}: controller ${controller.name} is not source-backed as a choice field`);
+              groupFailed = true;
+              break;
+            }
+            const persisted = findPersistedQuestion(storedQuestions, controller.jiraFieldId);
+            if (!persisted || !String(persisted.question?.label ?? '').trim()) {
+              conditionErrors.push(`${target.name}: persisted controller ${controller.name} was not found or has no label`);
+              groupFailed = true;
+              break;
+            }
+            const token = findChoiceToken(persisted.question, sourceCheck.value)
+              ?? await jiraOptionId(controller.jiraFieldId, sourceCheck.value);
+            if (!token) {
+              conditionErrors.push(`${target.name}: value '${sourceCheck.value}' was not found for ${controller.name}`);
+              groupFailed = true;
+              break;
+            }
+            compatibilityMap[persisted.id] = [...new Set([...(compatibilityMap[persisted.id] ?? []), token])];
+            checks.push({ fieldId: persisted.id, type: 'SOME_OF', constraint: [token] });
+          }
+          if (groupFailed) break;
+          groups.push({ operator: 'AND', checks });
+        }
+        if (groupFailed) continue;
+        const conditionId = String(conditionIndex + 1);
+        advancedConditions[conditionId] = {
+          i: { co: { cIds: compatibilityMap }, operator: 'OR', groups },
+          o: { sIds: [String(targetSection[0])], t: 'sh' }
+        };
+      }
+
+      if (conditionErrors.length || Object.keys(advancedConditions).length !== conditionalItems.length) {
+        results.push({ service: serviceName, status: 'failed', formId, stage: 'conditions-build', conditionErrors, unresolved });
+        continue;
+      }
+
+      if (conditionalItems.length) {
+        const conditionedSections: Record<string, any> = {};
+        for (const [sectionId, rawSection] of Object.entries(storedSections)) {
+          const section = { ...(rawSection as Record<string, unknown>) } as any;
+          section.conditions = Object.entries(advancedConditions)
+            .filter(([, condition]) => (condition.o?.sIds ?? []).map(String).includes(String(sectionId)))
+            .map(([conditionId]) => conditionId);
+          conditionedSections[sectionId] = section;
+        }
+        activeDesign = { ...(stored.design ?? design), sections: conditionedSections, conditions: advancedConditions };
+        const saveConditions = await api.asApp().requestJira(route`/forms/project/${PROJECT_ID}/form/${formId}`, {
+          method: 'PUT',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-ExperimentalApi': 'opt-in' },
+          body: JSON.stringify({ design: activeDesign })
+        });
+        await parseJira(saveConditions);
+        const verifyConditions = await parseJira<{ design?: { questions?: Record<string, any>; sections?: Record<string, any>; conditions?: Record<string, any> } }>(
+          await api.asApp().requestJira(route`/forms/project/${PROJECT_ID}/form/${formId}`, { headers: { Accept: 'application/json' } })
+        );
+        const persistedConditions = verifyConditions.design?.conditions ?? {};
+        const persistedSections = verifyConditions.design?.sections ?? {};
+        const broken: string[] = [];
+        for (const conditionId of Object.keys(advancedConditions)) {
+          const condition = persistedConditions[conditionId];
+          const controllerIds = Object.keys(condition?.i?.co?.cIds ?? {});
+          const checks = (condition?.i?.groups ?? []).flatMap((group: any) => group?.checks ?? []);
+          const targets = (condition?.o?.sIds ?? []).map(String);
+          if (!controllerIds.length || !checks.length) broken.push(`${conditionId}: controller/check missing`);
+          if (condition?.o?.t !== 'sh') broken.push(`${conditionId}: show output missing`);
+          for (const sectionId of targets) {
+            if (!(persistedSections[sectionId]?.conditions ?? []).map(String).includes(conditionId)) broken.push(`${conditionId}: section ${sectionId} is not linked`);
+          }
+        }
+        if (Object.keys(persistedConditions).length !== conditionalItems.length || broken.length) {
+          results.push({ service: serviceName, status: 'failed', formId, stage: 'conditions-readback', expected: conditionalItems.length, actual: Object.keys(persistedConditions).length, broken, unresolved });
+          continue;
+        }
+        activeDesign = verifyConditions.design ?? activeDesign;
+      }
+
       const publishResponse = await api.asApp().requestJira(route`/forms/project/${PROJECT_ID}/form/${formId}`, {
         method: 'PUT',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          design,
+          design: activeDesign,
           publish: {
             jira: { issueCreateIssueTypeIds: [], issueCreateRequestTypeIds: [Number(requestTypeId)], recommendedIssueRequestTypeIds: [], submitOnCreate: true, validateOnCreate: true },
             portal: { portalRequestTypeIds: [Number(requestTypeId)], submitOnCreate: true, validateOnCreate: true }
@@ -329,7 +560,17 @@ export async function handler(request: WebtriggerRequest) {
         })
       });
       await parseJira(publishResponse);
-      results.push({ service: serviceName, status: 'published', baseStatus, formId, requestTypeId, questions: expectedIds.length, sections: layout.length, unresolved });
+      const finalReadback = await parseJira<{ design?: { conditions?: Record<string, unknown> }; publish?: any }>(
+        await api.asApp().requestJira(route`/forms/project/${PROJECT_ID}/form/${formId}`, { headers: { Accept: 'application/json' } })
+      );
+      const finalConditions = Object.keys(finalReadback.design?.conditions ?? {}).length;
+      const portalIds = (finalReadback.publish?.portal?.portalRequestTypeIds ?? []).map(String);
+      const jiraIds = (finalReadback.publish?.jira?.issueCreateRequestTypeIds ?? []).map(String);
+      if (finalConditions !== conditionalItems.length || (!portalIds.includes(requestTypeId) && !jiraIds.includes(requestTypeId))) {
+        results.push({ service: serviceName, status: 'failed', formId, stage: 'publish-readback', expectedConditions: conditionalItems.length, finalConditions, portalIds, jiraIds, unresolved });
+        continue;
+      }
+      results.push({ service: serviceName, status: 'published', baseStatus, formId, requestTypeId, questions: expectedIds.length, sections: layout.length, conditions: finalConditions, unresolved });
     }
 
     const failed = (results as any[]).filter((item) => item.status === 'failed');
@@ -340,6 +581,7 @@ export async function handler(request: WebtriggerRequest) {
       serviceDeskId: SERVICE_DESK_ID,
       published: (results as any[]).filter((item) => item.status === 'published').length,
       failed: failed.length,
+      conditions: (results as any[]).reduce((sum, item) => sum + Number(item.conditions ?? 0), 0),
       unresolvedFieldOccurrences: (results as any[]).reduce((sum, item) => sum + (item.unresolved?.length ?? 0), 0),
       results
     };

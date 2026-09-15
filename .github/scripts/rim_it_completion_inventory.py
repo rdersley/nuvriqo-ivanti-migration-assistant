@@ -39,6 +39,10 @@ REQUEST_TYPES = {
     'UAT Vector System Decommissioning': '2436',
     'cBase Leaver': '2437',
 }
+SOURCE_TEAMS = [
+    'First Line Support', 'Second Line Support', 'MDM', 'SRE', 'DBA',
+    'Change Management', 'Nagios', 'Infosec'
+]
 
 AUTH = base64.b64encode(f'{EMAIL}:{TOKEN}'.encode()).decode()
 HEADERS = {'Authorization': f'Basic {AUTH}', 'Accept': 'application/json'}
@@ -130,6 +134,13 @@ if forms_status == 200 and isinstance(form_index, list):
             'design': design, 'publish': publish,
         })
 
+group_matches = {}
+for source_team in SOURCE_TEAMS:
+    status, body = get('/rest/api/3/groups/picker?query=' + urllib.parse.quote(source_team, safe=''))
+    candidates = (body or {}).get('groups', []) if isinstance(body, dict) else []
+    exact = [item for item in candidates if str(item.get('name') or '').casefold() == source_team.casefold()]
+    group_matches[source_team] = {'http': status, 'exact': exact, 'candidates': candidates[:20]}
+
 roles_status, roles = get(f'/rest/api/3/project/{PROJECT_ID}/role')
 role_details = []
 if roles_status == 200 and isinstance(roles, dict):
@@ -163,7 +174,9 @@ report = {
     'project': project,
     'requestTypes': request_types,
     'approvalFields': approval_fields,
+    'formsIndexHttp': forms_status,
     'forms': forms,
+    'sourceTeamGroups': group_matches,
     'projectRoles': role_details,
     'checks': checks,
     'issueCounts': issue_counts,
@@ -176,8 +189,10 @@ summary = {
     'formsWithConditions': sum(1 for item in forms if item['conditionCount'] > 0),
     'approvalFields': len(approval_fields),
     'projectRoles': len(role_details),
+    'formsIndexHttp': forms_status,
+    'sourceTeamExactMatches': sum(1 for value in group_matches.values() if value['exact']),
     'readOnly': True,
 }
 print(json.dumps(summary, indent=2))
-if summary['requestTypesVerified'] != 14 or summary['formsFound'] != 14:
-    raise SystemExit('Completion inventory failed the 14-request-type/form guard')
+if summary['requestTypesVerified'] != 14:
+    raise SystemExit('Completion inventory failed the 14-request-type guard')

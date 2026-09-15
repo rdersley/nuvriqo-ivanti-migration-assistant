@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - production-migration-runner
+      - migration-completion-20260915
     paths:
       - 'src/productionMigrationWebtrigger.ts'
       - 'manifest.yml'
       - '.github/scripts/prepare_it_webtrigger_payload.py'
+      - '.github/scripts/forms_webtrigger_condition_patch.py'
       - '.github/scripts/lookup_fallback_forms_fix.py'
       - '.github/workflows/rim-it-webtrigger-forms.yml'
   workflow_dispatch:
@@ -34,7 +36,10 @@ jobs:
       - name: Hard target guard
         shell: bash
         run: |
-          test "$GITHUB_REF_NAME" = "production-migration-runner"
+          case "$GITHUB_REF_NAME" in
+            production-migration-runner|migration-completion-20260915) ;;
+            *) exit 1 ;;
+          esac
           test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
 
       - name: Set up Python
@@ -50,7 +55,6 @@ jobs:
           python .github/scripts/forms_condition_backend_controller_fix.py
           python .github/scripts/forms_persisted_section_controller_fix.py
           python .github/scripts/lookup_field_fidelity_fix.py
-          python .github/scripts/lookup_fallback_forms_fix.py
           python .github/scripts/orchestration_react_view_fix.py
           python .github/scripts/orchestration_execution_plan_fix.py
           python .github/scripts/orchestration_automation_blueprint_fix.py
@@ -73,6 +77,7 @@ jobs:
           python .github/scripts/qa_regression.py
           python .github/scripts/qa_orchestration_runtime.py
           python .github/scripts/qa_source_integrity.py
+          python .github/scripts/qa_it_completion.py
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -176,8 +181,8 @@ jobs:
           (out/'response.json').write_text(body,encoding='utf-8')
           try: parsed=json.loads(body)
           except Exception: parsed={'raw':body}
-          print(json.dumps({'http':status,'ok':parsed.get('ok') if isinstance(parsed,dict) else None,'published':parsed.get('published') if isinstance(parsed,dict) else None,'failed':parsed.get('failed') if isinstance(parsed,dict) else None,'unresolvedFieldOccurrences':parsed.get('unresolvedFieldOccurrences') if isinstance(parsed,dict) else None},indent=2))
-          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14 or parsed.get('unresolvedFieldOccurrences') != 0:
+          print(json.dumps({'http':status,'ok':parsed.get('ok') if isinstance(parsed,dict) else None,'published':parsed.get('published') if isinstance(parsed,dict) else None,'failed':parsed.get('failed') if isinstance(parsed,dict) else None,'conditions':parsed.get('conditions') if isinstance(parsed,dict) else None,'unresolvedFieldOccurrences':parsed.get('unresolvedFieldOccurrences') if isinstance(parsed,dict) else None},indent=2))
+          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14 or parsed.get('conditions') != 12 or parsed.get('unresolvedFieldOccurrences') != 0:
               raise SystemExit(2)
           PY
 

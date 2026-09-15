@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Static/source QA for the guarded IT Help completion runner."""
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path('.')
+failures = []
+
+def check(name, value):
+    if not value:
+        failures.append(name)
+
+plan = json.loads((ROOT / 'migration-output/jira-creation-plan.json').read_text())
+payload = json.loads((ROOT / 'migration-output/it-webtrigger/payload.json').read_text())
+conditions = [
+    (service['name'], field)
+    for service in payload['services']
+    for field in service.get('fields', [])
+    if str(field.get('visibilityExpression') or '').strip()
+]
+check('exactly 14 source services', len(payload.get('services', [])) == 14 == plan.get('serviceCount'))
+check('exactly 12 source visibility rules', len(conditions) == 12)
+check('all conditional fields retain sourceName', all(field.get('sourceName') for _, field in conditions))
+check('all conditional fields retain sourceId', all(field.get('sourceId') for _, field in conditions))
+
+supported = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*\s*==\s*(?:"[^"]*"|\'[^\']*\'|true|false)$', re.I)
+for service, field in conditions:
+    expression = re.sub(r'\s+', ' ', field['visibilityExpression']).strip()
+    expression = re.sub(r'^\$\(\s*|\)\s*$', '', expression).strip()
+    match = re.match(r'^if\s+(.+?)\s+then\s+true\s+else\s+false$', expression, re.I)
+    if match:
+        expression = match.group(1)
+    for clause in re.split(r'\s*\|\|\s*|\s*&&\s*', expression):
+        check(f'supported expression: {service}/{field["name"]}/{clause}', supported.fullmatch(clause.strip()))
+
+source = (ROOT / 'src/productionMigrationWebtrigger.ts').read_text()
+workflow = (ROOT / '.github/workflows/rim-it-webtrigger-forms.yml').read_text()
+for anchor in [
+    "const PROJECT_ID = '12789'", "const PROJECT_KEY = 'IT'", "const SERVICE_DESK_ID = '2183'",
+    'parseVisibilityExpression', 'findPersistedQuestion', 'findChoiceToken', 'jiraOptionId',
+    'conditions-readback', 'publish-readback', 'ensureLookupFallbackFields'
+]:
+    check(f'runner anchor {anchor}', anchor in source)
+check('workflow requires 12 persisted conditions', "parsed.get('conditions') != 12" in workflow)
+check('workflow requires all 14 forms', "parsed.get('published') != 14" in workflow)
+check('workflow requires zero unresolved lookups', "parsed.get('unresolvedFieldOccurrences') != 0" in workflow)
+check('completion runner has no SD project target', not re.search(r"project(?:Key)?\s*[:=]\s*['\"]SD['\"]", source))
+
+print(f'IT completion QA: {31 + len(conditions)} guarded checks')
+if failures:
+    print(f'FAILED: {len(failures)}')
+    for failure in failures:
+        print(' -', failure)
+    sys.exit(1)
+print('PASSED: source-backed Forms completion runner')

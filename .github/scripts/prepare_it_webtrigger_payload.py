@@ -13,11 +13,14 @@ for svc in plan.get('services',[]):
     for f in svc.get('fields',[]):
         fields.append({
             'sourceId': f.get('sourceId',''),
+            'sourceName': f.get('sourceName',''),
             'name': f.get('name',''),
             'description': f.get('description',''),
             'jiraType': f.get('jiraType','text'),
             'required': bool(f.get('required')),
             'sequence': int(f.get('sequence') or 0),
+            'visibilityExpression': f.get('visibilityExpression',''),
+            'options': f.get('options',[]),
         })
     sections=[]
     for s in svc.get('sections',[]):
