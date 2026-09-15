@@ -1,0 +1,35 @@
+name: Retail in Motion IT Help - Request Type Group Probe
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_it_request_type_group_probe.py'
+      - '.github/workflows/rim-it-request-type-group-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test assigning one migrated request type to an IT Help portal group
+        run: python .github/scripts/rim_it_request_type_group_probe.py
+      - name: Upload probe result
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-request-type-group-probe
+          path: migration-output/it-request-type-group-probe/
+          if-no-files-found: error
+          retention-days: 7
