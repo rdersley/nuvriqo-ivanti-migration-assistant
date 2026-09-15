@@ -7,13 +7,13 @@ on:
     paths:
       - '.github/scripts/rim_it_request_type_groups_inventory.py'
       - '.github/scripts/rim_it_request_group_internal_probe.py'
+      - '.github/scripts/rim_it_group_put_noop_probe.py'
       - '.github/workflows/rim-it-request-type-groups-inventory.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
 
-# Read-only live inventory. This deliberately makes no Jira changes.
 jobs:
   inventory:
     runs-on: ubuntu-latest
@@ -30,7 +30,10 @@ jobs:
         run: python .github/scripts/rim_it_request_type_groups_inventory.py
       - name: Probe Agent request type grouping endpoints read-only
         run: python .github/scripts/rim_it_request_group_internal_probe.py
+      - name: Verify request type group PUT contract with unchanged payload
+        run: python .github/scripts/rim_it_group_put_noop_probe.py
       - name: Upload request type group inventory
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: retailinmotion-it-request-type-groups
