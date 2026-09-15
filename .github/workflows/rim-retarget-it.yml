@@ -1,0 +1,32 @@
+name: Retail in Motion Retarget Migration to IT Help
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_retarget_to_it.py'
+      - '.github/workflows/rim-retarget-it.yml'
+
+jobs:
+  retarget:
+    runs-on: ubuntu-24.04
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Retarget migrated issue types to IT Help and verify
+        run: python .github/scripts/rim_retarget_to_it.py
+      - name: Upload retarget report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-retarget-it
+          path: migration-output/retarget-it/
+          if-no-files-found: error
+          retention-days: 14
