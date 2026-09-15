@@ -1,0 +1,40 @@
+name: Retail in Motion Jira Read-Only Inventory
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_jira_readonly_inventory.py'
+      - '.github/workflows/rim-jira-readonly-inventory.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Inventory Jira read-only
+        run: python .github/scripts/rim_jira_readonly_inventory.py
+
+      - name: Upload inventory artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-jira-readonly-inventory
+          path: migration-output/jira-inventory/
+          if-no-files-found: error
+          retention-days: 7
