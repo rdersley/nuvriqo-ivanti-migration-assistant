@@ -1,0 +1,155 @@
+name: Retail in Motion IT Help - Forge Webtrigger Forms Migration
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - 'src/productionMigrationWebtrigger.ts'
+      - 'manifest.yml'
+      - '.github/scripts/prepare_it_webtrigger_payload.py'
+      - '.github/workflows/rim-it-webtrigger-forms.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: retailinmotion-it-webtrigger-forms
+  cancel-in-progress: false
+
+jobs:
+  migrate-forms:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+      CI: true
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+
+      - name: Hard target guard
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "production-migration-runner"
+          test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild and validate ROX plan
+        run: |
+          python .github/scripts/build_creation_plan.py
+          python .github/scripts/prepare_it_webtrigger_payload.py
+
+      - name: Run source regression gates
+        run: |
+          python .github/scripts/qa_regression.py
+          python .github/scripts/qa_orchestration_runtime.py
+          python .github/scripts/qa_source_integrity.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: static/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm --prefix static install
+
+      - name: Typecheck and build
+        run: |
+          npm run typecheck
+          npm run build
+
+      - name: Install Forge CLI
+        run: npm install --global @forge/cli@latest
+
+      - name: Configure and lint Forge app
+        run: |
+          forge settings set usage-analytics true
+          forge lint
+
+      - name: Create one-time migration token
+        shell: bash
+        run: |
+          TOKEN=$(python -c "import secrets; print(secrets.token_urlsafe(48))")
+          echo "::add-mask::$TOKEN"
+          echo "MIGRATION_RUNNER_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+
+      - name: Set encrypted production migration token
+        shell: bash
+        run: forge variables set --encrypt --environment production MIGRATION_RUNNER_TOKEN "$MIGRATION_RUNNER_TOKEN"
+
+      - name: Deploy guarded migration handler to production
+        run: forge deploy --environment production --non-interactive --approve MAJOR_VERSION_RULE
+
+      - name: Upgrade production installation on Retail in Motion
+        shell: bash
+        run: |
+          set +e
+          output=$(forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive 2>&1)
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -eq 0 ]; then exit 0; fi
+          if printf '%s\n' "$output" | grep -qi "Could not find an installation for the provided Atlassian app"; then
+            forge install --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive
+          else
+            exit "$status"
+          fi
+
+      - name: Create production webtrigger URL
+        shell: bash
+        run: |
+          set +e
+          output=$(forge webtrigger create --functionKey ivanti-production-migration-webtrigger --site "$RIM_FORGE_SITE" --product Jira --environment production 2>&1)
+          status=$?
+          set -e
+          printf '%s\n' "$output" | sed -E 's#https://[^ ]+#<webtrigger-url>#g'
+          test "$status" -eq 0
+          url=$(printf '%s\n' "$output" | grep -Eo 'https://[^[:space:]]+' | tail -1)
+          test -n "$url"
+          echo "WEBTRIGGER_URL=$url" >> "$GITHUB_ENV"
+
+      - name: Run live IT Help Forms migration through Forge asApp
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          from pathlib import Path
+          payload=Path('migration-output/it-webtrigger/payload.json').read_bytes()
+          req=urllib.request.Request(os.environ['WEBTRIGGER_URL'],data=payload,method='POST',headers={
+              'Authorization':'Bearer '+os.environ['MIGRATION_RUNNER_TOKEN'],
+              'Content-Type':'application/json',
+              'Accept':'application/json'
+          })
+          try:
+              with urllib.request.urlopen(req,timeout=180) as r:
+                  body=r.read().decode('utf-8','replace'); status=r.status
+          except urllib.error.HTTPError as e:
+              body=e.read().decode('utf-8','replace'); status=e.code
+          out=Path('migration-output/it-webtrigger'); out.mkdir(parents=True,exist_ok=True)
+          (out/'response.json').write_text(body,encoding='utf-8')
+          try: parsed=json.loads(body)
+          except Exception: parsed={'raw':body}
+          print(json.dumps({'http':status,'ok':parsed.get('ok') if isinstance(parsed,dict) else None,'published':parsed.get('published') if isinstance(parsed,dict) else None,'failed':parsed.get('failed') if isinstance(parsed,dict) else None,'unresolvedFieldOccurrences':parsed.get('unresolvedFieldOccurrences') if isinstance(parsed,dict) else None},indent=2))
+          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14:
+              raise SystemExit(2)
+          PY
+
+      - name: Upload migration report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-webtrigger-forms
+          path: migration-output/it-webtrigger/
+          if-no-files-found: warn
+          retention-days: 14
