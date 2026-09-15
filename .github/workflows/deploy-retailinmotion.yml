@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: forge-retailinmotion
+  group: forge-retailinmotion-production
   cancel-in-progress: false
 
 jobs:
@@ -74,13 +74,13 @@ jobs:
       - name: Configure Forge CLI
         run: |
           forge settings set usage-analytics true
-          forge settings set default-environment development
+          forge settings set default-environment production
 
       - name: Enforce Forge lint
         run: forge lint
 
-      - name: Deploy verified candidate
-        run: forge deploy --environment development --non-interactive --approve MAJOR_VERSION_RULE
+      - name: Deploy verified candidate to production
+        run: forge deploy --environment production --non-interactive --approve MAJOR_VERSION_RULE
 
-      - name: Install or upgrade on Retail in Motion
-        run: forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment development --confirm-scopes --non-interactive
+      - name: Install or upgrade production on Retail in Motion
+        run: forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive
