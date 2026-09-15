@@ -1,0 +1,46 @@
+name: Retail in Motion Live Migration - Phase 1 Fields
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/rim_create_fields_phase1.py'
+      - '.github/workflows/rim-live-fields-phase1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rim-live-migration-phase1-fields
+  cancel-in-progress: false
+
+jobs:
+  create-fields:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse ROX sources
+        run: python .github/scripts/production_migration_dry_run.py
+      - name: Build field creation plan
+        run: python .github/scripts/build_creation_plan.py
+      - name: Create safe phase-one Jira fields and read back
+        run: python .github/scripts/rim_create_fields_phase1.py
+      - name: Upload live phase-one result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-live-fields-phase1
+          path: migration-output/live-create-phase1/
+          if-no-files-found: warn
+          retention-days: 14
