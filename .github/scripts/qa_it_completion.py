@@ -48,6 +48,7 @@ for anchor in [
     'parseVisibilityExpression', 'findPersistedQuestion', 'findChoiceToken', 'jiraOptionId',
     'conditions-readback', 'publish-readback', 'ensureLookupFallbackFields'
     , 'applyItWorkflowMappings', 'installSourceBackedOrchestration'
+    , "statusId: '1'", "statusId: '4'", "newStatusId: '10121'"
 ]:
     check(f'runner anchor {anchor}', anchor in source)
 check('workflow requires 12 persisted conditions', "parsed.get('conditions') != 12" in workflow)

@@ -387,7 +387,15 @@ async function applyItWorkflowMappings(plan: CompletionPlan) {
   const publish = await api.asApp().requestJira(route`/rest/api/3/workflowscheme/${targetSchemeId}/draft/publish`, {
     method: 'POST',
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ statusMappings: [] })
+    // The migrated issue types currently inherit Jira's legacy Open/Reopened
+    // states. Both existing IT fulfilment workflows use Waiting for Support as
+    // the active intake state, so preserve that operational meaning explicitly.
+    body: JSON.stringify({
+      statusMappings: plan.services.flatMap((service) => [
+        { issueTypeId: service.issueTypeId, statusId: '1', newStatusId: '10121' },
+        { issueTypeId: service.issueTypeId, statusId: '4', newStatusId: '10121' }
+      ])
+    })
   });
   await parseJira(publish);
   const finalSchemes = await parseJira<{ values?: Array<{ projectIds?: string[]; workflowScheme?: any }> }>(
