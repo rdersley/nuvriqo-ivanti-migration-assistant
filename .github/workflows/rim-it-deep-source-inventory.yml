@@ -1,0 +1,32 @@
+name: Retail in Motion IT Help - Deep ROX Inventory
+
+on:
+  push:
+    branches:
+      - production-migration-runner
+    paths:
+      - '.github/scripts/deep_rox_inventory.py'
+      - '.github/workflows/rim-it-deep-source-inventory.yml'
+      - 'migration-input/*.rox'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deep-rox-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Extract exhaustive ROX source inventory
+        run: python .github/scripts/deep_rox_inventory.py
+      - name: Upload deep source inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-deep-rox-inventory
+          path: migration-output/deep-rox-inventory/
+          if-no-files-found: error
+          retention-days: 30
