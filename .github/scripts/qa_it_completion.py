@@ -29,7 +29,8 @@ check('completion plan targets IT only', completion.get('target') == {'projectKe
 check('completion plan has 14 services', len(completion.get('services') or []) == 14)
 check('completion plan has seven approval services', sum(bool(item.get('approval')) for item in completion.get('services') or []) == 7)
 check('completion plan has four exact orchestration services', sum(bool(item.get('tasks')) for item in completion.get('services') or []) == 4)
-check('exact orchestration task count is source-backed', sum(len(item.get('tasks') or []) for item in completion.get('services') or []) == 23)
+check('exact orchestration task count is source-backed', sum(len(item.get('tasks') or []) for item in completion.get('services') or []) == 22)
+check('all exact orchestration routes preserve v11 team', all(item.get('routingTeam') == 'First Line Support' for item in completion.get('services') or [] if item.get('tasks')))
 
 supported = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*\s*==\s*(?:"[^"]*"|\'[^\']*\'|true|false)$', re.I)
 for service, field in conditions:
@@ -48,7 +49,7 @@ for anchor in [
     'parseVisibilityExpression', 'findPersistedQuestion', 'findChoiceToken', 'jiraOptionId',
     'conditions-readback', 'publish-readback', 'ensureLookupFallbackFields'
     , 'applyItWorkflowMappings', 'installSourceBackedOrchestration'
-    , "statusId: '1'", "statusId: '4'", "newStatusId: '10121'"
+    , "statusId: '1'", "statusId: '4'", "newStatusId: '10121'", 'service.routingTeam'
 ]:
     check(f'runner anchor {anchor}', anchor in source)
 check('workflow requires 12 persisted conditions', "parsed.get('conditions') != 12" in workflow)

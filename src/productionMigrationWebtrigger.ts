@@ -43,7 +43,7 @@ type MappedField = {
 };
 type CompletionService = {
   name: string; requestTypeId: string; issueTypeId: string; approval: boolean;
-  tasks?: string[]; orchestrationHold?: string;
+  tasks?: string[]; routingTeam?: string; orchestrationHold?: string;
 };
 type CompletionPlan = {
   target: { projectKey: string; projectId: string; serviceDeskId: string; workflowSchemeId: string };
@@ -302,6 +302,7 @@ function buildExecutablePlan(service: CompletionService): ExecutableGraphPlan | 
     title,
     summary: title,
     details: `Source-backed recurring Ivanti fulfilment task for ${service.name}.`,
+    team: service.routingTeam,
     outcomes: ['completed']
   }));
   const nodes = [
@@ -398,10 +399,17 @@ async function applyItWorkflowMappings(plan: CompletionPlan) {
     })
   });
   await parseJira(publish);
-  const finalSchemes = await parseJira<{ values?: Array<{ projectIds?: string[]; workflowScheme?: any }> }>(
-    await api.asApp().requestJira(route`/rest/api/3/workflowscheme/project?projectId=${PROJECT_ID}`, { headers: { Accept: 'application/json' } })
-  );
-  const finalScheme = (finalSchemes.values ?? []).find((item) => (item.projectIds ?? []).map(String).includes(PROJECT_ID))?.workflowScheme;
+  // The project-association endpoint returns an abridged workflow scheme and can
+  // lag immediately after publication. Read the authoritative scheme resource,
+  // retrying briefly while Jira finishes activating the published draft.
+  let finalScheme: any;
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    finalScheme = await parseJira<any>(await api.asApp().requestJira(
+      route`/rest/api/3/workflowscheme/${targetSchemeId}`, { headers: { Accept: 'application/json' } }
+    ));
+    if (plan.services.every((service) => finalScheme?.issueTypeMappings?.[service.issueTypeId] === desired[service.issueTypeId])) break;
+    if (attempt < 11) await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
   for (const service of plan.services) {
     if (finalScheme?.issueTypeMappings?.[service.issueTypeId] !== desired[service.issueTypeId]) throw new Error(`Published workflow readback failed for ${service.name}.`);
   }

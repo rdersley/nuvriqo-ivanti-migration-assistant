@@ -33,6 +33,7 @@ def safe(path, method):
         raise RuntimeError(f'Forbidden SD target: {method} {path}')
     allowed = ('/rest/api/3/project/it', '/rest/api/3/project/12789', '/rest/api/3/issue',
                '/rest/api/3/search', '/rest/api/3/field', '/rest/api/3/workflowscheme/project',
+               '/rest/api/3/workflowscheme/12635',
                '/rest/servicedeskapi/servicedesk/2183')
     if not value.startswith(allowed):
         raise RuntimeError(f'Path outside IT E2E allow-list: {method} {path}')
@@ -73,11 +74,9 @@ request_types = rt_body.get('values') or []
 status_code, project_statuses = call('GET', f'/rest/api/3/project/{PROJECT_ID}/statuses')
 require(status_code == 200, f'Cannot read IT workflow statuses: {status_code}')
 status_by_type = {str(item.get('id')): {str(status.get('name')) for status in item.get('statuses') or []} for item in project_statuses}
-scheme_status, scheme_body = call('GET', f'/rest/api/3/workflowscheme/project?projectId={PROJECT_ID}')
-require(scheme_status == 200, f'Cannot read IT workflow scheme: {scheme_status}')
-schemes = scheme_body.get('values') or []
-scheme = next((item.get('workflowScheme') for item in schemes if PROJECT_ID in [str(v) for v in item.get('projectIds') or []]), None)
-require(scheme and str(scheme.get('id')) == str(PLAN['target']['workflowSchemeId']), 'IT workflow scheme guard failed')
+scheme_id = str(PLAN['target']['workflowSchemeId'])
+scheme_status, scheme = call('GET', f'/rest/api/3/workflowscheme/{scheme_id}')
+require(scheme_status == 200 and str(scheme.get('id')) == scheme_id, 'IT workflow scheme guard failed')
 form_results = {item.get('service'): item for item in MIGRATION.get('results') or []}
 
 results = []
@@ -127,7 +126,7 @@ try:
                     observed = []
                     orchestration_children = []
                     for ref in refs:
-                        _, child = call('GET', f"/rest/api/3/issue/{ref['key']}?fields=summary,labels,parent")
+                        _, child = call('GET', f"/rest/api/3/issue/{ref['key']}?fields=summary,description,labels,parent")
                         if 'ivanti-orchestration' in (child.get('fields',{}).get('labels') or []):
                             observed.append(str(child.get('fields',{}).get('summary') or ''))
                             orchestration_children.append(str(child.get('key') or ref['key']))
@@ -135,6 +134,13 @@ try:
                     time.sleep(5)
                 require(sorted(observed) == sorted(expected_tasks), f'orchestration mismatch expected={expected_tasks} observed={observed}')
                 row['checks'].append(f'orchestration:{len(expected_tasks)}')
+                expected_team = str(service.get('routingTeam') or '').strip()
+                require(expected_team == 'First Line Support', 'source routing team missing from plan')
+                for child_key in orchestration_children:
+                    _, child = call('GET', f'/rest/api/3/issue/{child_key}?fields=description')
+                    description = json.dumps(child.get('fields',{}).get('description') or {})
+                    require(f'Ivanti assignment team: {expected_team}' in description, f'source routing metadata missing on {child_key}')
+                row['checks'].append('routing-metadata')
                 for child_key in orchestration_children:
                     transition_done(child_key)
                 done_deadline = time.time() + 180
