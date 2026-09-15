@@ -95,6 +95,7 @@ jobs:
       - name: Configure and lint Forge app
         run: |
           forge settings set usage-analytics true
+          forge settings set default-environment development
           forge lint
 
       - name: Create one-time migration token
