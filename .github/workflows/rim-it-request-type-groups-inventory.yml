@@ -12,6 +12,7 @@ on:
 permissions:
   contents: read
 
+# Read-only live inventory. This deliberately makes no Jira changes.
 jobs:
   inventory:
     runs-on: ubuntu-latest
