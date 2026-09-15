@@ -1,0 +1,86 @@
+name: Deploy Forge Retail in Motion
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-retailinmotion
+  cancel-in-progress: false
+
+jobs:
+  verify-and-install:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+      CI: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply release patches
+        run: |
+          python .github/scripts/forms_condition_fix.py
+          python .github/scripts/forms_condition_runtime_fix.py
+          python .github/scripts/forms_condition_canonical_id_fix.py
+          python .github/scripts/forms_condition_backend_controller_fix.py
+          python .github/scripts/forms_persisted_section_controller_fix.py
+          python .github/scripts/lookup_field_fidelity_fix.py
+          python .github/scripts/orchestration_react_view_fix.py
+          python .github/scripts/orchestration_execution_plan_fix.py
+          python .github/scripts/orchestration_automation_blueprint_fix.py
+          python .github/scripts/orchestration_safe_ui_fix.py
+          python .github/scripts/cutover_readiness_fix.py
+          python .github/scripts/live_validation_readback_fix.py
+          python .github/scripts/native_workflow_export_import_fix.py
+          python .github/scripts/ivanti_direct_discovery_backend_fix.py
+          python .github/scripts/ivanti_source_acquisition_fix.py
+          python .github/scripts/action_review_hold_fix.py
+          python .github/scripts/multivalue_decision_fix.py
+
+      - name: Run release regression gates
+        run: |
+          python .github/scripts/qa_regression.py
+          python .github/scripts/qa_orchestration_runtime.py
+          python .github/scripts/qa_source_integrity.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: static/package-lock.json
+
+      - name: Install and audit dependencies
+        run: |
+          npm install
+          npm --prefix static install
+          npm --prefix static audit fix
+          npm --prefix static audit --audit-level=high
+
+      - name: Typecheck and build
+        run: |
+          npm run typecheck
+          npm run build
+
+      - name: Install Forge CLI
+        run: npm install --global @forge/cli@latest
+
+      - name: Configure Forge CLI
+        run: |
+          forge settings set usage-analytics true
+          forge settings set default-environment development
+
+      - name: Enforce Forge lint
+        run: forge lint
+
+      - name: Deploy verified candidate
+        run: forge deploy --environment development --non-interactive --approve MAJOR_VERSION_RULE
+
+      - name: Install or upgrade on Retail in Motion
+        run: forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment development --confirm-scopes --non-interactive
