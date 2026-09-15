@@ -46,8 +46,27 @@ def custom_kind(f):
  if c.endswith(':select'):return 'select'
  return None
 
+def all_fields():
+ # /field can omit newly-created custom fields until they are associated with screens.
+ # Combine it with the paginated custom-field search endpoint used by the app itself.
+ s,base=req('GET','/rest/api/3/field')
+ if s!=200 or not isinstance(base,list):
+  raise SystemExit(f'Cannot inventory Jira fields: {s} {base}')
+ merged={str(f.get('id')):f for f in base if f.get('id')}
+ start=0
+ while True:
+  cs,body=req('GET',f'/rest/api/3/field/search?type=custom&startAt={start}&maxResults=100')
+  if cs!=200 or not isinstance(body,dict):
+   raise SystemExit(f'Cannot inventory custom fields: {cs} {body}')
+  vals=body.get('values') or []
+  for f in vals:
+   if f.get('id'): merged[str(f.get('id'))]=f
+  start += len(vals)
+  total=int(body.get('total') or 0)
+  if not vals or start>=total: break
+ return list(merged.values())
+
 plan=json.loads(PLAN.read_text())
-# Union same-name/same-type source fields and options.
 groups=defaultdict(lambda:{'types':set(),'options':[],'services':set(),'description':''})
 for svc in plan.get('services',[]):
  for f in svc.get('fields',[]):
@@ -58,8 +77,7 @@ for svc in plan.get('services',[]):
   for o in f.get('options',[]):
    if o not in g['options']: g['options'].append(o)
 
-s,fields=req('GET','/rest/api/3/field')
-if s!=200: raise SystemExit(f'Cannot inventory Jira fields: {s} {fields}')
+fields=all_fields()
 byname=defaultdict(list)
 for f in fields: byname[norm(f.get('name'))].append(f)
 results=[]
@@ -68,7 +86,6 @@ for key,g in sorted(groups.items()):
  if 'lookup-select' in types:
   results.append({'sourceName':g['name'],'status':'deferred','reason':'lookup-backed field requires source-value resolution'}); continue
  if len(types)>1:
-  # Only known source conflict is Name: split by type/service to preserve semantics.
   if key=='name':
    variants=[('Name - Ivanti Person','user',['Leaver','Suspend Temporary Access']),('Name - cBase Leaver','text',['cBase Leaver'])]
   else:
@@ -78,13 +95,11 @@ for key,g in sorted(groups.items()):
   options=list(g['options']) if jtype in {'select','checkbox'} else []
   if jtype=='checkbox' and not options: options=['Yes','No']
   existing=byname.get(norm(desired),[])
-  # Existing exact names are reused only when unambiguous and type-compatible.
   if len(existing)==1:
    ek=custom_kind(existing[0])
    compatible=(desired in {'Summary','Description'} and jtype in {'text','paragraph'}) or ek==jtype
    if compatible:
     results.append({'sourceName':g['name'],'jiraName':desired,'jiraType':jtype,'status':'reused','id':existing[0]['id'],'services':services}); continue
-  # Collision policy: never overwrite or silently bind to an incompatible/duplicate field.
   if existing or (desired==g['name'] and len(byname.get(key,[]))>1):
    desired=f'{g["name"]} - Ivanti'
    if key=='name': desired='Name - Ivanti Person' if jtype=='user' else 'Name - cBase Leaver'
@@ -112,9 +127,8 @@ for key,g in sorted(groups.items()):
      row['optionsAdded']+=len(chunk)
   results.append(row)
 
-# Read-back verification of every created/reused field name.
-vs,vfields=req('GET','/rest/api/3/field')
-verify={norm(f.get('name')):f.get('id') for f in vfields} if vs==200 else {}
+vfields=all_fields()
+verify={norm(f.get('name')):f.get('id') for f in vfields}
 for r in results:
  if r.get('jiraName') and r['status'] in {'created','reused','partial'}:
   r['readBackId']=verify.get(norm(r['jiraName'])); r['readBackOk']=bool(r['readBackId'])
@@ -132,4 +146,4 @@ summary={
 (REPORT/'result.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
 print(json.dumps({k:v for k,v in summary.items() if k!='results'},indent=2))
 for r in results: print(f"{r.get('sourceName')}: {r.get('status')} -> {r.get('jiraName','')} {r.get('id','')}")
-if summary['failed'] or summary['readBackFailures']: raise SystemExit(2)
+if summary['failed'] or summary['partial'] or summary['readBackFailures']: raise SystemExit(2)
