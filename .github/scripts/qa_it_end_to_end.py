@@ -127,6 +127,8 @@ try:
                 observed_by_key = {}
                 completed_children = set()
                 reconciliation_nudge_count = 0
+                last_child_completion_at = 0.0
+                last_reconciliation_at = 0.0
                 deadline = time.time() + 600
                 parent_done = False
                 while time.time() < deadline and not parent_done:
@@ -140,16 +142,23 @@ try:
                                 'summary': str(child.get('fields',{}).get('summary') or ''),
                                 'description': json.dumps(child.get('fields',{}).get('description') or {})
                             }
-                    for child_key in sorted(set(observed_by_key) - completed_children):
+                    new_children = sorted(set(observed_by_key) - completed_children)
+                    for child_key in new_children:
                         transition_done(child_key)
                         completed_children.add(child_key)
-                    if completed_children:
+                    if new_children:
+                        last_child_completion_at = time.time()
+                    now = time.time()
+                    quiet_for = now - last_child_completion_at if last_child_completion_at else 0
+                    since_reconcile = now - last_reconciliation_at if last_reconciliation_at else quiet_for
+                    if completed_children and quiet_for >= 12 and since_reconcile >= 12:
                         reconcile_label = f'ivanti-orchestration-reconcile-{reconciliation_nudge_count % 2}'
                         nudge_status, nudge_body = call('PUT', f'/rest/api/3/issue/{key}', {'fields': {
                             'labels': ['ivanti-migration-auto-qa', reconcile_label]
                         }})
                         require(nudge_status == 204, f'parent reconciliation nudge failed: HTTP {nudge_status} {nudge_body}')
                         reconciliation_nudge_count += 1
+                        last_reconciliation_at = now
                     _, parent_status = call('GET', f'/rest/api/3/issue/{key}?fields=status')
                     parent_done = str(parent_status.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
                     if parent_done and sorted(item['summary'] for item in observed_by_key.values()) == sorted(expected_tasks): break
