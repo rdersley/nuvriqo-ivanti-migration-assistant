@@ -14,6 +14,8 @@ on:
       - '.github/scripts/forms_webtrigger_condition_patch.py'
       - '.github/scripts/qa_it_completion.py'
       - '.github/scripts/qa_it_end_to_end.py'
+      - '.github/scripts/action_review_hold_fix.py'
+      - '.github/scripts/multivalue_decision_fix.py'
       - 'migration-evidence/source-backed-completion-plan.json'
       - '.github/scripts/lookup_fallback_forms_fix.py'
       - '.github/workflows/rim-it-webtrigger-forms.yml'
