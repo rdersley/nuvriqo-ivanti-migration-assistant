@@ -5,8 +5,11 @@ engine = Path('src/orchestrationGraphEngine.ts')
 text = engine.read_text()
 old = "async function saveState(s:State){s.updatedAt=new Date().toISOString();await kvs.set(stateKey(s.parentIssueId),s)}"
 new = "async function saveState(s:State){const current=await kvs.get(stateKey(s.parentIssueId)) as State|undefined;if(current){s.createdTasks={...current.createdTasks,...s.createdTasks};s.passed=[...new Set([...current.passed,...s.passed])];s.active=[...new Set([...current.active,...s.active])].filter(id=>!s.passed.includes(id));s.completed=Boolean(current.completed||s.completed)}s.updatedAt=new Date().toISOString();await kvs.set(stateKey(s.parentIssueId),s)}"
+branch_merge = "async function saveState(s:State){const latest=await kvs.get(stateKey(s.parentIssueId)) as State|undefined;if(latest){s.createdTasks={...(latest.createdTasks||{}),...(s.createdTasks||{})};s.passed=[...new Set([...(latest.passed||[]),...(s.passed||[])])];s.active=[...new Set([...(latest.active||[]),...(s.active||[])])].filter(id=>!s.passed.includes(id));s.completed=Boolean(latest.completed||s.completed)}s.updatedAt=new Date().toISOString();await kvs.set(stateKey(s.parentIssueId),s)}"
 if old in text:
     text = text.replace(old, new, 1)
+elif branch_merge in text:
+    text = text.replace(branch_merge, new, 1)
 elif new not in text:
     raise SystemExit('Expected saveState implementation not found')
 
