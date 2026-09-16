@@ -142,7 +142,8 @@ try:
             if expected_tasks:
                 observed_by_key = {}
                 completed_children = set()
-                deadline = time.time() + 600
+                reconciliation_nudge_count = 0
+                deadline = time.time() + 300
                 parent_done = False
                 while time.time() < deadline and not parent_done:
                     _, parent = call('GET', f'/rest/api/3/issue/{key}?fields=subtasks')
@@ -164,6 +165,16 @@ try:
                     for child_key in new_children:
                         transition_done(child_key)
                         completed_children.add(child_key)
+                    if new_children:
+                        # Child events and this parent signal share the same per-parent lock.
+                        # The hard task cap prevents the signal from creating duplicates.
+                        time.sleep(10)
+                        reconcile_label = f'ivanti-orchestration-reconcile-{reconciliation_nudge_count % 2}'
+                        nudge_status, nudge_body = call('PUT', f'/rest/api/3/issue/{key}', {'fields': {
+                            'labels': ['ivanti-migration-auto-qa', reconcile_label]
+                        }})
+                        require(nudge_status == 204, f'parent reconciliation nudge failed: HTTP {nudge_status} {nudge_body}')
+                        reconciliation_nudge_count += 1
                     _, parent_status = call('GET', f'/rest/api/3/issue/{key}?fields=status')
                     parent_done = str(parent_status.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
                     if parent_done and sorted(item['summary'] for item in observed_by_key.values()) == sorted(expected_tasks): break
@@ -183,8 +194,7 @@ try:
             row['status'] = 'passed'
         except Exception as error:
             row['status'] = 'failed'; row['error'] = str(error)
-            if isinstance(error, SafetyAbort):
-                safety_abort = str(error)
+            safety_abort = str(error)
         results.append(row)
         print(f"E2E result: {service['name']} — {row['status']} {row.get('error','')}", flush=True)
         issue_key = row.get('issueKey')
