@@ -47,6 +47,7 @@ for service, field in conditions:
         check(f'supported expression: {service}/{field["name"]}/{clause}', supported.fullmatch(clause.strip()))
 
 source = (ROOT / 'src/productionMigrationWebtrigger.ts').read_text()
+engine = (ROOT / 'src/orchestrationGraphEngine.ts').read_text()
 vector_graphs = (ROOT / 'src/vectorRoxGraphs.ts').read_text()
 workflow = (ROOT / '.github/workflows/rim-it-webtrigger-forms.yml').read_text()
 for anchor in [
@@ -69,6 +70,7 @@ check('all four supplied Vector ROX graphs retained', all(name in vector_graphs 
 ]))
 check('Vector parameter substitution retained', 'fieldMap' in vector_graphs and 'renderSourceTemplate' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
 check('structural fan-out recovery retained', 'repairStructuralFanout(plan,state)' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
+check('parent updates reconcile installed graphs', '!isCreated&&!isUpdated' in engine)
 
 print(f'IT completion QA: {34 + len(conditions)} guarded checks')
 if failures:
