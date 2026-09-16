@@ -120,6 +120,7 @@ try:
             if expected_tasks:
                 observed_by_key = {}
                 completed_children = set()
+                reconciliation_nudge_sent = False
                 deadline = time.time() + 600
                 parent_done = False
                 while time.time() < deadline and not parent_done:
@@ -136,6 +137,13 @@ try:
                     for child_key in sorted(set(observed_by_key) - completed_children):
                         transition_done(child_key)
                         completed_children.add(child_key)
+                    observed_summaries = sorted(item['summary'] for item in observed_by_key.values())
+                    if not reconciliation_nudge_sent and observed_summaries == sorted(expected_tasks) and completed_children == set(observed_by_key):
+                        nudge_status, nudge_body = call('PUT', f'/rest/api/3/issue/{key}', {'fields': {
+                            'labels': ['ivanti-migration-auto-qa', 'ivanti-orchestration-reconcile']
+                        }})
+                        require(nudge_status == 204, f'parent reconciliation nudge failed: HTTP {nudge_status} {nudge_body}')
+                        reconciliation_nudge_sent = True
                     _, parent_status = call('GET', f'/rest/api/3/issue/{key}?fields=status')
                     parent_done = str(parent_status.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
                     if parent_done and sorted(item['summary'] for item in observed_by_key.values()) == sorted(expected_tasks): break
