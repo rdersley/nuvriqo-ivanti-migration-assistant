@@ -1,0 +1,112 @@
+{
+  "validatedAt": "2026-09-16T17:13:32Z",
+  "mode": "LIVE_IT_END_TO_END",
+  "validationCommit": "4d5bbd9a6cb63a982c2cccb5377db8236d105e42",
+  "workflowRun": "https://github.com/rdersley/nuvriqo-ivanti-migration-assistant/actions/runs/35123648400",
+  "target": {
+    "projectKey": "IT",
+    "projectId": "12789",
+    "serviceDeskId": "2183",
+    "workflowSchemeId": "12635"
+  },
+  "result": {
+    "verifiedRequestTypes": 14,
+    "failedRequestTypes": 0,
+    "publishedForms": 14,
+    "customerVisibleFieldOccurrences": 86,
+    "persistedConditions": 12,
+    "workflowMappings": 14,
+    "orchestrationPlans": 8,
+    "sourceBackedTasks": 54,
+    "unresolvedFieldOccurrences": 0
+  },
+  "safeguards": {
+    "oneParentAtATime": true,
+    "exactPerPlanTaskCap": true,
+    "duplicateChildAbort": true,
+    "jiraDoneReadbackRequired": true
+  },
+  "services": [
+    {
+      "name": "AWS Account management",
+      "tasks": 0,
+      "status": "passed"
+    },
+    {
+      "name": "Bitbucket Cloud Support",
+      "tasks": 0,
+      "status": "passed"
+    },
+    {
+      "name": "Domain Password Reset",
+      "tasks": 0,
+      "status": "passed"
+    },
+    {
+      "name": "Employee Move",
+      "tasks": 7,
+      "status": "passed"
+    },
+    {
+      "name": "Leaver",
+      "tasks": 7,
+      "status": "passed"
+    },
+    {
+      "name": "New Application Access Request",
+      "tasks": 0,
+      "status": "passed"
+    },
+    {
+      "name": "New IT Software Request",
+      "tasks": 0,
+      "status": "passed"
+    },
+    {
+      "name": "New Service Request",
+      "tasks": 0,
+      "status": "passed"
+    },
+    {
+      "name": "New Vector System Provisioning",
+      "tasks": 10,
+      "status": "passed"
+    },
+    {
+      "name": "Production Vector System Decommissioning",
+      "tasks": 8,
+      "status": "passed"
+    },
+    {
+      "name": "Suspend Temporary Access",
+      "tasks": 7,
+      "status": "passed"
+    },
+    {
+      "name": "Test Vector System Decommissioning",
+      "tasks": 6,
+      "status": "passed"
+    },
+    {
+      "name": "UAT Vector System Decommissioning",
+      "tasks": 8,
+      "status": "passed"
+    },
+    {
+      "name": "cBase Leaver",
+      "tasks": 1,
+      "status": "passed"
+    }
+  ],
+  "cleanup": {
+    "temporaryParentsCreated": 14,
+    "temporaryParentsDeleted": 14,
+    "temporaryParentsRemaining": 0,
+    "subtasksDeletedWithParents": true
+  },
+  "holds": {
+    "approverIdentity": "Not populated; user will add the approval line manually.",
+    "firstLineSupport": "Preserved as routing metadata because Jira does not assign issues directly to groups.",
+    "sdProject": "Not targeted or modified."
+  }
+}
