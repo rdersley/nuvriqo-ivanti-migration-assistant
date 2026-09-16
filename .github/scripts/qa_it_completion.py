@@ -68,8 +68,9 @@ check('all four supplied Vector ROX graphs retained', all(name in vector_graphs 
     'Test Vector System Decommissioning', 'UAT Vector System Decommissioning'
 ]))
 check('Vector parameter substitution retained', 'fieldMap' in vector_graphs and 'renderSourceTemplate' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
+check('structural fan-out recovery retained', 'repairStructuralFanout(plan,state)' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
 
-print(f'IT completion QA: {33 + len(conditions)} guarded checks')
+print(f'IT completion QA: {34 + len(conditions)} guarded checks')
 if failures:
     print(f'FAILED: {len(failures)}')
     for failure in failures:
