@@ -145,7 +145,7 @@ try:
                 reconciliation_nudge_count = 0
                 last_child_completion_at = 0.0
                 last_reconciliation_at = 0.0
-                deadline = time.time() + 300
+                deadline = time.time() + 600
                 parent_done = False
                 while time.time() < deadline and not parent_done:
                     _, parent = call('GET', f'/rest/api/3/issue/{key}?fields=subtasks')
