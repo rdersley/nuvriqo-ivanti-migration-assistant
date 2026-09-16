@@ -72,6 +72,10 @@ check('Vector parameter substitution retained', 'fieldMap' in vector_graphs and 
 check('structural fan-out recovery retained', 'repairStructuralFanout(plan,state)' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
 check('parent updates reconcile installed graphs', '!isCreated&&!isUpdated' in engine)
 check('orchestration state merges concurrent sibling progress', ('current.createdTasks' in engine or 'latest.createdTasks' in engine) and ('current.passed' in engine or 'latest.passed' in engine) and ('current.active' in engine or 'latest.active' in engine) and 'withParentLock(String(parent.id)' in engine)
+check('orchestration has a hard per-parent task cap', 'Orchestration task cap reached' in engine)
+check('only one settled child wave advances orchestration', 'isSettledWaveLeader(current,parent)' in engine)
+check('E2E enforces the exact 68-issue ceiling', 'expected_issue_cap == 68' in (ROOT / '.github/scripts/qa_it_end_to_end.py').read_text())
+check('E2E aborts on duplicate children', 'orchestration safety cap exceeded' in (ROOT / '.github/scripts/qa_it_end_to_end.py').read_text())
 
 print(f'IT completion QA: {36 + len(conditions)} guarded checks')
 if failures:
