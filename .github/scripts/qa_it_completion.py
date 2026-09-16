@@ -28,9 +28,13 @@ check('all conditional fields retain sourceId', all(field.get('sourceId') for _,
 check('completion plan targets IT only', completion.get('target') == {'projectKey':'IT','projectId':'12789','serviceDeskId':'2183','workflowSchemeId':'12635'})
 check('completion plan has 14 services', len(completion.get('services') or []) == 14)
 check('completion plan has seven approval services', sum(bool(item.get('approval')) for item in completion.get('services') or []) == 7)
-check('completion plan has four exact orchestration services', sum(bool(item.get('tasks')) for item in completion.get('services') or []) == 4)
-check('exact orchestration task count is source-backed', sum(len(item.get('tasks') or []) for item in completion.get('services') or []) == 22)
-check('all exact orchestration routes preserve v11 team', all(item.get('routingTeam') == 'First Line Support' for item in completion.get('services') or [] if item.get('tasks')))
+check('completion plan has eight exact orchestration services', sum(bool(item.get('tasks')) for item in completion.get('services') or []) == 8)
+check('exact orchestration task count is source-backed', sum(len(item.get('tasks') or []) for item in completion.get('services') or []) == 54)
+check('all exact orchestration tasks retain a source team', all(
+    (item.get('routingTeam') and not item.get('taskRoutes')) or
+    set(item.get('taskRoutes') or {}) == set(item.get('tasks') or [])
+    for item in completion.get('services') or [] if item.get('tasks')
+))
 
 supported = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*\s*==\s*(?:"[^"]*"|\'[^\']*\'|true|false)$', re.I)
 for service, field in conditions:
@@ -43,6 +47,7 @@ for service, field in conditions:
         check(f'supported expression: {service}/{field["name"]}/{clause}', supported.fullmatch(clause.strip()))
 
 source = (ROOT / 'src/productionMigrationWebtrigger.ts').read_text()
+vector_graphs = (ROOT / 'src/vectorRoxGraphs.ts').read_text()
 workflow = (ROOT / '.github/workflows/rim-it-webtrigger-forms.yml').read_text()
 for anchor in [
     "const PROJECT_ID = '12789'", "const PROJECT_KEY = 'IT'", "const SERVICE_DESK_ID = '2183'",
@@ -56,10 +61,15 @@ check('workflow requires 12 persisted conditions', "parsed.get('conditions') != 
 check('workflow requires all 14 forms', "parsed.get('published') != 14" in workflow)
 check('workflow requires zero unresolved lookups', "parsed.get('unresolvedFieldOccurrences') != 0" in workflow)
 check('workflow requires all workflow mappings', 'mapped != 14' in workflow)
-check('workflow requires four exact orchestration plans', 'installed != 4' in workflow)
+check('workflow requires eight exact orchestration plans', 'installed != 8' in workflow)
 check('completion runner has no SD project target', not re.search(r"project(?:Key)?\s*[:=]\s*['\"]SD['\"]", source))
+check('all four supplied Vector ROX graphs retained', all(name in vector_graphs for name in [
+    'New Vector System Provisioning', 'Production Vector System Decommissioning',
+    'Test Vector System Decommissioning', 'UAT Vector System Decommissioning'
+]))
+check('Vector parameter substitution retained', 'fieldMap' in vector_graphs and 'renderSourceTemplate' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
 
-print(f'IT completion QA: {31 + len(conditions)} guarded checks')
+print(f'IT completion QA: {33 + len(conditions)} guarded checks')
 if failures:
     print(f'FAILED: {len(failures)}')
     for failure in failures:
