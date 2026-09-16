@@ -83,6 +83,7 @@ results = []
 created_keys = []
 try:
     for service in PLAN['services']:
+        print(f"E2E start: {service['name']}", flush=True)
         row = {'service': service['name'], 'requestTypeId': service['requestTypeId'], 'issueTypeId': service['issueTypeId'], 'checks': []}
         try:
             rt = next((item for item in request_types if str(item.get('id')) == service['requestTypeId'] and item.get('name') == service['name']), None)
@@ -155,6 +156,7 @@ try:
         except Exception as error:
             row['status'] = 'failed'; row['error'] = str(error)
         results.append(row)
+        print(f"E2E result: {service['name']} — {row['status']} {row.get('error','')}", flush=True)
 finally:
     cleanup = []
     for key in reversed(created_keys):
