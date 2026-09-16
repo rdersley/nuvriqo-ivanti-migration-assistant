@@ -5,6 +5,7 @@ The script creates only labelled AUTO-QA issues in project 12789 and deletes tho
 same issues after verification. It never addresses SD or any other service desk.
 """
 import base64
+import http.client
 import json
 import os
 import time
@@ -54,8 +55,8 @@ def call(method, path, body=None):
             try: error_body = json.loads(raw) if raw else {}
             except Exception: error_body = raw
             return error.code, error_body
-        except (urllib.error.URLError, ConnectionResetError, TimeoutError):
-            if attempt == 2:
+        except (urllib.error.URLError, ConnectionResetError, TimeoutError, http.client.IncompleteRead):
+            if method not in ('GET', 'PUT', 'DELETE') or attempt == 2:
                 raise
             time.sleep(2 * (attempt + 1))
 
