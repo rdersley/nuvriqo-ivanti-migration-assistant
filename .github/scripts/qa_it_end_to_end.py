@@ -43,16 +43,21 @@ def safe(path, method):
 def call(method, path, body=None):
     safe(path, method)
     data = None if body is None else json.dumps(body).encode()
-    request = urllib.request.Request(SITE + path, headers=HEAD, method=method, data=data)
-    try:
-        with urllib.request.urlopen(request, timeout=90) as response:
-            raw = response.read().decode('utf-8', 'replace')
-            return response.status, json.loads(raw) if raw else {}
-    except urllib.error.HTTPError as error:
-        raw = error.read().decode('utf-8', 'replace')
-        try: body = json.loads(raw) if raw else {}
-        except Exception: body = raw
-        return error.code, body
+    for attempt in range(3):
+        request = urllib.request.Request(SITE + path, headers=HEAD, method=method, data=data)
+        try:
+            with urllib.request.urlopen(request, timeout=90) as response:
+                raw = response.read().decode('utf-8', 'replace')
+                return response.status, json.loads(raw) if raw else {}
+        except urllib.error.HTTPError as error:
+            raw = error.read().decode('utf-8', 'replace')
+            try: error_body = json.loads(raw) if raw else {}
+            except Exception: error_body = raw
+            return error.code, error_body
+        except (urllib.error.URLError, ConnectionResetError, TimeoutError):
+            if attempt == 2:
+                raise
+            time.sleep(2 * (attempt + 1))
 
 def require(ok, message):
     if not ok: raise RuntimeError(message)
@@ -120,7 +125,7 @@ try:
             if expected_tasks:
                 observed_by_key = {}
                 completed_children = set()
-                reconciliation_nudge_sent = False
+                reconciliation_nudge_count = 0
                 deadline = time.time() + 600
                 parent_done = False
                 while time.time() < deadline and not parent_done:
@@ -137,13 +142,13 @@ try:
                     for child_key in sorted(set(observed_by_key) - completed_children):
                         transition_done(child_key)
                         completed_children.add(child_key)
-                    observed_summaries = sorted(item['summary'] for item in observed_by_key.values())
-                    if not reconciliation_nudge_sent and observed_summaries == sorted(expected_tasks) and completed_children == set(observed_by_key):
+                    if completed_children:
+                        reconcile_label = f'ivanti-orchestration-reconcile-{reconciliation_nudge_count % 2}'
                         nudge_status, nudge_body = call('PUT', f'/rest/api/3/issue/{key}', {'fields': {
-                            'labels': ['ivanti-migration-auto-qa', 'ivanti-orchestration-reconcile']
+                            'labels': ['ivanti-migration-auto-qa', reconcile_label]
                         }})
                         require(nudge_status == 204, f'parent reconciliation nudge failed: HTTP {nudge_status} {nudge_body}')
-                        reconciliation_nudge_sent = True
+                        reconciliation_nudge_count += 1
                     _, parent_status = call('GET', f'/rest/api/3/issue/{key}?fields=status')
                     parent_done = str(parent_status.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
                     if parent_done and sorted(item['summary'] for item in observed_by_key.values()) == sorted(expected_tasks): break
