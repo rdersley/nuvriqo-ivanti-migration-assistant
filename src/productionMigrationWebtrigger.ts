@@ -1,6 +1,7 @@
 import api, { route } from '@forge/api';
 import { kvs } from '@forge/kvs';
 import { saveExecutableGraph, type ExecutableGraphPlan } from './orchestrationGraphEngine';
+import { ROX_VECTOR_GRAPH_SOURCES } from './vectorRoxGraphs';
 
 const PROJECT_ID = '12789';
 const PROJECT_KEY = 'IT';
@@ -43,7 +44,7 @@ type MappedField = {
 };
 type CompletionService = {
   name: string; requestTypeId: string; issueTypeId: string; approval: boolean;
-  tasks?: string[]; routingTeam?: string; orchestrationHold?: string;
+  tasks?: string[]; routingTeam?: string; taskRoutes?: Record<string, string>; orchestrationHold?: string;
 };
 type CompletionPlan = {
   target: { projectKey: string; projectId: string; serviceDeskId: string; workflowSchemeId: string };
@@ -294,6 +295,22 @@ function validateCompletionPlan(plan: CompletionPlan | undefined): CompletionPla
 }
 
 function buildExecutablePlan(service: CompletionService): ExecutableGraphPlan | undefined {
+  const roxGraph = ROX_VECTOR_GRAPH_SOURCES[service.name];
+  if (roxGraph) {
+    return {
+      version: 2,
+      serviceId: service.requestTypeId,
+      serviceName: service.name,
+      projectId: PROJECT_ID,
+      issueTypeId: service.issueTypeId,
+      workflowName: `${service.name} — supplied ROX orchestration`,
+      workflowVersion: 'rox-20260915',
+      entryNodeIds: roxGraph.entryNodeIds,
+      fieldMap: roxGraph.fieldMap,
+      nodes: roxGraph.nodes,
+      transitions: roxGraph.transitions
+    };
+  }
   if (!service.tasks?.length) return undefined;
   const taskNodes = service.tasks.map((title, index) => ({
     id: `task-${index + 1}`,
