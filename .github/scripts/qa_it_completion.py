@@ -71,8 +71,9 @@ check('all four supplied Vector ROX graphs retained', all(name in vector_graphs 
 check('Vector parameter substitution retained', 'fieldMap' in vector_graphs and 'renderSourceTemplate' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
 check('structural fan-out recovery retained', 'repairStructuralFanout(plan,state)' in (ROOT / 'src/orchestrationGraphEngine.ts').read_text())
 check('parent updates reconcile installed graphs', '!isCreated&&!isUpdated' in engine)
+check('orchestration state merges concurrent sibling progress', 'latest.createdTasks' in engine and 'latest.passed' in engine and 'latest.active' in engine)
 
-print(f'IT completion QA: {35 + len(conditions)} guarded checks')
+print(f'IT completion QA: {36 + len(conditions)} guarded checks')
 if failures:
     print(f'FAILED: {len(failures)}')
     for failure in failures:
