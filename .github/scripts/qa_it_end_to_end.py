@@ -6,6 +6,7 @@ same issues after verification. It never addresses SD or any other service desk.
 """
 import base64
 import http.client
+from collections import Counter
 import json
 import os
 import time
@@ -63,6 +64,17 @@ def call(method, path, body=None):
 def require(ok, message):
     if not ok: raise RuntimeError(message)
 
+class SafetyAbort(RuntimeError):
+    pass
+
+def cleanup_auto_qa(key):
+    read_status, issue = call('GET', f'/rest/api/3/issue/{key}?fields=summary')
+    summary = str(issue.get('fields',{}).get('summary') or '') if read_status == 200 else ''
+    if not summary.startswith(AUTO_PREFIX):
+        return {'key': key, 'status': 'refused-non-auto-qa'}
+    delete_status, _ = call('DELETE', f'/rest/api/3/issue/{key}?deleteSubtasks=true')
+    return {'key': key, 'status': 'deleted' if delete_status in (204,404) else f'failed-http-{delete_status}'}
+
 def transition_done(issue_key):
     status, body = call('GET', f'/rest/api/3/issue/{issue_key}/transitions')
     require(status == 200, f'cannot read transitions for {issue_key}: HTTP {status}')
@@ -87,6 +99,10 @@ form_results = {item.get('service'): item for item in MIGRATION.get('results') o
 
 results = []
 created_keys = []
+cleanup = []
+safety_abort = None
+expected_issue_cap = len(PLAN['services']) + sum(len(service.get('tasks') or []) for service in PLAN['services'])
+require(expected_issue_cap == 68, f'Unexpected AUTO-QA issue cap: {expected_issue_cap}')
 try:
     for service in PLAN['services']:
         print(f"E2E start: {service['name']}", flush=True)
@@ -126,9 +142,6 @@ try:
             if expected_tasks:
                 observed_by_key = {}
                 completed_children = set()
-                reconciliation_nudge_count = 0
-                last_child_completion_at = 0.0
-                last_reconciliation_at = 0.0
                 deadline = time.time() + 600
                 parent_done = False
                 while time.time() < deadline and not parent_done:
@@ -142,23 +155,15 @@ try:
                                 'summary': str(child.get('fields',{}).get('summary') or ''),
                                 'description': json.dumps(child.get('fields',{}).get('description') or {})
                             }
+                    observed_counts = Counter(item['summary'] for item in observed_by_key.values())
+                    expected_counts = Counter(expected_tasks)
+                    overflow = {name: count for name, count in observed_counts.items() if count > expected_counts.get(name, 0)}
+                    if len(observed_by_key) > len(expected_tasks) or overflow:
+                        raise SafetyAbort(f'orchestration safety cap exceeded for {key}: children={len(observed_by_key)}/{len(expected_tasks)} duplicates={overflow}')
                     new_children = sorted(set(observed_by_key) - completed_children)
                     for child_key in new_children:
                         transition_done(child_key)
                         completed_children.add(child_key)
-                    if new_children:
-                        last_child_completion_at = time.time()
-                    now = time.time()
-                    quiet_for = now - last_child_completion_at if last_child_completion_at else 0
-                    since_reconcile = now - last_reconciliation_at if last_reconciliation_at else quiet_for
-                    if completed_children and quiet_for >= 12 and since_reconcile >= 12:
-                        reconcile_label = f'ivanti-orchestration-reconcile-{reconciliation_nudge_count % 2}'
-                        nudge_status, nudge_body = call('PUT', f'/rest/api/3/issue/{key}', {'fields': {
-                            'labels': ['ivanti-migration-auto-qa', reconcile_label]
-                        }})
-                        require(nudge_status == 204, f'parent reconciliation nudge failed: HTTP {nudge_status} {nudge_body}')
-                        reconciliation_nudge_count += 1
-                        last_reconciliation_at = now
                     _, parent_status = call('GET', f'/rest/api/3/issue/{key}?fields=status')
                     parent_done = str(parent_status.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
                     if parent_done and sorted(item['summary'] for item in observed_by_key.values()) == sorted(expected_tasks): break
@@ -178,18 +183,21 @@ try:
             row['status'] = 'passed'
         except Exception as error:
             row['status'] = 'failed'; row['error'] = str(error)
+            if isinstance(error, SafetyAbort):
+                safety_abort = str(error)
         results.append(row)
         print(f"E2E result: {service['name']} — {row['status']} {row.get('error','')}", flush=True)
+        issue_key = row.get('issueKey')
+        if issue_key:
+            outcome = cleanup_auto_qa(issue_key)
+            cleanup.append(outcome)
+            if outcome['status'] == 'deleted':
+                created_keys.remove(issue_key)
+        if safety_abort:
+            break
 finally:
-    cleanup = []
     for key in reversed(created_keys):
-        read_status, issue = call('GET', f'/rest/api/3/issue/{key}?fields=summary')
-        summary = str(issue.get('fields',{}).get('summary') or '') if read_status == 200 else ''
-        if not summary.startswith(AUTO_PREFIX):
-            cleanup.append({'key': key, 'status': 'refused-non-auto-qa'})
-            continue
-        delete_status, _ = call('DELETE', f'/rest/api/3/issue/{key}?deleteSubtasks=true')
-        cleanup.append({'key': key, 'status': 'deleted' if delete_status in (204,404) else f'failed-http-{delete_status}'})
+        cleanup.append(cleanup_auto_qa(key))
 
 report = {'mode':'LIVE_IT_END_TO_END','target':PLAN['target'],'verified':sum(item['status']=='passed' for item in results),'failed':sum(item['status']=='failed' for item in results),'results':results,'cleanup':cleanup}
 (OUT/'report.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
