@@ -7,6 +7,8 @@ on:
       - migration-completion-20260915
     paths:
       - 'src/productionMigrationWebtrigger.ts'
+      - 'src/orchestrationGraphEngine.ts'
+      - 'src/vectorRoxGraphs.ts'
       - 'manifest.yml'
       - '.github/scripts/prepare_it_webtrigger_payload.py'
       - '.github/scripts/forms_webtrigger_condition_patch.py'
@@ -187,7 +189,7 @@ jobs:
           installed=sum(1 for item in (parsed.get('orchestrationResults') or []) if item.get('status')=='installed') if isinstance(parsed,dict) else 0
           mapped=((parsed.get('workflowResult') or {}).get('mapped')) if isinstance(parsed,dict) else None
           print(json.dumps({'http':status,'ok':parsed.get('ok') if isinstance(parsed,dict) else None,'published':parsed.get('published') if isinstance(parsed,dict) else None,'failed':parsed.get('failed') if isinstance(parsed,dict) else None,'conditions':parsed.get('conditions') if isinstance(parsed,dict) else None,'workflowMappings':mapped,'orchestrationPlansInstalled':installed,'unresolvedFieldOccurrences':parsed.get('unresolvedFieldOccurrences') if isinstance(parsed,dict) else None},indent=2))
-          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14 or parsed.get('conditions') != 12 or parsed.get('unresolvedFieldOccurrences') != 0 or mapped != 14 or installed != 4:
+          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14 or parsed.get('conditions') != 12 or parsed.get('unresolvedFieldOccurrences') != 0 or mapped != 14 or installed != 8:
               raise SystemExit(2)
           PY
 
