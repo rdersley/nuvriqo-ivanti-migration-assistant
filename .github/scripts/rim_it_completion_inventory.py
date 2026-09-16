@@ -114,6 +114,11 @@ approval_fields = [
     for item in fields
     if re.search(r'approv', str(item.get('name') or ''), re.I)
 ]
+group_picker_fields = [
+    {'id': item.get('id'), 'name': item.get('name'), 'schema': item.get('schema')}
+    for item in fields
+    if 'grouppicker' in str((item.get('schema') or {}).get('custom') or '').lower()
+]
 
 forms_status, form_index = get(f'/forms/project/{PROJECT_ID}/form')
 forms = []
@@ -140,6 +145,13 @@ for source_team in SOURCE_TEAMS:
     candidates = (body or {}).get('groups', []) if isinstance(body, dict) else []
     exact = [item for item in candidates if str(item.get('name') or '').casefold() == source_team.casefold()]
     group_matches[source_team] = {'http': status, 'exact': exact, 'candidates': candidates[:20]}
+
+first_line_group = group_matches['First Line Support']
+if first_line_group['http'] != 200 or len(first_line_group['exact']) != 1:
+    raise SystemExit(
+        'Expected exactly one current Jira group named First Line Support; '
+        f"HTTP {first_line_group['http']}, exact matches {len(first_line_group['exact'])}"
+    )
 
 roles_status, roles = get(f'/rest/api/3/project/{PROJECT_ID}/role')
 role_details = []
@@ -174,6 +186,7 @@ report = {
     'project': project,
     'requestTypes': request_types,
     'approvalFields': approval_fields,
+    'groupPickerFields': group_picker_fields,
     'formsIndexHttp': forms_status,
     'forms': forms,
     'sourceTeamGroups': group_matches,
@@ -191,8 +204,11 @@ summary = {
     'projectRoles': len(role_details),
     'formsIndexHttp': forms_status,
     'sourceTeamExactMatches': sum(1 for value in group_matches.values() if value['exact']),
+    'firstLineSupportGroupVerified': len(first_line_group['exact']) == 1,
+    'groupPickerFields': len(group_picker_fields),
     'readOnly': True,
 }
 print(json.dumps(summary, indent=2))
 if summary['requestTypesVerified'] != 14:
     raise SystemExit('Completion inventory failed the 14-request-type guard')
+
