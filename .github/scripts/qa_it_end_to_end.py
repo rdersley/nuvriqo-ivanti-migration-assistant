@@ -143,6 +143,8 @@ try:
                 observed_by_key = {}
                 completed_children = set()
                 reconciliation_nudge_count = 0
+                last_child_completion_at = 0.0
+                last_reconciliation_at = 0.0
                 deadline = time.time() + 300
                 parent_done = False
                 while time.time() < deadline and not parent_done:
@@ -166,15 +168,20 @@ try:
                         transition_done(child_key)
                         completed_children.add(child_key)
                     if new_children:
-                        # Child events and this parent signal share the same per-parent lock.
-                        # The hard task cap prevents the signal from creating duplicates.
-                        time.sleep(10)
+                        last_child_completion_at = time.time()
+                    now = time.time()
+                    quiet_for = now - last_child_completion_at if last_child_completion_at else 0
+                    since_reconcile = now - last_reconciliation_at if last_reconciliation_at else quiet_for
+                    if completed_children and quiet_for >= 12 and since_reconcile >= 12:
+                        # Reconcile until the next wave appears. Child and parent events share
+                        # the same per-parent lock, and the hard task cap blocks duplicates.
                         reconcile_label = f'ivanti-orchestration-reconcile-{reconciliation_nudge_count % 2}'
                         nudge_status, nudge_body = call('PUT', f'/rest/api/3/issue/{key}', {'fields': {
                             'labels': ['ivanti-migration-auto-qa', reconcile_label]
                         }})
                         require(nudge_status == 204, f'parent reconciliation nudge failed: HTTP {nudge_status} {nudge_body}')
                         reconciliation_nudge_count += 1
+                        last_reconciliation_at = now
                     _, parent_status = call('GET', f'/rest/api/3/issue/{key}?fields=status')
                     parent_done = str(parent_status.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
                     if parent_done and sorted(item['summary'] for item in observed_by_key.values()) == sorted(expected_tasks): break
