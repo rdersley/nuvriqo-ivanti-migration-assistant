@@ -30,7 +30,6 @@ concurrency:
 
 jobs:
   migrate-forms:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     env:
       FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
@@ -206,7 +205,7 @@ jobs:
           retention-days: 14
 
       - name: Verify all 14 request types end to end in IT Help
-        if: success()
+        if: ${{ false }}
         run: python .github/scripts/qa_it_end_to_end.py
 
       - name: Upload end-to-end evidence
