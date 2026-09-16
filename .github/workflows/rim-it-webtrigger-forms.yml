@@ -26,10 +26,11 @@ permissions:
 
 concurrency:
   group: retailinmotion-it-webtrigger-forms
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   migrate-forms:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     env:
       FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
