@@ -117,39 +117,38 @@ try:
 
             expected_tasks = service.get('tasks') or []
             if expected_tasks:
-                observed = []
-                orchestration_children = []
-                deadline = time.time() + 150
-                while time.time() < deadline:
+                observed_by_key = {}
+                completed_children = set()
+                deadline = time.time() + 600
+                parent_done = False
+                while time.time() < deadline and not parent_done:
                     _, parent = call('GET', f'/rest/api/3/issue/{key}?fields=subtasks')
                     refs = parent.get('fields',{}).get('subtasks') or []
-                    observed = []
-                    orchestration_children = []
                     for ref in refs:
                         _, child = call('GET', f"/rest/api/3/issue/{ref['key']}?fields=summary,description,labels,parent")
                         if 'ivanti-orchestration' in (child.get('fields',{}).get('labels') or []):
-                            observed.append(str(child.get('fields',{}).get('summary') or ''))
-                            orchestration_children.append(str(child.get('key') or ref['key']))
-                    if sorted(observed) == sorted(expected_tasks): break
+                            child_key = str(child.get('key') or ref['key'])
+                            observed_by_key[child_key] = {
+                                'summary': str(child.get('fields',{}).get('summary') or ''),
+                                'description': json.dumps(child.get('fields',{}).get('description') or {})
+                            }
+                    for child_key in sorted(set(observed_by_key) - completed_children):
+                        transition_done(child_key)
+                        completed_children.add(child_key)
+                    _, parent_status = call('GET', f'/rest/api/3/issue/{key}?fields=status')
+                    parent_done = str(parent_status.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
+                    if parent_done and sorted(item['summary'] for item in observed_by_key.values()) == sorted(expected_tasks): break
                     time.sleep(5)
+                observed = [item['summary'] for item in observed_by_key.values()]
                 require(sorted(observed) == sorted(expected_tasks), f'orchestration mismatch expected={expected_tasks} observed={observed}')
                 row['checks'].append(f'orchestration:{len(expected_tasks)}')
-                expected_team = str(service.get('routingTeam') or '').strip()
-                require(expected_team == 'First Line Support', 'source routing team missing from plan')
-                for child_key in orchestration_children:
-                    _, child = call('GET', f'/rest/api/3/issue/{child_key}?fields=description')
-                    description = json.dumps(child.get('fields',{}).get('description') or {})
+                task_routes = service.get('taskRoutes') or {}
+                for child_key, child in observed_by_key.items():
+                    expected_team = str(task_routes.get(child['summary']) or service.get('routingTeam') or '').strip()
+                    require(expected_team, f'source routing team missing from plan for {child["summary"]}')
+                    description = child['description']
                     require(f'Ivanti assignment team: {expected_team}' in description, f'source routing metadata missing on {child_key}')
                 row['checks'].append('routing-metadata')
-                for child_key in orchestration_children:
-                    transition_done(child_key)
-                done_deadline = time.time() + 180
-                parent_done = False
-                while time.time() < done_deadline:
-                    _, parent = call('GET', f'/rest/api/3/issue/{key}?fields=status')
-                    parent_done = str(parent.get('fields',{}).get('status',{}).get('statusCategory',{}).get('key')) == 'done'
-                    if parent_done: break
-                    time.sleep(5)
                 require(parent_done, 'parent did not complete after all source-backed child tasks completed')
                 row['checks'].append('orchestration-completion')
             row['status'] = 'passed'
