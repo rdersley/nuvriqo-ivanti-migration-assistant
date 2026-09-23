@@ -1,0 +1,47 @@
+name: IT Help - New Employee Demo Release
+
+on:
+  push:
+    branches:
+      - migration-completion-20260915
+    paths:
+      - '.github/scripts/new_employee_demo_release.py'
+      - '.github/workflows/new-employee-demo-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: retailinmotion-new-employee-demo-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Hard target guard
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "migration-completion-20260915"
+          test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
+      - name: Validate release script
+        run: python -m py_compile .github/scripts/new_employee_demo_release.py
+      - name: Create and verify New Employee Setup in IT Help
+        run: python .github/scripts/new_employee_demo_release.py
+      - name: Upload durable release report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-new-employee-demo-release
+          path: migration-output/new-employee-demo-release/report.json
+          if-no-files-found: warn
+          retention-days: 30
