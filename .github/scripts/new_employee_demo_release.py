@@ -414,10 +414,9 @@ def main():
         raise RuntimeError('IT project identity guard failed')
 
     issue_type_id, request_type_id, issue_state, request_state, issue_scheme_id = ensure_issue_and_request_type()
-    field_map, field_results = ensure_fields()
-    form_id, form_state = ensure_form(field_map, request_type_id)
     workflow_state = map_workflow(issue_type_id)
     assign_portal_group(request_type_id)
+    field_map, field_results = ensure_fields()
 
     status, request_type = call('GET', f'/rest/servicedeskapi/servicedesk/{SERVICE_DESK_ID}/requesttype/{request_type_id}')
     require(status, request_type, {200}, 'final request type readback')
@@ -427,7 +426,7 @@ def main():
         'sourceOffering': {'name': SERVICE_NAME, 'recId': 'F1901A6167B04E3EB2B7664675CCB528'},
         'issueType': {'id': issue_type_id, 'status': issue_state},
         'requestType': {'id': request_type_id, 'status': request_state, 'groupIds': request_type.get('groupIds')},
-        'form': {'id': form_id, 'status': form_state, 'questions': 26, 'required': 13, 'sections': 3, 'persistedConditions': 8},
+        'form': {'status': 'pending-forge-asApp', 'questions': 26, 'required': 13, 'sections': 3, 'persistedConditions': 8},
         'workflow': {'name': STANDARD_WORKFLOW, 'status': workflow_state},
         'fields': {'created': sum(x['status'] == 'created' for x in field_results), 'reused': sum(x['status'] == 'reused' for x in field_results), 'results': field_results},
         'qaTicketsCreated': 0,

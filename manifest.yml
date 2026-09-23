@@ -16,6 +16,8 @@ modules:
   webtrigger:
     - key: ivanti-prod-migration-trigger
       function: prod-migration-trigger
+    - key: new-employee-demo-trigger
+      function: new-employee-demo
 
   function:
     - key: resolver
@@ -24,6 +26,8 @@ modules:
       handler: orchestrationGraphEngine.handleGraphIssueEvent
     - key: prod-migration-trigger
       handler: productionMigrationWebtrigger.handler
+    - key: new-employee-demo
+      handler: newEmployeeDemoWebtrigger.handler
 
 resources:
   - key: main
