@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - production-migration-runner
+      - migration-completion-20260915
     paths:
       - 'src/productionMigrationWebtrigger.ts'
-      - 'manifest.yml'
       - '.github/scripts/prepare_it_webtrigger_payload.py'
+      - '.github/scripts/forms_webtrigger_condition_patch.py'
+      - '.github/scripts/qa_it_completion.py'
+      - '.github/scripts/qa_it_end_to_end.py'
+      - 'migration-evidence/source-backed-completion-plan.json'
       - '.github/scripts/lookup_fallback_forms_fix.py'
-      - '.github/workflows/rim-it-webtrigger-forms.yml'
   workflow_dispatch:
 
 permissions:
@@ -34,7 +37,10 @@ jobs:
       - name: Hard target guard
         shell: bash
         run: |
-          test "$GITHUB_REF_NAME" = "production-migration-runner"
+          case "$GITHUB_REF_NAME" in
+            production-migration-runner|migration-completion-20260915) ;;
+            *) exit 1 ;;
+          esac
           test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
 
       - name: Set up Python
@@ -50,7 +56,6 @@ jobs:
           python .github/scripts/forms_condition_backend_controller_fix.py
           python .github/scripts/forms_persisted_section_controller_fix.py
           python .github/scripts/lookup_field_fidelity_fix.py
-          python .github/scripts/lookup_fallback_forms_fix.py
           python .github/scripts/orchestration_react_view_fix.py
           python .github/scripts/orchestration_execution_plan_fix.py
           python .github/scripts/orchestration_automation_blueprint_fix.py
@@ -73,6 +78,7 @@ jobs:
           python .github/scripts/qa_regression.py
           python .github/scripts/qa_orchestration_runtime.py
           python .github/scripts/qa_source_integrity.py
+          python .github/scripts/qa_it_completion.py
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -176,8 +182,10 @@ jobs:
           (out/'response.json').write_text(body,encoding='utf-8')
           try: parsed=json.loads(body)
           except Exception: parsed={'raw':body}
-          print(json.dumps({'http':status,'ok':parsed.get('ok') if isinstance(parsed,dict) else None,'published':parsed.get('published') if isinstance(parsed,dict) else None,'failed':parsed.get('failed') if isinstance(parsed,dict) else None,'unresolvedFieldOccurrences':parsed.get('unresolvedFieldOccurrences') if isinstance(parsed,dict) else None},indent=2))
-          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14 or parsed.get('unresolvedFieldOccurrences') != 0:
+          installed=sum(1 for item in (parsed.get('orchestrationResults') or []) if item.get('status')=='installed') if isinstance(parsed,dict) else 0
+          mapped=((parsed.get('workflowResult') or {}).get('mapped')) if isinstance(parsed,dict) else None
+          print(json.dumps({'http':status,'ok':parsed.get('ok') if isinstance(parsed,dict) else None,'published':parsed.get('published') if isinstance(parsed,dict) else None,'failed':parsed.get('failed') if isinstance(parsed,dict) else None,'conditions':parsed.get('conditions') if isinstance(parsed,dict) else None,'workflowMappings':mapped,'orchestrationPlansInstalled':installed,'unresolvedFieldOccurrences':parsed.get('unresolvedFieldOccurrences') if isinstance(parsed,dict) else None},indent=2))
+          if status < 200 or status >= 300 or not isinstance(parsed,dict) or not parsed.get('ok') or parsed.get('published') != 14 or parsed.get('conditions') != 12 or parsed.get('unresolvedFieldOccurrences') != 0 or mapped != 14 or installed != 4:
               raise SystemExit(2)
           PY
 
@@ -187,5 +195,18 @@ jobs:
         with:
           name: retailinmotion-it-webtrigger-forms
           path: migration-output/it-webtrigger/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Verify all 14 request types end to end in IT Help
+        if: success()
+        run: python .github/scripts/qa_it_end_to_end.py
+
+      - name: Upload end-to-end evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-it-end-to-end
+          path: migration-output/it-end-to-end/
           if-no-files-found: warn
           retention-days: 14

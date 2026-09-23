@@ -40,7 +40,7 @@ elif new_check not in qa:
 qa_path.write_text(qa, encoding='utf-8')
 
 # Jira can emit sibling subtask updates concurrently. Apply the monotonic state merge patch
-# in the same pre-QA runtime patch stage so one invocation cannot erase another's progress.
+# in the same pre-QA runtime patch stage; it accepts both legacy and branch merge forms.
 exec(Path('.github/scripts/orchestration_state_merge_fix.py').read_text(encoding='utf-8'))
 
 # CI #189 exposed two Jira fields containing "ServiceDesk": the migrated decision field

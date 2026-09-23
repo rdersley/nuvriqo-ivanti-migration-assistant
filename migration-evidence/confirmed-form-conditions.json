@@ -1,0 +1,19 @@
+{
+  "source": "ROX VisibilityExpression inventory, verified 2026-09-15",
+  "ruleCount": 12,
+  "serviceCount": 6,
+  "rules": [
+    {"service":"AWS Account management","target":"Password reset or Modify","expression":"$(if new_aws_account == \"No\" then true else false)"},
+    {"service":"AWS Account management","target":"Business Case","expression":"$(if new_aws_account == \"Yes\" || password_reset == \"Account Modifications\" then true else false)"},
+    {"service":"Bitbucket Cloud Support","target":"Please choose a person","expression":"$(RequestFor == \"someone else\")"},
+    {"service":"Bitbucket Cloud Support","target":"New Starter","expression":"$(RequestFor == \"a new starter\")"},
+    {"service":"Bitbucket Cloud Support","target":"User","expression":"$(RequestFor == \"myself\")"},
+    {"service":"Leaver","target":"Forward Email Address","expression":"$(ForwardEmail == true)"},
+    {"service":"New IT Software Request","target":"What internal systems will this software connect to?","expression":"$(if NewSupplier == true then true else false)"},
+    {"service":"New IT Software Request","target":"What information will be used by this software?","expression":"$(if NewSupplier == true then true else false)"},
+    {"service":"New Service Request","target":"Please choose a person","expression":"$(RequestFor == \"someone else\")"},
+    {"service":"New Service Request","target":"New Starter","expression":"$(RequestFor == \"a new starter\")"},
+    {"service":"New Service Request","target":"User","expression":"$(RequestFor == \"myself\")"},
+    {"service":"Suspend Temporary Access","target":"Forward Email Address","expression":"$(ForwardEmail == true)"}
+  ]
+}

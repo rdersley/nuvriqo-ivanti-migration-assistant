@@ -1,0 +1,34 @@
+name: Emergency IT AUTO-QA Cleanup
+
+on:
+  push:
+    branches:
+      - migration-completion-20260915
+    paths:
+      - '.github/workflows/emergency-it-auto-qa-cleanup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Delete only IT migration AUTO-QA parents and subtasks
+        run: python .github/scripts/cleanup_it_auto_qa.py
+      - name: Upload cleanup evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: it-auto-qa-cleanup
+          path: migration-output/it-auto-qa-cleanup/
+          retention-days: 30
