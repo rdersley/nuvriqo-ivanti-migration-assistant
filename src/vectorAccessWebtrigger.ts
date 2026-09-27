@@ -56,7 +56,9 @@ const BUCKETS: Bucket[] = [
   { name:'Production approvals', questions:['Pre approved for Prod','SelfCreate Prod'], rule:[[['What type of Vector System','Production']]] },
 ];
 const EXPECTED_QUESTIONS = SOURCES.length;
-const EXPECTED_CONDITIONS = BUCKETS.filter(b=>b.rule).length;
+// Each OR group becomes its own show condition on the section: a single
+// condition holding two controllers is not honoured by the portal renderer.
+const EXPECTED_CONDITIONS = BUCKETS.reduce((n,b)=>n+(b.rule?.length||0),0);
 
 const norm=(v:unknown)=>String(v??'').trim().toLowerCase().replace(/\s+/g,' ');
 const response=(statusCode:number,value:unknown)=>({statusCode,headers:{'Content-Type':['application/json']},body:JSON.stringify(value)});
@@ -90,9 +92,8 @@ export async function handler(req:Request){try{
   const conditions:Record<string,any>={};
   for(const b of BUCKETS.filter(x=>x.rule)){
     const section=Object.entries(stored.design.sections||{}).find(([,v]:any)=>norm(v.name)===norm(b.name));if(!section)throw new Error(`Section ${b.name} was not persisted`);
-    const cIds:Record<string,string[]>={};const groups:any[]=[];
-    for(const group of b.rule!){const checks:any[]=[];for(const [controller,wanted] of group){const fieldId=resolved.get(controller)!.id;const persisted=Object.entries(stored.design.questions||{}).find(([,q]:any)=>String(q.jiraField)===fieldId);const token=await optionId(fieldId,wanted);if(!persisted||!token)throw new Error(`Condition build failed for ${b.name}: ${controller} = ${wanted}`);const controllerId=String(persisted[0]);cIds[controllerId]=[...new Set([...(cIds[controllerId]||[]),token])];checks.push({fieldId:controllerId,type:'SOME_OF',constraint:[token]})}groups.push({operator:'AND',checks})}
-    conditions[String(Object.keys(conditions).length+1)]={i:{co:{cIds},operator:'OR',groups},o:{sIds:[String(section[0])],t:'sh'}};
+    for(const group of b.rule!){const cIds:Record<string,string[]>={};const checks:any[]=[];for(const [controller,wanted] of group){const fieldId=resolved.get(controller)!.id;const persisted=Object.entries(stored.design.questions||{}).find(([,q]:any)=>String(q.jiraField)===fieldId);const token=await optionId(fieldId,wanted);if(!persisted||!token)throw new Error(`Condition build failed for ${b.name}: ${controller} = ${wanted}`);const controllerId=String(persisted[0]);cIds[controllerId]=[...new Set([...(cIds[controllerId]||[]),token])];checks.push({fieldId:controllerId,type:'SOME_OF',constraint:[token]})}
+      conditions[String(Object.keys(conditions).length+1)]={i:{co:{cIds},operator:'OR',groups:[{operator:'AND',checks}]},o:{sIds:[String(section[0])],t:'sh'}};}
   }
   const conditioned:Record<string,any>={};for(const [sid,raw] of Object.entries(stored.design.sections||{})){const value={...(raw as any)};value.conditions=Object.entries(conditions).filter(([,c]:any)=>c.o.sIds.map(String).includes(String(sid))).map(([id])=>id);conditioned[sid]=value}
   await writeForm(formId,{design:{...stored.design,sections:conditioned,conditions}},true);stored=await readForm(formId);if(Object.keys(stored.design?.conditions||{}).length!==EXPECTED_CONDITIONS)throw new Error(`${EXPECTED_CONDITIONS}-condition readback failed`);
