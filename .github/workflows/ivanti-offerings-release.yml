@@ -9,6 +9,7 @@ on:
       - '.github/workflows/ivanti-offerings-release.yml'
       - 'src/ivantiOfferingsWebtrigger.ts'
       - 'src/ivanti-offerings.json'
+      - 'manifest.yml'
   workflow_dispatch:
 
 permissions:

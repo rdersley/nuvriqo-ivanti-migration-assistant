@@ -21,7 +21,7 @@ modules:
     - key: vector-access-release-trigger
       function: vector-access-release
     - key: ivanti-offerings-release-trigger
-      function: ivanti-offerings-release
+      function: ivanti-offerings
 
   function:
     - key: resolver
@@ -34,7 +34,7 @@ modules:
       handler: newEmployeeDemoWebtrigger.handler
     - key: vector-access-release
       handler: vectorAccessWebtrigger.handler
-    - key: ivanti-offerings-release
+    - key: ivanti-offerings
       handler: ivantiOfferingsWebtrigger.handler
 
 resources:
