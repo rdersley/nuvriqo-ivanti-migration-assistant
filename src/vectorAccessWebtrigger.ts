@@ -10,8 +10,9 @@ const FIELD_SUFFIX = ' - Vector Access';
 type Request = { method?: string; body?: string; headers?: Record<string, string | string[] | undefined> };
 type Field = { id: string; name: string; schema?: { custom?: string } };
 type Source = { name: string; type: string; required: boolean; description?: string };
-// Show the section when any group matches; every check in a group must match.
-type Rule = Array<Array<[string, string]>>;
+// Show the section when the controller question has any of the listed answers.
+// Jira Forms only honours one controller per section on the portal.
+type Rule = { question: string; values: string[] };
 type Bucket = { name: string; questions: string[]; rule?: Rule };
 
 // Customer-input questions from Ivanti offering 8A12298C44EC42309B53935D6F34E11D.
@@ -19,8 +20,8 @@ type Bucket = { name: string; questions: string[]; rule?: Rule };
 // Required questions inside hidden sections are not enforced, which matches
 // the Ivanti "required when visible" expressions.
 const SOURCES: Source[] = [
-  { name:'New Vector Account',type:'select',required:true },
-  { name:'Password reset or Modify?',type:'select',required:true },
+  // Ivanti NewAccount and PwdResOrMod merged, so every rule has a single controller.
+  { name:'Request type',type:'select',required:true },
   { name:'Business Case',type:'paragraph',required:true,description:'Why is this needed? Please give details' },
   { name:'User Name',type:'user',required:true,description:'Name of user for whom Vector account is needed' },
   { name:'User Email',type:'text',required:true },
@@ -42,23 +43,20 @@ const SOURCES: Source[] = [
 ];
 
 // Ivanti: NewAccount == "Yes" || PwdResOrMod == "Account Modifications"
-const NEW_OR_MODIFY: Rule = [[['New Vector Account','Yes']],[['Password reset or Modify?','Account Modifications']]];
+const NEW_OR_MODIFY: Rule = { question:'Request type', values:['New Vector Account','Account Modifications'] };
 const BUCKETS: Bucket[] = [
-  { name:'Vector account', questions:['New Vector Account'] },
-  { name:'Password reset or modification', questions:['Password reset or Modify?'], rule:[[['New Vector Account','No']]] },
+  { name:'Vector account', questions:['Request type'] },
   { name:'Business case', questions:['Business Case'], rule:NEW_OR_MODIFY },
   { name:'User and Vector system', questions:['User Name','User Email','Vector system','OBR','What type of Vector System'] },
   { name:'Super Admin', questions:['Super Admin'], rule:NEW_OR_MODIFY },
-  { name:'Super Admin details', questions:['Super Admin details','Super Admin from','Super Admin to'], rule:[[['Super Admin','Yes']]] },
-  { name:'User permissions', questions:['User Permissions','Additional requested modifications'], rule:[[['Super Admin','No']]] },
-  { name:'Test approvals', questions:['Pre approved For Test','SelfCreate Test'], rule:[[['What type of Vector System','Test']]] },
-  { name:'UAT approvals', questions:['Pre approved for UAT','SelfCreate UAT'], rule:[[['What type of Vector System','UAT']]] },
-  { name:'Production approvals', questions:['Pre approved for Prod','SelfCreate Prod'], rule:[[['What type of Vector System','Production']]] },
+  { name:'Super Admin details', questions:['Super Admin details','Super Admin from','Super Admin to'], rule:{ question:'Super Admin', values:['Yes'] } },
+  { name:'User permissions', questions:['User Permissions','Additional requested modifications'], rule:{ question:'Super Admin', values:['No'] } },
+  { name:'Test approvals', questions:['Pre approved For Test','SelfCreate Test'], rule:{ question:'What type of Vector System', values:['Test'] } },
+  { name:'UAT approvals', questions:['Pre approved for UAT','SelfCreate UAT'], rule:{ question:'What type of Vector System', values:['UAT'] } },
+  { name:'Production approvals', questions:['Pre approved for Prod','SelfCreate Prod'], rule:{ question:'What type of Vector System', values:['Production'] } },
 ];
 const EXPECTED_QUESTIONS = SOURCES.length;
-// Each OR group becomes its own show condition on the section: a single
-// condition holding two controllers is not honoured by the portal renderer.
-const EXPECTED_CONDITIONS = BUCKETS.reduce((n,b)=>n+(b.rule?.length||0),0);
+const EXPECTED_CONDITIONS = BUCKETS.filter(b=>b.rule).length;
 
 const norm=(v:unknown)=>String(v??'').trim().toLowerCase().replace(/\s+/g,' ');
 const response=(statusCode:number,value:unknown)=>({statusCode,headers:{'Content-Type':['application/json']},body:JSON.stringify(value)});
@@ -92,8 +90,10 @@ export async function handler(req:Request){try{
   const conditions:Record<string,any>={};
   for(const b of BUCKETS.filter(x=>x.rule)){
     const section=Object.entries(stored.design.sections||{}).find(([,v]:any)=>norm(v.name)===norm(b.name));if(!section)throw new Error(`Section ${b.name} was not persisted`);
-    for(const group of b.rule!){const cIds:Record<string,string[]>={};const checks:any[]=[];for(const [controller,wanted] of group){const fieldId=resolved.get(controller)!.id;const persisted=Object.entries(stored.design.questions||{}).find(([,q]:any)=>String(q.jiraField)===fieldId);const token=await optionId(fieldId,wanted);if(!persisted||!token)throw new Error(`Condition build failed for ${b.name}: ${controller} = ${wanted}`);const controllerId=String(persisted[0]);cIds[controllerId]=[...new Set([...(cIds[controllerId]||[]),token])];checks.push({fieldId:controllerId,type:'SOME_OF',constraint:[token]})}
-      conditions[String(Object.keys(conditions).length+1)]={i:{co:{cIds},operator:'OR',groups:[{operator:'AND',checks}]},o:{sIds:[String(section[0])],t:'sh'}};}
+    const {question:controller,values}=b.rule!;const fieldId=resolved.get(controller)!.id;const persisted=Object.entries(stored.design.questions||{}).find(([,q]:any)=>String(q.jiraField)===fieldId);if(!persisted)throw new Error(`Condition build failed for ${b.name}: ${controller} not on form`);
+    const tokens:string[]=[];for(const v of values){const token=await optionId(fieldId,v);if(!token)throw new Error(`Condition build failed for ${b.name}: ${controller} = ${v}`);tokens.push(token)}
+    const controllerId=String(persisted[0]);
+    conditions[String(Object.keys(conditions).length+1)]={i:{co:{cIds:{[controllerId]:tokens}},operator:'OR',groups:[{operator:'AND',checks:[{fieldId:controllerId,type:'SOME_OF',constraint:tokens}]}]},o:{sIds:[String(section[0])],t:'sh'}};
   }
   const conditioned:Record<string,any>={};for(const [sid,raw] of Object.entries(stored.design.sections||{})){const value={...(raw as any)};value.conditions=Object.entries(conditions).filter(([,c]:any)=>c.o.sIds.map(String).includes(String(sid))).map(([id])=>id);conditioned[sid]=value}
   await writeForm(formId,{design:{...stored.design,sections:conditioned,conditions}},true);stored=await readForm(formId);if(Object.keys(stored.design?.conditions||{}).length!==EXPECTED_CONDITIONS)throw new Error(`${EXPECTED_CONDITIONS}-condition readback failed`);

@@ -81,7 +81,7 @@ jobs:
           (out/'forge-response.json').write_text(body,encoding='utf-8')
           parsed=json.loads(body); print(json.dumps(parsed,indent=2))
           form=parsed.get('form',{})
-          if status!=200 or not parsed.get('ok') or form.get('questions')!=20 or form.get('conditions')!=10 or not form.get('published'): raise SystemExit(2)
+          if status!=200 or not parsed.get('ok') or form.get('questions')!=19 or form.get('conditions')!=7 or not form.get('published'): raise SystemExit(2)
           PY
       - name: Upload durable release report
         if: always()

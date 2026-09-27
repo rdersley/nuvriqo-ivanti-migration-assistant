@@ -68,8 +68,10 @@ VECTOR_ROLES = ['Account Manager', 'Business Analyst', 'Developer', 'Finance', '
 # The always-hidden userdisplayname helper is intentionally excluded.
 # Keep in step with SOURCES in src/vectorAccessWebtrigger.ts.
 FIELDS = [
-    {'name': 'New Vector Account', 'type': 'select', 'options': ['Yes', 'No']},
-    {'name': 'Password reset or Modify?', 'type': 'select', 'options': ['Password Reset', 'Account Modifications']},
+    # Ivanti NewAccount and PwdResOrMod merged into one question: Jira Forms can only
+    # show a section from choices of a single question, and Business case / Super Admin
+    # depend on NewAccount == Yes || PwdResOrMod == Account Modifications.
+    {'name': 'Request type', 'type': 'select', 'options': ['New Vector Account', 'Password Reset', 'Account Modifications']},
     {'name': 'Business Case', 'type': 'paragraph', 'description': 'Why is this needed? Please give details'},
     {'name': 'User Name', 'type': 'user', 'description': 'Name of user for whom Vector account is needed'},
     {'name': 'User Email', 'type': 'text'},
