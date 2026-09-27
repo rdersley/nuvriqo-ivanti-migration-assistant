@@ -20,6 +20,8 @@ modules:
       function: new-employee-demo
     - key: vector-access-release-trigger
       function: vector-access-release
+    - key: ivanti-offerings-release-trigger
+      function: ivanti-offerings-release
 
   function:
     - key: resolver
@@ -32,6 +34,8 @@ modules:
       handler: newEmployeeDemoWebtrigger.handler
     - key: vector-access-release
       handler: vectorAccessWebtrigger.handler
+    - key: ivanti-offerings-release
+      handler: ivantiOfferingsWebtrigger.handler
 
 resources:
   - key: main
