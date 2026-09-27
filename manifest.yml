@@ -18,6 +18,8 @@ modules:
       function: prod-migration-trigger
     - key: new-employee-demo-trigger
       function: new-employee-demo
+    - key: vector-access-release-trigger
+      function: vector-access-release
 
   function:
     - key: resolver
@@ -28,6 +30,8 @@ modules:
       handler: productionMigrationWebtrigger.handler
     - key: new-employee-demo
       handler: newEmployeeDemoWebtrigger.handler
+    - key: vector-access-release
+      handler: vectorAccessWebtrigger.handler
 
 resources:
   - key: main
