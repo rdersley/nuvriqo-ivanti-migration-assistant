@@ -1,0 +1,93 @@
+name: IT Help - Vector Access Request Release
+
+on:
+  push:
+    branches:
+      - release/vector-access-request-20260927
+    paths:
+      - '.github/scripts/vector_access_release.py'
+      - '.github/workflows/vector-access-release.yml'
+      - 'src/vectorAccessWebtrigger.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: retailinmotion-vector-access-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Hard target guard
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "release/vector-access-request-20260927"
+          test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
+      - name: Validate release script
+        run: python -m py_compile .github/scripts/vector_access_release.py
+      - name: Create and verify Vector Access Request in IT Help
+        run: python .github/scripts/vector_access_release.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: static/package-lock.json
+      - name: Install and typecheck Forge app
+        run: |
+          npm install
+          npm --prefix static install
+          npm run typecheck
+          npm run build
+          npm install --global @forge/cli@latest
+      - name: Configure one-time Forge trigger
+        shell: bash
+        run: |
+          forge settings set usage-analytics true
+          forge settings set default-environment development
+          TOKEN=$(python -c "import secrets; print(secrets.token_urlsafe(48))")
+          echo "::add-mask::$TOKEN"
+          echo "VECTOR_ACCESS_RELEASE_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          forge variables set --encrypt --environment production VECTOR_ACCESS_RELEASE_TOKEN "$TOKEN"
+      - name: Deploy guarded Vector Access handler
+        run: |
+          forge deploy --environment production --non-interactive --approve MAJOR_VERSION_RULE
+          forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive
+      - name: Publish and verify Vector Access Request Form
+        shell: bash
+        run: |
+          output=$(forge webtrigger create --functionKey vector-access-release-trigger --site "$RIM_FORGE_SITE" --product Jira --environment production 2>&1)
+          url=$(printf '%s\n' "$output" | grep -Eo 'https://[^[:space:]]+' | tail -1)
+          test -n "$url"
+          export url
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          from pathlib import Path
+          req=urllib.request.Request(os.environ['url'],data=b'{}',method='POST',headers={'Authorization':'Bearer '+os.environ['VECTOR_ACCESS_RELEASE_TOKEN'],'Content-Type':'application/json'})
+          try:
+              with urllib.request.urlopen(req,timeout=180) as r: status=r.status; body=r.read().decode()
+          except urllib.error.HTTPError as e: status=e.code; body=e.read().decode()
+          out=Path('migration-output/vector-access-release'); out.mkdir(parents=True,exist_ok=True)
+          (out/'forge-response.json').write_text(body,encoding='utf-8')
+          parsed=json.loads(body); print(json.dumps(parsed,indent=2))
+          form=parsed.get('form',{})
+          if status!=200 or not parsed.get('ok') or form.get('questions')!=19 or form.get('conditions')!=7 or not form.get('published'): raise SystemExit(2)
+          PY
+      - name: Upload durable release report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-vector-access-release
+          path: migration-output/vector-access-release/
+          if-no-files-found: warn
+          retention-days: 30

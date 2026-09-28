@@ -1,0 +1,108 @@
+name: IT Help - Remaining Ivanti Offerings Release
+
+on:
+  push:
+    branches:
+      - release/vector-access-request-20260927
+    paths:
+      - '.github/scripts/ivanti_offerings_release.py'
+      - '.github/workflows/ivanti-offerings-release.yml'
+      - 'src/ivantiOfferingsWebtrigger.ts'
+      - 'src/ivanti-offerings.json'
+      - 'manifest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: retailinmotion-ivanti-offerings-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Hard target guard
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "release/vector-access-request-20260927"
+          test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
+      - name: Validate release script and spec
+        run: |
+          python -m py_compile .github/scripts/ivanti_offerings_release.py
+          python -c "import json; s=json.load(open('src/ivanti-offerings.json')); print(len(s['offerings']), 'offerings')"
+      - name: Create and verify request types, workflows and fields in IT Help
+        run: python .github/scripts/ivanti_offerings_release.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: static/package-lock.json
+      - name: Install and typecheck Forge app
+        run: |
+          npm install
+          npm --prefix static install
+          npm run typecheck
+          npm run build
+          npm install --global @forge/cli@latest
+      - name: Configure one-time Forge trigger
+        shell: bash
+        run: |
+          forge settings set usage-analytics true
+          forge settings set default-environment development
+          TOKEN=$(python -c "import secrets; print(secrets.token_urlsafe(48))")
+          echo "::add-mask::$TOKEN"
+          echo "IVANTI_OFFERINGS_RELEASE_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          forge variables set --encrypt --environment production IVANTI_OFFERINGS_RELEASE_TOKEN "$TOKEN"
+      - name: Deploy guarded offerings handler
+        run: |
+          forge deploy --environment production --non-interactive --approve MAJOR_VERSION_RULE
+          forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive
+      - name: Publish and verify every Form
+        shell: bash
+        run: |
+          output=$(forge webtrigger create --functionKey ivanti-offerings-release-trigger --site "$RIM_FORGE_SITE" --product Jira --environment production 2>&1)
+          url=$(printf '%s\n' "$output" | grep -Eo 'https://[^[:space:]]+' | tail -1)
+          test -n "$url"
+          export url
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          from pathlib import Path
+          spec=json.load(open('src/ivanti-offerings.json'))
+          setup=json.load(open('migration-output/ivanti-offerings-release/report.json'))
+          ready={o['name'] for o in setup.get('offerings',[]) if o.get('ok')}
+          out=Path('migration-output/ivanti-offerings-release'); results=[]
+          for offering in spec['offerings']:
+              name=offering['name']
+              if name not in ready:
+                  results.append({'name':name,'ok':False,'error':'skipped: Jira setup failed'}); continue
+              req=urllib.request.Request(os.environ['url'],data=json.dumps({'name':name}).encode(),method='POST',headers={'Authorization':'Bearer '+os.environ['IVANTI_OFFERINGS_RELEASE_TOKEN'],'Content-Type':'application/json'})
+              try:
+                  with urllib.request.urlopen(req,timeout=180) as r: status=r.status; body=r.read().decode()
+              except urllib.error.HTTPError as e: status=e.code; body=e.read().decode()
+              try: parsed=json.loads(body)
+              except Exception: parsed={'ok':False,'error':body[:500]}
+              parsed.setdefault('name',name); parsed['httpStatus']=status
+              results.append(parsed); print(json.dumps(parsed))
+          (out/'forms-response.json').write_text(json.dumps(results,indent=2),encoding='utf-8')
+          failed=[r['name'] for r in results if not r.get('ok')]
+          print('failed:',failed)
+          if failed: raise SystemExit(2)
+          PY
+      - name: Upload durable release report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retailinmotion-ivanti-offerings-release
+          path: migration-output/ivanti-offerings-release/
+          if-no-files-found: warn
+          retention-days: 30
