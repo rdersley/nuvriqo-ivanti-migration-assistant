@@ -1,0 +1,51 @@
+name: IT Help - Orchestration Engine Release
+
+# Deploys app code only (no Jira configuration or Form changes) when the
+# orchestration engine changes on the release branch.
+on:
+  push:
+    branches:
+      - release/vector-access-request-20260927
+    paths:
+      - 'src/orchestrationGraphEngine.ts'
+      - '.github/workflows/orchestration-engine-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: retailinmotion-orchestration-engine-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      RIM_FORGE_SITE: ${{ secrets.RIM_FORGE_SITE }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hard target guard
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = "release/vector-access-request-20260927"
+          test "$RIM_FORGE_SITE" = "RetailinMotion.atlassian.net"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: static/package-lock.json
+      - name: Install and typecheck Forge app
+        run: |
+          npm install
+          npm --prefix static install
+          npm run typecheck
+          npm run build
+          npm install --global @forge/cli@latest
+      - name: Deploy to production
+        run: |
+          forge settings set usage-analytics true
+          forge deploy --environment production --non-interactive --approve MAJOR_VERSION_RULE
+          forge install --upgrade --site "$RIM_FORGE_SITE" --product jira --environment production --confirm-scopes --non-interactive
