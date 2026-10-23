@@ -18,6 +18,10 @@ modules:
       function: prod-migration-trigger
     - key: new-employee-demo-trigger
       function: new-employee-demo
+    - key: vector-access-release-trigger
+      function: vector-access-release
+    - key: ivanti-offerings-release-trigger
+      function: ivanti-offerings
 
   function:
     - key: resolver
@@ -28,6 +32,10 @@ modules:
       handler: productionMigrationWebtrigger.handler
     - key: new-employee-demo
       handler: newEmployeeDemoWebtrigger.handler
+    - key: vector-access-release
+      handler: vectorAccessWebtrigger.handler
+    - key: ivanti-offerings
+      handler: ivantiOfferingsWebtrigger.handler
 
 resources:
   - key: main

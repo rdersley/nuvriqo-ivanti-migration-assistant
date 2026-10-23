@@ -1,0 +1,1786 @@
+{
+  "_source": "Live Ivanti ServiceReqTemplates / ServiceReqTemplateParams / ServiceReqTemplateParamValids and validation lists, read 2026-09-27 via ithelp.retailinmotion.com OData. Hidden helper fields, Ivanti EPM automation flags and person-list values are excluded; person lists become Jira user pickers. Section rules are single-controller because Jira Forms only honours one controller per section on the portal.",
+  "lists": {
+    "DEPARTMENTS": [
+      "Consultants",
+      "Customer Evolution",
+      "Delivery",
+      "Design",
+      "Engineering",
+      "Finance",
+      "HR",
+      "Hardware",
+      "IT Operations",
+      "Legal",
+      "OBR",
+      "Operations",
+      "Product",
+      "Senior Management"
+    ],
+    "SUBDEPARTMENTS": [
+      "Business Analyst",
+      "CSA",
+      "CSM",
+      "Data Analytics",
+      "DevOps",
+      "Hardware",
+      "IT Operations and DBA",
+      "InfoSec",
+      "MDM",
+      "Migration Team",
+      "Multiplatform",
+      "Procurement",
+      "Product Design",
+      "Product Manager",
+      "Product Owner",
+      "Project Manager",
+      "QA",
+      "Release",
+      "SME",
+      "SRE",
+      "Service Desk",
+      "System Team",
+      "Territory Manager",
+      "VOMS and VWMS",
+      "VPOS Android",
+      "vCommerce",
+      "vESB",
+      "vPOS Control",
+      "vPack / vPlanner",
+      "vPay",
+      "vPos IOS",
+      "vRec"
+    ],
+    "CUSTOMERS": [
+      "Aegean Airlines (AEE)",
+      "Aer Lingus (EIN)",
+      "American Airlines (AA)",
+      "American Airlines (L-US)",
+      "American Airlines Regional",
+      "Austrian OBR (AUA)",
+      "Brussels (BRU)",
+      "Chair Airlines (GSW)",
+      "Condor (CFG)",
+      "Easyjet (EZY) NOT VIA IVANTI See Ivanti Q&A#10129*",
+      "Edelweiss (EDW)",
+      "Eurowings (EWG)",
+      "Eurowings Discover (OCN)",
+      "Flybondi (FBD) - Decommissioned",
+      "Flydubai (FDB)",
+      "Frontier Airlines (FFT)",
+      "Hong Kong Express (HKE)",
+      "Jazeera (JZR)",
+      "Jet2 (EXS)",
+      "KLM",
+      "Lufthansa OBR (DLHOBR)",
+      "Marabu MBU",
+      "RIM",
+      "Royal Air Maroc (RAM)",
+      "Ryanair (RYR)",
+      "Sales Demo - UAT Only",
+      "Spirit (NKS)",
+      "Sunclass Airlines (VKG)",
+      "Sunclass Retail (VKR)",
+      "Swiss OBR (SWROBR)",
+      "TUI Group (TUI)",
+      "VIVA Aerobus (VIV)",
+      "Vector X 'Preorders': Alaska (ASA)",
+      "Vector X 'Preorders': Edelweiss (EDW)",
+      "Vector X 'Preorders': Germania Chair (GMI)",
+      "Vector X 'Preorders': Spirit - NKS",
+      "Vector X 'Preorders': Vector X Cloud"
+    ]
+  },
+  "offerings": [
+    {
+      "name": "cBase Active directory password reset",
+      "short": "cBase AD Reset",
+      "group": "2258",
+      "approval": false,
+      "description": "A formal request to reset cBase AD password",
+      "sections": [
+        {
+          "title": "Request details",
+          "questions": [
+            {
+              "key": "username",
+              "label": "New Starter",
+              "type": "text",
+              "required": true,
+              "desc": "Please input the new starter's name"
+            },
+            {
+              "key": "sreq_desc",
+              "label": "Description",
+              "type": "paragraph",
+              "required": true,
+              "desc": "Please give detailed description of the request and/or business case"
+            },
+            {
+              "key": "combo_1",
+              "label": "Urgency",
+              "type": "select",
+              "required": false,
+              "options": [
+                "High",
+                "Medium",
+                "Low"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Create Distribution List",
+      "short": "Distribution List",
+      "group": "2258",
+      "approval": false,
+      "description": "Request a new e-mail distribution list to be created",
+      "sections": [
+        {
+          "title": "Contact Details",
+          "questions": [
+            {
+              "key": "Department_1",
+              "label": "Department",
+              "type": "select",
+              "required": true,
+              "optionsRef": "DEPARTMENTS",
+              "desc": "Department of Requester"
+            },
+            {
+              "key": "Requestor_2",
+              "label": "Requester",
+              "type": "user",
+              "required": true
+            },
+            {
+              "key": "RequesterEMail",
+              "label": "Requester E-Mail",
+              "type": "text",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "Distribution List Details",
+          "questions": [
+            {
+              "key": "ListName",
+              "label": "List Name",
+              "type": "text",
+              "required": true,
+              "desc": "Enter the name you would like for your Distribution List"
+            },
+            {
+              "key": "PrimaryActiveListOwner",
+              "label": "Primary/Active List Owner",
+              "type": "user",
+              "required": false,
+              "desc": "Enter the name of the List Owner (if different than Requester)"
+            },
+            {
+              "key": "PrimaryActiveListOwnerEMail",
+              "label": "Primary/Active List Owner E-Mail",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "ListMembers",
+              "label": "List Members",
+              "type": "paragraph",
+              "required": false,
+              "desc": "Enter the Names of the Distribution List members; each name on its own line"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Backup",
+      "short": "Data Backup",
+      "group": "2260",
+      "approval": true,
+      "description": "Request for data backup",
+      "sections": [
+        {
+          "title": "General Information",
+          "questions": [
+            {
+              "key": "DateRequested",
+              "label": "Date Required",
+              "type": "date",
+              "required": true,
+              "desc": "Date you need the backup made"
+            },
+            {
+              "key": "TimeRequested",
+              "label": "Time Required",
+              "type": "text",
+              "required": true,
+              "desc": "Time Backup must be made"
+            },
+            {
+              "key": "AfterHoursBackup",
+              "label": "After Hours Backup",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "StoreOffsite",
+              "label": "Store Offsite",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Will backup be stored off site?"
+            }
+          ]
+        },
+        {
+          "title": "Offsite storage",
+          "rule": {
+            "key": "StoreOffsite",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "OffsiteStorageLocation",
+              "label": "Offsite Storage Location",
+              "type": "paragraph",
+              "required": false,
+              "desc": "What is the location for offsite storage?"
+            }
+          ]
+        },
+        {
+          "title": "File Backup",
+          "questions": [
+            {
+              "key": "LocationOfFiles",
+              "label": "Location of File(s)",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "FilesToBeBackedUp",
+              "label": "Files to be Backed Up",
+              "type": "paragraph",
+              "required": false,
+              "desc": "List of files to be backed up (each file, with extension, on its own line)"
+            },
+            {
+              "key": "BackupTo",
+              "label": "Backup Media Type",
+              "type": "select",
+              "required": false,
+              "options": [
+                "Tape Drive",
+                "Network Folder",
+                "DVD",
+                "CD-ROM"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "File backup network folder",
+          "rule": {
+            "key": "BackupTo",
+            "values": [
+              "Network Folder"
+            ]
+          },
+          "questions": [
+            {
+              "key": "BackupLocationIfNetworkLocation",
+              "label": "Backup Location (network folder)",
+              "type": "text",
+              "required": false,
+              "desc": "Enter network location for backup (i.e. \\\\servername\\sharename)"
+            }
+          ]
+        },
+        {
+          "title": "Database Backup",
+          "questions": [
+            {
+              "key": "ServerName",
+              "label": "Server Name",
+              "type": "text",
+              "required": false,
+              "desc": "Name of Server where database is located"
+            },
+            {
+              "key": "DatabaseName",
+              "label": "Database Name",
+              "type": "text",
+              "required": false,
+              "desc": "Name of database to be backed up"
+            },
+            {
+              "key": "BackupMediaType",
+              "label": "Backup Media Type",
+              "type": "select",
+              "required": false,
+              "options": [
+                "Tape Drive",
+                "DVD",
+                "CD-ROM",
+                "Network Folder"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Database backup network folder",
+          "rule": {
+            "key": "BackupMediaType",
+            "values": [
+              "Network Folder"
+            ]
+          },
+          "questions": [
+            {
+              "key": "BackupLocationNetworkFolder",
+              "label": "Backup Location (network folder)",
+              "type": "text",
+              "required": false,
+              "desc": "Enter network location for backup (i.e. \\\\servername\\sharename)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Restore",
+      "short": "Data Restore",
+      "group": "2260",
+      "approval": false,
+      "description": "Request data to be restored from a backup",
+      "sections": [
+        {
+          "title": "General Information",
+          "questions": [
+            {
+              "key": "DateRequested",
+              "label": "Date Required",
+              "type": "date",
+              "required": true,
+              "desc": "Date data needs to be restored"
+            },
+            {
+              "key": "TimeRequested",
+              "label": "Time Required",
+              "type": "text",
+              "required": true,
+              "desc": "Time data needs to be restored"
+            },
+            {
+              "key": "AfterHours",
+              "label": "After Hours",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Is data restore to be done outside of business hours?"
+            }
+          ]
+        },
+        {
+          "title": "File Restore",
+          "questions": [
+            {
+              "key": "LocationOfSourceFilesOrBackup",
+              "label": "Location of Source Files or Backup",
+              "type": "text",
+              "required": false,
+              "desc": "Where should the restored data come from?"
+            },
+            {
+              "key": "NumberOfFilesToBe",
+              "label": "Number of Files to be restored",
+              "type": "number",
+              "required": false
+            },
+            {
+              "key": "FilesToBeRestored",
+              "label": "File(s) to be restored",
+              "type": "paragraph",
+              "required": false,
+              "desc": "List file names (with extension), each on its own line"
+            },
+            {
+              "key": "ApproximateSizeOfFilesToBeRestored",
+              "label": "Approximate size of files to be restored",
+              "type": "number",
+              "required": false,
+              "desc": "Note approximate size of files in megabytes (if known)"
+            }
+          ]
+        },
+        {
+          "title": "Database Restore",
+          "questions": [
+            {
+              "key": "TypeOfMediaToRestoreFrom_1",
+              "label": "Type of Media to Restore From",
+              "type": "select",
+              "required": false,
+              "options": [
+                "Network Folder",
+                "CD-ROM",
+                "Tape Drive",
+                "DVD"
+              ]
+            },
+            {
+              "key": "LocationOfSourceFilesOrBackup_1",
+              "label": "Location of Source Files or Backup",
+              "type": "text",
+              "required": false,
+              "desc": "Where is the database backup located?"
+            },
+            {
+              "key": "RestoreAsNewDatabase",
+              "label": "Restore as New Database?",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Should the data be restored into a new database?"
+            }
+          ]
+        },
+        {
+          "title": "New database",
+          "rule": {
+            "key": "RestoreAsNewDatabase",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "DatabaseName",
+              "label": "Database Name",
+              "type": "text",
+              "required": false,
+              "desc": "What would you like the database to be called?"
+            }
+          ]
+        },
+        {
+          "title": "Overwrite",
+          "questions": [
+            {
+              "key": "OverwriteExistingDatabase",
+              "label": "Overwrite Existing Database?",
+              "type": "checkbox",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "Database to overwrite",
+          "rule": {
+            "key": "OverwriteExistingDatabase",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "NameOfDatabaseToBeOverwritten",
+              "label": "Name of Database to be Overwritten",
+              "type": "text",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "F06 - User Access form",
+      "short": "F06 User Access",
+      "group": "2258",
+      "approval": false,
+      "description": "User access form to CDE",
+      "sections": [
+        {
+          "title": "Request access to RiM's CDE EU & US",
+          "questions": [
+            {
+              "key": "EmployeeName",
+              "label": "Employee Name",
+              "type": "user",
+              "required": true
+            },
+            {
+              "key": "SubDepartment",
+              "label": "SubDepartment (Team)",
+              "type": "select",
+              "required": true,
+              "optionsRef": "SUBDEPARTMENTS"
+            },
+            {
+              "key": "role",
+              "label": "Role",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Application Support",
+                "Business Operations Support",
+                "Database Administrator",
+                "Developer",
+                "Pen Tester",
+                "Release Engineer",
+                "Sysadmin"
+              ]
+            },
+            {
+              "key": "env",
+              "label": "vPay Environment",
+              "type": "select",
+              "required": true,
+              "options": [
+                "UAT",
+                "Prod"
+              ]
+            },
+            {
+              "key": "jiralink",
+              "label": "InfoSec F06 - User Access Request ticket",
+              "type": "text",
+              "required": true,
+              "desc": "Insert the link to the JIRA ticket"
+            },
+            {
+              "key": "StartDate",
+              "label": "Start Date",
+              "type": "date",
+              "required": true,
+              "desc": "Minimum two weeks lead time required"
+            }
+          ]
+        },
+        {
+          "title": "This ticket contains evidence of the following",
+          "questions": [
+            {
+              "key": "bkgcheck",
+              "label": "HR Background check",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Completed",
+                "Not Completed"
+              ]
+            },
+            {
+              "key": "securecode",
+              "label": "Secure Coding",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Completed",
+                "Not completed",
+                "N/A"
+              ]
+            },
+            {
+              "key": "PCITraining",
+              "label": "PCI DSS training",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Completed",
+                "Not completed"
+              ]
+            },
+            {
+              "key": "cdetraining",
+              "label": "CDE introduction training",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Completed",
+                "Not completed"
+              ]
+            },
+            {
+              "key": "f06form",
+              "label": "F06 - User Access Request form",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Completed",
+                "Not completed"
+              ]
+            },
+            {
+              "key": "linemanager",
+              "label": "Line Manager Approval",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Recorded",
+                "Not recorded"
+              ]
+            },
+            {
+              "key": "swfupload_1",
+              "label": "F06 - Form Upload",
+              "type": "attachment",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IF1250 - Firewall change request",
+      "short": "Firewall Change",
+      "group": "2260",
+      "approval": false,
+      "description": "Firewall change request",
+      "sections": [
+        {
+          "title": "Firewall rule",
+          "questions": [
+            {
+              "key": "text_1",
+              "label": "Source IP",
+              "type": "text",
+              "required": true
+            },
+            {
+              "key": "text_2",
+              "label": "Destination IP",
+              "type": "text",
+              "required": true
+            },
+            {
+              "key": "text_3",
+              "label": "Port number",
+              "type": "text",
+              "required": true,
+              "desc": "Needed port(s) separated by comma"
+            },
+            {
+              "key": "text_4",
+              "label": "Protocol",
+              "type": "text",
+              "required": true,
+              "desc": "(TCP/UDP/other)"
+            },
+            {
+              "key": "combo_1",
+              "label": "Status",
+              "type": "select",
+              "required": false,
+              "options": [
+                "Temporary",
+                "Permanent"
+              ]
+            },
+            {
+              "key": "sreq_desc",
+              "label": "Business case",
+              "type": "paragraph",
+              "required": true,
+              "desc": "Please provide the business justification for the firewall rule request, provide as much information as possible, insufficient information will result in rejection of the request"
+            },
+            {
+              "key": "start_date",
+              "label": "Start date",
+              "type": "datetime",
+              "required": true,
+              "desc": "When do you expect to start implementation?"
+            },
+            {
+              "key": "end_date",
+              "label": "End Date",
+              "type": "datetime",
+              "required": true,
+              "desc": "When do you expect to finish implementation?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "New E-Mail Account",
+      "short": "New E-Mail Account",
+      "group": "2258",
+      "approval": true,
+      "description": "Request a new E-Mail account be created for a special program or other purpose not related to an individual",
+      "sections": [
+        {
+          "title": "Contact Details",
+          "questions": [
+            {
+              "key": "Department",
+              "label": "Department",
+              "type": "select",
+              "required": true,
+              "optionsRef": "DEPARTMENTS"
+            },
+            {
+              "key": "Requester",
+              "label": "Requester",
+              "type": "user",
+              "required": true
+            },
+            {
+              "key": "RequesterEMail",
+              "label": "Requester E-Mail",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "RequesterPhone",
+              "label": "Requester Work Phone",
+              "type": "text",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "Account Details",
+          "questions": [
+            {
+              "key": "AccountType",
+              "label": "Account Type",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Permanent",
+                "Temporary"
+              ]
+            },
+            {
+              "key": "CreateByDate",
+              "label": "Date Required",
+              "type": "date",
+              "required": true,
+              "desc": "Minimum two days lead time required"
+            }
+          ]
+        },
+        {
+          "title": "Temporary account",
+          "rule": {
+            "key": "AccountType",
+            "values": [
+              "Temporary"
+            ]
+          },
+          "questions": [
+            {
+              "key": "NeededUntil",
+              "label": "Needed Until",
+              "type": "date",
+              "required": false
+            },
+            {
+              "key": "SpecialInstructions",
+              "label": "Special Instructions",
+              "type": "paragraph",
+              "required": false,
+              "desc": "Include any special instructions for when you no longer need this account (i.e. what to do with email remaining?) If none then all remaining e-mail will be deleted"
+            }
+          ]
+        },
+        {
+          "title": "Address and access",
+          "questions": [
+            {
+              "key": "Field",
+              "label": "Requested E-Mail Address",
+              "type": "text",
+              "required": true,
+              "desc": "What do you want the e-mail address to be (i.e. myprogram@example.com)"
+            },
+            {
+              "key": "AccessAndPermissions",
+              "label": "Access and Permissions",
+              "type": "paragraph",
+              "required": false,
+              "desc": "Who will need access and what type of access is needed?"
+            },
+            {
+              "key": "CommentsSpecialInstructions",
+              "label": "Comments/Special Instructions",
+              "type": "paragraph",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Request Computer Accessories",
+      "short": "Computer Accessories",
+      "group": "2257",
+      "approval": true,
+      "description": "Request additional or replacement computer accessories",
+      "sections": [
+        {
+          "title": "Requester Details",
+          "questions": [
+            {
+              "key": "Department",
+              "label": "Department",
+              "type": "select",
+              "required": true,
+              "optionsRef": "DEPARTMENTS"
+            },
+            {
+              "key": "Requester",
+              "label": "Requester",
+              "type": "user",
+              "required": true
+            },
+            {
+              "key": "DateRequired",
+              "label": "Date Required",
+              "type": "date",
+              "required": true,
+              "desc": "When do you need the equipment (minimum three days notice)"
+            }
+          ]
+        },
+        {
+          "title": "Equipment Details",
+          "questions": [
+            {
+              "key": "Field",
+              "label": "Keyboard / Mouse",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Request a keyboard and mouse"
+            },
+            {
+              "key": "_2",
+              "label": "Power Supply / Cord",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "_3",
+              "label": "Monitor",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "DockingStation",
+              "label": "Docking Station (for Laptops)",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "Printer",
+              "label": "Printer",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Request just a printer"
+            },
+            {
+              "key": "textarea_1",
+              "label": "Additional Information",
+              "type": "paragraph",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Request Test Devices",
+      "short": "Test Devices",
+      "group": "2257",
+      "approval": false,
+      "description": "Request additional or replacement test device",
+      "sections": [
+        {
+          "title": "Requester Details",
+          "questions": [
+            {
+              "key": "Department",
+              "label": "Department",
+              "type": "select",
+              "required": true,
+              "optionsRef": "DEPARTMENTS"
+            },
+            {
+              "key": "Requester",
+              "label": "Requester",
+              "type": "user",
+              "required": true
+            },
+            {
+              "key": "DateRequired",
+              "label": "Date Required",
+              "type": "date",
+              "required": true,
+              "desc": "When do you need the equipment (minimum three days notice)"
+            }
+          ]
+        },
+        {
+          "title": "Equipment Details",
+          "questions": [
+            {
+              "key": "checkbox_8",
+              "label": "vPos Android - Samsung",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "checkbox_9",
+              "label": "vPos Android - Other",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "checkbox_11",
+              "label": "vPos iOS iPad",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "checkbox_10",
+              "label": "SimCard",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "checkbox_1",
+              "label": "Test Card",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "checkbox_2",
+              "label": "CardReader BP50",
+              "type": "checkbox",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "CardReader BP50 customer",
+          "rule": {
+            "key": "checkbox_2",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "combo_3",
+              "label": "Customer",
+              "type": "select",
+              "required": true,
+              "optionsRef": "CUSTOMERS"
+            }
+          ]
+        },
+        {
+          "title": "Pinpad",
+          "questions": [
+            {
+              "key": "checkbox_3",
+              "label": "Pinpad BP5000",
+              "type": "checkbox",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "Pinpad BP5000 customer",
+          "rule": {
+            "key": "checkbox_3",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "combo_1",
+              "label": "Customer",
+              "type": "select",
+              "required": true,
+              "optionsRef": "CUSTOMERS"
+            }
+          ]
+        },
+        {
+          "title": "C3X",
+          "questions": [
+            {
+              "key": "checkbox_12",
+              "label": "C3X",
+              "type": "checkbox",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "C3X customer",
+          "rule": {
+            "key": "checkbox_12",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "combo_4",
+              "label": "Customer",
+              "type": "select",
+              "required": true,
+              "optionsRef": "CUSTOMERS"
+            }
+          ]
+        },
+        {
+          "title": "Printers and other",
+          "questions": [
+            {
+              "key": "checkbox_4",
+              "label": "Printer DPP250",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "checkbox_5",
+              "label": "Printer Roller",
+              "type": "checkbox",
+              "required": false
+            },
+            {
+              "key": "checkbox_7",
+              "label": "Other",
+              "type": "checkbox",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "Other device",
+          "rule": {
+            "key": "checkbox_7",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "text_4",
+              "label": "Other device",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "title": "Shipping",
+          "questions": [
+            {
+              "key": "checkbox_6",
+              "label": "Is equipment shipping required?",
+              "type": "checkbox",
+              "required": false
+            }
+          ]
+        },
+        {
+          "title": "Shipping details",
+          "rule": {
+            "key": "checkbox_6",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "text_2",
+              "label": "Delivery Address",
+              "type": "text",
+              "required": true
+            },
+            {
+              "key": "text_3",
+              "label": "Phone Number",
+              "type": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "title": "Additional Information",
+          "questions": [
+            {
+              "key": "textarea_1",
+              "label": "Additional Information",
+              "type": "paragraph",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Web Site Access Request",
+      "short": "Web Site Access",
+      "group": "2259",
+      "approval": true,
+      "description": "Request access to the corporate intranet or a temporary or permanent override of the corporate URL filtering/blocking to a specific web site",
+      "sections": [
+        {
+          "title": "Request Details",
+          "questions": [
+            {
+              "key": "DateRequired",
+              "label": "Date Required",
+              "type": "date",
+              "required": true,
+              "desc": "Minimum two day lead time required"
+            },
+            {
+              "key": "TypeofSite",
+              "label": "Type of Site",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Internal",
+                "External"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Internal Sites",
+          "rule": {
+            "key": "TypeofSite",
+            "values": [
+              "Internal"
+            ]
+          },
+          "questions": [
+            {
+              "key": "URL",
+              "label": "URL",
+              "type": "text",
+              "required": true,
+              "desc": "Enter address of Intranet site"
+            }
+          ]
+        },
+        {
+          "title": "External Sites",
+          "rule": {
+            "key": "TypeofSite",
+            "values": [
+              "External"
+            ]
+          },
+          "questions": [
+            {
+              "key": "URL_1",
+              "label": "URL",
+              "type": "text",
+              "required": true,
+              "desc": "Enter address of Internet site"
+            },
+            {
+              "key": "RequiresWebSiteFilterOverride",
+              "label": "Requires Web Site Filter Override?",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Does this site require an override of the corporate web site filter?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "EC2 Instance type change request",
+      "short": "EC2 Type Change",
+      "group": "2260",
+      "approval": true,
+      "description": "EC2 Instance type change request",
+      "sections": [
+        {
+          "title": "Request details",
+          "questions": [
+            {
+              "key": "sreq_desc",
+              "label": "Description/Business case",
+              "type": "paragraph",
+              "required": false,
+              "desc": "Why this is needed"
+            },
+            {
+              "key": "PCI",
+              "label": "Is the instance PCI?",
+              "type": "select",
+              "required": false,
+              "options": [
+                "Yes",
+                "No"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "PCI change details",
+          "rule": {
+            "key": "PCI",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "chg_reason",
+              "label": "Reason for change",
+              "type": "paragraph",
+              "required": true
+            },
+            {
+              "key": "chg_risk",
+              "label": "Risk Assessment",
+              "type": "paragraph",
+              "required": true
+            },
+            {
+              "key": "chg_riskmit",
+              "label": "Risk mitigation actions",
+              "type": "paragraph",
+              "required": true
+            },
+            {
+              "key": "chg_plan",
+              "label": "Implementation plan",
+              "type": "paragraph",
+              "required": true,
+              "desc": "No need to fill in the implementation plan now. You can do it later in the change."
+            },
+            {
+              "key": "chg_testplan",
+              "label": "Test Plan",
+              "type": "paragraph",
+              "required": true,
+              "desc": "No need to fill in the test plan now. You can do it later in the change."
+            },
+            {
+              "key": "chg_rolback",
+              "label": "Roll back plan",
+              "type": "paragraph",
+              "required": true
+            }
+          ]
+        },
+        {
+          "title": "Schedule",
+          "questions": [
+            {
+              "key": "chg_category",
+              "label": "Category",
+              "type": "text",
+              "required": false,
+              "desc": "Migrated from the Ivanti CI category lookup."
+            },
+            {
+              "key": "chg_startdate",
+              "label": "Start Date",
+              "type": "date",
+              "required": true
+            },
+            {
+              "key": "chg_enddate",
+              "label": "End Date",
+              "type": "date",
+              "required": true
+            },
+            {
+              "key": "chg_approval",
+              "label": "Approval Needed",
+              "type": "select",
+              "required": false,
+              "options": [
+                "Yes",
+                "No"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Approver",
+          "rule": {
+            "key": "chg_approval",
+            "values": [
+              "Yes"
+            ]
+          },
+          "questions": [
+            {
+              "key": "chg_approver",
+              "label": "Approver",
+              "type": "user",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Laptop Computer Loaner",
+      "short": "Laptop Loaner",
+      "group": "2257",
+      "approval": true,
+      "description": "Request temporary use of a laptop computer",
+      "sections": [
+        {
+          "title": "Requester Details",
+          "questions": [
+            {
+              "key": "Department_1",
+              "label": "Department",
+              "type": "select",
+              "required": true,
+              "optionsRef": "DEPARTMENTS"
+            },
+            {
+              "key": "Requester",
+              "label": "Requester",
+              "type": "user",
+              "required": true,
+              "desc": "Employee Requesting the Laptop"
+            },
+            {
+              "key": "IsThisLaptopForYou_1",
+              "label": "Is this Laptop for You?",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Choose No if this laptop is not for you"
+            }
+          ]
+        },
+        {
+          "title": "Laptop user",
+          "rule": {
+            "key": "IsThisLaptopForYou_1",
+            "values": [
+              "No"
+            ]
+          },
+          "questions": [
+            {
+              "key": "DepartmentOfEmployeeThisLaptopIsFor",
+              "label": "Department of User",
+              "type": "select",
+              "required": false,
+              "optionsRef": "DEPARTMENTS",
+              "desc": "Department of the employee who will be using this laptop"
+            },
+            {
+              "key": "Field_1",
+              "label": "User",
+              "type": "user",
+              "required": false,
+              "desc": "Who will be the user of this laptop"
+            }
+          ]
+        },
+        {
+          "title": "Billing",
+          "questions": [
+            {
+              "key": "BillToRequestersDepartment",
+              "label": "Bill to Requester's Department?",
+              "type": "checkbox",
+              "required": false,
+              "desc": "Choose No if you need to bill this to another department"
+            }
+          ]
+        },
+        {
+          "title": "Department to bill",
+          "rule": {
+            "key": "BillToRequestersDepartment",
+            "values": [
+              "No"
+            ]
+          },
+          "questions": [
+            {
+              "key": "DepartmentToBillTo",
+              "label": "Department to Bill to",
+              "type": "select",
+              "required": false,
+              "optionsRef": "DEPARTMENTS"
+            }
+          ]
+        },
+        {
+          "title": "Hardware Details",
+          "questions": [
+            {
+              "key": "Platform",
+              "label": "Platform",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Windows",
+                "Linux",
+                "Mac"
+              ],
+              "desc": "What base Operating System do you need?"
+            }
+          ]
+        },
+        {
+          "title": "Windows version",
+          "rule": {
+            "key": "Platform",
+            "values": [
+              "Windows"
+            ]
+          },
+          "questions": [
+            {
+              "key": "combo_1",
+              "label": "Windows Version",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Windows 10"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Configuration",
+          "questions": [
+            {
+              "key": "StandardConfigurationOK",
+              "label": "Standard Configuration OK?",
+              "type": "select",
+              "required": true,
+              "options": [
+                "No",
+                "Yes"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Special configuration",
+          "rule": {
+            "key": "StandardConfigurationOK",
+            "values": [
+              "No"
+            ]
+          },
+          "questions": [
+            {
+              "key": "SpecialInstructions",
+              "label": "Special Instructions",
+              "type": "paragraph",
+              "required": false,
+              "desc": "Include any special software or configuration requests"
+            }
+          ]
+        },
+        {
+          "title": "Loan Details",
+          "questions": [
+            {
+              "key": "PickUpDate",
+              "label": "Pick Up Date",
+              "type": "date",
+              "required": true,
+              "desc": "Request should be submitted a MINIMUM of 2 days in advance"
+            },
+            {
+              "key": "ReturnDate",
+              "label": "Return Date",
+              "type": "date",
+              "required": true,
+              "desc": "Maximum Loan Timeframe is 3 Weeks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Optional Software Installation Request",
+      "short": "Optional Software",
+      "group": "2259",
+      "approval": false,
+      "description": "Request software installation on-demand",
+      "sections": [
+        {
+          "title": "Request details",
+          "questions": [
+            {
+              "key": "cboOrgUnit",
+              "label": "Organizational Unit",
+              "type": "text",
+              "required": true,
+              "desc": "Migrated from the Ivanti organizational unit lookup."
+            },
+            {
+              "key": "cboRequestername",
+              "label": "Requester Name",
+              "type": "user",
+              "required": true
+            },
+            {
+              "key": "txtRequesetEmail",
+              "label": "Requester Email",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "txtRequesterWorkPhone",
+              "label": "Requester Work Phone",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "cboComputer",
+              "label": "Computer",
+              "type": "text",
+              "required": true,
+              "desc": "Computer name, e.g. RIMDUB-0478 (migrated from the Ivanti computer lookup)."
+            },
+            {
+              "key": "cboOptionalSoftware",
+              "label": "Software",
+              "type": "text",
+              "required": true,
+              "desc": "Migrated from the Ivanti optional software catalogue."
+            },
+            {
+              "key": "cbxApprovalRequired",
+              "label": "Approval Required",
+              "type": "checkbox",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SecOps - IF-2476 - Secure Areas Access Request",
+      "short": "Secure Areas Access",
+      "group": "2256",
+      "approval": true,
+      "description": "SecOps - IF-2476 - Secure Areas Access Request",
+      "sections": [
+        {
+          "title": "Access details",
+          "questions": [
+            {
+              "key": "text_1",
+              "label": "Name of Person Requiring Access",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "text_2",
+              "label": "Secure Area Name",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "text_3",
+              "label": "Business Reason for Access",
+              "type": "text",
+              "required": false
+            },
+            {
+              "key": "visitor",
+              "label": "Visitor or Permanent Access",
+              "type": "select",
+              "required": true,
+              "options": [
+                "Visitor",
+                "Permanent"
+              ]
+            },
+            {
+              "key": "datetime_1",
+              "label": "Access required Duration",
+              "type": "datetime",
+              "required": false,
+              "desc": "If visitor access please indicate duration for which access is required"
+            },
+            {
+              "key": "combo_1",
+              "label": "Requires Equipment Removal Permissions?",
+              "type": "select",
+              "required": false,
+              "options": [
+                "Yes",
+                "No"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Web Site Move Request",
+      "short": "Web Site Move",
+      "group": "2260",
+      "approval": false,
+      "description": "Request to have a web site moved from one server to another.",
+      "sections": [
+        {
+          "title": "Requester Details",
+          "questions": [
+            {
+              "key": "Department",
+              "label": "Department",
+              "type": "select",
+              "required": true,
+              "optionsRef": "DEPARTMENTS",
+              "desc": "What department is this for?"
+            },
+            {
+              "key": "ContactPerson",
+              "label": "Contact Name",
+              "type": "user",
+              "required": true,
+              "desc": "Who is the contact person for this site?"
+            },
+            {
+              "key": "ContactEMail",
+              "label": "Contact Email",
+              "type": "text",
+              "required": false,
+              "desc": "Email address of the contact person"
+            },
+            {
+              "key": "ContactPhone",
+              "label": "Contact Phone",
+              "type": "text",
+              "required": false,
+              "desc": "Phone number where we can reach the contact person for this site"
+            }
+          ]
+        },
+        {
+          "title": "Web Site Details",
+          "questions": [
+            {
+              "key": "ExistingSiteLocation",
+              "label": "Existing Site Location",
+              "type": "paragraph",
+              "required": true,
+              "desc": "Where is the site located right now? Type or paste the URL in here"
+            },
+            {
+              "key": "NewSiteLocation",
+              "label": "New Site Location",
+              "type": "paragraph",
+              "required": true,
+              "desc": "Where do you want the site to be located? Type the URL in here"
+            },
+            {
+              "key": "Req",
+              "label": "Requested Live Date",
+              "type": "date",
+              "required": true,
+              "desc": "Date you need this site to be live on the new server. Minimum one week lead time required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AWS Account management",
+      "short": "AWS Account",
+      "group": null,
+      "approval": true,
+      "description": "Please use this request offering to manage your AWS account",
+      "_note": "Existing IT Help request type (2424). Rebuilt so Business Case shows for a new account or account modifications: Ivanti new_aws_account and password_reset are merged into one Request type question. Portal groups are left as they are.",
+      "sections": [
+        {
+          "title": "Request details",
+          "questions": [
+            {
+              "key": "request_type",
+              "label": "Request type",
+              "type": "select",
+              "required": true,
+              "options": [
+                "New AWS account",
+                "Password Reset",
+                "Account Modifications"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Business case",
+          "rule": {
+            "key": "request_type",
+            "values": [
+              "New AWS account",
+              "Account Modifications"
+            ]
+          },
+          "questions": [
+            {
+              "key": "textarea_1",
+              "label": "Business Case",
+              "type": "paragraph",
+              "required": true,
+              "desc": "Why is this needed? Please give details"
+            }
+          ]
+        },
+        {
+          "title": "Account",
+          "questions": [
+            {
+              "key": "combo_1",
+              "label": "User Name",
+              "type": "user",
+              "required": true
+            },
+            {
+              "key": "list_1",
+              "label": "AWS Account",
+              "type": "select",
+              "required": true,
+              "desc": "Please find the full list of AWS accounts here: https://retailinmotion.atlassian.net/wiki/spaces/PS/pages/25363866/AWS+Amazon+Web+Services",
+              "options": [
+                "Vector 2",
+                "Vector US UAT",
+                "Vector EKS",
+                "vPay US UAT",
+                "vPay US",
+                "CBase-Test",
+                "IT Dept (Billing Account)",
+                "IT Operations",
+                "RiM LSG",
+                "RiM LSG-Backbone",
+                "RiM LSG Development",
+                "LSG SAP",
+                "MiM",
+                "RiM Development",
+                "RiM Test",
+                "LSG-Test"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
